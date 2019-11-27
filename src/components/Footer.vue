@@ -1,7 +1,7 @@
 <template>
-  <div class="app-footer">
+  <footer class="flex align-center justify-center">
     Footer
-  </div>
+  </footer>
 </template>
 
 <script>
