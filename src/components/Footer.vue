@@ -1,7 +1,7 @@
 <template>
-  <div class="app-footer">
+  <footer class="flex">
     Footer
-  </div>
+  </footer>
 </template>
 
 <script>
