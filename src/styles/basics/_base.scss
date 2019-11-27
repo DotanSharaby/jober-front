@@ -23,3 +23,7 @@ body {
 .main-view {
     min-height: calc(100vh - 152px);
 }
+
+input, button, textarea, select {
+    outline: none;
+}
