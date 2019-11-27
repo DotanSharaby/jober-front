@@ -1,4 +1,3 @@
-
 import JobService from '../services/JobService'
 
 export default ({
