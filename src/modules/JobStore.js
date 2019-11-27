@@ -1,4 +1,4 @@
-import { JobService } from '../services/Job.Service'
+import { JobService } from '../services/JobService'
 
 export default {
     state: {

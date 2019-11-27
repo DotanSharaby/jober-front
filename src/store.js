@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import JobStore from './modules/Job.Store'
-import SocketStore from './modules/Socket.Store'
+import JobStore from './modules/JobStore'
+import SocketStore from './modules/SocketStore'
 
 Vue.use(Vuex)
 
