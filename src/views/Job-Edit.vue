@@ -1,10 +1,9 @@
 <template>
-  <section>
+  <section class="job-edit">
     <h1 v-if="job.id">Edit Job</h1>
     <h1 v-else>Add Job</h1>
   </section>
 </template>
-
 
 <script>
 export default {

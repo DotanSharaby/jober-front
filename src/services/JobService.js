@@ -15,7 +15,7 @@ function query() {
 }
 
 function add(job) {
-    return HttpService.post(`job`, job);
+    return HttpService.post('job', job);
 }
 
 function remove(jobId) {
