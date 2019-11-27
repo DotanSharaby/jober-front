@@ -10,12 +10,10 @@
       <textarea placeholder="Description" v-model="jobToSave.desc"></textarea>
       <button>Save</button>
     </form>
-    <sade />
   </section>
 </template>
 
 <script>
-  import sade from '../components/sade.cmp';
 export default {
   data() {
     return {
@@ -43,9 +41,6 @@ export default {
       await this.$store.dispatch({ type: "saveJob", job: this.jobToSave });
       this.jobs = this.$store.getters.jobsToShow;
     }
-  },
-  components:{
-    sade
   }
 };
 </script>
