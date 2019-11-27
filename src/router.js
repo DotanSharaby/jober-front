@@ -25,14 +25,14 @@ const routes = [
     component: JobPage
   },
   {
-    path: '/job/:id',
-    name: 'jobDetails',
-    component: JobDetails
-  },
-  {
     path: '/job/edit/:id?',
     name: 'jobEdit',
     component: JobEdit
+  },
+  {
+    path: '/job/:id',
+    name: 'jobDetails',
+    component: JobDetails
   }
 ]
 

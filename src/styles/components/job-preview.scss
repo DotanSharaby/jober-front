@@ -1,0 +1,39 @@
+.job-preview {
+    border: 1px solid white;
+    width: 320px;
+    padding-bottom: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+
+    h2, h3, h4, p {
+        margin: 0;
+    }
+    .job-img {
+        height: 200px;
+        width: 315px;
+        object-fit: cover;
+    }
+    .details {
+        width: 305px;
+        .owner-logo {
+            height: 50px;
+            width: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-top: 15px;
+        }
+        .main {
+            h2 {
+                margin: 10px 0 5px;
+                color: $clr1;
+            }
+            h4 {
+                margin: 20px 0 5px;
+            }
+        }
+        .extra {
+            height: 65px;
+        }
+    }
+}
