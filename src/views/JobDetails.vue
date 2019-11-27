@@ -11,10 +11,13 @@
           ,
           {{job.loc.address}}
         </p>
-        <button>Apply</button>
+          <button>Apply</button>
+          <router-link :to="editUrl">Edit</router-link>
       </div>
     </section>
+    
     <pre class="job-desc">{{job.desc}}</pre>
+    
     <img class="job-img" :src="imgUrl" />
     <img
       class="map"
@@ -39,6 +42,9 @@ export default {
     },
     imgUrl() {
       return this.job.img;
+    },
+    editUrl() {
+      return `/job/edit/${this.job._id}`;
     }
   },
   async created() {
