@@ -1,6 +1,8 @@
+
 import JobService from '../services/JobService'
 
-export default {
+export default ({
+    strict: true,
     state: {
         jobs: []
     },
@@ -26,21 +28,18 @@ export default {
         },
     },
     actions: {
-        loadJobs(context) {
-            return JobService.query()
-                .then(jobs => context.commit({ type: 'setJobs', jobs }));
+        async loadJobs(context) {
+            const jobs = await JobService.query()
+            context.commit({ type: 'setJobs', jobs })
+            return jobs;
         },
-        removeJob(context, { jobId }) {
-            return JobService.remove(jobId)
-                .then(() => context.commit({ type: 'removeJob', jobId }))
+        async saveJob(context, payload) {
+            const addedJob = await JobService.save(payload.job)
+            context.commit({ type: 'updateJob', addedJob })
         },
-        updateJob(context, { job }) {
-            return JobService.update(job)
-                .then(updatedJob => context.commit({ type: 'updateJob', updatedJob }))
-        },
-        addJob(context, { job }) {
-            return JobService.add(job)
-                .then(addedJob => context.commit({ type: 'addJob', addedJob }))
+        async getJob(context, payload) {
+            const job = await JobService.getById(payload.id)
+            return job;
         }
-    }
-}
+    },
+})
