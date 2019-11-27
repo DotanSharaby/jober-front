@@ -1,0 +1,36 @@
+.job-details {
+    display: grid;
+    gap: 15px;
+    grid-template-columns: repeat(auto, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas: "header header header"
+                        ". job-desc job-img"
+                        " . map-toggle map"
+    ;
+    .details-header {
+        grid-area: header;
+    }
+    .job-desc {
+        grid-area: job-desc;
+        grid-column: 2/3;
+    }
+    .job-img {
+        grid-area: job-img;
+        width: 300px;
+        outline: 1px solid black;
+    }
+    .map {
+        width: 250px;
+        outline: 1px solid black;
+        grid-area: map;
+    }
+    .map-toggle {
+        grid-area: map-toggle;
+    }
+    .avatar {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+}
