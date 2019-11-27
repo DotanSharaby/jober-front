@@ -1,6 +1,6 @@
 <template>
   <footer class="flex align-center justify-center">
-    Footer
+    <img src="../assets/logo.png" class="logo">
   </footer>
 </template>
 
