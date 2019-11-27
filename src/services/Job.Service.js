@@ -1,6 +1,4 @@
-
-
-import HttpService from './HttpService'
+import HttpService from './Http.Service'
 
 export default {
     query,
