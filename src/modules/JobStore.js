@@ -9,6 +9,15 @@ export default ({
     mutations: {
         setJobs(state, { jobs }) {
             state.jobs = jobs;
+        },
+        saveJob(state, { addedJob }) {
+            debugger;
+            console.log(state,addedJob);
+        }
+    },
+    getters: {
+        getJobs(state) {
+            return state.jobs;
         }
     },
     actions: {
@@ -16,6 +25,10 @@ export default ({
             const jobs = await JobService.query()
             context.commit({ type: 'setJobs', jobs })
             return jobs;
+        },
+        async saveJob(context, payload) {
+            const addedJob = await JobService.save(payload.job)
+            context.commit({ type: 'saveJob', addedJob })
         }
     },
 })
