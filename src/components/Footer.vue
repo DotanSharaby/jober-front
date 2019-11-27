@@ -1,5 +1,5 @@
 <template>
-  <footer class="flex">
+  <footer class="flex align-center justify-center">
     Footer
   </footer>
 </template>
