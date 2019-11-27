@@ -11,8 +11,11 @@ export default ({
             state.jobs = jobs;
         },
         saveJob(state, { addedJob }) {
-            debugger;
-            console.log(state,addedJob);
+            const jobs = state.jobs.map(job => {
+                if (job._id === addedJob._id) return addedJob;
+                else return job
+            })
+            state.jobs = jobs;
         }
     },
     getters: {
@@ -29,6 +32,10 @@ export default ({
         async saveJob(context, payload) {
             const addedJob = await JobService.save(payload.job)
             context.commit({ type: 'saveJob', addedJob })
+        },
+        async getJob(context, payload) {
+            const job = await JobService.getById(payload.id)
+            return job;
         }
     },
 })
