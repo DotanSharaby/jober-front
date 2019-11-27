@@ -9,7 +9,6 @@ export default {
 }
 
 function query() {
-    console.log('query?');
     return HttpService.get('job');
 }
 

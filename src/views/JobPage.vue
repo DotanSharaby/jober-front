@@ -1,7 +1,6 @@
 <template>
     <section class="job-page">
         <JobList v-if="jobs" :jobs="jobs"></JobList>
-        <pre>{{jobs}}</pre>
     </section>
 </template>
 
