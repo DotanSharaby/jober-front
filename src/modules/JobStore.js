@@ -33,12 +33,12 @@ export default ({
             context.commit({ type: 'setJobs', jobs })
             return jobs;
         },
-        async saveJob(context, payload) {
-            const addedJob = await JobService.save(payload.job)
+        async saveJob(context, {job}) {
+            const addedJob = await JobService.save(job)
             context.commit({ type: 'updateJob', addedJob })
         },
-        async getJob(context, payload) {
-            const job = await JobService.getById(payload.id)
+        async getJob(context, {id}) {
+            const job = await JobService.getById(id)
             return job;
         }
     },
