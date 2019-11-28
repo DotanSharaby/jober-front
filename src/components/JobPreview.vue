@@ -1,6 +1,6 @@
 <template>
     <section @click="goToDetails" class="job-preview flex column space-between align-center">
-        <h3 v-if="saved" class="star" @click.stop="toggleSave">⭐</h3>
+        <h3 v-if="saved" class="favorite-icon" @click.stop="toggleSave">⭐</h3>
         <div class="icons flex space-between align-center text-center">
             <h2 class="trash bold" @click.stop="removeJob">🗑</h2>
             <h2 @click.stop="toggleSave">❤</h2>
@@ -11,7 +11,7 @@
                 <img class="owner-logo" :src="job.owner.logoUrl" />
                 <div class="details flex column align-center justify-center">
                     <h2 >{{job.owner.name}}</h2>
-                    <h4 class="rating semi flex align-center">{{job.owner.rating}} <span>☆</span></h4>
+                    <h4 class="rating semi flex align-center">{{job.owner.rating}} <span>★</span></h4>
                 </div>
             </div>
             <p v-if="job.owner.rating>4.5" class="top-comp bold">Top Company</p>
