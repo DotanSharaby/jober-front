@@ -1,12 +1,17 @@
 <template>
     <section @click="goToDetails" class="job-preview flex column space-between align-center">
+        <h3 v-if="msg">{{msg}}</h3>
+        <div class="icons flex space-between align-center text-center">
+          <h2>❤</h2>
+          <h2>🗑</h2>
+        </div>
         <img class="job-img" :src="job.img" />
         <div class="details flex space-between align-center">
             <div class="main flex space-between">
                 <img class="owner-logo" :src="job.owner.logoUrl" />
                 <div class="job column flex align-center space-between">
                     <h2>{{job.owner.name}}</h2>
-                    <h3>{{job.rating}}☆</h3>
+                    <h3>{{job.owner.rating}}☆</h3>
                     <h4>{{job.title}}</h4>
                     <p>{{job.loc.address}}</p>
                 </div>
@@ -23,9 +28,20 @@
 
 export default {
     props: { job: Object },
+    data() {
+      return {
+        msg: ''
+      }
+    },
     methods: {
         goToDetails() {
             this.$router.push(`/job/${this.job._id}`);
+        },
+        showMsg(msg) {
+            this.msg = msg;
+            setTimeout(() => {
+                this.msg = '';
+            }, 1500);
         }
     }
 
