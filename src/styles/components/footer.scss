@@ -2,5 +2,30 @@ footer {
     height: 75px;
     background-color: #ffffff;
     border-top: 3px solid #cbd0d0;
-    color: $clr2;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1;
+    .main {
+        grid-column: 2/3;
+        grid-row: 1/2;
+        justify-self: center;
+        align-self: center;
+        width: 100%;
+    }
+
+    .logo {
+        grid-column: 3/4;
+        justify-self: end;
+        align-self: center;
+        margin-right: 20px;
+    }
+
+    .developer {
+        font-weight: 900;
+        transition: .2s;
+        &:hover{
+            color: $clr1;
+            cursor: pointer;
+        }
+    }
 }
