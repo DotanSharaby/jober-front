@@ -1,35 +1,42 @@
 <template>
   <section v-if="job" class="job-details">
-    <div class="btn-sect">
+    <section class="btn-sect">
       <a href @click="goBack">Go Back</a> |
       <router-link :to="editUrl">Edit</router-link>
-    </div>
-    <section class="details-header">
-      <div class="flex align-center space-around">
-        <div class="flex align-center">
-          <img class="avatar" :src="logoUrl" alt />
-          <strong>{{job.owner.name}}</strong>
-        </div>
-        <p>
-          <strong>{{job.title}}</strong>
-          ,
-          {{job.loc.address}}
-        </p>
-        <button>Apply</button>
-      </div>
     </section>
-    <p class="job-desc">{{job.desc}}</p>
 
+    <div class="top-left">
+      <img class="avatar" :src="logoUrl" alt />
+      <span class="bold">{{job.owner.name}}</span>
+    </div>
+    <div class="top-center">
+      <span class="semi">{{job.title}},&nbsp;</span>
+      <span>{{job.loc.address}}</span>
+    </div>
+    <div class="top-right">
+      <button class="apply-btn" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
+      <button class="disabled-btn" v-else disabled>Applied</button>
+    </div>
+    <!-- </div> -->
+    <section class="job-desc">
+      <p>{{job.desc}}</p>
+    </section>
     <img class="job-img" :src="imgUrl" />
     <img
       class="map"
       src="https://icdn7.digitaltrends.com/image/digitaltrends/google_maps_share_location_1-500x300-c.jpg"
     />
-    <section class="chat">
+    <section class="chat flex column space-between">
       <h2 class="text-center">chat goes here</h2>
+      <div class="flex">
+        <input type="text" style="width: 100%" placeholder="Enter message" />
+        <button>Send</button>
+      </div>
     </section>
-    <section class="rating">
-      <strong>Rating: {{job.rating}}☆</strong>
+    <section class="bottom-right">
+      <span class="bold">Company Rating: {{job.rating}}☆</span>
+      <button class="apply-btn" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
+      <button class="disabled-btn" v-else disabled>Applied</button>
     </section>
   </section>
 </template>
@@ -40,10 +47,15 @@ import JobService from "@/services/JobService";
 export default {
   data() {
     return {
-      job: null
+      job: null,
+      applied: false
     };
   },
   methods: {
+    applyToJob(){
+      console.log('applying to job mf');
+      this.applied = true;
+    },
     goBack() {
       return this.$router.go(-1);
     }

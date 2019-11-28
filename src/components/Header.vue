@@ -1,6 +1,9 @@
 <template>
   <header class="flex space-between align-center">
-    <img src="../assets/logo.png" class="logo">
+    <div class="logo-box flex align-center" @click="goHome">
+      <img src="../assets/logo.png" class="logo" />
+      <span>Jober</span>
+    </div>
     <nav>
       <router-link exact to="/">Home</router-link>
       <router-link exact to="/job">Jobs</router-link>
@@ -11,7 +14,12 @@
 
 <script>
 export default {
-  name: "Header"
+  name: "Header",
+  methods: {
+    goHome() {
+      return this.$router.push('/');
+    }
+  }
 };
 </script>
 
