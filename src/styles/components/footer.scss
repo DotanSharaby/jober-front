@@ -22,9 +22,9 @@ footer {
 
     .developer {
         transition: .3s;
+        cursor: pointer;
         &:hover{
             color: $clr1;
-            cursor: pointer;
         }
     }
 }
