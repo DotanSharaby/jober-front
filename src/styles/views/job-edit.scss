@@ -2,18 +2,13 @@
     max-width: 450px;
     margin: 0 auto;
     padding: 20px;
-
-    button {
-        margin-top: 5px;
-    }
-
     input {
         padding: 5px;
     }
 
     textarea {
         overflow-x: hidden;
-        resize: vertical;
+        resize: none;
         max-height: 100px;
     }
 
@@ -30,17 +25,28 @@
         z-index: -1;
     }
 
-    .inputfile+label {
-
-        background-color: $clr3;
+    .save-btn {
+        width: 150px;
         padding: 7px;
+        margin: 5px auto;
+        font-size: 1em;
+        margin-top: 10px;
+        transition: .3s;
+        &:hover {
+            background-color: $clr4;
+        }
+    }
+
+    .inputfile+label {
+        transition: .3s;
+        background-color: $clr3;
+        padding: 4px;
         border-radius: 5px;
         border: none;
         cursor: pointer;
         color: white;
         max-width: 140px;
         margin: 5px 0;
-        font-weight: 600;
         display: inline-block;
     }
     .inputLogo+label {
@@ -48,7 +54,7 @@
 
     .inputfile:focus+label,
     .inputfile+label:hover {
-        text-decoration: underline;
+        background-color: $clr4;
     }
 
     /* Chrome, Safari, Edge, Opera */

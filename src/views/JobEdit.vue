@@ -28,7 +28,7 @@
       <label>
         Images:
         <input type="file" name="file" id="file" class="inputfile" @change="getUrl" multiple />
-        <label for="file">Choose files..</label>
+        <label for="file">Choose files</label>
       </label>
 
       <label>Description:</label>
@@ -38,10 +38,10 @@
         rows="5"
       ></textarea>
 
-      <label>Salery:</label>
+      <label>Salary:</label>
       <input type="number" placeholder="Expected Salery" v-model="jobToSave.payment" />
 
-      <button>Save</button>
+      <button class="save-btn">Save</button>
     </form>
 
     <button v-if="jobToSave._id" @click="remove">Remove</button>
