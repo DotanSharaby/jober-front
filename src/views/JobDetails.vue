@@ -17,7 +17,6 @@
       <button class="apply-btn" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
       <button class="disabled-btn" v-else disabled>Applied</button>
     </div>
-    <!-- </div> -->
     <section class="job-desc">
       <p>{{job.desc}}</p>
     </section>
@@ -57,7 +56,7 @@ export default {
       this.applied = true;
     },
     goBack() {
-      return this.$router.go(-1);
+      return this.$router.push('/job');
     }
   },
   computed: {
