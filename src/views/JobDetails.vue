@@ -1,5 +1,9 @@
 <template>
   <section v-if="job" class="job-details">
+    <div class="btn-sect">
+      <a href @click="goBack">Go Back</a> |
+      <router-link :to="editUrl">Edit</router-link>
+    </div>
     <section class="details-header">
       <div class="flex align-center space-around">
         <div class="flex align-center">
@@ -11,19 +15,22 @@
           ,
           {{job.loc.address}}
         </p>
-          <button>Apply</button>
-          <router-link :to="editUrl">Edit</router-link>
+        <button>Apply</button>
       </div>
     </section>
-    
-    <pre class="job-desc">{{job.desc}}</pre>
-    
+    <p class="job-desc">{{job.desc}}</p>
+
     <img class="job-img" :src="imgUrl" />
     <img
       class="map"
       src="https://icdn7.digitaltrends.com/image/digitaltrends/google_maps_share_location_1-500x300-c.jpg"
     />
-    <section class="chat"></section>
+    <section class="chat">
+      <h2 class="text-center">chat goes here</h2>
+    </section>
+    <section class="rating">
+      <strong>Rating: {{job.rating}}☆</strong>
+    </section>
   </section>
 </template>
 
@@ -35,6 +42,11 @@ export default {
     return {
       job: null
     };
+  },
+  methods: {
+    goBack() {
+      return this.$router.go(-1);
+    }
   },
   computed: {
     logoUrl() {
