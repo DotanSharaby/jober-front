@@ -12,11 +12,14 @@
 // VIEWS
 @import 'views/home';
 @import 'views/job-page';
+<<<<<<< HEAD
 @import 'views/job-edit';
+=======
+@import 'views/job-details';
+>>>>>>> 6c3239477dda8745be785c26f8bd0ca92aaaa6cf
 
 // COMPONENTS
 @import 'components/header';
 @import 'components/footer';
 @import 'components/job-preview';
 @import 'components/job-list';
-@import 'components/job-details';
