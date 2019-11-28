@@ -4,5 +4,10 @@
         display: block;
         width: 135px;
         font-size: 1.2em;
+        transition: .3s;
+
+        &:hover {
+            color: $clr1;
+        }
     }
 }

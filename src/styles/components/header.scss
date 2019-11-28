@@ -1,6 +1,6 @@
 header {
    color: $clr1;
-   padding: 0 25px 0 7px;
+   padding: 0 25px;
    background-color: #fff;
    border-bottom: 3px solid #cbd0d0;
    position: sticky;
@@ -11,7 +11,7 @@ header {
    
    .logo-box {
       font-family: Squada;
-      font-size: 26px;
+      font-size: 30px;
       color: $clr1;
       cursor: pointer;
    }
@@ -20,11 +20,12 @@ header {
       color: $clr2;
       margin-left: 40px;
       font-size: 20px;
-      transition: .2s;
+      transition: .3s;
    }
 
    .router-link-active {
       color: $clr1;
+      // box-shadow: inset 0 -4px 0 #040a2c;
       font-weight: bold;
    }
 

@@ -41,18 +41,22 @@
     width: 80%;
     justify-self: center;
     align-self: center;
-    outline: 1px solid black;
+    border: 1px solid #cfcaca;
   }
   .map {
-    width: 80%;
-    outline: 1px solid black;
+    width: 280px;
+    margin-bottom: 20px;
+    border: 1px solid #cfcaca;
     grid-area: map;
+    // justify-self: center;
   }
   .avatar {
     width: 80px;
     height: 80px;
     object-fit: cover;
     border-radius: 50%;
+    border: 1px solid #cfcaca;
+    background-color: white;
   }
   .btn-sect {
     grid-area: btns;
@@ -64,7 +68,7 @@
     grid-area: chat;
     width: 50%;
     height: 80%;
-    outline: 1px solid black;
+    border: 1px solid #cfcaca;
     justify-self: center;
     align-self: end;
   }
