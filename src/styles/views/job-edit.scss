@@ -1,0 +1,65 @@
+.job-edit {
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 20px;
+
+    button {
+        margin-top: 5px;
+    }
+
+    input {
+        padding: 5px;
+    }
+
+    textarea {
+        overflow-x: hidden;
+        resize: vertical;
+        max-height: 100px;
+    }
+
+    label {
+        margin: 5px 0;
+    }
+
+    .inputfile {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .inputfile+label {
+
+        background-color: $clr3;
+        padding: 7px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        color: white;
+        max-width: 140px;
+        margin: 5px 0;
+        font-weight: 600;
+        display: inline-block;
+    }
+    .inputLogo+label {
+        margin-left:10px}
+
+    .inputfile:focus+label,
+    .inputfile+label:hover {
+        text-decoration: underline;
+    }
+
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+}
