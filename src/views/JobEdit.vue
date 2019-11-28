@@ -76,15 +76,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.job-edit {
-  margin: 0 auto;
-  text-align: center;
-}
-.job-edit form {
-  border: 1px solid black;
-  max-width: 550px;
-  margin: 0 auto;
-}
-</style>
