@@ -48,7 +48,7 @@ export default {
     },
     computed: {
         match() {
-            return Math.floor(Math.random() * (100 + 1))
+            return Math.floor(Math.random() * (100 - 50 + 1) + 50);
         }
     }
 

@@ -24,7 +24,7 @@
             width: 45px;
             height: 45px;
             border-radius: 50%;
-            transition: .3s;
+            transition: 0.3s;
             background-color: #505050ba;
 
             &:hover {
@@ -36,7 +36,7 @@
             font-size: 2.2em;
 
             &:hover {
-                color: $clr4;
+                color: #fff4bc;
             }
         }
     }
@@ -45,8 +45,8 @@
     }
     .desc {
         width: 100%;
-        height: 160px;
-        margin-bottom: 15px;
+        height: 170px;
+        background-color: white;
 
         .rating span {
             font-size: 1.3em;
@@ -81,7 +81,7 @@
     .extra {
         width: 100%;
         padding: 0 15px;
-        margin: 15px 0 0;
+        margin: 15px 0;
 
         p {
             margin-top: 5px;
