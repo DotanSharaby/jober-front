@@ -14,7 +14,7 @@ function makeId(length = 5) {
 }
 
 function upload(ev) {
-    debugger;
+    // debugger;
 
     const CLOUD_NAME = 'dvbqwqxqs'
     const PRESET_NAME = 'ockqw801'

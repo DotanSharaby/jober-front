@@ -24,10 +24,12 @@
         />
         <label for="logoFile">Choose a file</label>
       </label>
-      <input type="url" v-model="jobToSave.owner.logoUrl" placeholder="Logo URL.." />
 
-      <label>Images:</label>
-      <input type="url" v-model="jobToSave.img" placeholder="Images" />
+      <label>
+        Images:
+        <input type="file" name="file" id="file" class="inputfile" @change="getUrl" multiple />
+        <label for="file">Choose files..</label>
+      </label>
 
       <label>Description:</label>
       <textarea
@@ -39,17 +41,16 @@
       <label>Salery:</label>
       <input type="number" placeholder="Expected Salery" v-model="jobToSave.payment" />
 
-      <input type="file" name="file" id="file" class="inputfile" @change="getUrl" multiple />
-      <label for="file">Choose files..</label>
-
       <button>Save</button>
     </form>
 
     <button v-if="jobToSave._id" @click="remove">Remove</button>
 
-    <pre>images-{{images}}</pre>
+    <img v-if="jobToSave.owner.logoUrl" :src="jobToSave.owner.logoUrl" height="100" />
 
-    <pre>{{jobToSave}}</pre>
+    <div v-if="jobToSave.imgs.length">
+      <img v-for="(img,idx) in jobToSave.imgs" :src="img" :key="idx" height="100" />
+    </div>
   </section>
 </template>
 
@@ -64,15 +65,13 @@ export default {
         title: "",
         loc: { address: "" },
         desc: "",
-        img: "",
+        imgs: [],
         payment: null
-      },
-      jobs: [],
-      images: []
+      }
     };
   },
   async created() {
-    this.jobs = await this.$store.dispatch({ type: "loadJobs" });
+    await this.$store.dispatch({ type: "loadJobs" });
     const jobId = this.$route.params.id;
     if (jobId) {
       this.jobToSave = await this.$store.dispatch({
@@ -84,27 +83,22 @@ export default {
   methods: {
     async saveJob() {
       await this.$store.dispatch({ type: "saveJob", job: this.jobToSave });
-      this.jobs = this.$store.getters.jobsToShow;
       this.$router.go(-1);
     },
     async getUrl(ev, type) {
-      if (ev.target.files.length > 1) {
-        var files = ev.target.files;
-        files = Object.entries(files);
-        files = files.map(file => {
-          return UtilService.upload(file[1]);
-        });
-        return Promise.all(files).then(res => {
-          console.log(res);
-          return (this.images = res);
-        });
-      }
       const file = await UtilService.upload(ev);
       if (!file) return;
-      if (type === "logo") this.jobToSave.owner.logoUrl = file.url;
-      else {
-        this.jobToSave.img = file.url;
-      }
+      if (type === "logo") return (this.jobToSave.owner.logoUrl = file.url);
+      var files = ev.target.files;
+      files = Object.entries(files);
+      files = files.map(file => {
+        return UtilService.upload(file[1]);
+      });
+      return Promise.all(files).then(files => {
+        var urls = [];
+        files.forEach(file => urls.push(file.url));
+        return (this.jobToSave.imgs = this.jobToSave.imgs.concat(urls));
+      });
     },
     async remove() {
       await this.$store.dispatch({ type: "removeJob", id: this.jobToSave._id });
