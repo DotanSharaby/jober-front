@@ -34,7 +34,7 @@
       </div>
     </section>
     <section class="bottom-right">
-      <span class="bold">Company Rating: {{job.rating}}☆</span>
+      <span class="bold">Company Rating: {{job.owner.rating}}☆</span>
       <button class="apply-btn" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
       <button class="disabled-btn" v-else disabled>Applied</button>
     </section>
