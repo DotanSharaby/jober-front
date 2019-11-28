@@ -1,6 +1,6 @@
 <template>
   <section class="job-page">
-    <router-link to="/job/edit">Add A new Job !</router-link>
+    <router-link class="edit-link" to="/job/edit">Add a New Job</router-link>
     <JobList v-if="jobs" :jobs="jobs"></JobList>
   </section>
 </template>
