@@ -1,29 +1,21 @@
 footer {
     height: 75px;
+    width: 100%;
     background-color: #ffffff;
     border-top: 3px solid #cbd0d0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1;
+
     .main {
-        grid-column: 2/3;
-        grid-row: 1/2;
-        justify-self: center;
-        align-self: center;
-        width: 100%;
+        width: 450px;
     }
 
     .logo {
-        grid-column: 3/4;
-        justify-self: end;
-        align-self: center;
-        margin-right: 20px;
+        position: absolute;
+        right: 15px;
     }
-
     .developer {
-        transition: .3s;
+        transition: 0.3s;
         cursor: pointer;
-        &:hover{
+        &:hover {
             color: $clr1;
         }
     }
