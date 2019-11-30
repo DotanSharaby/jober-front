@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="wall">
     <ul>
       <li>
         <div class="comment flex space-between column">
