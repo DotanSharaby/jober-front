@@ -21,7 +21,7 @@
     <section class="job-desc">
       <p>{{job.desc}}</p>
     </section>
-    <img class="job-img" :src="imgUrl" />
+    <img v-for="(img,idx) in job.imgs" class="job-img" :src="img" :key="idx" />
     <img
       class="map"
       src="https://icdn7.digitaltrends.com/image/digitaltrends/google_maps_share_location_1-500x300-c.jpg"
@@ -52,20 +52,17 @@ export default {
     };
   },
   methods: {
-    applyToJob(){
-      console.log('applying to job mf');
+    applyToJob() {
+      console.log("applying to job mf");
       this.applied = true;
     },
     goBack() {
-      return this.$router.push('/job');
+      return this.$router.push("/job");
     }
   },
   computed: {
     logoUrl() {
       return this.job.owner.logoUrl;
-    },
-    imgUrl() {
-      return this.job.img;
     },
     editUrl() {
       return `/job/edit/${this.job._id}`;

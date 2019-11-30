@@ -33,12 +33,19 @@ export default {
         setTimeout(() => (this.msg = ""), 2000);
         return (this.msg = "Please enter user/password");
       }
-      await this.$store.dispatch({ type: "login", userCred: cred });
+      const user = await this.$store.dispatch({
+        type: "login",
+        userCred: cred
+      });
+      if (!user) {
+        setTimeout(() => (this.msg = ""), 2000);
+        return (this.msg = "User does not exist");
+      }
       setTimeout(() => {
         this.msg = "";
         this.$router.push("/job");
       }, 2000);
-      this.msg = "Signup Successfully!";
+      this.msg = "Logged in successfully!";
       this.loginCred = {};
     }
   }

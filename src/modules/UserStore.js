@@ -24,20 +24,29 @@ export default {
             state.users = users;
         },
         removeUser(state, { userId }) {
-            state.users = state.users.filter(user => user._id !== userId)
+            state.users = state.users.filter(user => user._id !== userId);
+        },
+        updateUser(state, {updatedUser}) {
+            const idx = state.users.findIndex(user => user._id === updatedUser._id);
+            state.users.splice(idx, 1, updatedUser);
         }
     },
     actions: {
         async login(context, { userCred }) {
-            const user = await UserService.login(userCred);
-            context.commit({ type: 'setUser', user })
+            const users = await context.dispatch({ type: 'loadUsers' });
+            const user = users.find(currUser => {
+                return currUser.email === userCred.email &&
+                    currUser.password === userCred.password
+            })
+            if (!user) return null;
+            await UserService.login(user);
+            context.commit({ type: 'setUser', user });
             return user;
         },
         async signup(context, { userCred }) {
-            const user = await UserService.signup(userCred)
-            context.commit({ type: 'setUser', user })
+            const user = await UserService.signup(userCred);
+            context.commit({ type: 'setUser', user });
             return user;
-
         },
         async logout(context) {
             await UserService.logout()
@@ -47,10 +56,15 @@ export default {
         async loadUsers(context) {
             const users = await UserService.getUsers();
             context.commit({ type: 'setUsers', users })
+            return users;
         },
         async removeUser(context, { userId }) {
             await UserService.remove(userId);
-            context.commit({ type: 'removeUser', userId })
+            context.commit({ type: 'removeUser', userId });
+        },
+        async saveUser(context, { user }) {
+            const updatedUser = await UserService.update(user);
+            context.commit({ type: 'updateUser', updatedUser });
         }
     }
 }

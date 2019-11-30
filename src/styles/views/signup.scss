@@ -17,16 +17,60 @@
         text-decoration: underline;
     }
 
-    .save-btn {
-        width: 150px;
-        padding: 7px;
-        margin: 5px auto;
-        font-size: 1em;
-        margin-top: 10px;
-        transition: .3s;
+    button {
+        margin-top: 5px;
+        transition: all .2s;
 
         &:hover {
             background-color: $clr4;
         }
+    }
+
+    .selected {
+        background-color: $clr4;
+    }
+
+    .wizard-nav {
+        padding: 20px;
+        background-color: $clr5;
+    }
+
+    .wizard-progress-with-circle {
+        display: none;
+    }
+
+    .wizard-header {
+        display: none;
+    }
+
+    .inputfile {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .inputfile+label {
+        transition: .3s;
+        background-color: $clr3;
+        padding: 4px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        color: $clr5;
+        max-width: 140px;
+        margin: 5px 0;
+        display: inline-block;
+    }
+
+    .inputLogo+label {
+        margin-left: 10px
+    }
+
+    .inputfile:focus+label,
+    .inputfile+label:hover {
+        background-color: $clr4;
     }
 }

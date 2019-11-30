@@ -5,6 +5,7 @@ import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Login from './views/Login.vue'
 import Signup from './views/Signup.vue'
+import UserDetails from './views/UserDetails.vue'
 
 import JobPage from './views/JobPage.vue'
 import JobDetails from './views/JobDetails.vue'
@@ -32,6 +33,11 @@ const routes = [
     path: '/signup',
     name: 'signup',
     component: Signup
+  },
+  {
+    path: '/user/:id',
+    name: 'serDetails',
+    component: UserDetails
   },
   {
     path: '/job',

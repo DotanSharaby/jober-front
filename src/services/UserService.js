@@ -13,52 +13,44 @@ export default {
 }
 
 function getById(userId) {
-    return HttpService.get(`user/${userId}`)
+    const user = HttpService.get(`user/${userId}`);
+    debugger;
+    return _handleLogin(user)
 }
 function remove(userId) {
-    return HttpService.delete(`user/${userId}`)
+    return HttpService.delete(`user/${userId}`);
 }
 
 function update(user) {
-    return HttpService.put(`user/${user._id}`, user)
+    return HttpService.put(`user/${user._id}`, user);
 }
 
-
-
-
-async function login(userCred) {
+async function login(user) {
     // const user = await HttpService.post('auth/login', userCred)
 
-
-    // switch to get and find user in DB by ID and display that user
-
-    const user = await HttpService.post('user', userCred)
-    return _handleLogin(user)
+    return _handleLogin(user);
 }
-
-
-
-
-
 
 async function signup(userCred) {
     // const user = await HttpService.post('auth/signup', userCred)
-    
+
     userCred._id = UtilService.makeId();
-    const user = await HttpService.post('user', userCred)
-    
-    return _handleLogin(user)
+    const user = await HttpService.post('user', userCred);
+
+    return _handleLogin(user);
 }
-async function logout() {
+
+function logout() {
     // await HttpService.post('auth/logout');
-    await HttpService.post('auth/logout');
     sessionStorage.clear();
 }
-function getUsers() {
-    return HttpService.get('user');
+
+async function getUsers() {
+    return await HttpService.get('user');
 }
 
 function _handleLogin(user) {
-    sessionStorage.setItem('user', JSON.stringify(user))
+    sessionStorage.setItem('user', JSON.stringify(user));
+    debugger;
     return user;
 }
