@@ -5,6 +5,7 @@ import About from './views/About.vue'
 import JobPage from './views/JobPage.vue'
 import JobDetails from './views/JobDetails.vue'
 import JobEdit from './views/JobEdit.vue'
+import Wall from './components/Wall.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/job/:id',
     name: 'jobDetails',
     component: JobDetails
+  },
+  {
+    path: '/wall',
+    name: 'Wall',
+    component: Wall
   }
 ]
 
