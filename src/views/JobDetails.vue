@@ -85,7 +85,7 @@
             src="https://icdn7.digitaltrends.com/image/digitaltrends/google_maps_share_location_1-500x300-c.jpg"
           />
         </div>
-        <div>
+        
         <button
           class="apply-btn center"
           v-if="!applied"
@@ -93,7 +93,7 @@
           @click="applyToJob"
         >Apply</button>
         <button class="disabled-btn center" v-else disabled>Applied</button>
-      </div>
+      
       <div class="chat"></div>
     </section>
 
@@ -129,12 +129,14 @@
       <span class="bold">Company Rating: {{job.owner.rating}}☆</span>
       <button class="apply-btn" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
       <button class="disabled-btn" v-else disabled>Applied</button>
+        <Wall class="wall"></Wall>
     </section>
   </section>
 </template>
 
 <script>
 import JobService from "@/services/JobService";
+import Wall from "../components/Wall"
 
 export default {
   data() {
@@ -161,14 +163,14 @@ export default {
             return `/comp/${this.job.owner._id}`;
         }
     },
-    editUrl() {
-      return `/job/edit/${this.job._id}`;
+    async created() {
+        const id = this.$route.params.id;
+        const job = await JobService.getById(id);
+        this.job = job;
+    },
+    components: {
+        Wall
     }
-  },
-  async created() {
-    const id = this.$route.params.id;
-    const job = await JobService.getById(id);
-    this.job = job;
   }
 };
 </script>

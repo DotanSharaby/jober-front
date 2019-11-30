@@ -69,13 +69,14 @@
     .more-info {
         margin-bottom: 35px;
     }
-    .chat {
-        border: 1px solid #cfcaca;
+    .wall {
         flex-grow: 1;
+        padding: 15px;
         max-width: 400px;
-        height: calc(100vh - 105px);
+        height: calc(100vh - 75px);
         position: sticky;
-        top: 90px;
+        top: 75px;
+        border-left: 1px solid #d0d0d0;
     }
     .apply-btn {
         width: 100px;
