@@ -40,11 +40,8 @@
             <p class="desc">{{job.desc}}</p>
             <div class="more-info flex align-center space-between">
                 <div class="props flex column">
-                    <h2 class="semi">Properties</h2>
-                    <p>★ Frontend devloping</p>
-                    <p>★ Cooking</p>
-                    <p>★ ewjflksea</p>
-                    <p>★ jenfklnssd</p>
+                    <h2 class="semi" v-if="job.props.length > 0 ">Properties</h2>
+                    <JobProp v-for="item in job.props" :item="item" :key="item" />
                 </div>
                 <img
                     class="map"
@@ -66,6 +63,7 @@
 <script>
 import JobService from "@/services/JobService";
 import Wall from "../components/Wall"
+import JobProp from "../components/JobProp"
 
 export default {
     data() {
@@ -102,7 +100,8 @@ export default {
         this.job = job;
     },
     components: {
-        Wall
+        Wall,
+        JobProp
     }
 };
 </script>

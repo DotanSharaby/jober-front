@@ -7,9 +7,9 @@ import "./styles/global.scss"
 
 // Font Awesome
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPaw, faBus, faUtensils, faParking, faMugHot, faThumbsUp, faReply } from '@fortawesome/free-solid-svg-icons'
+import { faPaw, faBus, faUtensils, faParking, faMugHot, faThumbsUp, faReply, faCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-library.add(faPaw, faBus, faUtensils, faParking, faMugHot, faThumbsUp, faReply)
+library.add(faPaw, faBus, faUtensils, faParking, faMugHot, faThumbsUp, faReply, faCheck)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
