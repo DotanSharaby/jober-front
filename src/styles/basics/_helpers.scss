@@ -55,3 +55,9 @@
 .center {
     margin: 0 auto;
 }
+
+.profile-link {
+    &:hover {
+        text-decoration: underline;
+    }
+}

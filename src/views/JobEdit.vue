@@ -13,6 +13,14 @@
       <label>Address:</label>
       <input type="text" v-model="jobToSave.loc.address" placeholder="Narnia" />
 
+      <label>Perks: </label>
+      <div class="icons-container flex">
+        <font-awesome-icon @click="addProp" class="icon-item" :icon="['fas', 'paw']" />
+        <font-awesome-icon @click="addProp" class="icon-item" :icon="['fas', 'bus']" />
+        <font-awesome-icon @click="addProp" class="icon-item" :icon="['fas', 'utensils']" />
+        <font-awesome-icon @click="addProp" class="icon-item" :icon="['fas', 'parking']" />
+        <font-awesome-icon @click="addProp" class="icon-item" :icon="['fas', 'mug-hot']" />
+      </div>
       <label>
         Logo:
         <input
@@ -64,6 +72,7 @@ export default {
         owner: { name: "", logoUrl: "" },
         title: "",
         loc: { address: "" },
+        props: [],
         desc: "",
         imgs: [],
         payment: null
@@ -103,6 +112,19 @@ export default {
     async remove() {
       await this.$store.dispatch({ type: "removeJob", id: this.jobToSave._id });
       this.$router.push("/");
+    },
+    addProp(ev) {
+      // Adding the fontawesome icon name to the jobToSave object for our future use
+      var target = ev.target;
+      if (target.localName === "path") target = target.farthestViewportElement;
+
+      if (this.jobToSave.props.includes(target.dataset.icon)) {
+
+        this.jobToSave.props.splice(this.jobToSave.props.indexOf(target.dataset.icon), 1);
+
+      } else this.jobToSave.props.push(target.dataset.icon);
+
+      target.classList.toggle("active");
     }
   }
 };

@@ -2,6 +2,7 @@
     max-width: 450px;
     margin: 0 auto;
     padding: 20px;
+
     input {
         padding: 5px;
     }
@@ -32,6 +33,7 @@
         font-size: 1em;
         margin-top: 10px;
         transition: .3s;
+
         &:hover {
             background-color: $clr4;
         }
@@ -49,8 +51,10 @@
         margin: 5px 0;
         display: inline-block;
     }
+
     .inputLogo+label {
-        margin-left:10px}
+        margin-left: 10px
+    }
 
     .inputfile:focus+label,
     .inputfile+label:hover {
@@ -67,5 +71,19 @@
     /* Firefox */
     input[type=number] {
         -moz-appearance: textfield;
+    }
+
+    .icons-container {
+        .icon-item {
+            margin: 10px;
+            font-size: 22px;
+            transition: .2s;
+            &:hover{ 
+                box-shadow: 0 2px 0 0 lightblue;
+            }
+            &.active {
+                color:$clr1;
+            }
+        }
     }
 }
