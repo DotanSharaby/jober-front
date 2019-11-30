@@ -7,7 +7,7 @@
 
     <div class="top-left">
       <img class="avatar" :src="logoUrl" alt />
-      <span class="bold">{{job.owner.name}}</span>
+      <span class="bold profile-link"><router-link :to="compUrl">{{job.owner.name}}</router-link></span>
     </div>
     <div class="top-center">
       <span class="semi">{{job.title}},&nbsp;</span>
@@ -67,7 +67,10 @@ export default {
       return this.job.img;
     },
     editUrl() {
-      return `/job/edit/${this.job._id}`;
+      return `/job/edit/${this.job.owner.id}`;
+    },
+    compUrl() {
+      return `/comp/${this.job.owner._id}`;
     }
   },
   async created() {

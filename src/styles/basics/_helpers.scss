@@ -51,3 +51,9 @@
 .container {
     max-width: 980px;
 }
+
+.profile-link {
+    &:hover {
+        text-decoration: underline;
+    }
+}
