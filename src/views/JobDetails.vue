@@ -37,12 +37,12 @@
             </div>
             <p class="desc">{{job.desc}}</p>
             <div class="more-info flex align-center space-between">
-                <div class="props flex column justify-center align-center">
+                <div class="props flex column">
                     <h2 class="semi">Properties</h2>
-                    <p>Frontend devloping</p>
-                    <p>Cooking</p>
-                    <p>ewjflksea</p>
-                    <p>jenfklnssd</p>
+                    <p>★ Frontend devloping</p>
+                    <p>★ Cooking</p>
+                    <p>★ ewjflksea</p>
+                    <p>★ jenfklnssd</p>
                 </div>
                 <img
                     class="map"
@@ -73,7 +73,6 @@ export default {
     },
     methods: {
         applyToJob() {
-            console.log('applying to job mf');
             this.applied = true;
         },
         goBack() {
