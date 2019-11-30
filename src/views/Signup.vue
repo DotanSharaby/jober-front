@@ -2,8 +2,6 @@
 <template>
   <section class="signup">
     <h1>Signup</h1>
-    <pre>{{signupCred}}</pre>
-
     <form-wizard
       @on-complete="doSignup"
       shape="tab"
@@ -26,7 +24,7 @@
 
       <tab-content class="flex column" title="Additional Info" icon="ti-settings">
         <label>User Name:</label>
-        <input type="text" v-model="signupCred.username" placeholder="Harry Potter" />
+        <input type="text" v-model="signupCred.username" placeholder="User Name" />
         <label>Email:</label>
         <input type="email" v-model="signupCred.email" placeholder="Email" />
         <label>Password:</label>
@@ -34,17 +32,6 @@
       </tab-content>
 
       <tab-content class="flex column" title="Last step" icon="ti-check">
-        <label>
-          <input
-            type="file"
-            name="signupImgFile"
-            id="signupImgFile"
-            class="inputfile inputImg"
-            @change="getUrl($event)"
-          />
-          <label for="signupImgFile">Choose Image</label>
-        </label>
-        <img v-if="signupCred.img" :src="signupCred.img" height="100" />
         <div v-if="signupCred.isCompany">
           <label>
             <input
@@ -62,12 +49,23 @@
           <label>
             <input
               type="file"
+              name="signupImgFile"
+              id="signupImgFile"
+              class="inputfile inputImg"
+              @change="getUrl($event)"
+            />
+            <label for="signupImgFile">Choose Image</label>
+          </label>
+          <img v-if="signupCred.img" :src="signupCred.img" height="100" />
+          <label>
+            <input
+              type="file"
               name="cvFile"
               id="cvFile"
               class="inputfile inputCv"
               @change="getUrl($event,'cv')"
             />
-            <label for="cvFile">Upload CV</label>
+            <label for="cvFile">Upload CV - (pdf)</label>
           </label>
         </div>
       </tab-content>
@@ -96,11 +94,10 @@ export default {
   data() {
     return {
       signupCred: {
-        imgs: "",
         isCompany: true
       },
       msg: "",
-      isLoading:true
+      isLoading: false
     };
   },
   methods: {
@@ -121,7 +118,7 @@ export default {
       const file = await UploadService.upload(ev.target.files[0]);
       if (!file) return;
       if (type === "cv") return (this.signupCred.cvUrl = file.url);
-      this.signupCred.img = file.url;
+      return this.signupCred.img = file.url;
     },
     isCompany(val) {
       if (val) this.signupCred.isCompany = true;
@@ -131,7 +128,7 @@ export default {
   components: {
     FormWizard,
     TabContent,
-    PulseLoader,
+    PulseLoader
   }
 };
 </script>

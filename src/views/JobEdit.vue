@@ -4,14 +4,13 @@
     <h1 v-else>Edit Job</h1>
 
     <form @submit.prevent="saveJob" class="flex column">
-      <label>Name:</label>
-      <input type="text" v-model="editedJob.owner.name" placeholder="Micky Mouse" />
+      <label v-if="getLoggedinUser">{{ loggedinUser.username }}</label>
 
       <label>Position:</label>
-      <input type="text" v-model="editedJob.title" placeholder="Mice Walker" />
+      <input type="text" v-model="editedJob.title" placeholder="Front End Developer" />
 
       <label>Address:</label>
-      <input type="text" v-model="editedJob.loc.address" placeholder="Narnia" />
+      <input type="text" v-model="editedJob.loc.address" placeholder="Tel Aviv" />
 
       <label>Perks:</label>
       <div class="icons-container flex">
@@ -43,16 +42,16 @@
     <button v-if="editedJob._id" @click="remove">Remove</button>
 
     <img v-if="editedJob.owner.logoUrl" :src="editedJob.owner.logoUrl" height="100" />
-<label>
-            <input
-              type="file"
-              name="imgsFile"
-              id="imgsFile"
-              class="inputfile imgsFile"
-              @change="getUrl($event)"
-            />
-            <label for="imgsFile">Choose Images</label>
-          </label>
+    <label>
+      <input
+        type="file"
+        name="imgsFile"
+        id="imgsFile"
+        class="inputfile imgsFile"
+        @change="getUrl($event)"
+      />
+      <label for="imgsFile">Choose Images</label>
+    </label>
     <div v-if="editedJob.imgs.length">
       <img v-for="(img,idx) in editedJob.imgs" :src="img" :key="idx" height="100" />
     </div>
@@ -73,7 +72,8 @@ export default {
         desc: "",
         imgs: [],
         payment: null
-      }
+      },
+      loggedinUser: ""
     };
   },
   async created() {
@@ -85,6 +85,9 @@ export default {
         id: jobId
       });
     }
+    const user = this.$store.getters.loggedinUser;
+    this.loggedinUser = JSON.parse(JSON.stringify(user));
+    delete this.user.password;
   },
   methods: {
     async saveJob() {
@@ -119,6 +122,11 @@ export default {
       } else this.editedJob.props.push(target.dataset.icon);
 
       target.classList.toggle("active");
+    }
+  },
+  computed: {
+    getLoggedinUser() {
+      return this.loggedinUser;
     }
   }
 };
