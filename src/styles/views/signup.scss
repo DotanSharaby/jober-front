@@ -1,0 +1,76 @@
+.signup {
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 20px;
+
+    input {
+        padding: 5px;
+        margin-top: 5px;
+    }
+
+    label {
+        margin: 5px 0;
+    }
+
+    h1 {
+        padding: 20px 0;
+        text-decoration: underline;
+    }
+
+    button {
+        margin-top: 5px;
+        transition: all .2s;
+
+        &:hover {
+            background-color: $clr4;
+        }
+    }
+
+    .selected {
+        background-color: $clr4;
+    }
+
+    .wizard-nav {
+        padding: 20px;
+        background-color: $clr5;
+    }
+
+    .wizard-progress-with-circle {
+        display: none;
+    }
+
+    .wizard-header {
+        display: none;
+    }
+
+    .inputfile {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .inputfile+label {
+        transition: .3s;
+        background-color: $clr3;
+        padding: 4px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        color: $clr5;
+        max-width: 140px;
+        margin: 5px 0;
+        display: inline-block;
+    }
+
+    .inputLogo+label {
+        margin-left: 10px
+    }
+
+    .inputfile:focus+label,
+    .inputfile+label:hover {
+        background-color: $clr4;
+    }
+}

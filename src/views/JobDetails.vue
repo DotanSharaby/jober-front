@@ -1,4 +1,5 @@
 <template>
+  <section>
     <section v-if="job" class="job-details flex space-between">
         <div class="details flex column">
             <div class="navigate">
@@ -51,16 +52,86 @@
                     src="https://icdn7.digitaltrends.com/image/digitaltrends/google_maps_share_location_1-500x300-c.jpg"
                 />
             </div>
-            <button
-                class="apply-btn center"
-                v-if="!applied"
-                :disabled="applied"
-                @click="applyToJob"
-            >Apply</button>
-            <button class="disabled-btn center" v-else disabled>Applied</button>
+          </div>
+          <div>
+          <div class="flex column align-center space-between">
+            <h3 class="bold job-title">{{job.title}}</h3>
+            <p>{{job.loc.address}}</p>
+          </div>
+          <button class="apply-btn" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
+          <button class="disabled-btn" v-else disabled>Applied</button>
         </div>
+        <div class="info flex space-between align-center">
+          <img v-for="(img,idx) in job.imgs" class="job-img" :src="img" :key="idx" />
+          <div class="skills flex column align-center">
+            <h2 class="semi">Required Skills</h2>
+            <p>Frontend devloping</p>
+            <p>Cooking</p>
+            <p>ewjflksea</p>
+            <p>jenfklnssd</p>
+          </div>
+        </div>
+        <p class="desc">{{job.desc}}</p>
+        <div class="more-info flex align-center space-between">
+          <div class="props flex column">
+            <h2 class="semi">Properties</h2>
+            <p>★ Frontend devloping</p>
+            <p>★ Cooking</p>
+            <p>★ ewjflksea</p>
+            <p>★ jenfklnssd</p>
+          </div>
+          <img
+            class="map"
+            src="https://icdn7.digitaltrends.com/image/digitaltrends/google_maps_share_location_1-500x300-c.jpg"
+          />
+        </div>
+        
+        <button
+          class="apply-btn center"
+          v-if="!applied"
+          :disabled="applied"
+          @click="applyToJob"
+        >Apply</button>
+        <button class="disabled-btn center" v-else disabled>Applied</button>
+      
+      <div class="chat"></div>
+    </section>
+
+    <div class="top-left">
+      <img class="avatar" :src="logoUrl" alt />
+      <span class="bold">{{job.owner.name}}</span>
+    </div>
+    <div class="top-center">
+      <span class="semi">{{job.title}},&nbsp;</span>
+      <span>{{job.loc.address}}</span>
+    </div>
+    {{job.props}}
+    <div class="top-right">
+      <button class="apply-btn" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
+      <button class="disabled-btn" v-else disabled>Applied</button>
+    </div>
+    <section class="job-desc">
+      <p>{{job.desc}}</p>
+    </section>
+
+    <img
+      class="map"
+      src="https://icdn7.digitaltrends.com/image/digitaltrends/google_maps_share_location_1-500x300-c.jpg"
+    />
+    <section class="chat flex column space-between">
+      <h2 class="text-center">chat goes here</h2>
+      <div class="flex">
+        <input type="text" style="width: 100%" placeholder="Enter message" />
+        <button>Send</button>
+      </div>
+    </section>
+    <section class="bottom-right">
+      <span class="bold">Company Rating: {{job.owner.rating}}☆</span>
+      <button class="apply-btn" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
+      <button class="disabled-btn" v-else disabled>Applied</button>
         <Wall class="wall"></Wall>
     </section>
+  </section>
 </template>
 
 <script>
@@ -68,19 +139,15 @@ import JobService from "@/services/JobService";
 import Wall from "../components/Wall"
 
 export default {
-    data() {
-        return {
-            job: null,
-            applied: false
-        };
-    },
-    methods: {
-        applyToJob() {
-            this.applied = true;
-        },
-        goBack() {
-            return this.$router.push('/job');
-        }
+  data() {
+    return {
+      job: null,
+      applied: false
+    };
+  },
+  methods: {
+    applyToJob() {
+      this.applied = true;
     },
     computed: {
         logoUrl() {
@@ -104,6 +171,7 @@ export default {
     components: {
         Wall
     }
+  }
 };
 </script>
 
