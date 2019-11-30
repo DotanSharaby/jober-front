@@ -16,8 +16,6 @@
       <router-link exact to="/job">Jobs</router-link>
       <router-link exact to="/comp">Back-Office Demo</router-link>
       <router-link exact to="/about">About</router-link>
-      <router-link exact to="/login">Login</router-link>
-      <router-link exact to="/signup">Signup</router-link>
     </nav>
   </header>
 </template>
