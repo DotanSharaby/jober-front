@@ -1,5 +1,6 @@
 .comp-job-preview {
-    margin: 20px 15px 0;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
 
     h3 {
         width: 250px;
@@ -7,5 +8,11 @@
     }
     .applicants {
         color: $clr1;
+    }
+    .info {
+        flex-grow: 1;
+        margin: 15px 0;
+        max-width: 500px;
+        padding-right: 60px;
     }
 }

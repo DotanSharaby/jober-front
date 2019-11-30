@@ -1,11 +1,14 @@
 <template>
     <section class="comp-page">
-        <div class="title">
-            <h1 class="text-center semi">{{comp.name}}</h1>
-            <h2 class="text-center semi">{{comp.rating}} ★</h2>
+        <div class="title flex align-center center justify-center">
+            <h1 class="text-center bold">{{comp.name}}</h1>
+            <h2 class="text-center bold">{{comp.rating}} ★</h2>
         </div>
-        <CompJobList :jobs="jobs"></CompJobList>
-        <CompChart :jobs="jobs" class="comp-chart"></CompChart>
+        <div class="content flex space-between">
+            <div class="flex column"></div>
+            <CompJobList :jobs="jobs"></CompJobList>
+            <CompChart :jobs="jobs" class="comp-chart"></CompChart>
+        </div>
     </section>
 </template>
 

@@ -9,7 +9,9 @@
                 <div class="comp flex align-center justify-center">
                     <img class="avatar" :src="logoUrl" alt />
                     <div class="flex column align-center space-between">
-                        <h2>{{job.owner.name}}</h2>
+                        <router-link :to="compUrl">
+                            <h2 class="profile-link">{{job.owner.name}}</h2>
+                        </router-link>
                         <h3>{{job.owner.rating}} ★</h3>
                     </div>
                 </div>
@@ -88,6 +90,9 @@ export default {
         },
         editUrl() {
             return `/job/edit/${this.job._id}`;
+        },
+        compUrl() {
+            return `/comp/${this.job.owner._id}`;
         }
     },
     async created() {
