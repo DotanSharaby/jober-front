@@ -1,6 +1,18 @@
 .comp-page {
-    h1 {
-        margin: 25px 0 40px;
+    .title {
+        margin: 25px 0 50px;
         color: $clr1;
+
+        h1 {
+            margin-bottom: 5px;
+        }
+    }
+    .comp-chart {
+        max-width: 400px;
+        max-height: 400px;
+        margin: 20px auto;
+    }
+    .comp-job-list {
+        margin-bottom: 70px;
     }
 }

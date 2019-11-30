@@ -1,12 +1,17 @@
 <template>
     <section class="comp-page">
-        <h1 class="text-center semi">{{comp.name}}</h1>
+        <div class="title">
+            <h1 class="text-center semi">{{comp.name}}</h1>
+            <h2 class="text-center semi">{{comp.rating}} ★</h2>
+        </div>
         <CompJobList :jobs="jobs"></CompJobList>
+        <CompChart :jobs="jobs" class="comp-chart"></CompChart>
     </section>
 </template>
 
 <script>
 import CompJobList from '../components/CompJobList'
+import CompChart from '../components/CompChart'
 
 export default {
     data() {
@@ -61,7 +66,8 @@ export default {
         }
     },
     components: {
-        CompJobList
+        CompJobList,
+        CompChart
     }
     // async created() {
     // const id = this.$route.params.id;
