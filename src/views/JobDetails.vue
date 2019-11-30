@@ -59,12 +59,13 @@
             >Apply</button>
             <button class="disabled-btn center" v-else disabled>Applied</button>
         </div>
-        <div class="chat"></div>
+        <Wall class="wall"></Wall>
     </section>
 </template>
 
 <script>
 import JobService from "@/services/JobService";
+import Wall from "../components/Wall"
 
 export default {
     data() {
@@ -99,6 +100,9 @@ export default {
         const id = this.$route.params.id;
         const job = await JobService.getById(id);
         this.job = job;
+    },
+    components: {
+        Wall
     }
 };
 </script>

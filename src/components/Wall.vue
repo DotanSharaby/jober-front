@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       comment: {
-        from: "anonymous",
+        from: "Anonymous",
         when: "40 minutes ago",
         body: `Lorem ipsum dolor sit, amet consectetur
               adipisicing elit. Sunt, iure atque maxime
