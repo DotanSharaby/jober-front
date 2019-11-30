@@ -5,7 +5,8 @@ import About from './views/About.vue'
 import JobPage from './views/JobPage.vue'
 import JobDetails from './views/JobDetails.vue'
 import JobEdit from './views/JobEdit.vue'
-import Wall from './components/Wall.vue'
+import CompPage from './views/CompPage.vue'
+
 
 Vue.use(VueRouter)
 
@@ -36,9 +37,9 @@ const routes = [
     component: JobDetails
   },
   {
-    path: '/wall',
-    name: 'Wall',
-    component: Wall
+    path: '/comp/:id?',
+    name: 'compPage',
+    component: CompPage
   }
 ]
 
