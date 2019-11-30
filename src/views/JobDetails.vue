@@ -1,8 +1,59 @@
 <template>
-  <section v-if="job" class="job-details">
-    <section class="btn-sect">
-      <a href @click="goBack">Go Back</a> |
-      <router-link :to="editUrl">Edit</router-link>
+  <section>
+    <section v-if="job" class="job-details flex space-between">
+      <div class="details flex column">
+        <div class="navigate">
+          <a href @click="goBack">Go Back</a> |
+          <router-link :to="editUrl">Edit</router-link>
+        </div>
+        <div class="title flex space-between align-center">
+          <div class="comp flex align-center justify-center">
+            <img class="avatar" :src="logoUrl" alt />
+            <div class="flex column align-center space-between">
+              <h2>{{job.owner.name}}</h2>
+              <h3>{{job.owner.rating}} ★</h3>
+            </div>
+          </div>
+          <div class="flex column align-center space-between">
+            <h3 class="bold job-title">{{job.title}}</h3>
+            <p>{{job.loc.address}}</p>
+          </div>
+          <button class="apply-btn" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
+          <button class="disabled-btn" v-else disabled>Applied</button>
+        </div>
+        <div class="info flex space-between align-center">
+          <img v-for="(img,idx) in job.imgs" class="job-img" :src="img" :key="idx" />
+          <div class="skills flex column align-center">
+            <h2 class="semi">Required Skills</h2>
+            <p>Frontend devloping</p>
+            <p>Cooking</p>
+            <p>ewjflksea</p>
+            <p>jenfklnssd</p>
+          </div>
+        </div>
+        <p class="desc">{{job.desc}}</p>
+        <div class="more-info flex align-center space-between">
+          <div class="props flex column">
+            <h2 class="semi">Properties</h2>
+            <p>★ Frontend devloping</p>
+            <p>★ Cooking</p>
+            <p>★ ewjflksea</p>
+            <p>★ jenfklnssd</p>
+          </div>
+          <img
+            class="map"
+            src="https://icdn7.digitaltrends.com/image/digitaltrends/google_maps_share_location_1-500x300-c.jpg"
+          />
+        </div>
+        <button
+          class="apply-btn center"
+          v-if="!applied"
+          :disabled="applied"
+          @click="applyToJob"
+        >Apply</button>
+        <button class="disabled-btn center" v-else disabled>Applied</button>
+      </div>
+      <div class="chat"></div>
     </section>
 
     <div class="top-left">
@@ -21,7 +72,7 @@
     <section class="job-desc">
       <p>{{job.desc}}</p>
     </section>
-    <img v-for="(img,idx) in job.imgs" class="job-img" :src="img" :key="idx" />
+
     <img
       class="map"
       src="https://icdn7.digitaltrends.com/image/digitaltrends/google_maps_share_location_1-500x300-c.jpg"
@@ -53,7 +104,6 @@ export default {
   },
   methods: {
     applyToJob() {
-      console.log("applying to job mf");
       this.applied = true;
     },
     goBack() {
