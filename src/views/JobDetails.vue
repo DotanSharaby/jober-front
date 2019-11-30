@@ -13,6 +13,7 @@
       <span class="semi">{{job.title}},&nbsp;</span>
       <span>{{job.loc.address}}</span>
     </div>
+    {{job.props}}
     <div class="top-right">
       <button class="apply-btn" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
       <button class="disabled-btn" v-else disabled>Applied</button>
