@@ -17,9 +17,12 @@
 @import 'views/job-edit';
 @import 'views/job-details';
 @import 'views/user-details';
+@import 'views/comp-page';
 
 // COMPONENTS
 @import 'components/header';
 @import 'components/footer';
 @import 'components/job-preview';
 @import 'components/job-list';
+@import 'components/wall.scss';
+@import 'components/comp-job-preview';

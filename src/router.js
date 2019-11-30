@@ -10,6 +10,8 @@ import UserDetails from './views/UserDetails.vue'
 import JobPage from './views/JobPage.vue'
 import JobDetails from './views/JobDetails.vue'
 import JobEdit from './views/JobEdit.vue'
+import CompPage from './views/CompPage.vue'
+
 
 Vue.use(VueRouter)
 
@@ -53,6 +55,11 @@ const routes = [
     path: '/job/:id',
     name: 'jobDetails',
     component: JobDetails
+  },
+  {
+    path: '/comp/:id?',
+    name: 'compPage',
+    component: CompPage
   }
 ]
 

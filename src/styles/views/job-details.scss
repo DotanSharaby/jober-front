@@ -6,6 +6,7 @@
     .details {
         margin: 20px auto;
         width: 700px;
+        padding: 0 20px;
     }
     .title {
         margin: 40px auto;
@@ -70,7 +71,8 @@
     }
     .chat {
         border: 1px solid #cfcaca;
-        width: calc(100vw - 850px);
+        flex-grow: 1;
+        max-width: 400px;
         height: calc(100vh - 105px);
         position: sticky;
         top: 90px;
@@ -84,7 +86,7 @@
         }
     }
     .disabled-btn {
-        width: 200px;
+        width: 100px;
         height: 30px;
         opacity: 0.6;
         cursor: auto;
