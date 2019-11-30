@@ -1,5 +1,5 @@
 <template>
-    <section v-if="job" class="job-details flex">
+    <section v-if="job" class="job-details flex space-between">
         <div class="details flex column">
             <div class="navigate">
                 <a href @click="goBack">Go Back</a> |
@@ -25,7 +25,7 @@
                 >Apply</button>
                 <button class="disabled-btn" v-else disabled>Applied</button>
             </div>
-            <div class="media flex space-between align-center">
+            <div class="info flex space-between align-center">
                 <img class="job-img" :src="imgUrl" />
                 <div class="skills flex column align-center">
                     <h2 class="semi">Required Skills</h2>

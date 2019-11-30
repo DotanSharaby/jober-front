@@ -1,82 +1,92 @@
 .job-details {
-  .details {
-    margin: 20px 35px;
-  }
-  .title {
-    margin: 20px auto 40px;
-    width: 100%;
-    padding: 0 35px;
-    h3 {
-      font-size: 20px;
-      margin-bottom: 5px;
+    .navigate {
+        position: absolute;
+        left: 30px;
     }
-    .job-title {
-      color: $clr1;
-      font-size: 23px;
+    .details {
+        margin: 20px auto;
+        width: 700px;
     }
-  }  
-  .avatar {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 1px solid #cfcaca;
-    background-color: white;
-    margin-right: 5px;
-  }
-  .job-img {
-    width: 360px;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-  .map {
-    width: 330px;
-    height: 220px;
-    border-radius: 10px;
-  }
-  .desc {
-    margin: 40px 0;
-    line-height: 25px;
-  }
-  .skills, .props {
-    flex-grow: 1;
-    h2 {
-      margin-bottom: 15px;
-      color: $clr3;
+    .title {
+        margin: 40px auto;
+        width: 100%;
+        h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        .job-title {
+            color: $clr1;
+            font-size: 23px;
+        }
     }
-    p {
-      margin-bottom: 5px;
+    .avatar {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 1px solid #cfcaca;
+        background-color: white;
+        margin-right: 5px;
     }
-  }
-  .skills {
-    padding-left: 35px;
-  }
-  .props {
-    padding-right: 50px;
-  }
-  .more-info {
-    margin-bottom: 35px;
-  }
-  .chat {
-    border: 1px solid #cfcaca;
-    width: 875px;
-    height: calc(100vh - 105px);
-    position: sticky;
-    top: 90px;
-  }
-  .apply-btn {
-    width: 100px;
-    height: 30px;
-    transition: .3s;
-    &:hover {
-      background-color: $clr4;
+    .job-img {
+        width: 360px;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 10px;
     }
-  }
-  .disabled-btn {
-    width: 200px;
-    height: 30px;
-    opacity: 0.6;
-    cursor: auto;
-  }
+    .map {
+        width: 330px;
+        height: 220px;
+        border-radius: 10px;
+    }
+    .desc {
+        margin: 40px 0;
+        line-height: 25px;
+        white-space: pre-line;
+    }
+    .skills,
+    .props {
+        flex-grow: 1;
+        h2 {
+            margin-bottom: 15px;
+            color: $clr3;
+        }
+        p {
+            margin-bottom: 5px;
+        }
+    }
+    .info, .more-info {
+        margin: 0 auto;
+        width: 100%;
+    }
+    .skills {
+        padding-left: 35px;
+    }
+    .props {
+        padding-right: 50px;
+    }
+    .more-info {
+        margin-bottom: 35px;
+    }
+    .chat {
+        border: 1px solid #cfcaca;
+        width: calc(100vw - 850px);
+        height: calc(100vh - 105px);
+        position: sticky;
+        top: 90px;
+    }
+    .apply-btn {
+        width: 100px;
+        height: 30px;
+        transition: 0.3s;
+        &:hover {
+            background-color: $clr4;
+        }
+    }
+    .disabled-btn {
+        width: 200px;
+        height: 30px;
+        opacity: 0.6;
+        cursor: auto;
+    }
 }
