@@ -1,7 +1,7 @@
 <template>
     <section class="comp-job-preview flex space-between align-center">
         <router-link :to="jobEditUrl">
-            <h3 class="semi profile-link">{{job.title}}</h3>
+            <h3 class="semi profile-link" title="Edit Job">{{job.title}}</h3>
         </router-link>
         <div class="info flex space-between align-center">
             <p class="date">30.11.19</p>
