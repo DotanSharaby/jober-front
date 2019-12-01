@@ -9,9 +9,7 @@
                 <div class="comp flex align-center justify-center">
                     <img class="avatar" :src="logoUrl" alt />
                     <div class="flex column align-center space-between">
-                        <router-link :to="compUrl">
-                            <h2 class="profile-link">{{job.owner.name}}</h2>
-                        </router-link>
+                        <h2>{{job.owner.name}}</h2>
                         <h3>{{job.owner.rating}} ★</h3>
                     </div>
                 </div>
@@ -40,11 +38,8 @@
             <p class="desc">{{job.desc}}</p>
             <div class="more-info flex align-center space-between">
                 <div class="props flex column">
-                    <h2 class="semi">Properties</h2>
-                    <p>★ Frontend devloping</p>
-                    <p>★ Cooking</p>
-                    <p>★ ewjflksea</p>
-                    <p>★ jenfklnssd</p>
+                    <h2 class="semi" v-if="job.props.length > 0 ">Properties</h2>
+                    <JobProp v-for="item in job.props" :item="item" :key="item" />
                 </div>
                 <img
                     class="map"
@@ -66,6 +61,7 @@
 <script>
 import JobService from "@/services/JobService";
 import Wall from "../components/Wall"
+import JobProp from "../components/JobProp"
 
 export default {
     data() {
@@ -77,6 +73,7 @@ export default {
     methods: {
         applyToJob() {
             this.applied = true;
+            this.$router.push('/apply')
         },
         goBack() {
             return this.$router.push('/job');
@@ -91,9 +88,6 @@ export default {
         },
         editUrl() {
             return `/job/edit/${this.job._id}`;
-        },
-        compUrl() {
-            return `/comp/${this.job.owner._id}`;
         }
     },
     async created() {
@@ -102,7 +96,8 @@ export default {
         this.job = job;
     },
     components: {
-        Wall
+        Wall,
+        JobProp
     }
 };
 </script>
