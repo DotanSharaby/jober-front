@@ -20,12 +20,6 @@
         <font-awesome-icon @click="addProp" class="icon-item" :icon="['fas', 'parking']" />
         <font-awesome-icon @click="addProp" class="icon-item" :icon="['fas', 'mug-hot']" />
       </div>
-      <label>
-        Images:
-        <input type="file" name="file" id="file" class="inputfile" @change="getUrl" multiple />
-        <label for="file">Choose files</label>
-      </label>
-
       <label>Description:</label>
       <textarea
         placeholder="Describe the position, working place etc.."
@@ -35,25 +29,32 @@
 
       <label>Salary:</label>
       <input type="number" placeholder="Expected Salery" v-model="editedJob.payment" />
-
+      <label>
+        Images:
+        <input type="file" name="file" id="file" class="inputfile" @change="getUrl" multiple />
+        <label for="file">Choose files</label>
+      </label>
       <button class="save-btn">Save</button>
     </form>
+    <button v-if="editedJob._id" @click="remove">Remove Job</button>
 
-    <button v-if="editedJob._id" @click="remove">Remove</button>
-
-    <img v-if="editedJob.owner.logoUrl" :src="editedJob.owner.logoUrl" height="100" />
-    <label>
-      <input
-        type="file"
-        name="imgsFile"
-        id="imgsFile"
-        class="inputfile imgsFile"
-        @change="getUrl($event)"
-      />
-      <label for="imgsFile">Choose Images</label>
-    </label>
-    <div v-if="editedJob.imgs.length">
-      <img v-for="(img,idx) in editedJob.imgs" :src="img" :key="idx" height="100" />
+    <div class="flex gallery-container">
+      <gallery
+        v-if="editedJob.imgs.length"
+        :images="editedJob.imgs"
+        :index="index"
+        @close="index = null"
+      ></gallery>
+      <div
+        class="image"
+        v-for="(image, imageIndex) in editedJob.imgs"
+        :key="imageIndex"
+        @click="index = imageIndex"
+        :style="{ backgroundImage: 'url(' + image + ')', width: '300px', height: '200px' }"
+      >
+      <button @click.stop="removeImg(index)">x
+      </button>
+      </div>
     </div>
   </section>
 </template>
@@ -61,11 +62,13 @@
 <script>
 import UploadService from "../services/UploadService";
 
+import VueGallery from "vue-gallery";
+
 export default {
   data() {
     return {
       editedJob: {
-        owner: { name: "", logoUrl: "" },
+        owner: { name: "" },
         title: "",
         loc: { address: "" },
         props: [],
@@ -73,7 +76,8 @@ export default {
         imgs: [],
         payment: null
       },
-      loggedinUser: ""
+      loggedinUser: "",
+      index: null
     };
   },
   async created() {
@@ -86,8 +90,10 @@ export default {
       });
     }
     const user = this.$store.getters.loggedinUser;
-    this.loggedinUser = JSON.parse(JSON.stringify(user));
-    delete this.user.password;
+    if (user) {
+      this.loggedinUser = JSON.parse(JSON.stringify(user));
+      delete this.user.password;
+    }
   },
   methods: {
     async saveJob() {
@@ -122,12 +128,19 @@ export default {
       } else this.editedJob.props.push(target.dataset.icon);
 
       target.classList.toggle("active");
+    },
+    removeImg(idx){
+      console.log(idx);
+      debugger
     }
   },
   computed: {
     getLoggedinUser() {
       return this.loggedinUser;
     }
+  },
+  components: {
+    gallery: VueGallery
   }
 };
 </script>

@@ -78,11 +78,41 @@
             margin: 10px;
             font-size: 22px;
             transition: .2s;
-            &:hover{ 
+
+            &:hover {
                 box-shadow: 0 2px 0 0 lightblue;
             }
+
             &.active {
-                color:$clr1;
+                color: $clr1;
+            }
+        }
+    }
+
+    .gallery-container {
+        margin-top: 10px
+    }
+
+    .image {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        border: 1px solid #ebebeb;
+        border-radius: 5px;
+        margin: 5px;
+        position: relative;
+        cursor: pointer;
+        max-height: 150px;
+
+        &:hover {
+            border: 1px solid $clr1;
+        }
+
+        button {
+            position: absolute;
+            right: 0;
+            &:hover {
+                color: black;
             }
         }
     }
