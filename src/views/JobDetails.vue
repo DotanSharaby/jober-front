@@ -85,7 +85,7 @@ export default {
             return this.job.owner.logoUrl;
         },
         imgUrl() {
-            return this.job.imgs[0];
+            return this.job.img;
         },
         editUrl() {
             return `/job/edit/${this.job._id}`;

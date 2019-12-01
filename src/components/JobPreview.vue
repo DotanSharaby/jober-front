@@ -5,8 +5,8 @@
             <h2 class="trash bold" @click.stop="removeJob">🗑</h2>
             <h2 @click.stop="toggleSave">❤</h2>
         </div>
-        <img class="job-img" :src="job.imgs[0]" />
-        <div class="desc flex align-center column space-between">
+        <img class="job-img" :src="job.img" />
+        <div v-if="job.owner" class="desc flex align-center column space-between">
             <div class="company flex space-around align-center">
                 <img class="owner-logo" :src="job.owner.logoUrl" />
                 <div class="details flex column align-center justify-center">
