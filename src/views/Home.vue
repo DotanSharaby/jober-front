@@ -1,10 +1,11 @@
 <template>
   <section class="home">
+    <img src="../assets/imgs/employment.jpg" />
   </section>
 </template>
 
-<script>
 
+<script>
 export default {
   name: 'home',
 }
