@@ -18,7 +18,7 @@ import JobList from "../components/JobList.vue";
 export default {
     computed: {
         jobs() {
-            return this.$store.getters.jobsToShow;
+            return this.$store.getters.jobsToShow.slice(0, 4);
         }
     },
     created() {
