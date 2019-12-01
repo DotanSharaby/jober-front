@@ -3,14 +3,27 @@
   <section class="signup">
     <h1>Signup</h1>
     <form-wizard
+      class="my-form"
       @on-complete="doSignup"
       shape="tab"
       color="#3fc1c9"
-      back-button-text="Go back!"
-      next-button-text="Go next!"
-      finish-button-text="We're there"
+      back-button-text="Back"
+      next-button-text="Next"
+      finish-button-text="Done"
     >
-      <tab-content class="flex column" title="User setup" icon="ti-user">
+      <font-awesome-icon class="icon-item user" :icon="['fas', 'user']" size="2x" />
+      <font-awesome-icon class="icon-item details" :icon="['fas', 'asterisk']" size="2x" />
+      <font-awesome-icon class="icon-item done" :icon="['fas', 'check']" size="2x" />
+      <tab-content class="flex column" title="User setup" icon="ti-user" :before-change="validate">
+        <label>User Name:</label>
+        <input type="text" v-model="signupCred.username" placeholder="User Name" />
+        <label>Email:</label>
+        <input type="email" v-model="signupCred.email" placeholder="Email" />
+        <label>Password:</label>
+        <input type="text" v-model="signupCred.password" placeholder="Password" />
+      </tab-content>
+
+      <tab-content class="flex column" title="Additional Info" icon="ti-settings">
         Looking to post some Jobs?
         <button
           :class="{selected :signupCred.isCompany}"
@@ -21,16 +34,6 @@
           @click="isCompany(false)"
         >No, I am looking for one</button>
       </tab-content>
-
-      <tab-content class="flex column" title="Additional Info" icon="ti-settings">
-        <label>User Name:</label>
-        <input type="text" v-model="signupCred.username" placeholder="User Name" />
-        <label>Email:</label>
-        <input type="email" v-model="signupCred.email" placeholder="Email" />
-        <label>Password:</label>
-        <input type="text" v-model="signupCred.password" placeholder="Password" />
-      </tab-content>
-
       <tab-content class="flex column" title="Last step" icon="ti-check">
         <div v-if="signupCred.isCompany">
           <label>
@@ -70,15 +73,11 @@
           </label>
 
           <Checkbox />
-
         </div>
       </tab-content>
     </form-wizard>
-    <pulse-loader v-if="isLoading" :color="'#8bdade'"></pulse-loader>
-    <!-- <beat-loader :loading="loading" :color="color" :size="size"></beat-loader> -->
-    <!-- <fade-loader :loading="loading" :color="color" :height="height" :width="width"></fade-loader> -->
-    <!-- <pacman-loader :loading="loading" :color="color" :size="size"></pacman-loader> -->
-    <!-- <scale-loader :loading="loading" :color="color" :height="height" :width="width"></scale-loader> -->
+    <p>{{ msg }}</p>
+    <scale-loader v-if="isLoading" :color="'#8bdade'"></scale-loader>
   </section>
 </template>
 
@@ -90,17 +89,13 @@ import "vue-form-wizard/dist/vue-form-wizard.min.css";
 
 import Checkbox from "../components/Checkbox";
 
-import PulseLoader from "vue-spinner/src/PulseLoader.vue";
-// import BeatLoader from "vue-spinner/src/BeatLoader.vue";
-// import FadeLoader from "vue-spinner/src/FadeLoader.vue";
-// import PacmanLoader from "vue-spinner/src/PacmanLoader.vue";
-// import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
+import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
 
 export default {
   data() {
     return {
       signupCred: {
-        isCompany: true
+        isCompany: null
       },
       msg: "",
       isLoading: false
@@ -109,10 +104,6 @@ export default {
   methods: {
     doSignup() {
       const cred = this.signupCred;
-      if (!cred.email || !cred.password || !cred.username) {
-        setTimeout(() => (this.msg = ""), 2000);
-        return (this.msg = "Please fill up the form");
-      }
       this.$store.dispatch({ type: "signup", userCred: cred });
       setTimeout(() => {
         this.msg = "";
@@ -120,11 +111,29 @@ export default {
       }, 2000);
       this.msg = "Signup successfully!";
     },
+    validate() {
+      const cred = this.signupCred;
+      if (!cred.email || !cred.password || !cred.username) {
+        setTimeout(() => (this.msg = ""), 2000);
+        this.msg = "Please fill up the form";
+        return false;
+      }
+      return true;
+    },
     async getUrl(ev, type) {
+      this.isLoading = true;
       const file = await UploadService.upload(ev.target.files[0]);
+      this.isLoading = false;
       if (!file) return;
-      if (type === "cv") return (this.signupCred.cvUrl = file.url);
-      return (this.signupCred.img = file.url);
+      if (type === "cv") {
+        setTimeout(() => (this.msg = ""), 2000);
+        this.signupCred.cvUrl = file.url;
+        return (this.msg = "CV uploaded");
+      } else {
+        setTimeout(() => (this.msg = ""), 2000);
+        this.signupCred.img = file.url;
+        return (this.msg = "Image uploaded");
+      }
     },
     isCompany(val) {
       if (val) this.signupCred.isCompany = true;
@@ -134,7 +143,7 @@ export default {
   components: {
     FormWizard,
     TabContent,
-    PulseLoader,
+    ScaleLoader,
     Checkbox
   }
 };

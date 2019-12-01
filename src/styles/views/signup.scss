@@ -2,6 +2,7 @@
     max-width: 450px;
     margin: 0 auto;
     padding: 20px;
+    position: relative;
 
     input {
         padding: 5px;
@@ -16,6 +17,27 @@
         padding: 20px 0;
         text-decoration: underline;
     }
+
+    .my-form {
+        .icon-item {
+            position: absolute;
+            color: $clr5;
+            top: 115px;
+        }
+
+        .icon-item.user {
+            left: 87px;
+        }
+
+        .icon-item.details {
+            left: 210px;
+        }
+
+        .icon-item.done {
+            left: 335px;
+        }
+    }
+
 
     button {
         margin-top: 5px;
