@@ -14,11 +14,11 @@
 
       <label>Perks:</label>
       <div class="icons-container flex">
-        <font-awesome-icon @click="addProp" class="icon-item" :icon="['fas', 'paw']" />
-        <font-awesome-icon @click="addProp" class="icon-item" :icon="['fas', 'bus']" />
-        <font-awesome-icon @click="addProp" class="icon-item" :icon="['fas', 'utensils']" />
-        <font-awesome-icon @click="addProp" class="icon-item" :icon="['fas', 'parking']" />
-        <font-awesome-icon @click="addProp" class="icon-item" :icon="['fas', 'mug-hot']" />
+        <font-awesome-icon @click="addProp" class="icon-item" data-desc="Dog friendly" :icon="['fas', 'paw']" />
+        <font-awesome-icon @click="addProp" class="icon-item" data-desc="Transportation" :icon="['fas', 'bus']" />
+        <font-awesome-icon @click="addProp" class="icon-item" data-desc="Restaurants" :icon="['fas', 'utensils']" />
+        <font-awesome-icon @click="addProp" class="icon-item" data-desc="Parking" :icon="['fas', 'parking']" />
+        <font-awesome-icon @click="addProp" class="icon-item" data-desc="Coffee shops" :icon="['fas', 'mug-hot']" />
       </div>
       <label>
         Images:
