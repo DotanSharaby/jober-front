@@ -55,7 +55,6 @@ import JobProp from "../components/JobProp";
 export default {
   data() {
     return {
-      // job: null,
       applied: false
     };
   },
@@ -79,15 +78,12 @@ export default {
       return `/job/edit/${this.job._id}`;
     },
     job() {
-      console.log(this.$store.getters.currJob);
       return this.$store.getters.currJob;
     }
   },
   async created() {
     const id = this.$route.params.id;
     setTimeout(async () => await this.$store.dispatch({ type: "getJob", id }), 1000);
-    // this.job = job;
-    // console.log(job)
   },
   components: {
     Wall,

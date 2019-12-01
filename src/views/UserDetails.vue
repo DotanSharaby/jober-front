@@ -16,7 +16,7 @@
           @change="getUrl($event)"
         />
       </label>
-      <img v-if="user.imgs" :src="user.imgs[0]" height="100" />
+      <img v-if="user.img" :src="user.img" height="100" />
 
       <ul class="clean-list">
         <li v-for="(skill,idx) in user.skills" :key="idx">{{skill}}</li>
@@ -50,7 +50,7 @@ export default {
     async getUrl(ev) {
       const file = await UploadService.upload(ev.target.files[0]);
       if (!file) return;
-      this.user.imgs.push(file.url);
+      this.user.img = file.url;
       return this.$store.dispatch({ type: "saveUser", user: this.user });
     }
   }
