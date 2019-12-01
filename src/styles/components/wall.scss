@@ -1,79 +1,74 @@
 .wall {
-    // position: relative;
-    // width: 33%;
-    // right: 0;
-    // float: right;
-    padding-left: 20px;
+  .comment-container {
+    width: 100%;
+    min-height: 100px;
+    max-height: 80%;
+    padding: 15px;
+    overflow: scroll;
+    overflow-x: hidden;
 
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-
-        li {
-            .comment {
-                width: 100%;
-                min-height: 100px;
-                padding: 7px;
-            }
-
-            .comment-header {
-                font-size: 0.9em;
-                padding-bottom: 7px;
-            }
-
-            .comment-main {
-                line-height: 22px;
-                padding-bottom: 7px;
-
-                p {
-                    overflow-wrap: break-word;
-                }
-            }
-
-            .comment-options {
-                height: 100%;
-                align-items: center;
-
-                .btn-wrap {
-                    padding: 8px 16px;
-                }
-
-                .icon-item {
-                    cursor: pointer;
-                    opacity: 0.6;
-
-                    &:hover {
-                        opacity: 1;
-                    }
-                }
-            }
-        }
+    &::-webkit-scrollbar {
+      width: .5em;
     }
 
-    .comment-wrapper {
-        border-radius: 8px;
-        padding: 5px;
-        background-color: #eeeeee;
-        .comment-container {
-            width: 100%;
-            margin-bottom: 8px;
 
-            textarea {
-                flex-grow: 1;
-                resize: none;
-                height: 68px;
-                border-radius: 10px;
-            }
+    &::-webkit-scrollbar-thumb {
+      background-color: $clr3;
+    }
+  }
 
+  .comment-header {
+    font-size: 0.9em;
+    padding-bottom: 7px;
+  }
 
-        }
+  .comment-main {
+    line-height: 22px;
+    padding-bottom: 7px;
 
-        button {
-            height: 34px;
-            align-self: flex-end;
+    p {
+      overflow-wrap: break-word;
+    }
+  }
 
-        }
+  .comment-options {
+    height: 100%;
+    align-items: center;
+    margin-bottom: 30px;
+    .btn-wrap {
+      padding: 8px 16px;
     }
 
+    .icon-item {
+      cursor: pointer;
+      opacity: 0.6;
+        transition: .3s;
+      &:hover {
+        opacity: 1;
+      }
+      &.active {
+          opacity: 1;
+      }
+    }
+  }
+
+  .add-comment {
+    position: absolute;
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 15px;
+    bottom: 0;
+    background-color: #eeeeee;
+    textarea {
+      flex-grow: 1;
+      resize: none;
+      height: 68px;
+      border-radius: 10px;
+    }
+
+    button {
+      height: 34px;
+      align-self: flex-end;
+    }
+  }
 }
