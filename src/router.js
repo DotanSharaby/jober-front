@@ -11,6 +11,7 @@ import JobPage from './views/JobPage.vue'
 import JobDetails from './views/JobDetails.vue'
 import JobEdit from './views/JobEdit.vue'
 import CompPage from './views/CompPage.vue'
+import ApplyForm from './views/ApplyForm.vue'
 
 
 Vue.use(VueRouter)
@@ -57,9 +58,13 @@ const routes = [
     component: JobDetails
   },
   {
-    path: '/comp/:id?',
+    path: '/comp',
     name: 'compPage',
     component: CompPage
+  },
+  {
+    path: '/apply',
+    component: ApplyForm
   }
 ]
 

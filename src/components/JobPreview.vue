@@ -1,24 +1,23 @@
 <template>
     <section @click="goToDetails" class="job-preview flex column space-between align-center">
-        <h3 v-if="saved" class="favorite-icon" @click.stop="toggleSave">⭐</h3>
         <div class="icons flex space-between align-center text-center">
             <h2 class="trash bold" @click.stop="removeJob">🗑</h2>
-            <h2 @click.stop="toggleSave">❤</h2>
+            <h2 @click.stop="saveJob">❤</h2>
         </div>
-        <img class="job-img" :src="job.img" />
-        <div v-if="job.owner" class="desc flex align-center column space-between">
+        <img class="job-img" :src="currJob.img" />
+        <div class="desc flex align-center column space-between">
             <div class="company flex space-around align-center">
-                <img class="owner-logo" :src="job.owner.logoUrl" />
+                <img class="owner-logo" :src="currJob.owner.logoUrl" />
                 <div class="details flex column align-center justify-center">
-                    <h2 >{{job.owner.name}}</h2>
-                    <h4 class="rating semi flex align-center">{{job.owner.rating}} <span>★</span></h4>
+                    <h2 >{{currJob.owner.name}}</h2>
+                    <h4 class="rating semi flex align-center">{{currJob.owner.rating}} <span>★</span></h4>
                 </div>
             </div>
-            <p v-if="job.owner.rating>4.5" class="top-comp bold">Top Company</p>
+            <p v-if="currJob.owner.rating>4.5" class="top-comp bold">Top Company</p>
             <div class="extra flex space-between align-center">
                 <div class="job flex space-between column align-center">
-                    <h4 class="semi">{{job.title}}</h4>
-                    <p>{{job.loc.address}}</p>
+                    <h4 class="semi">{{currJob.title}}</h4>
+                    <p>{{currJob.loc.address}}</p>
                 </div>
                 <h4 :class="{ colored: match>70}">{{match}}% match</h4>
             </div>
@@ -32,25 +31,32 @@ export default {
     props: { job: Object },
     data() {
         return {
-            saved: false
+            saved: false,
+            currJob: null
         }
     },
     methods: {
         goToDetails() {
-            this.$router.push(`/job/${this.job._id}`);
+            this.$router.push(`/job/${this.currJob._id}`);
         },
-        toggleSave() {
+        saveJob() {
             this.saved = !this.saved;
+            this.removeJob()
+            // if (this.saved) this.currJob.saves += 1;
+            // if (!this.saved) this.currJob.saves -= 1;
+            // this.$emit('updated', this.currJob)
         },
         removeJob() {
-            this.$emit('removed', this.job._id)
+            this.$emit('removed', this.currJob._id)
         }
     },
     computed: {
         match() {
             return Math.floor(Math.random() * (100 - 50 + 1) + 50);
         }
+    },
+    created() {
+        this.currJob = JSON.parse(JSON.stringify(this.job))
     }
-
 };
 </script>

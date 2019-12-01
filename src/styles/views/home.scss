@@ -1,5 +1,84 @@
 .home {
-  img {
-    width: 100%;
-  }
+    margin-bottom: 50px;
+    .site-header {
+        position: absolute;
+        font-size: 65px;
+        font-family: Lobster;
+        width: 544px;
+        left: 50%;
+        top: 90px;
+        margin-left: -272px;
+        color: #37afb6ad;
+    }
+    .main-img {
+        width: 100%;
+        max-height: 350px;
+        object-fit: cover;
+    }
+    .preview-header {
+        color: $clr3;
+        margin: 50px auto 20px;
+        padding: 0 15px;
+        max-width: 1150px;
+    }
+    .job-list {
+        margin: 0 auto 10px;
+        padding: 0 15px;
+        max-width: 1150px;
+        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    }
+    .job-preview {
+        border-radius: 5px;
+        .job-img {
+            height: 140px;
+            border-radius: 5px 5px 0 0;
+        }
+        .desc {
+            height: 125px;
+        }
+        .top-comp {
+            display: none;
+        }
+        .company {
+            .owner-logo {
+                height: 40px;
+                width: 40px;
+                left: 5px;
+                top: 160px;
+            }
+            .details {
+                h2 {
+                    font-size: 20px;
+                    margin: 0;
+                }
+                h4 {
+                    font-size: 15px;
+                }
+            }
+        }
+        .extra {
+            margin: 0 0 10px;
+            h4:last-child {
+              text-align: center;
+            }
+            p {
+                display: none;
+            }
+        }
+        .icons {
+            display: none;
+            // width: 33px;
+            // padding: 0;
+            // top: 7px;
+            // right: 7px;
+            // h2 {
+            //     font-size: 25px;
+            //     width: 33px;
+            //     height: 33px;
+            // }
+            // .trash {
+            //     display: none;
+            // }
+        }
+    }
 }

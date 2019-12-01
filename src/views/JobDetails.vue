@@ -9,9 +9,7 @@
                 <div class="comp flex align-center justify-center">
                     <img class="avatar" :src="logoUrl" alt />
                     <div class="flex column align-center space-between">
-                        <router-link :to="compUrl">
-                            <h2 class="profile-link">{{job.owner.name}}</h2>
-                        </router-link>
+                        <h2>{{job.owner.name}}</h2>
                         <h3>{{job.owner.rating}} ★</h3>
                     </div>
                 </div>
@@ -19,6 +17,7 @@
                     <h3 class="bold job-title">{{job.title}}</h3>
                     <p>{{job.loc.address}}</p>
                 </div>
+                <h2 class="{saved: savedJob, heart}">❤</h2>
                 <button
                     class="apply-btn"
                     v-if="!applied"
@@ -75,6 +74,7 @@ export default {
     methods: {
         applyToJob() {
             this.applied = true;
+            this.$router.push('/apply')
         },
         goBack() {
             return this.$router.push('/job');
@@ -89,9 +89,6 @@ export default {
         },
         editUrl() {
             return `/job/edit/${this.job._id}`;
-        },
-        compUrl() {
-            return `/comp/${this.job.owner._id}`;
         }
     },
     async created() {
