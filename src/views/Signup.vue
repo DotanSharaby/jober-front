@@ -58,6 +58,7 @@
           </label>
           <img v-if="signupCred.img" :src="signupCred.img" height="100" />
           <label>
+            |
             <input
               type="file"
               name="cvFile"
@@ -67,6 +68,9 @@
             />
             <label for="cvFile">Upload CV - (pdf)</label>
           </label>
+
+          <Checkbox />
+
         </div>
       </tab-content>
     </form-wizard>
@@ -83,6 +87,8 @@ import UploadService from "../services/UploadService";
 
 import { FormWizard, TabContent } from "vue-form-wizard";
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
+
+import Checkbox from "../components/Checkbox";
 
 import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 // import BeatLoader from "vue-spinner/src/BeatLoader.vue";
@@ -118,7 +124,7 @@ export default {
       const file = await UploadService.upload(ev.target.files[0]);
       if (!file) return;
       if (type === "cv") return (this.signupCred.cvUrl = file.url);
-      return this.signupCred.img = file.url;
+      return (this.signupCred.img = file.url);
     },
     isCompany(val) {
       if (val) this.signupCred.isCompany = true;
@@ -128,7 +134,8 @@ export default {
   components: {
     FormWizard,
     TabContent,
-    PulseLoader
+    PulseLoader,
+    Checkbox
   }
 };
 </script>
