@@ -14,11 +14,36 @@
 
       <label>Perks:</label>
       <div class="icons-container flex">
-        <font-awesome-icon @click="addProp" class="icon-item" data-desc="Dog friendly" :icon="['fas', 'paw']" />
-        <font-awesome-icon @click="addProp" class="icon-item" data-desc="Transportation" :icon="['fas', 'bus']" />
-        <font-awesome-icon @click="addProp" class="icon-item" data-desc="Restaurants" :icon="['fas', 'utensils']" />
-        <font-awesome-icon @click="addProp" class="icon-item" data-desc="Parking" :icon="['fas', 'parking']" />
-        <font-awesome-icon @click="addProp" class="icon-item" data-desc="Coffee shops" :icon="['fas', 'mug-hot']" />
+        <font-awesome-icon
+          @click="addProp"
+          class="icon-item"
+          data-desc="Dog friendly"
+          :icon="['fas', 'paw']"
+        />
+        <font-awesome-icon
+          @click="addProp"
+          class="icon-item"
+          data-desc="Transportation"
+          :icon="['fas', 'bus']"
+        />
+        <font-awesome-icon
+          @click="addProp"
+          class="icon-item"
+          data-desc="Restaurants"
+          :icon="['fas', 'utensils']"
+        />
+        <font-awesome-icon
+          @click="addProp"
+          class="icon-item"
+          data-desc="Parking"
+          :icon="['fas', 'parking']"
+        />
+        <font-awesome-icon
+          @click="addProp"
+          class="icon-item"
+          data-desc="Coffee shops"
+          :icon="['fas', 'mug-hot']"
+        />
       </div>
       <label>Description:</label>
       <textarea
@@ -37,7 +62,7 @@
       <button class="save-btn">Save</button>
     </form>
     <button v-if="editedJob._id" @click="remove">Remove Job</button>
-
+    <p>{{ msg }}</p>
     <div class="flex gallery-container">
       <gallery
         v-if="editedJob.imgs.length"
@@ -52,10 +77,10 @@
         @click="index = imageIndex"
         :style="{ backgroundImage: 'url(' + image + ')', width: '300px', height: '200px' }"
       >
-      <button @click.stop="removeImg(index)">x
-      </button>
+        <button @click.stop="removeImg(imageIndex)">x</button>
       </div>
     </div>
+    <scale-loader v-if="isLoading" :color="'#8bdade'"></scale-loader>
   </section>
 </template>
 
@@ -63,6 +88,8 @@
 import UploadService from "../services/UploadService";
 
 import VueGallery from "vue-gallery";
+
+import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
 
 export default {
   data() {
@@ -77,7 +104,9 @@ export default {
         payment: null
       },
       loggedinUser: "",
-      index: null
+      index: null,
+      msg: "",
+      isLoading: false
     };
   },
   async created() {
@@ -101,6 +130,7 @@ export default {
       this.$router.go(-1);
     },
     async getUrl(ev) {
+      this.isLoading = true;
       var files = ev.target.files;
       files = Object.values(files).map(file => {
         return UploadService.upload(file);
@@ -108,7 +138,10 @@ export default {
       return Promise.all(files).then(files => {
         var urls = [];
         files.forEach(file => urls.push(file.url));
-        return (this.editedJob.imgs = this.editedJob.imgs.concat(urls));
+        this.isLoading = false;
+        setTimeout(() => (this.msg = ""), 2000);
+        this.editedJob.imgs = this.editedJob.imgs.concat(urls);
+        return (this.msg = "Images uploaded");
       });
     },
     async remove() {
@@ -129,9 +162,8 @@ export default {
 
       target.classList.toggle("active");
     },
-    removeImg(idx){
-      console.log(idx);
-      debugger
+    removeImg(idx) {
+      this.editedJob.imgs.splice(idx, 1);
     }
   },
   computed: {
@@ -140,7 +172,8 @@ export default {
     }
   },
   components: {
-    gallery: VueGallery
+    gallery: VueGallery,
+    ScaleLoader
   }
 };
 </script>

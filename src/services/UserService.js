@@ -51,6 +51,5 @@ async function getUsers() {
 
 function _handleLogin(user) {
     sessionStorage.setItem('user', JSON.stringify(user));
-    debugger;
     return user;
 }

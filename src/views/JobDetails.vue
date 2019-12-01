@@ -75,6 +75,7 @@ export default {
     methods: {
         applyToJob() {
             this.applied = true;
+            this.$router.push('/apply')
         },
         goBack() {
             return this.$router.push('/job');
