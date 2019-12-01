@@ -37,7 +37,7 @@ export default ({
             context.commit({ type: 'updateJob', addedJob })
         },
         async getJob(context, { id }) {
-            const job = await JobService.getById(id)
+            const job = await JobService.getById(id);
             return job;
         },
         async removeJob(context, { id }) {

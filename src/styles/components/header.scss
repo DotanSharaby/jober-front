@@ -8,7 +8,7 @@ header {
    width: 100%;
    height: 75px;
    z-index: 10;
-   
+
    .logo-box {
       font-family: Squada;
       font-size: 30px;
@@ -29,7 +29,7 @@ header {
       font-family: Raleway-Semi;
    }
 
-   nav > *:hover {
+   nav>*:hover {
       color: $clr1;
    }
 
@@ -51,7 +51,17 @@ header {
       opacity: 0;
       transition: opacity .3s;
    }
-   
+
+   .logout-btn {
+      cursor: pointer;
+      margin-left: 7px;
+
+      &:hover {
+         text-decoration: underline;
+         ;
+      }
+   }
+
 }
 
 
@@ -95,7 +105,7 @@ header {
 //        color: #fe876c;
 //        box-shadow: -2px 0px 0px 0px #fe876c;
 //    }
-   
+
 //    .app-header.opened-menu .screen {
 //        visibility: visible;
 //        opacity: 1;

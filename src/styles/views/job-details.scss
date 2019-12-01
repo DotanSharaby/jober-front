@@ -6,6 +6,7 @@
     .details {
         margin: 20px auto;
         width: 700px;
+        padding: 0 20px;
     }
     .title {
         margin: 40px auto;
@@ -68,12 +69,14 @@
     .more-info {
         margin-bottom: 35px;
     }
-    .chat {
-        border: 1px solid #cfcaca;
-        width: calc(100vw - 850px);
-        height: calc(100vh - 105px);
+    .wall {
+        flex-grow: 1;
+        padding: 15px;
+        max-width: 35vw;
+        height: calc(100vh - 75px);
         position: sticky;
-        top: 90px;
+        top: 75px;
+        border-left: 1px solid #d0d0d0;
     }
     .apply-btn {
         width: 100px;
@@ -84,7 +87,7 @@
         }
     }
     .disabled-btn {
-        width: 200px;
+        width: 100px;
         height: 30px;
         opacity: 0.6;
         cursor: auto;

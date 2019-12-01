@@ -11,9 +11,12 @@
 
 // VIEWS
 @import 'views/home';
+@import 'views/login';
+@import 'views/signup';
 @import 'views/job-page';
 @import 'views/job-edit';
 @import 'views/job-details';
+@import 'views/user-details';
 @import 'views/comp-page';
 
 // COMPONENTS
@@ -21,4 +24,6 @@
 @import 'components/footer';
 @import 'components/job-preview';
 @import 'components/job-list';
+@import 'components/wall';
 @import 'components/comp-job-preview';
+@import 'components/checkbox';

@@ -28,11 +28,3 @@ function remove(jobId) {
 function getById(jobId) {
     return HttpService.get(`job/${jobId}`);
 }
-
-// function update(job) {
-//     return HttpService.put(`job/${job._id}`, job);
-// }
-
-// function add(job) {
-//     return HttpService.post('job', job);
-// }
