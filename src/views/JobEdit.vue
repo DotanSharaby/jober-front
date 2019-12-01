@@ -55,30 +55,17 @@
       <label>Salary:</label>
       <input type="number" placeholder="Expected Salery" v-model="editedJob.payment" />
       <label>
-        Images:
+        Image:
         <input type="file" name="file" id="file" class="inputfile" @change="getUrl" multiple />
-        <label for="file">Choose files</label>
+        <label for="file">Choose File</label>
       </label>
       <button class="save-btn">Save</button>
     </form>
     <button v-if="editedJob._id" @click="remove">Remove Job</button>
     <p>{{ msg }}</p>
-    <div class="flex gallery-container">
-      <gallery
-        v-if="editedJob.imgs.length"
-        :images="editedJob.imgs"
-        :index="index"
-        @close="index = null"
-      ></gallery>
-      <div
-        class="image"
-        v-for="(image, imageIndex) in editedJob.imgs"
-        :key="imageIndex"
-        @click="index = imageIndex"
-        :style="{ backgroundImage: 'url(' + image + ')', width: '300px', height: '200px' }"
-      >
-        <button @click.stop="removeImg(imageIndex)">x</button>
-      </div>
+    <div v-if="editedJob.img">
+      <img class="image" :src="editedJob.img" height="100px" />
+      <button @click="removeImg">x</button>
     </div>
     <scale-loader v-if="isLoading" :color="'#8bdade'"></scale-loader>
   </section>
@@ -86,8 +73,6 @@
 
 <script>
 import UploadService from "../services/UploadService";
-
-import VueGallery from "vue-gallery";
 
 import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
 
@@ -100,7 +85,7 @@ export default {
         loc: { address: "" },
         props: [],
         desc: "",
-        imgs: [],
+        img: "",
         payment: null
       },
       loggedinUser: "",
@@ -131,18 +116,12 @@ export default {
     },
     async getUrl(ev) {
       this.isLoading = true;
-      var files = ev.target.files;
-      files = Object.values(files).map(file => {
-        return UploadService.upload(file);
-      });
-      return Promise.all(files).then(files => {
-        var urls = [];
-        files.forEach(file => urls.push(file.url));
-        this.isLoading = false;
-        setTimeout(() => (this.msg = ""), 2000);
-        this.editedJob.imgs = this.editedJob.imgs.concat(urls);
-        return (this.msg = "Images uploaded");
-      });
+      const file = await UploadService.upload(ev.target.files[0]);
+
+      this.isLoading = false;
+      setTimeout(() => (this.msg = ""), 2000);
+      this.editedJob.img = file.url;
+      return (this.msg = "Image uploaded");
     },
     async remove() {
       await this.$store.dispatch({ type: "removeJob", id: this.editedJob._id });
@@ -162,8 +141,8 @@ export default {
 
       target.classList.toggle("active");
     },
-    removeImg(idx) {
-      this.editedJob.imgs.splice(idx, 1);
+    removeImg() {
+      this.editedJob.img = "";
     }
   },
   computed: {
@@ -172,7 +151,6 @@ export default {
     }
   },
   components: {
-    gallery: VueGallery,
     ScaleLoader
   }
 };
