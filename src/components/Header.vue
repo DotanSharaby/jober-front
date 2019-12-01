@@ -14,7 +14,7 @@
     <nav>
       <router-link exact to="/">Home</router-link>
       <router-link exact to="/job">Jobs</router-link>
-      <router-link exact to="/comp">Back-Office Demo</router-link>
+      <router-link exact to="/comp">Company Demo</router-link>
       <router-link exact to="/about">About</router-link>
     </nav>
   </header>
