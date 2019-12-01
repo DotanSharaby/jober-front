@@ -1,45 +1,38 @@
 <template>
   <section class="wall">
-    <div class="comment-container">
-      <Comment v-for="comment in comments" :comment="comment" :key="comment.id"></Comment>
+    <div class="post-container">
+      <Post v-for="post in posts" :post="post" :key="post._id"></Post>
     </div>
-    <div class="add-comment flex">
-      <textarea type="text" />
-      <button>Post</button>
+    <div class="add-post flex">
+      <textarea type="text" v-model="postToAdd.txt" />
+      <button @click="addPost">Post</button>
     </div>
   </section>
 </template>
 
 <script>
-import Comment from "./Comment";
+import Post from "./Post";
 export default {
   components: {
-    Comment
+    Post
   },
   data() {
     return {
-      comments: [
-        {
-          id: "124",
-          from: "Anonymous",
-          when: "40 minutes ago",
-          body: `Lorem ipsum dolor sit, amet consectetur
-              adipisicing elit. Sunt, iure atque maxime
-              harum exercitationem sapiente! Vero maxime ex exercitationem impedit. Quaerat`,
-          likeAmount: 0
-        },
-        {
-          id: "123",
-          from: "Anonymous",
-          when: "40 minutes ago",
-          body: `Lorem ipsum dolor sit, amet consectetur
-              adipisicing elit. Sunt, iure atque maxime
-              harum exercitationem sapiente! Vero maxime ex exercitationem impedit. Quaerat`,
-          likeAmount: 0
-        }
-      ]
+      postToAdd: {
+        from: "Anonymous",
+        txt: ""  
+      }
     };
-  }
+  },
+  methods: {
+    addPost() {
+      // dispatch "addPost", send to db (make unique id),
+      this.$store.dispatch({type: 'addPost', post: this.postToAdd});
+      this.posts.unshift(JSON.parse(JSON.stringify(this.postToAdd)));
+      this.postToAdd.txt = "";
+    }
+  },
+  props: ["posts"]
 };
 </script>
 

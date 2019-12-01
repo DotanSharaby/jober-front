@@ -15,11 +15,15 @@ export default ({
             },
             "username": "Meital",
             "_id": "weok9f"
-        }
+        },
+        currJob: null
     },
     mutations: {
         setJobs(state, { jobs }) {
             state.jobs = jobs
+        },
+        setCurrJob(state, { job }) {
+            state.currJob = job;
         },
         updateJob(state, updatedJob) {
             const idx = state.jobs.findIndex(job => job._id === updatedJob._id);
@@ -34,6 +38,9 @@ export default ({
         }
     },
     getters: {
+        currJob(state) {
+            return state.currJob
+        },
         jobsToShow(state) {
             return state.jobs
         },
@@ -63,8 +70,9 @@ export default ({
             const addedJob = await JobService.save(job)
             context.commit({ type: 'updateJob', addedJob })
         },
-        async getJob(context, { id }) {
-            const job = await JobService.getById(id);
+        async getJob({ commit }, { id }) {
+            const job = await JobService.getById(id)
+            commit({ type: 'setCurrJob', job });
             return job;
         },
         async removeJob(context, { id }) {

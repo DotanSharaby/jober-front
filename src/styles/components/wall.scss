@@ -1,5 +1,5 @@
 .wall {
-  .comment-container {
+  .post-container {
     width: 100%;
     min-height: 100px;
     max-height: 80%;
@@ -17,12 +17,12 @@
     }
   }
 
-  .comment-header {
+  .post-header {
     font-size: 0.9em;
     padding-bottom: 7px;
   }
 
-  .comment-main {
+  .post-main {
     line-height: 22px;
     padding-bottom: 7px;
 
@@ -31,7 +31,7 @@
     }
   }
 
-  .comment-options {
+  .post-options {
     height: 100%;
     align-items: center;
     margin-bottom: 30px;
@@ -52,7 +52,7 @@
     }
   }
 
-  .add-comment {
+  .add-post {
     position: absolute;
     width: 100%;
     margin-bottom: 8px;

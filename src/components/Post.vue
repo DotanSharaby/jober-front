@@ -1,27 +1,27 @@
 <template>
-  <section v-if="comment">
-    <div class="comment-header">
+  <section v-if="post">
+    <div class="post-header">
       <p>
-        <span class="semi">{{comment.from}}</span>
-        {{comment.when}}
+        <span class="semi">{{post.from}}</span>
+        {{post.createdAt}}
       </p>
     </div>
-    <div class="comment-main flex column">
-      <p>{{comment.body}}</p>
+    <div class="post-main flex column">
+      <p>{{post.txt}}</p>
     </div>
-    <div class="comment-options flex">
+    <div class="post-options flex">
       <div class="btn-wrap">
         <font-awesome-icon class="icon-item" @click="addLike" :icon="['fa', 'thumbs-up']" />
       </div>
-      <span v-if="comment.likeAmount > 0">&nbsp;{{comment.likeAmount}}</span>
+      <span v-if="post.likes > 0">&nbsp;{{post.likes}}</span>
     </div>
   </section>
 </template>
 
 <script>
 export default {
-  name: "Comment",
-  props: ["comment"],
+  name: "Post",
+  props: ["post"],
   data() {
     return {
       isLiked: false
@@ -30,9 +30,7 @@ export default {
   methods: {
     addLike(ev) {
       this.isLiked = !this.isLiked;
-      this.isLiked
-        ? (this.comment.likeAmount += 1)
-        : (this.comment.likeAmount -= 1);
+      this.isLiked ? (this.post.likes += 1) : (this.post.likes -= 1);
       var target = ev.target;
       if (target.localName === "path") target = target.farthestViewportElement;
       target.classList.toggle("active");
