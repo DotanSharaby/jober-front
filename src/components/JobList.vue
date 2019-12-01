@@ -1,5 +1,5 @@
 <template>
-    <section class="job-list flex space-around align-center">
+    <section class="job-list">
         <JobPreview @removed="removeJob" v-for="job in jobs" :key="job._id" :job="job"></JobPreview>
     </section>
 </template>
