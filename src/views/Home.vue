@@ -11,7 +11,6 @@
     </section>
 </template>
 
-
 <script>
 import JobList from "../components/JobList.vue";
 

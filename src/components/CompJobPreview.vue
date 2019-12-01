@@ -4,9 +4,9 @@
             <h3 class="semi profile-link" title="Edit Job">{{job.title}}</h3>
         </router-link>
         <div class="info flex space-between align-center">
-            <p class="date">30.11.19</p>
-            <p class="saved">12 users saved this job</p>
-            <p class="applicants profile-link semi">3 applicants</p>
+            <p class="date">{{job.createdAt}}</p>
+            <p class="saved">{{job.saves}} users saved this job</p>
+            <p class="applicants profile-link semi">{{job.applicants.length}} applicants</p>
         </div>
     </section>
 </template>

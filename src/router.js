@@ -58,7 +58,7 @@ const routes = [
     component: JobDetails
   },
   {
-    path: '/comp/:id?',
+    path: '/comp',
     name: 'compPage',
     component: CompPage
   },
