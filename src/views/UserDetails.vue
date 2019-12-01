@@ -30,6 +30,7 @@
 
 <script>
 import UploadService from "../services/UploadService";
+
 export default {
   data() {
     return {
@@ -38,6 +39,10 @@ export default {
   },
   created() {
     const user = this.$store.getters.loggedinUser;
+    if (!user) {
+      alert("No user to show");
+      return this.$router.push("/");
+    }
     this.user = JSON.parse(JSON.stringify(user));
     delete this.user.password;
   },
