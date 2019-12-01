@@ -21,16 +21,18 @@
         max-width: 1150px;
     }
     .job-list {
-        margin: 20px auto 35px;
+        margin: 0 auto;
         padding: 0 15px;
         max-width: 1150px;
         justify-content: space-between;
+        flex-wrap: wrap;
     }
     .job-preview {
         width: 23%;
-        margin: 0;
+        margin: 20px 5px 35px;
         border-radius: 5px;
         max-width: 270px;
+        min-width: 220px;
         .job-img {
             height: 140px;
             border-radius: 5px 5px 0 0;
