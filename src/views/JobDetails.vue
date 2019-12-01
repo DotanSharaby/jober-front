@@ -17,6 +17,7 @@
                     <h3 class="bold job-title">{{job.title}}</h3>
                     <p>{{job.loc.address}}</p>
                 </div>
+                <h2 class="{saved: savedJob, heart}">❤</h2>
                 <button
                     class="apply-btn"
                     v-if="!applied"
@@ -84,7 +85,7 @@ export default {
             return this.job.owner.logoUrl;
         },
         imgUrl() {
-            return this.job.imgs[0];
+            return this.job.img;
         },
         editUrl() {
             return `/job/edit/${this.job._id}`;

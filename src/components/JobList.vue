@@ -1,6 +1,6 @@
 <template>
     <section class="job-list">
-        <JobPreview @removed="removeJob" v-for="job in jobs" :key="job._id" :job="job"></JobPreview>
+        <JobPreview @removed="removeJob" @updated="updateJob" v-for="job in jobs" :key="job._id" :job="job"></JobPreview>
     </section>
 </template>
 
@@ -12,6 +12,9 @@ export default {
     methods: {
         removeJob(jobId) {
             this.$emit('removed', jobId)
+        },
+        updateJob(job) {
+            this.$emit('updated', job)
         }
     },
     components: {
