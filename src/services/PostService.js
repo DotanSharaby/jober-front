@@ -12,6 +12,7 @@ function query() {
 }
 
 function save(post) {
+    console.log(post, 'post from service')
     if (post._id) {
         return HttpService.put(`job/post/${post._id}`, post);
     } else {
