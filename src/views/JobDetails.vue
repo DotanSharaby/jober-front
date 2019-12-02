@@ -83,7 +83,7 @@ export default {
   },
   async created() {
     const id = this.$route.params.id;
-    setTimeout(async () => await this.$store.dispatch({ type: "getJob", id }), 1000);
+    await this.$store.dispatch({ type: "getJob", id });
   },
   components: {
     Wall,

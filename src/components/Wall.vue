@@ -2,7 +2,9 @@
   <section class="wall">
     <div class="post-container">
       <Post v-for="post in posts" :post="post" :key="post._id"></Post>
+      {{posts}}
     </div>
+
     <div class="add-post flex">
       <textarea type="text" v-model="postToAdd.txt" />
       <button @click="addPost">Post</button>
@@ -20,15 +22,24 @@ export default {
     return {
       postToAdd: {
         from: "Anonymous",
-        txt: ""  
+        txt: "",
+        createdAt: Date.now(),
+        likes: 0,
+        jobId: null
       }
     };
   },
+  computed: {
+    currJob() {
+      return this.$store.getters.currJob._id;
+    }
+  },
   methods: {
-    addPost() {
+    async addPost() {
       // dispatch "addPost", send to db (make unique id),
-      this.$store.dispatch({type: 'addPost', post: this.postToAdd});
-      this.posts.unshift(JSON.parse(JSON.stringify(this.postToAdd)));
+      this.postToAdd.jobId = this.currJob;
+      const post = JSON.parse(JSON.stringify(this.postToAdd));
+      await this.$store.dispatch({ type: "savePost", post });
       this.postToAdd.txt = "";
     }
   },

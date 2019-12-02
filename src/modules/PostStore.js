@@ -25,6 +25,7 @@ export default ({
         async savePost(context, { post }) {
             const addedPost = await PostService.save(post)
             context.commit({ type: 'updatePost', addedPost })
+            return addedPost;
         },
         async removePost(context, { id }) {
             await PostService.remove(id)
