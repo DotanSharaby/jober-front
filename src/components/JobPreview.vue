@@ -5,14 +5,13 @@
       <h2 @click.stop="saveJob">❤</h2>
     </div>
     <img class="job-img" :src="currJob.img" />
-    <div v-if="currJob.owner" class="desc flex align-center column space-between">
+    <div class="desc flex align-center column space-between">
       <div class="company flex space-around align-center">
-        <img class="owner-logo" :src="currJob.owner.logoUrl" />
+        <img class="owner-logo" :src="currJob.owner.img" />
         <div class="details flex column align-center justify-center">
-          <h2>{{currJob.owner.name}}</h2>
+          <h2>{{currJob.owner.username}}</h2>
           <h4 class="rating semi flex align-center">
-            {{currJob.owner.rating}}
-            <span>★</span>
+            {{jobSaves}} Saves
           </h4>
         </div>
       </div>
@@ -55,6 +54,11 @@ export default {
   computed: {
     match() {
       return Math.floor(Math.random() * (100 - 50 + 1) + 50);
+    },
+    jobSaves() {
+      var saves = this.currJob.saves;
+      if (!saves) saves = 0;
+      return saves
     }
   },
   created() {

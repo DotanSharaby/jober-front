@@ -6,8 +6,7 @@
         <div class="comp flex align-center justify-center">
           <img class="avatar" :src="logoUrl" alt />
           <div class="flex column align-center space-between">
-            <h2>{{job.owner.name}}</h2>
-            <h3>{{job.owner.rating}} ★</h3>
+            <h2>{{job.owner.username}}</h2>
           </div>
         </div>
         <div class="position flex column align-center space-between">
@@ -21,17 +20,14 @@
         <img class="job-img" :src="imgUrl" />
         <div class="skills flex column align-center">
           <h2 class="semi">Required Skills</h2>
-          <p>Frontend devloping</p>
-          <p>Cooking</p>
-          <p>ewjflksea</p>
-          <p>jenfklnssd</p>
+          <p v-for="(skill, idx) in job.reqSkills" :key="idx">{{skill}}</p>
         </div>
       </div>
       <p class="desc">{{job.desc}}</p>
       <div class="more-info flex align-center space-between">
         <div class="props flex column">
-          <h2 class="semi" v-if="job.props.length > 0 ">Properties</h2>
-          <JobProp v-for="item in job.props" :item="item" :key="item" />
+          <h2 class="semi" v-if="job.perks.length > 0 ">Properties</h2>
+          <JobProp v-for="item in job.perks" :item="item" :key="item" />
         </div>
         <img
           class="map"
@@ -73,7 +69,7 @@ export default {
   },
   computed: {
     logoUrl() {
-      return this.job.owner.logoUrl;
+      return this.job.owner.img;
     },
     imgUrl() {
       return this.job.img;
@@ -87,7 +83,7 @@ export default {
   },
   async created() {
     const id = this.$route.params.id;
-    await this.$store.dispatch({ type: "getJob", id });
+    await this.$store.dispatch({ type: "getJob", id })
   },
   components: {
     Wall,
