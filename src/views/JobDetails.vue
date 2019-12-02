@@ -33,10 +33,14 @@
           <h2 class="semi" v-if="job.props.length > 0 ">Properties</h2>
           <JobProp v-for="item in job.props" :item="item" :key="item" />
         </div>
-        <img
+        <!-- <img
           class="map"
           src="https://icdn7.digitaltrends.com/image/digitaltrends/google_maps_share_location_1-500x300-c.jpg"
-        />
+        />-->
+
+        <Map :loc="job.loc" />
+
+
       </div>
       <button class="apply-btn center" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
       <button class="disabled-btn center" v-else disabled>Applied</button>
@@ -48,6 +52,7 @@
 <script>
 import Wall from "../components/Wall";
 import JobProp from "../components/JobProp";
+import Map from "../components/Map";
 
 export default {
   data() {
@@ -87,10 +92,8 @@ export default {
   },
   components: {
     Wall,
-    JobProp
+    JobProp,
+    Map
   }
 };
 </script>
-
-<style>
-</style>
