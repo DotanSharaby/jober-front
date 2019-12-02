@@ -18,10 +18,10 @@ import CompChart from '../components/CompChart'
 export default {
     computed: {
         comp() {
-            return this.$store.getters.getUserComp;
+            return this.$store.getters.userComp;
         },
         compJobs() {
-            return this.$store.getters.getUserJobs;
+            return this.$store.getters.userJobs;
         }
     },
     created() {

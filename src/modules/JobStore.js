@@ -64,7 +64,7 @@ export default ({
             }
             return state.jobs
         },
-        getUserComp(state) {
+        userComp(state) {
             var comp = state.currUser.comp;
             if (!comp) comp = {
                 "_id": "90328jfsc",
@@ -74,10 +74,19 @@ export default ({
             }
             return comp
         },
-        getUserJobs(state, getters) {
+        userJobs(state, getters) {
             var comp = getters.getUserComp;
             var jobs = state.jobs.filter(job => job.owner._id === comp._id)
             return jobs
+        },
+        skills(state) {
+            var skills = [];
+            state.jobs.forEach(job => {
+                job.reqSkills.forEach(skill => {
+                    if (!skills.includes(skill)) skills.push(skill)
+                })
+            })
+            return skills;
         }
     },
     actions: {
