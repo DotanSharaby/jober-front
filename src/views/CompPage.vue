@@ -2,7 +2,6 @@
     <section class="comp-page" v-if="comp && compJobs">
         <div class="title flex align-center center justify-center">
             <h1 class="text-center bold">{{comp.name}}</h1>
-            <h2 class="text-center bold">{{comp.rating}} ★</h2>
         </div>
         <div class="content flex space-between">
             <div class="flex column"></div>

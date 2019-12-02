@@ -17,7 +17,6 @@ export default {
   },
   async created() {
     await this.$store.dispatch("loadJobs");
-    console.log(this.$store.getters.jobsToShow)
   }
 };
 </script>
