@@ -1,0 +1,18 @@
+.el-select .el-input.is-focus .el-input__inner {
+    border-color: $clr2 !important;
+}
+.el-input__inner {
+    min-width: 300px;
+    min-height: 70px;
+}
+.el-select-dropdown__item{
+    min-width: 310px;
+}
+
+.el-select .el-input__inner:focus {
+    border-color: $clr2 !important;
+}
+
+.el-select-dropdown.is-multiple .el-select-dropdown__item.selected {
+    color: $clr2 !important;
+}

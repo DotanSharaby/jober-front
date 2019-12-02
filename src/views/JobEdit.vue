@@ -2,77 +2,97 @@
   <section class="job-edit">
     <h1 v-if="!editedJob._id">Add Job</h1>
     <h1 v-else>Edit Job</h1>
+    <section class="flex">
+      <form @submit.prevent="saveJob" class="flex">
+        <section class="flex column">
+          <label v-if="getLoggedinUser">{{ loggedinUser.username }}</label>
 
-    <form @submit.prevent="saveJob" class="flex column">
-      <label v-if="getLoggedinUser">{{ loggedinUser.username }}</label>
+          <label>Position:</label>
+          <input type="text" v-model="editedJob.title" placeholder="Front End Developer" />
 
-      <label>Position:</label>
-      <input type="text" v-model="editedJob.title" placeholder="Front End Developer" />
+          <label>Address:</label>
+          <input type="text" v-model="editedJob.address" placeholder="Tel Aviv" />
+          <label>Description:</label>
+          <textarea
+            placeholder="Describe the position, working place etc.."
+            v-model="editedJob.desc"
+            rows="5"
+          ></textarea>
+        </section>
 
-      <label>Address:</label>
-      <input type="text" v-model="editedJob.loc.address" placeholder="Tel Aviv" />
+        <section class="flex column">
+          <h4>Choose up to 3 questions:</h4>
+          <drop-down />
+        </section>
+        <section class="flex column">
+          <label>Perks:</label>
+          <div class="icons-container flex">
+            <font-awesome-icon
+              @click="addProp"
+              class="icon-item"
+              data-desc="Dog friendly"
+              :icon="['fas', 'paw']"
+            />
+            <font-awesome-icon
+              @click="addProp"
+              class="icon-item"
+              data-desc="Transportation"
+              :icon="['fas', 'bus']"
+            />
+            <font-awesome-icon
+              @click="addProp"
+              class="icon-item"
+              data-desc="Restaurants"
+              :icon="['fas', 'utensils']"
+            />
+            <font-awesome-icon
+              @click="addProp"
+              class="icon-item"
+              data-desc="Parking"
+              :icon="['fas', 'parking']"
+            />
+            <font-awesome-icon
+              @click="addProp"
+              class="icon-item"
+              data-desc="Coffee shops"
+              :icon="['fas', 'mug-hot']"
+            />
+          </div>
 
-      <label>Perks:</label>
-      <div class="icons-container flex">
-        <font-awesome-icon
-          @click="addProp"
-          class="icon-item"
-          data-desc="Dog friendly"
-          :icon="['fas', 'paw']"
-        />
-        <font-awesome-icon
-          @click="addProp"
-          class="icon-item"
-          data-desc="Transportation"
-          :icon="['fas', 'bus']"
-        />
-        <font-awesome-icon
-          @click="addProp"
-          class="icon-item"
-          data-desc="Restaurants"
-          :icon="['fas', 'utensils']"
-        />
-        <font-awesome-icon
-          @click="addProp"
-          class="icon-item"
-          data-desc="Parking"
-          :icon="['fas', 'parking']"
-        />
-        <font-awesome-icon
-          @click="addProp"
-          class="icon-item"
-          data-desc="Coffee shops"
-          :icon="['fas', 'mug-hot']"
-        />
-      </div>
-      <label>Description:</label>
-      <textarea
-        placeholder="Describe the position, working place etc.."
-        v-model="editedJob.desc"
-        rows="5"
-      ></textarea>
-
-      <label>Salary:</label>
-      <input type="number" placeholder="Expected Salery" v-model="editedJob.payment" />
-      <label>
-        Image:
-        <input type="file" name="file" id="file" class="inputfile" @change="getUrl" multiple />
-        <label for="file">Choose File</label>
-      </label>
-      <button class="save-btn">Save</button>
-    </form>
-    <button v-if="editedJob._id" @click="remove">Remove Job</button>
-    <p>{{ msg }}</p>
-    <div class="image" v-if="editedJob.img">
-      <img :src="editedJob.img" height="100px" />
-      <button @click="removeImg">x</button>
-    </div>
-    <scale-loader v-if="isLoading" :color="'#8bdade'"></scale-loader>
+          <label>Salary:</label>
+          <input type="number" placeholder="Expected Salery" v-model="editedJob.payment" />
+          <label>
+            Image:
+            <input
+              type="file"
+              name="file"
+              id="file"
+              class="inputfile"
+              @change="getUrl"
+              multiple
+            />
+            <label for="file">Choose File</label>
+          </label>
+          <!-- <button class="save-btn">Save</button> -->
+        </section>
+      </form>
+      <section class="flex column">
+        <p>{{ msg }}</p>
+        <div class="image" v-if="editedJob.img">
+          <img :src="editedJob.img" height="100px" />
+          <button @click="removeImg">x</button>
+        </div>
+        <button v-if="editedJob._id" @click="remove">Remove Job</button>
+        <scale-loader v-if="isLoading" :color="'#8bdade'"></scale-loader>
+      </section>
+    </section>
   </section>
 </template>
 
 <script>
 import UploadService from "../services/UploadService";
+
+import dropDown from "../components/Dropdown";
 
 import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
 
@@ -82,7 +102,7 @@ export default {
       editedJob: {
         owner: { name: "" },
         title: "",
-        loc: { address: "" },
+        address: "",
         props: [],
         desc: "",
         img: "",
@@ -97,10 +117,11 @@ export default {
     await this.$store.dispatch({ type: "loadJobs" });
     const jobId = this.$route.params.id;
     if (jobId) {
-      this.editedJob = await this.$store.dispatch({
+      const job = await this.$store.dispatch({
         type: "getJob",
         id: jobId
       });
+      this.editedJob = JSON.parse(JSON.stringify(job));
     }
     const user = this.$store.getters.loggedinUser;
     if (user) {
@@ -150,7 +171,8 @@ export default {
     }
   },
   components: {
-    ScaleLoader
+    ScaleLoader,
+    dropDown
   }
 };
 </script>

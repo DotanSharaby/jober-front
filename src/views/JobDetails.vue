@@ -11,7 +11,7 @@
         </div>
         <div class="position flex column align-center space-between">
           <h3 class="bold job-title">{{job.title}}</h3>
-          <p>{{job.loc.address}}</p>
+          <p>{{job.address}}</p>
         </div>
         <button class="apply-btn" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
         <button class="disabled-btn" v-else disabled>Applied</button>

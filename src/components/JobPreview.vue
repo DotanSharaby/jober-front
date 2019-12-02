@@ -19,7 +19,7 @@
       <div class="extra flex space-between align-center">
         <div class="job flex space-between column align-center">
           <h4 class="semi">{{currJob.title}}</h4>
-          <p>{{currJob.loc.address}}</p>
+          <p>{{currJob.address}}</p>
         </div>
         <h4 :class="{ colored: match>70}">{{match}}% match</h4>
       </div>
