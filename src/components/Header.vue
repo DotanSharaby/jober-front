@@ -13,7 +13,7 @@
         </div>
         <span v-else>{{msg}}</span>
         <button @click="toggleMenu">☰</button>
-        <nav>
+        <nav @click="toggleMenu">
             <router-link exact to="/">Home</router-link>
             <router-link exact to="/job">Jobs</router-link>
             <router-link exact to="/comp">Company Demo</router-link>
