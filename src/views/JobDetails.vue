@@ -1,10 +1,7 @@
 <template>
   <section v-if="job" class="job-details flex space-between">
     <div class="details flex column">
-      <div class="navigate">
-        <a href @click="goBack">Go Back</a> |
-        <router-link :to="editUrl">Edit</router-link>
-      </div>
+      <a href @click="goBack" class="back-btn profile-link">Back</a>
       <div class="title flex space-between align-center">
         <div class="comp flex align-center justify-center">
           <img class="avatar" :src="logoUrl" alt />
@@ -13,7 +10,7 @@
             <h3>{{job.owner.rating}} ★</h3>
           </div>
         </div>
-        <div class="flex column align-center space-between">
+        <div class="position flex column align-center space-between">
           <h3 class="bold job-title">{{job.title}}</h3>
           <p>{{job.loc.address}}</p>
         </div>
@@ -44,7 +41,7 @@
       <button class="apply-btn center" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
       <button class="disabled-btn center" v-else disabled>Applied</button>
     </div>
-    <Wall class="wall" @add-post="addPost" :posts="job.posts"></Wall>
+    <Wall class="wall-container" @add-post="addPost" :posts="job.posts"></Wall>
   </section>
 </template>
 

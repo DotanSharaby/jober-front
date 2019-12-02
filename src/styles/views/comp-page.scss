@@ -18,22 +18,33 @@
         width: 100%;
         padding: 0 35px;
 
-        @media(max-width: 960px) {
-            flex-direction: column;
-        }
+        
     }
     .comp-chart {
         max-width: 350px;
         max-height: 350px;
         flex-grow: 1;
         margin: 0 auto;
-
-        @media(max-width: 790px) {
-            margin-bottom: 15px;;
-        }
     }
     .comp-job-list {
         margin: 15px auto;
         max-width: 700px;
+    }
+    @media(max-width: 960px) {
+        margin-bottom: 70px;
+        .title {
+            margin: 10px auto;
+        }
+        .content {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .comp-job-list {
+            margin: 25px 15px 35px;
+        }
+        .comp-chart {
+            max-width: 100%;
+        }
     }
 }

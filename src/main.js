@@ -11,10 +11,21 @@ Vue.use(ElementUI)
 
 // Font Awesome
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPaw, faBus, faUtensils, faParking, faMugHot, faThumbsUp, faReply, faCheck, faUser, faAsterisk } from '@fortawesome/free-solid-svg-icons'
+import { faPaw, faBus, faUtensils, faParking, faMugHot, faThumbsUp, faReply, faCheck, faUser, faAsterisk, faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-library.add(faPaw, faBus, faUtensils, faParking, faMugHot, faThumbsUp, faReply, faCheck, faUser, faAsterisk)
+library.add(faPaw, faBus, faUtensils, faParking, faMugHot, faThumbsUp, faReply, faCheck, faUser, faAsterisk, faLongArrowAltLeft)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+// Google maps 
+import * as VueGoogleMaps from 'vue2-google-maps'
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyCb1UNDCLnAZOCRQOAd-0yoIU6fM9kSgxE',
+    libraries: 'places',
+  },
+  installComponents: true
+})
+
 
 Vue.config.productionTip = false
 
