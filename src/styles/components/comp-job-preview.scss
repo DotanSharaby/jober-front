@@ -11,4 +11,10 @@
     & *:not(:last-child) {
         margin-right: 30px;
     }
+    @media(max-width: 618px) {
+        margin-bottom: 25px;
+        h3 {
+            margin-bottom: 10px;
+        }
+    }
 }
