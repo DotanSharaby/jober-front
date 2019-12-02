@@ -13,6 +13,7 @@
     .main-img {
         width: 100%;
         max-height: 350px;
+        min-height: 300px;
         object-fit: cover;
     }
     .preview-header {
@@ -67,18 +68,38 @@
         }
         .icons {
             display: none;
-            // width: 33px;
-            // padding: 0;
-            // top: 7px;
-            // right: 7px;
-            // h2 {
-            //     font-size: 25px;
-            //     width: 33px;
-            //     height: 33px;
-            // }
-            // .trash {
-            //     display: none;
-            // }
+        }
+    }
+    @media(max-width: 710px) {
+        .main-img {
+            min-height: 240px;
+        }
+        .site-header {
+            font-size: 45px;
+            width: 378px;
+            margin-left: -189px;
+        }
+        .job-list {
+            padding: 0 45px;
+        }
+        .preview-header {
+            padding: 0 45px;
+        }
+    }
+    @media(max-width: 540px) {
+        .job-list {
+            padding: 0 14px;
+        }
+        .preview-header {
+            padding: 0 14px;
+        }
+    }
+    @media(max-width: 480px) {
+        .job-list {
+            padding: 0 55px;
+        }
+        .preview-header {
+            padding: 0 55px;
         }
     }
 }

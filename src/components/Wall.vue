@@ -1,51 +1,38 @@
 <template>
   <section class="wall">
-    <ul>
-      <li>
-        <div class="comment flex space-between column">
-          <div class="comment-header">
-            <p>
-              <span class="semi">{{comment.from}}</span>
-              {{comment.when}}
-            </p>
-          </div>
-          <div class="comment-main flex column">
-            <p>{{comment.body}}</p>
-          </div>
-          <div class="comment-options flex">
-            <div class="btn-wrap">
-              <font-awesome-icon class="icon-item" :icon="['fa', 'thumbs-up']" />&nbsp;{{comment.likeAmount}}
-            </div>
-            <div class="btn-wrap">
-              <span class="icon-item">Reply</span>
-            </div>
-          </div>
-        </div>
-      </li>
-    </ul>
-    <div class="comment-wrapper flex column">
-      <div class="comment-container flex">
-        <textarea type="text" />
-      </div>
-      <button>Send</button>
+    <div class="post-container">
+      <Post v-for="post in posts" :post="post" :key="post._id"></Post>
+    </div>
+    <div class="add-post flex">
+      <textarea type="text" v-model="postToAdd.txt" />
+      <button @click="addPost">Post</button>
     </div>
   </section>
 </template>
 
 <script>
+import Post from "./Post";
 export default {
+  components: {
+    Post
+  },
   data() {
     return {
-      comment: {
+      postToAdd: {
         from: "Anonymous",
-        when: "40 minutes ago",
-        body: `Lorem ipsum dolor sit, amet consectetur
-              adipisicing elit. Sunt, iure atque maxime
-              harum exercitationem sapiente! Vero maxime ex exercitationem impedit. Quaerat`,
-        likeAmount: 50
+        txt: ""  
       }
     };
-  }
+  },
+  methods: {
+    addPost() {
+      // dispatch "addPost", send to db (make unique id),
+      this.$store.dispatch({type: 'addPost', post: this.postToAdd});
+      this.posts.unshift(JSON.parse(JSON.stringify(this.postToAdd)));
+      this.postToAdd.txt = "";
+    }
+  },
+  props: ["posts"]
 };
 </script>
 

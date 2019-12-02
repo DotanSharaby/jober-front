@@ -23,9 +23,6 @@ export default {
             return this.$store.getters.jobsToShow;
         }
     },
-    created() {
-        this.$store.dispatch("loadJobs");
-    },
     components: {
         JobList
     }
