@@ -1,8 +1,15 @@
 <template>
   <section class="wall">
     <div class="post-container">
-      <Post v-for="post in posts" :post="post" :key="post._id"></Post>
+      <Post
+        v-for="(post, idx) in copyJob.posts"
+        @update-post="updatePost"
+        :post="post"
+        :idx="idx"
+        :key="idx"
+      ></Post>
     </div>
+
     <div class="add-post flex">
       <textarea type="text" v-model="postToAdd.txt" />
       <button @click="addPost">Post</button>
@@ -18,21 +25,38 @@ export default {
   },
   data() {
     return {
-      postToAdd: {
-        from: "Anonymous",
-        txt: ""  
-      }
+      postToAdd: null,
+      copyJob: null
     };
   },
   methods: {
     addPost() {
-      // dispatch "addPost", send to db (make unique id),
-      this.$store.dispatch({type: 'addPost', post: this.postToAdd});
-      this.posts.unshift(JSON.parse(JSON.stringify(this.postToAdd)));
-      this.postToAdd.txt = "";
+      if (this.postToAdd.txt.length <= 2) return;
+      this.copyJob.posts.unshift(this.postToAdd);
+      this.updateJob();
+      this.clearPost();
+    },
+    updatePost(sentPost, postIdx) {
+      this.copyJob.posts.splice(postIdx, 1, sentPost);
+      this.updateJob();
+    },
+    async updateJob() {
+      await this.$store.dispatch({ type: "saveJob", job: this.copyJob });
+    },
+    clearPost() {
+      this.postToAdd = {
+        from: "Anonymous",
+        txt: "",
+        createdAt: Date.now(),
+        likes: 0
+      };
     }
   },
-  props: ["posts"]
+  created() {
+    this.clearPost();
+    this.copyJob = JSON.parse(JSON.stringify(this.job));
+  },
+  props: ["job"]
 };
 </script>
 

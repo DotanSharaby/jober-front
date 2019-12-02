@@ -37,7 +37,7 @@
       <button class="apply-btn center" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
       <button class="disabled-btn center" v-else disabled>Applied</button>
     </div>
-    <Wall class="wall-container" :posts="job.posts"></Wall>
+    <Wall class="wall-container" :job="job"></Wall>
   </section>
 </template>
 

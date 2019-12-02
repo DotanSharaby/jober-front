@@ -73,7 +73,6 @@ export default ({
         async getJob({ commit }, { id }) {
             const job = await JobService.getById(id)
             commit({ type: 'setCurrJob', job });
-            return job;
         },
         async removeJob(context, { id }) {
             await JobService.remove(id)
