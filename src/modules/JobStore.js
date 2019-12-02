@@ -46,7 +46,6 @@ export default ({
             return state.currJob
         },
         jobsToShow(state) {
-            console.log(state.filter)
             if (state.filter) {
                 let filter = state.filter.toLowerCase();
                 var res = [];
