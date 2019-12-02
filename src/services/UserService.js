@@ -1,6 +1,5 @@
 
 import HttpService from './HttpService'
-import UtilService from './UtilService'
 
 export default {
     login,
@@ -14,7 +13,6 @@ export default {
 
 function getById(userId) {
     const user = HttpService.get(`user/${userId}`);
-    debugger;
     return _handleLogin(user)
 }
 function remove(userId) {
@@ -34,7 +32,6 @@ async function login(user) {
 async function signup(userCred) {
     // const user = await HttpService.post('auth/signup', userCred)
 
-    userCred._id = UtilService.makeId();
     const user = await HttpService.post('user', userCred);
 
     return _handleLogin(user);

@@ -1,5 +1,4 @@
 import HttpService from './HttpService'
-import UtilService from './UtilService'
 
 export default {
     query,
@@ -14,10 +13,9 @@ function query() {
 
 function save(job) {
     if (job._id) {
-        return HttpService.put(`job/${job._id}`, job);
+        return HttpService.put(`job/edit/${job._id}`, job);
     } else {
-        job._id = UtilService.makeId();
-        return HttpService.post('job', job);
+        return HttpService.post('job/edit', job);
     }
 }
 
