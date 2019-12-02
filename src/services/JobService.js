@@ -13,7 +13,7 @@ function query() {
 
 function save(job) {
     if (job._id) {
-        return HttpService.put(`job/${job._id}`, job);
+        return HttpService.put(`job/edit/${job._id}`, job);
     } else {
         return HttpService.post('job/edit', job);
     }

@@ -89,28 +89,25 @@
         }
     }
 
-    .gallery-container {
-        margin-top: 10px
-    }
-
     .image {
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
-        border: 1px solid #ebebeb;
-        border-radius: 5px;
         margin: 5px;
         position: relative;
         cursor: pointer;
-        max-height: 150px;
 
-        &:hover {
-            border: 1px solid $clr1;
+        img {
+            max-height: 150px;
+            border-radius: 5px;
+            border: 1px solid #ebebeb;
+
+            &:hover {
+                border: 1px solid $clr1;
+            }
         }
 
         button {
             position: absolute;
-            right: 0;
+            left: 0;
+
             &:hover {
                 color: black;
             }

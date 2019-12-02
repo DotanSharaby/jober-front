@@ -63,8 +63,8 @@
     </form>
     <button v-if="editedJob._id" @click="remove">Remove Job</button>
     <p>{{ msg }}</p>
-    <div v-if="editedJob.img">
-      <img class="image" :src="editedJob.img" height="100px" />
+    <div class="image" v-if="editedJob.img">
+      <img :src="editedJob.img" height="100px" />
       <button @click="removeImg">x</button>
     </div>
     <scale-loader v-if="isLoading" :color="'#8bdade'"></scale-loader>
@@ -89,7 +89,6 @@ export default {
         payment: null
       },
       loggedinUser: "",
-      index: null,
       msg: "",
       isLoading: false
     };
