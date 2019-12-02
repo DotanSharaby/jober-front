@@ -1,6 +1,8 @@
 .job-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
+    max-width: 1150px;
     gap: 30px;;
-    margin: 35px;
+    margin: 35px auto;
+    padding: 0 15px;
 }
