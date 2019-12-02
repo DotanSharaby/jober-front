@@ -2,7 +2,6 @@
   <section class="wall">
     <div class="post-container">
       <Post v-for="post in posts" :post="post" :key="post._id"></Post>
-      {{posts}}
     </div>
 
     <div class="add-post flex">
@@ -24,23 +23,17 @@ export default {
         from: "Anonymous",
         txt: "",
         createdAt: Date.now(),
-        likes: 0,
-        jobId: null
+        likes: 0
       }
     };
   },
-  computed: {
-    currJob() {
-      return this.$store.getters.currJob._id;
-    }
-  },
   methods: {
     async addPost() {
-      // dispatch "addPost", send to db (make unique id),
-      this.postToAdd.jobId = this.currJob;
       const post = JSON.parse(JSON.stringify(this.postToAdd));
-      await this.$store.dispatch({ type: "savePost", post });
-      this.postToAdd.txt = "";
+      if (this.postToAdd.txt.length >= 2) this.$emit("add-post", post);
+      // dispatch "addPost", send to db (make unique id),
+      // await this.$store.dispatch({ type: "savePost", post });
+      // this.postToAdd.txt = "";
     }
   },
   props: ["posts"]

@@ -67,13 +67,14 @@ export default ({
             return jobs;
         },
         async saveJob(context, { job }) {
+            console.log(job)
             const addedJob = await JobService.save(job)
+            console.log(addedJob, 'added job, jobStore')
             context.commit({ type: 'updateJob', addedJob })
         },
         async getJob({ commit }, { id }) {
             const job = await JobService.getById(id)
             commit({ type: 'setCurrJob', job });
-            return job;
         },
         async removeJob(context, { id }) {
             await JobService.remove(id)
