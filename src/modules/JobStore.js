@@ -16,11 +16,15 @@ export default ({
             "username": "Meital",
             "_id": "weok9f"
         },
-        currJob: null
+        currJob: null,
+        filter: null
     },
     mutations: {
         setJobs(state, { jobs }) {
-            state.jobs = jobs
+            state.jobs = jobs;
+        },
+        setFilter(state, { filterBy }) {
+            state.filter = filterBy;
         },
         setCurrJob(state, { job }) {
             state.currJob = job;
@@ -42,6 +46,23 @@ export default ({
             return state.currJob
         },
         jobsToShow(state) {
+            console.log(state.filter)
+            if (state.filter) {
+                let filter = state.filter.toLowerCase();
+                var res = [];
+                state.jobs.forEach(job => {
+                    if (job.title.toLowerCase().includes(filter)) {
+                        res.unshift(job);
+                    } else if (job.owner.username.toLowerCase().includes(filter)) {
+                        res.push(job);
+                    } else if (job.address.toLowerCase().includes(filter)) {
+                        res.push(job);
+                    } else if (job.desc.toLowerCase().includes(filter)) {
+                        res.push(job);
+                    }
+                })
+                return res;
+            }
             return state.jobs
         },
         getUserComp(state) {
