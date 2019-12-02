@@ -21,7 +21,7 @@
 <script>
 export default {
   name: "Post",
-  props: ["post"],
+  props: ["post", "idx"],
   data() {
     return {
       isLiked: false
@@ -30,7 +30,11 @@ export default {
   methods: {
     addLike(ev) {
       this.isLiked = !this.isLiked;
-      this.isLiked ? (this.post.likes += 1) : (this.post.likes -= 1);
+      var diff = this.isLiked ? 1 : -1;
+      let postToEdit = JSON.parse(JSON.stringify(this.post));
+      postToEdit.likes += diff;
+      this.$emit("update-post", postToEdit, this.idx);
+      // todo : make it computed (if likes is true, make active else unactive)
       var target = ev.target;
       if (target.localName === "path") target = target.farthestViewportElement;
       target.classList.toggle("active");

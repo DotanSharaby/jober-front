@@ -37,7 +37,7 @@
       <button class="apply-btn center" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
       <button class="disabled-btn center" v-else disabled>Applied</button>
     </div>
-    <Wall class="wall-container" @add-post="addPost" :posts="job.posts"></Wall>
+    <Wall class="wall-container" :job="job"></Wall>
   </section>
 </template>
 
@@ -58,13 +58,6 @@ export default {
     },
     goBack() {
       return this.$router.push("/job");
-    },
-    addPost(post) {
-      // console.log(post);
-      let jobToUpdate = JSON.parse(JSON.stringify(this.job));
-      jobToUpdate.posts.unshift(post);
-      console.log(jobToUpdate, 'front (job details)')
-      return this.$store.dispatch({type: 'saveJob', job: jobToUpdate})
     }
   },
   computed: {

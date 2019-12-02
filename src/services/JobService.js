@@ -12,7 +12,6 @@ function query() {
 }
 
 function save(job) {
-    console.log(job, 'from jobService')
     if (job._id) {
         return HttpService.put(`job/edit/${job._id}`, job);
     } else {

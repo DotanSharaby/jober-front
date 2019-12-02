@@ -1,7 +1,7 @@
 <template>
   <section class="wall">
     <div class="post-container">
-      <Post v-for="post in posts" :post="post" :key="post._id"></Post>
+      <Post v-for="(post, idx) in copyJob.posts" @update-post="updatePost" :post="post" :idx="idx" :key="idx"></Post>
     </div>
 
     <div class="add-post flex">
@@ -24,19 +24,29 @@ export default {
         txt: "",
         createdAt: Date.now(),
         likes: 0
-      }
+      },
+      copyJob: null
     };
   },
   methods: {
-    async addPost() {
-      const post = JSON.parse(JSON.stringify(this.postToAdd));
-      if (this.postToAdd.txt.length >= 2) this.$emit("add-post", post);
-      // dispatch "addPost", send to db (make unique id),
-      // await this.$store.dispatch({ type: "savePost", post });
-      // this.postToAdd.txt = "";
+    addPost() {
+      if (this.postToAdd.txt.length <= 2) return;
+      this.copyJob.posts.unshift(this.postToAdd);
+      this.updateJob();
+      this.postToAdd.txt = "";
+    },
+    updatePost(sentPost, postIdx) {
+      this.copyJob.posts.splice(postIdx, 1, sentPost);
+      this.updateJob();
+    },
+    updateJob() {
+      this.$store.dispatch({type: 'saveJob', job: this.copyJob});
     }
   },
-  props: ["posts"]
+  created() {
+    this.copyJob = JSON.parse(JSON.stringify(this.job));
+  },
+  props: ["job"]
 };
 </script>
 
