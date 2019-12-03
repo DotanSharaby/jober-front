@@ -46,8 +46,8 @@
           >Apply</button>
           <button class="disabled-btn center" v-else disabled>Applied</button>
         </div>
-
         <Map :address="job.address" />
+
 
       </div>
       <Wall class="wall-container" :job="job"></Wall>

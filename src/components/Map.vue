@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="map">
     <GmapMap
       :options="{
    zoomControl: true,
@@ -12,7 +12,6 @@
  }"
       :center="center"
       :zoom="11"
-      style="max-width: 500px; width:100%;  height: 300px; outline: 1px solid #bfadad"
       ref="mapRef"
     >
       <GmapMarker :position="marker.position" :clickable="true" @click="centerMap" />
