@@ -14,7 +14,8 @@
                     </div>
                     <div class="position flex column align-center space-between">
                         <h3 class="bold job-title">{{job.title}}</h3>
-                        <p>{{job.address}}</p>
+                        <p class="semi">{{job.address}}</p>
+                        <span>Published {{timeToShow}}</span>
                     </div>
                     <button
                         class="apply-btn"
@@ -32,10 +33,6 @@
                         <p v-for="(skill, idx) in job.reqSkills" :key="idx">{{skill}}</p>
                     </div>
                 </div>
-                <p class="time-show">
-                    Published:
-                    <span class="semi">{{timeToShow}}</span>
-                </p>
                 <p class="desc">{{job.desc}}</p>
 
                 <div class="more-info flex align-center space-between">

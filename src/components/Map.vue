@@ -1,6 +1,6 @@
 <template>
-  <section class="map">
-    <GmapMap
+  <section>
+    <GmapMap class="map"
       :options="{
    zoomControl: true,
    mapTypeControl: false,
