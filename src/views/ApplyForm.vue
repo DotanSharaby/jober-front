@@ -1,6 +1,6 @@
 <template>
   <section class="apply-form-wrapper flex column">
-    <a href="#">Back</a>
+    <span @click="goBack" class="profile-link">Back</span>
     <h2 class="bold">Your application to Frontend Developer at Googooloo</h2>
     <h3 class="semi">Please record your answers for the following questions!</h3>
     <div class="quest-container flex">
@@ -9,7 +9,7 @@
     <textarea placeholder="Leave a message?"></textarea>
     <div class="btn-sect flex align-center justify-center">
       <button>Submit</button>
-      <a href="#" class="not-now">Another time</a>
+      <span @click="goBack" class="profile-link">Another time</span>
     </div>
   </section>
 </template>
@@ -20,8 +20,17 @@ import ApplyQuest from "@/components/ApplyQuest";
 export default {
   data() {
     return {
-      questions: ["Why do you think we should hire you?", "Explain Closures", "Explain Hoisting in javascript"]
+      questions: [
+        "Why do you think we should hire you?",
+        "Explain Closures",
+        "Explain Hoisting in javascript"
+      ]
     };
+  },
+  methods: {
+    goBack() {
+      this.$router.go(-1);
+    }
   },
   components: {
     ApplyQuest
@@ -34,7 +43,7 @@ export default {
   width: 100%;
   margin: 0 auto;
   .quest-container {
-    justify-content: space-evenly
+    justify-content: space-evenly;
   }
   h2 {
     align-self: center;
@@ -51,7 +60,7 @@ export default {
     resize: none;
   }
   .btn-sect {
-      margin: 15px;
+    margin: 15px;
   }
   button {
     width: 150px;
@@ -60,9 +69,9 @@ export default {
   }
 }
 
-@media(max-width: 720px) {
-    .quest-container {
-        flex-direction: column;
-    }
+@media (max-width: 720px) {
+  .quest-container {
+    flex-direction: column;
+  }
 }
 </style>

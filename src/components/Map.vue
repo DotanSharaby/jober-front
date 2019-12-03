@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import GeolocationService from '../services/Geolocation.service';
+import GeolocationService from "../services/Geolocation.service";
 export default {
   props: { address: String },
   data() {
@@ -35,12 +35,11 @@ export default {
     async centerMap() {
       const map = await this.$refs.mapRef.$mapPromise;
       map.panTo(this.marker.position);
-    },
-    async created(){
-      debugger
-      const loc = await GeolocationService.getLoc(this.address)
-      console.log(loc);
     }
+  },
+  async created() {
+    const loc = GeolocationService.getLoc(this.address);
+    console.log(loc);
   }
 };
 </script>

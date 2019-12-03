@@ -1,7 +1,7 @@
 <template>
   <section v-if="job" class="job-details flex space-between">
     <div class="details flex column">
-      <a href @click="goBack" class="back-btn profile-link">Back</a>
+      <span @click="goBack" class="back-btn profile-link">Back</span>
       <div class="title flex space-between align-center">
         <div class="comp flex align-center justify-center">
           <img class="avatar" :src="logoUrl" alt />
@@ -62,7 +62,7 @@ export default {
       this.$router.push("/apply");
     },
     goBack() {
-      return this.$router.push("/job");
+      this.$router.go(-1);
     }
   },
   computed: {
