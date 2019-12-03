@@ -79,7 +79,7 @@
                 }
                 flex-grow: 1;
                 h2 {
-                    padding-left: 48px;
+                    padding-left: 36px;
                 }
             }
         }
@@ -89,15 +89,19 @@
         flex-grow: 1;
         .category {
             flex-grow: 1;
+            width: 100%;
+            &:not(:last-child) {
+                margin-bottom: 20px;
+                border-bottom: 1px solid #d5d5d5;
+            }
             h2 {
                 color: $clr3;
-                margin: 25px 0;
+                margin: 0 0 10px;
             }
             .no-jobs {
                 flex-grow: 1;
                 a {
-                    margin-top: 15px;
-                    font-size: 18px;
+                    margin-top: 3px;
                     color: $clr1;
                 }
             }

@@ -56,7 +56,7 @@ export default ({
             return state.jobs
         },
         userComp(state) {
-            var comp = state.currUser.comp;
+            var comp = state.currUser;
             if (!comp) comp = {
                 "_id": "90328jfsc",
                 "name": "Googloo",

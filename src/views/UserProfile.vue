@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="extra flex space-between">
-                <div class="skills">
+                <div class="skills text-center">
                     <h2 class="semi">Your Skills</h2>
                     <div v-if="!isOpenSkills">
                         <ul class="clean-list">
@@ -54,16 +54,23 @@
         </div>
         <div class="jobs flex-center column">
             <div class="category flex-center column">
-              <h2 class="semi">Applied Jobs</h2>
+                <h2 class="semi">Applied Jobs</h2>
                 <div v-if="!user.appliedJobsIds" class="no-jobs flex-center column">
-                    <h3>No applied jobs yet</h3>
+                    <p>No applied jobs yet</p>
                     <router-link class="semi profile-link" to="/job">Browse Jobs</router-link>
                 </div>
             </div>
             <div class="category flex-center column">
-              <h2 class="semi">Saved Jobs</h2>
-                <div v-if="!user.appliedJobsIds" class="no-jobs flex-center column">
-                    <h3>No applied jobs yet</h3>
+                <h2 class="semi">Saved Jobs</h2>
+                <div v-if="!user.savedJobsIds" class="no-jobs flex-center column">
+                    <p>No saved jobs yet</p>
+                    <router-link class="semi profile-link" to="/job">Browse Jobs</router-link>
+                </div>
+            </div>
+            <div class="category flex-center column">
+                <h2 class="semi">Archived Jobs</h2>
+                <div v-if="!user.archivedJobsIds" class="no-jobs flex-center column">
+                    <p>No archived jobs yet</p>
                     <router-link class="semi profile-link" to="/job">Browse Jobs</router-link>
                 </div>
             </div>
@@ -103,7 +110,10 @@ export default {
     },
     created() {
         const user = this.$store.getters.loggedinUser;
-        if (!user) this.$router.go(-1);
+        if (!user) {
+            this.$router.go(-1)
+            return
+        }
         this.user = JSON.parse(JSON.stringify(user));
     }
 };
