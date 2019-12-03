@@ -1,9 +1,5 @@
 <template>
   <div class="about">
-    About..............
-    <br />
-    <br />
-    <br />
     <gmap-autocomplete class="introInput">
       <template v-slot:input="slotProps">
         <v-text-field
