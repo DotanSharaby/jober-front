@@ -75,3 +75,12 @@
     margin-top: 10px;
     color: #f10000;
 }
+
+.back-btn {
+    position: absolute;
+    left: 30px;
+    top: 75px;
+    color: $clr3;
+    cursor: pointer;
+    font-size: 45px;
+}

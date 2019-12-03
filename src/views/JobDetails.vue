@@ -1,7 +1,7 @@
 <template>
   <section v-if="job" class="job-details flex space-between">
     <div class="details flex column">
-      <span @click="goBack" class="back-btn profile-link">Back</span>
+      <span @click="goBack" class="back-btn">⬅</span>
       <div class="title flex space-between align-center">
         <div class="comp flex align-center justify-center">
           <img class="avatar" :src="logoUrl" alt />

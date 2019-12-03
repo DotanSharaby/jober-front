@@ -2,10 +2,6 @@
     .heart {
         color: gray;
     }
-    .back-btn {
-        position: absolute;
-        left: 30px;
-    }
     .details {
         margin: 20px auto;
         width: 700px;
@@ -66,9 +62,13 @@
     .skills {
         flex-grow: 1;
         padding-left: 35px;
+        align-self: flex-start;
+        align-items: flex-start;
     }
     .props {
         padding-left: 50px;
+        align-self: flex-start;
+        align-items: flex-start;
         h2 {
             text-align: center;
         }
@@ -87,6 +87,7 @@
     .apply-btn {
         width: 100px;
         height: 30px;
+        margin: 10px auto;
         transition: 0.3s;
         &:hover {
             background-color: $clr4;
