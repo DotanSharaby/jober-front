@@ -32,7 +32,11 @@
                         <p @click="toggleSkills">Edit</p>
                     </div>
                     <div v-else class="edit-skills">
-                        <div class="skill flex align-center" v-for="(skill, idx) in skills" :key="idx">
+                        <div
+                            class="skill flex align-center"
+                            v-for="(skill, idx) in skills"
+                            :key="idx"
+                        >
                             <input type="checkbox" :id="skill" :value="skill" v-model="user.skills" />
                             <label :for="skill">{{skill}}</label>
                         </div>
@@ -48,6 +52,22 @@
                 </div>
             </div>
         </div>
+        <div class="jobs flex-center column">
+            <div class="category flex-center column">
+              <h2 class="semi">Applied Jobs</h2>
+                <div v-if="!user.appliedJobsIds" class="no-jobs flex-center column">
+                    <h3>No applied jobs yet</h3>
+                    <router-link class="semi profile-link" to="/job">Browse Jobs</router-link>
+                </div>
+            </div>
+            <div class="category flex-center column">
+              <h2 class="semi">Saved Jobs</h2>
+                <div v-if="!user.appliedJobsIds" class="no-jobs flex-center column">
+                    <h3>No applied jobs yet</h3>
+                    <router-link class="semi profile-link" to="/job">Browse Jobs</router-link>
+                </div>
+            </div>
+        </div>
     </section>
 </template>
 
@@ -58,7 +78,7 @@ export default {
     data() {
         return {
             user: {},
-            isOpenSkills: false
+            isOpenSkills: false,
         };
     },
     methods: {
@@ -72,7 +92,7 @@ export default {
             this.$store.dispatch({ type: "updateUser", user: this.user });
         },
         toggleSkills() {
-          if (this.isOpenSkills) this.updateUser;
+            if (this.isOpenSkills) this.updateUser;
             this.isOpenSkills = !this.isOpenSkills;
         }
     },

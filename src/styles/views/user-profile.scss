@@ -1,5 +1,4 @@
 .user-profile {
-    padding: 30px;
     input {
         color: $clr2;
         background-color: $clr5;
@@ -17,6 +16,7 @@
         }
     }
     .info {
+        padding: 30px;
         position: sticky;
         .title {
             height: 122px;
@@ -80,6 +80,25 @@
                 flex-grow: 1;
                 h2 {
                     padding-left: 48px;
+                }
+            }
+        }
+    }
+    .jobs {
+        padding: 30px;
+        flex-grow: 1;
+        .category {
+            flex-grow: 1;
+            h2 {
+                color: $clr3;
+                margin: 25px 0;
+            }
+            .no-jobs {
+                flex-grow: 1;
+                a {
+                    margin-top: 15px;
+                    font-size: 18px;
+                    color: $clr1;
                 }
             }
         }
