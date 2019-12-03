@@ -44,7 +44,7 @@ export default {
       return this.$router.push("/");
     }
     this.user = JSON.parse(JSON.stringify(user));
-    delete this.user.password;
+    delete this.user.pass;
   },
   methods: {
     async getUrl(ev) {

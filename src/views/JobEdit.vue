@@ -4,7 +4,6 @@
     <h1 v-else>Edit Job</h1>
 
     <form @submit.prevent="saveJob" class="flex column">
-      <label v-if="getLoggedinUser">{{ loggedinUser.username }}</label>
 
       <label>Position:</label>
       <input type="text" v-model="editedJob.title" placeholder="Front End Developer" />
@@ -88,7 +87,6 @@ export default {
         img: "",
         payment: null
       },
-      loggedinUser: "",
       msg: "",
       isLoading: false
     };
@@ -101,11 +99,6 @@ export default {
         type: "getJob",
         id: jobId
       });
-    }
-    const user = this.$store.getters.loggedinUser;
-    if (user) {
-      this.loggedinUser = JSON.parse(JSON.stringify(user));
-      delete this.user.password;
     }
   },
   methods: {
@@ -142,11 +135,6 @@ export default {
     },
     removeImg() {
       this.editedJob.img = "";
-    }
-  },
-  computed: {
-    getLoggedinUser() {
-      return this.loggedinUser;
     }
   },
   components: {

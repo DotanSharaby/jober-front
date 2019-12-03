@@ -33,7 +33,7 @@ header {
         color: $clr1;
     }
 
-    button {
+    .menu-btn {
         display: none;
         background-color: transparent;
         font-size: 32px;
@@ -52,16 +52,19 @@ header {
         transition: opacity 0.3s;
     }
 
-    .logout-btn {
-        cursor: pointer;
-        margin-left: 7px;
-
-        &:hover {
-            text-decoration: underline;
-        }
+    .login-btn {
+        background-color: $clr1;
     }
+
+    .user-img {
+        height: 40px;
+        width: 40px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
     @media (max-width: 760px) {
-        button {
+        .menu-btn {
             display: block;
         }
         nav {

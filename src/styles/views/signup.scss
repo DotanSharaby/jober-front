@@ -1,8 +1,12 @@
 .signup {
     max-width: 450px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 18px;
     position: relative;
+
+    .main-view {
+        position: relative;
+    }
 
     input {
         padding: 5px;
@@ -10,38 +14,73 @@
     }
 
     label {
-        margin: 5px 0;
+        margin: 10px 0 5px;
     }
 
     h1 {
-        padding: 20px 0;
-        text-decoration: underline;
+        color: $clr3;
+    }
+
+    .vue-form-wizard {
+        padding-bottom: 0;
+    }
+
+    .wizard-btn {
+        background-color: $clr3;
     }
 
     .my-form {
         .icon-item {
             position: absolute;
             color: $clr5;
-            top: 115px;
+            top: 73px;
         }
 
         .icon-item.user {
-            left: 87px;
+            left: 107px;
         }
 
         .icon-item.details {
-            left: 210px;
+            left: 209px;
         }
 
         .icon-item.done {
-            left: 335px;
+            left: 313px;
         }
     }
 
+    .vue-form-wizard.md .wizard-icon-circle.tab_shape {
+        width: 80px;
+    }
+
+    .vue-form-wizard .wizard-tab-content {
+        min-height: 220px;
+        padding: 10px 20px;
+    }
+
+    .img-div {
+        position: relative;
+        img {
+            position: absolute;
+            right: 0px;
+            top: 17px;
+            border-radius: 50%;
+            height: 100px;
+            width: 100px;
+            object-fit: cover;
+        }
+    }
+
+    .skill {
+        margin: 8px 0px;
+        label {
+            margin: 13px 5px;
+        }
+    }
 
     button {
         margin-top: 5px;
-        transition: all .2s;
+        transition: all 0.2s;
 
         &:hover {
             background-color: $clr4;
@@ -53,7 +92,7 @@
     }
 
     .wizard-nav {
-        padding: 20px;
+        padding: 20px 20px 5px;
         background-color: $clr5;
     }
 
@@ -74,25 +113,40 @@
         z-index: -1;
     }
 
-    .inputfile+label {
-        transition: .3s;
+    .inputfile + label {
+        transition: 0.3s;
         background-color: $clr3;
-        padding: 4px;
+        padding: 7px;
+        width: 115px;
+        text-align: center;
         border-radius: 5px;
         border: none;
         cursor: pointer;
         color: $clr5;
         max-width: 140px;
-        margin: 5px 0;
+        margin: 20px 0 5px;
         display: inline-block;
     }
 
-    .inputLogo+label {
-        margin-left: 10px
+    .inputLogo + label {
+        margin-left: 10px;
     }
 
-    .inputfile:focus+label,
-    .inputfile+label:hover {
+    .inputfile:focus + label,
+    .inputfile + label:hover {
         background-color: $clr4;
+    }
+
+    .whats-next {
+        button {
+            width: 170px;
+            font-size: 18px;
+            padding: 10px;
+            margin: 60px 15px 20px 0;
+        }
+    }
+
+    .instructions {
+        margin: 10px 0 20px;
     }
 }
