@@ -34,7 +34,7 @@
           src="https://icdn7.digitaltrends.com/image/digitaltrends/google_maps_share_location_1-500x300-c.jpg"
         />-->
 
-        <Map :loc="job.loc" />
+        <Map :address="job.address" />
 
 
       </div>

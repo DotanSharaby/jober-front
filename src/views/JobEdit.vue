@@ -10,7 +10,7 @@
       <input type="text" v-model="editedJob.title" placeholder="Front End Developer" />
 
       <label>Address:</label>
-      <input type="text" v-model="editedJob.loc.address" placeholder="Tel Aviv" />
+      <input type="text" v-model="editedJob.address" placeholder="Tel Aviv" />
 
       <label>Perks:</label>
       <div class="icons-container flex">
@@ -82,7 +82,7 @@ export default {
       editedJob: {
         owner: { name: "" },
         title: "",
-        loc: { address: "" },
+        address: "",
         props: [],
         desc: "",
         img: "",

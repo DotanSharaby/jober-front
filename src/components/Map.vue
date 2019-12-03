@@ -17,13 +17,14 @@
     >
       <GmapMarker :position="marker.position" :clickable="true" @click="centerMap" />
     </GmapMap>
-    {{loc}}
+    {{address}}
   </section>
 </template>
 
 <script>
+import GeolocationService from '../services/Geolocation.service';
 export default {
-  props: { loc: Object },
+  props: { address: String },
   data() {
     return {
       center: { lat: 32, lng: 35 },
@@ -34,6 +35,11 @@ export default {
     async centerMap() {
       const map = await this.$refs.mapRef.$mapPromise;
       map.panTo(this.marker.position);
+    },
+    async created(){
+      debugger
+      const loc = await GeolocationService.getLoc(this.address)
+      console.log(loc);
     }
   }
 };
