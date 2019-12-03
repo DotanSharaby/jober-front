@@ -18,6 +18,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 // Google maps 
 import * as VueGoogleMaps from 'vue2-google-maps'
+
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyCb1UNDCLnAZOCRQOAd-0yoIU6fM9kSgxE',

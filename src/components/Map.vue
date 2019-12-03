@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import GeolocationService from "../services/Geolocation.service";
+import { gmapApi } from "vue2-google-maps";
 export default {
   props: { address: String },
   data() {
@@ -37,9 +37,25 @@ export default {
       map.panTo(this.marker.position);
     }
   },
-  async created() {
-    const loc = GeolocationService.getLoc(this.address);
-    console.log(loc);
+  computed: {
+    google: gmapApi
+  },
+  async mounted() {
+    const self = this;
+    const map = await this.$refs.mapRef.$mapPromise;
+
+debugger
+    var geocoder = new this.google.maps.Geocoder();
+    var address = this.address;
+    geocoder.geocode({ address: address }, function(results, status) {
+      if (status === this.google.maps.GeocoderStatus.OK) {
+        var latitude = results[0].geometry.location.lat();
+        var longitude = results[0].geometry.location.lng();
+        self.center = { lat: latitude, lng: longitude };
+        map.zoom = 12;
+        self.marker.position = { lat: latitude, lng: longitude };
+      }
+    });
   }
 };
 </script>

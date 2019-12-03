@@ -46,12 +46,9 @@
           >Apply</button>
           <button class="disabled-btn center" v-else disabled>Applied</button>
         </div>
-        <!-- <img
-          class="map"
-          src="https://icdn7.digitaltrends.com/image/digitaltrends/google_maps_share_location_1-500x300-c.jpg"
-        />-->
 
         <Map :address="job.address" />
+
       </div>
       <Wall class="wall-container" :job="job"></Wall>
     </section>
