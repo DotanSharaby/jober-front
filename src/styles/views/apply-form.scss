@@ -1,0 +1,37 @@
+.apply-form-wrapper {
+    .quest-container {
+        justify-content: space-evenly;
+    }
+
+    h2 {
+        align-self: center;
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        align-self: center;
+        margin-bottom: 30px;
+    }
+
+    textarea {
+        width: 400px;
+        height: 100px;
+        resize: none;
+        margin-bottom: 20px;
+    }
+
+    button {
+        width: 150px;
+        height: 40px;
+    }
+
+    li{
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 720px) {
+    .quest-container {
+        flex-direction: column;
+    }
+}

@@ -2,12 +2,8 @@
     .heart {
         color: gray;
     }
-    .back-btn {
-        position: absolute;
-        left: 30px;
-    }
     .details {
-        margin: 20px auto;
+        margin: 35px auto;
         width: 700px;
         padding: 0 20px;
     }
@@ -49,7 +45,7 @@
         white-space: pre-line;
     }
     .skills,
-    .props {
+    .perks {
         h2 {
             margin-bottom: 15px;
             color: $clr3;
@@ -67,7 +63,7 @@
         flex-grow: 1;
         padding-left: 35px;
     }
-    .props {
+    .perks {
         padding-left: 50px;
         h2 {
             text-align: center;
@@ -123,7 +119,7 @@
             min-width: 350px;
             padding-left: 15px;
         }
-        .props {
+        .perks {
             padding: 0;
         }
     }
@@ -139,7 +135,7 @@
         }
         .more-info {
             flex-direction: column;
-            .props {
+            .perks {
                 margin-bottom: 25px;
             }
         }

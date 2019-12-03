@@ -1,7 +1,17 @@
 .job-edit {
-    max-width: 450px;
-    margin: 0 auto;
+    margin-left: 3em;
     padding: 20px;
+
+    h1 {
+        padding: 20px;
+        margin-left: 1em;
+    }
+
+    section.flex {
+        margin-left: 20px;
+        min-width: 3em;
+        padding: 20px;
+    }
 
     input {
         padding: 5px;
@@ -10,11 +20,13 @@
     textarea {
         overflow-x: hidden;
         resize: none;
-        max-height: 100px;
+        min-height: 200px;
+        min-width: 200px;
+        line-height: 1.5;
     }
 
     label {
-        margin: 5px 0;
+        margin: 10px 0;
     }
 
     .inputfile {
@@ -111,6 +123,15 @@
             &:hover {
                 color: black;
             }
+        }
+    }
+}
+
+@media (max-width: 1040px) {
+    .job-edit{
+        form {
+            flex-direction: column;
+            max-width: 450px;
         }
     }
 }
