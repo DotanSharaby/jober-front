@@ -3,7 +3,7 @@
         color: gray;
     }
     .details {
-        margin: 20px auto;
+        margin: 35px auto;
         width: 700px;
         padding: 0 20px;
     }
@@ -50,7 +50,7 @@
         white-space: pre-line;
     }
     .skills,
-    .props {
+    .perks {
         h2 {
             margin-bottom: 15px;
             color: $clr3;
@@ -70,7 +70,7 @@
         align-self: flex-start;
         align-items: flex-start;
     }
-    .props {
+    .perks {
         padding-left: 50px;
         align-self: flex-start;
         align-items: flex-start;
@@ -131,7 +131,7 @@
             max-width: 350px;
             min-width: 350px;
         }
-        .props {
+        .perks {
             padding: 0;
         }
     }
@@ -147,7 +147,7 @@
         }
         .more-info {
             flex-direction: column;
-            .props {
+            .perks {
                 margin-bottom: 25px;
             }
         }

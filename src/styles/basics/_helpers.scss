@@ -18,12 +18,18 @@
     justify-content: center;
 }
 
+.center-self {
+    align-self: center;
+}
+
+
 .column {
     flex-direction: column;
 }
 
+
 .wrap {
-	flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 .clean-list {
@@ -48,16 +54,13 @@
     font-family: Raleway-Semi;
 }
 
-.container {
-    max-width: 980px;
-}
-
 .center {
     margin: 0 auto;
 }
 
 .profile-link {
     cursor: pointer;
+
     &:hover {
         text-decoration: underline;
     }

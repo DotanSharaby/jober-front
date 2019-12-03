@@ -1,73 +1,45 @@
 <template>
-    <section class="apply-form-wrapper flex column">
-        <span @click="goBack" class="back-btn">⬅</span>
-        <h2 class="bold">Your application to Frontend Developer at Googooloo</h2>
-        <h3 class="semi">Please record a short video of yourself, and refer to the following:</h3>
-        <div class="quest-container flex">
-            <ApplyQuest v-for="quest in questions" :quest="quest" :key="quest"></ApplyQuest>
-        </div>
-        <textarea placeholder="Add a personal message (optional)"></textarea>
-        <div class="btn-sect flex align-center justify-center">
-            <button>Submit</button>
-            <a href="#" class="not-now">Cancle</a>
-        </div>
+  <section class="apply-form-wrapper container flex column">
+    <span @click="goBack" class="profile-link">Back</span>
+    <h2 class="bold">Your application to Frontend Developer at Googooloo</h2>
+    <h3 class="semi">Please record a short video of yourself, and refer to the following:</h3>
+
+    <!-- <ApplyQuest v-for="quest in questions" :quest="quest" :key="quest"></ApplyQuest> -->
+
+    <section class="flex column med-container center-self">
+      <ul>
+        <li v-for="quest in questions" :quest="quest" :key="quest">{{ quest }}</li>
+      </ul>
+      <textarea placeholder="Add a personal message (optional)"></textarea>
+      <div class="flex align-center space-around">
+        <span @click="goBack" class="profile-link">Cancel</span>
+        <button>Submit</button>
+      </div>
     </section>
+  </section>
 </template>
 
 <script>
-import ApplyQuest from "@/components/ApplyQuest";
+// import ApplyQuest from "@/components/ApplyQuest";
 
 export default {
-    data() {
-        return {
-            questions: ["Why do you think we should hire you?", "Explain Closures", "Explain Hoisting in javascript"]
-        };
-    },
-    methods: {
-        goBack() {
-            return this.$router.go(-1);
-        }
-    },
-    components: {
-        ApplyQuest
+  data() {
+    return {
+      currJob: null,
+      questions: null
+    };
+  },
+  methods: {
+    goBack() {
+      return this.$router.go(-1);
     }
+  },
+  created() {
+    this.currJob = this.$store.getters.currJob;
+    this.questions = this.currJob.quests;
+  },
+  components: {
+    // ApplyQuest
+  }
 };
 </script>
-
-<style scoped lang="scss">
-.apply-form-wrapper {
-    width: 100%;
-    margin: 0 auto;
-    .quest-container {
-        justify-content: space-evenly;
-    }
-    h2 {
-        align-self: center;
-        margin-bottom: 20px;
-    }
-    h3 {
-        align-self: center;
-        margin-bottom: 30px;
-    }
-    textarea {
-        width: 400px;
-        height: 100px;
-        margin: 0 auto;
-        resize: none;
-    }
-    .btn-sect {
-        margin: 15px;
-    }
-    button {
-        width: 150px;
-        height: 40px;
-        margin-right: 10px;
-    }
-}
-
-@media (max-width: 720px) {
-    .quest-container {
-        flex-direction: column;
-    }
-}
-</style>

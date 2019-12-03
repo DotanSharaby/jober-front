@@ -17,6 +17,9 @@ export default ({
         setCurrJob(state, { job }) {
             state.currJob = job;
         },
+        resetCurrJob(state) {
+            state.currJob = null;
+        },
         updateJob(state, updatedJob) {
             const idx = state.jobs.findIndex(job => job._id === updatedJob._id);
             state.jobs.splice(idx, 1, updatedJob);
@@ -93,6 +96,7 @@ export default ({
         },
         async saveJob(context, { job }) {
             const addedJob = await JobService.save(job)
+            debugger
             context.commit({ type: 'updateJob', addedJob })
         },
         async getJob({ commit }, { id }) {
@@ -102,6 +106,9 @@ export default ({
         async removeJob(context, { id }) {
             await JobService.remove(id)
             context.commit({ type: 'removeJob', id })
+        },
+        resetCurrJob(context) {
+            context.commit({ type: 'resetCurrJob' })
         }
     },
 })
