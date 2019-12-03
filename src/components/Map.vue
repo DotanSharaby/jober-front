@@ -12,12 +12,11 @@
  }"
       :center="center"
       :zoom="11"
-      style="width: 500px; height: 300px"
+      style="max-width: 500px; width:100%;  height: 300px; outline: 1px solid #bfadad"
       ref="mapRef"
     >
       <GmapMarker :position="marker.position" :clickable="true" @click="centerMap" />
     </GmapMap>
-    {{address}}
   </section>
 </template>
 
