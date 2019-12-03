@@ -4,18 +4,6 @@ export default ({
     strict: true,
     state: {
         jobs: [],
-        currUser: {
-            "email": "m@m.com",
-            "img": "https://www.afrombira.com/img/no-user.png",
-            "comp": {
-                "_id": "90328jfsc",
-                "name": "Googloo",
-                "rating": 4.4,
-                "logoUrl": "https://i.pinimg.com/originals/ee/8e/1c/ee8e1ce91c0ffddf0105b4173f597db8.jpg"
-            },
-            "username": "Meital",
-            "_id": "weok9f"
-        },
         currJob: null,
         filter: null
     },
@@ -87,6 +75,14 @@ export default ({
                 })
             })
             return skills;
+        },
+        userPostedJobs(state, commit, rootState) {
+            const userId = rootState.UserStore.loggedinUser;
+            var userJobs = [];
+            state.jobs.forEach(job => {
+                if (job.owner._id === userId) userJobs.push(job)
+            })
+            return userJobs
         }
     },
     actions: {
