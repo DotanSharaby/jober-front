@@ -34,7 +34,7 @@
           src="https://icdn7.digitaltrends.com/image/digitaltrends/google_maps_share_location_1-500x300-c.jpg"
         />
       </div>
-      <button class="apply-btn center" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
+      <button class="apply-btn second center" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
       <button class="disabled-btn center" v-else disabled>Applied</button>
     </div>
     <Wall class="wall-container" :job="job"></Wall>

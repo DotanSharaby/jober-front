@@ -87,10 +87,13 @@
     .apply-btn {
         width: 100px;
         height: 30px;
-        margin: 10px auto;
+        margin: 10px 0;
         transition: 0.3s;
         &:hover {
             background-color: $clr4;
+        }
+        &.second {
+            margin: 10px auto;
         }
     }
     .disabled-btn {
