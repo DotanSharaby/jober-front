@@ -1,10 +1,20 @@
 <template>
-  <section v-if="job" class="job-details flex space-between">
+  <section
+    v-if="job"
+    class="job-details flex space-between"
+  >
     <div class="details flex column">
-      <span @click="goBack" class="back-btn profile-link">Back</span>
+      <span
+        @click="goBack"
+        class="back-btn profile-link"
+      >Back</span>
       <div class="title flex space-between align-center">
         <div class="comp flex align-center justify-center">
-          <img class="avatar" :src="logoUrl" alt />
+          <img
+            class="avatar"
+            :src="logoUrl"
+            alt
+          />
           <div class="flex column align-center space-between">
             <h2>{{job.owner.username}}</h2>
           </div>
@@ -13,38 +23,73 @@
           <h3 class="bold job-title">{{job.title}}</h3>
           <p>{{job.address}}</p>
         </div>
-        <button class="apply-btn" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
-        <button class="disabled-btn" v-else disabled>Applied</button>
+        <button
+          class="apply-btn"
+          v-if="!applied"
+          :disabled="applied"
+          @click="applyToJob"
+        >Apply</button>
+        <button
+          class="disabled-btn"
+          v-else
+          disabled
+        >Applied</button>
       </div>
       <div class="info flex space-between align-center">
-        <img class="job-img" :src="imgUrl" />
+        <img
+          class="job-img"
+          :src="imgUrl"
+        />
         <div class="skills flex column align-center">
           <h2 class="semi">Required Skills</h2>
-          <p v-for="(skill, idx) in job.reqSkills" :key="idx">{{skill}}</p>
+          <p
+            v-for="(skill, idx) in job.reqSkills"
+            :key="idx"
+          >{{skill}}</p>
         </div>
       </div>
+      <p class="time-show">Published: <span class="semi">{{timeToShow}}</span></p>
       <p class="desc">{{job.desc}}</p>
       <div class="more-info flex align-center space-between">
         <div class="props flex column">
-          <h2 class="semi" v-if="job.perks.length > 0 ">Properties</h2>
-          <JobProp v-for="item in job.perks" :item="item" :key="item" />
+          <h2
+            class="semi"
+            v-if="job.perks.length > 0 "
+          >Properties</h2>
+          <JobProp
+            v-for="item in job.perks"
+            :item="item"
+            :key="item"
+          />
         </div>
         <img
           class="map"
           src="https://icdn7.digitaltrends.com/image/digitaltrends/google_maps_share_location_1-500x300-c.jpg"
         />
       </div>
-      <button class="apply-btn center" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
-      <button class="disabled-btn center" v-else disabled>Applied</button>
+      <button
+        class="apply-btn center"
+        v-if="!applied"
+        :disabled="applied"
+        @click="applyToJob"
+      >Apply</button>
+      <button
+        class="disabled-btn center"
+        v-else
+        disabled
+      >Applied</button>
     </div>
-    <Wall class="wall-container" :job="job"></Wall>
+    <Wall
+      class="wall-container"
+      :job="job"
+    ></Wall>
   </section>
 </template>
 
 <script>
 import Wall from "../components/Wall";
 import JobProp from "../components/JobProp";
-
+import moment from 'moment';
 export default {
   data() {
     return {
@@ -72,11 +117,17 @@ export default {
     },
     job() {
       return this.$store.getters.currJob;
+    },
+    timeToShow() {
+      return this.creationTime.fromNow();
+    },
+    creationTime() {
+      return moment(this.job.createdAt);
     }
   },
   async created() {
     const id = this.$route.params.id;
-    await this.$store.dispatch({ type: "getJob", id })
+    await this.$store.dispatch({ type: "getJob", id });
   },
   components: {
     Wall,
