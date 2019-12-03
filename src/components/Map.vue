@@ -44,7 +44,6 @@ export default {
     const self = this;
     const map = await this.$refs.mapRef.$mapPromise;
 
-debugger
     var geocoder = new this.google.maps.Geocoder();
     var address = this.address;
     geocoder.geocode({ address: address }, function(results, status) {
