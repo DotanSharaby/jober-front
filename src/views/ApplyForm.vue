@@ -1,6 +1,6 @@
 <template>
   <section class="apply-form-wrapper container flex column">
-    <span @click="goBack" class="profile-link">Back</span>
+    <span @click="goBack" class="back-btn">⬅</span>
     <h2 class="bold">Your application to Frontend Developer at Googooloo</h2>
     <h3 class="semi">Please record a short video of yourself, and refer to the following:</h3>
 
