@@ -46,6 +46,9 @@
           >Apply</button>
           <button class="disabled-btn center" v-else disabled>Applied</button>
         </div>
+
+        <Map :address="job.address" />
+
       </div>
       <Wall class="wall-container" :job="job"></Wall>
     </section>
@@ -55,6 +58,7 @@
 <script>
 import Wall from "../components/Wall";
 import JobProp from "../components/JobProp";
+import Map from "../components/Map";
 import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
 
 import moment from "moment";
@@ -103,10 +107,8 @@ export default {
   components: {
     Wall,
     JobProp,
+    Map,
     ScaleLoader
   }
 };
 </script>
-
-<style>
-</style>
