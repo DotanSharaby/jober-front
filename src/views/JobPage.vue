@@ -2,7 +2,7 @@
     <section class="job-page">
         <JobFilter @set-filter="setFilter"></JobFilter>
         <router-link class="edit-link" to="/job/edit">Add a New Job</router-link>
-        <JobList @removed="removeJob" @updated="updateJob" v-if="jobs" :jobs="jobs" :user="user"></JobList>
+        <JobList @removed="removeJob" @updated="updateJob" v-if="jobs" :jobs="jobs" :user="user" class="container"></JobList>
     </section>
 </template>
 

@@ -4,8 +4,16 @@
     margin: 35px auto;
     padding: 0 30px;
 
-    @media (max-width:720px) {
-        max-width: 720px;
+    @media (max-width: 1040px) {
+        max-width: 980px;
+    }
+
+    @media (max-width: 620px) {
+        max-width: 500px;
+    }
+
+    @media (max-width: 520px) {
+        max-width: 430px;
     }
 }
 
