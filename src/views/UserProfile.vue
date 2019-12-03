@@ -13,22 +13,36 @@
                     />
                 </label>
                 <div class="basic flex column align-center">
-                    <input class="username semi" type="text" @input="updateUser" v-model="user.username" />
+                    <input
+                        class="username semi"
+                        type="text"
+                        @input="updateUser"
+                        v-model="user.username"
+                    />
                     <input class="email" type="email" @input="updateUser" v-model="user.email" />
                 </div>
             </div>
             <div class="extra flex space-between">
                 <div class="skills">
                     <h2 class="semi">Your Skills</h2>
-                    <ul class="clean-list">
-                        <li v-for="(skill,idx) in user.skills" :key="idx">{{skill}}</li>
-                    </ul>
-                    <p @click="showSkills">Edit</p>
+                    <div v-if="!isOpenSkills">
+                        <ul class="clean-list">
+                            <li v-for="(skill,idx) in user.skills" :key="idx">{{skill}}</li>
+                        </ul>
+                        <p @click="toggleSkills">Edit</p>
+                    </div>
+                    <div v-else class="edit-skills">
+                        <div class="skill flex align-center" v-for="(skill, idx) in skills" :key="idx">
+                            <input type="checkbox" :id="skill" :value="skill" v-model="user.skills" />
+                            <label :for="skill">{{skill}}</label>
+                        </div>
+                        <p @click="toggleSkills">Done</p>
+                    </div>
                 </div>
                 <div class="salary" v-if="user.expSalary">
                     <h2 class="semi">Expected Salary</h2>
                     <div class="flex-center">
-                        <input type="number" v-model="user.expSalary"  @input="updateUser"/>
+                        <input type="number" v-model="user.expSalary" @input="updateUser" />
                         <h3 class="text-center">USD</h3>
                     </div>
                 </div>
@@ -43,13 +57,9 @@ import UploadService from "../services/UploadService";
 export default {
     data() {
         return {
-            user: {}
+            user: {},
+            isOpenSkills: false
         };
-    },
-    created() {
-        const user = this.$store.getters.loggedinUser;
-        if (!user) this.$router.go(-1);
-        this.user = JSON.parse(JSON.stringify(user));
     },
     methods: {
         async getUrl(ev) {
@@ -61,9 +71,20 @@ export default {
         updateUser() {
             this.$store.dispatch({ type: "updateUser", user: this.user });
         },
-        showSkills() {
-          
+        toggleSkills() {
+          if (this.isOpenSkills) this.updateUser;
+            this.isOpenSkills = !this.isOpenSkills;
         }
+    },
+    computed: {
+        skills() {
+            return this.$store.getters.skills;
+        }
+    },
+    created() {
+        const user = this.$store.getters.loggedinUser;
+        if (!user) this.$router.go(-1);
+        this.user = JSON.parse(JSON.stringify(user));
     }
 };
 </script>
