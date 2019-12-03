@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import JobStore from './modules/JobStore'
-import UserStore from './modules/UserStore.js'
+import UserStore from './modules/UserStore'
 
 
 Vue.use(Vuex)

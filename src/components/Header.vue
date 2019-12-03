@@ -5,46 +5,45 @@
             <img src="../assets/logo.png" class="logo" />
             <span>Jober</span>
         </div>
-        <div v-if="user" class="flex">
-            <router-link :to="userDetails">
-                <span>{{ user.username }}</span>
-            </router-link>
-            <span @click="logout" class="logout-btn">logout</span>
+        <button @click="toggleMenu" class="menu-btn">☰</button>
+        <div class="flex align-center justify-center">
+            <nav @click="toggleMenu">
+                <router-link exact to="/job">Jobs</router-link>
+                <router-link exact to="/comp">Company Demo</router-link>
+                <router-link exact to="/about">About</router-link>
+            </nav>
+            <img class="user-img" v-if="user" :src="userImg" />
+            <button v-else @click="goToLogin" class="login-btn">Login</button>
         </div>
-        <span v-else>{{msg}}</span>
-        <button @click="toggleMenu">☰</button>
-        <nav>
-            <router-link exact to="/">Home</router-link>
-            <router-link exact to="/job">Jobs</router-link>
-            <router-link exact to="/comp">Company Demo</router-link>
-            <router-link exact to="/about">About</router-link>
-        </nav>
     </header>
 </template>
 
 <script>
 export default {
-    name: "Header",
+    props: {
+        user: Object
+    },
     data() {
         return {
-            user: null,
-            msg: "",
+            msg: '',
             isMenuOpen: false
         };
     },
     methods: {
         goHome() {
-            return this.$router.push("/");
+            return this.$router.push('/');
         },
         logout() {
-            this.$store.dispatch({ type: "logout", user: this.user });
-            this.user = null;
-            setTimeout(() => (this.msg = ""), 1500);
-            this.msg = "Logged out!";
+            this.$store.dispatch({ type: 'logout', user: this.user });
+            setTimeout(() => (this.msg = ''), 1500);
+            this.msg = 'Logged out!';
             this.goHome();
         },
         toggleMenu() {
             this.isMenuOpen = !this.isMenuOpen
+        },
+        goToLogin() {
+            this.$router.push('/login');
         }
     },
     watch: {
@@ -55,6 +54,10 @@ export default {
     computed: {
         userDetails() {
             return `user/${this.user._id}`;
+        },
+        userImg() {
+            if (this.user.img) return this.user.img;
+            return 'https://www.afrombira.com/img/no-user.png';
         }
     }
 };

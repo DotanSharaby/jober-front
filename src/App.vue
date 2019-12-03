@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header />
+    <Header :user="user"/>
     <router-view class="main-view"></router-view>
     <Footer />
   </div>
@@ -11,16 +11,17 @@ import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 
 export default {
+  computed: {
+    user() {
+      return this.$store.getters.loggedinUser
+    }
+  },
   components: {
     Header,
     Footer
   },
   async created() {
     await this.$store.dispatch("loadJobs");
-    console.log(this.$store.getters.jobsToShow)
   }
 };
 </script>
-
-<style lang="scss">
-</style>

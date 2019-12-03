@@ -16,11 +16,15 @@ export default ({
             "username": "Meital",
             "_id": "weok9f"
         },
-        currJob: null
+        currJob: null,
+        filter: null
     },
     mutations: {
         setJobs(state, { jobs }) {
-            state.jobs = jobs
+            state.jobs = jobs;
+        },
+        setFilter(state, { filterBy }) {
+            state.filter = filterBy;
         },
         setCurrJob(state, { job }) {
             state.currJob = job;
@@ -42,9 +46,25 @@ export default ({
             return state.currJob
         },
         jobsToShow(state) {
+            if (state.filter) {
+                let filter = state.filter.toLowerCase();
+                var res = [];
+                state.jobs.forEach(job => {
+                    if (job.title.toLowerCase().includes(filter)) {
+                        res.unshift(job);
+                    } else if (job.owner.username.toLowerCase().includes(filter)) {
+                        res.push(job);
+                    } else if (job.address.toLowerCase().includes(filter)) {
+                        res.push(job);
+                    } else if (job.desc.toLowerCase().includes(filter)) {
+                        res.push(job);
+                    }
+                })
+                return res;
+            }
             return state.jobs
         },
-        getUserComp(state) {
+        userComp(state) {
             var comp = state.currUser.comp;
             if (!comp) comp = {
                 "_id": "90328jfsc",
@@ -54,10 +74,19 @@ export default ({
             }
             return comp
         },
-        getUserJobs(state, getters) {
+        userJobs(state, getters) {
             var comp = getters.getUserComp;
             var jobs = state.jobs.filter(job => job.owner._id === comp._id)
             return jobs
+        },
+        skills(state) {
+            var skills = [];
+            state.jobs.forEach(job => {
+                job.reqSkills.forEach(skill => {
+                    if (!skills.includes(skill)) skills.push(skill)
+                })
+            })
+            return skills;
         }
     },
     actions: {
@@ -73,7 +102,6 @@ export default ({
         async getJob({ commit }, { id }) {
             const job = await JobService.getById(id)
             commit({ type: 'setCurrJob', job });
-            return job;
         },
         async removeJob(context, { id }) {
             await JobService.remove(id)
