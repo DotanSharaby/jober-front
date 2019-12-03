@@ -57,7 +57,7 @@ export default {
       this.$router.push("/apply");
     },
     goBack() {
-      return this.$router.go(-1);
+      this.$router.go(-1);
     }
   },
   computed: {

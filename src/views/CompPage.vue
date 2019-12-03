@@ -32,9 +32,10 @@ export default {
     },
     created() {
         this.user = this.$store.getters.loggedinUser
-        this.$router.push(`/comp`)
-        this.jobs = this.$store.getters.userPostedJobs
+        if (!this.user) this.$router.go(-1);
         this.$store.dispatch("loadJobs");
+        this.jobs = this.$store.getters.userPostedJobs
+        if (!this.jobs.length) this.$router.go(-1);
     },
     components: {
         CompJobList,
