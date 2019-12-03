@@ -58,7 +58,7 @@ export default {
             this.$router.push('/login');
         },
         goToProfile() {
-            this.$router.push(`/user/${this.user._id}`);
+            this.$router.push(`/user`);
         },
         goToCompPage() {
             this.$router.push(`/comp`)

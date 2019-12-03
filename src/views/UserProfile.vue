@@ -93,7 +93,7 @@ export default {
             const file = await UploadService.upload(ev.target.files[0]);
             if (!file) return;
             this.user.img = file.url;
-            return this.$store.dispatch({ type: "updateUser", user: this.user });
+            return this.updateUser();
         },
         updateUser() {
             this.$store.dispatch({ type: "updateUser", user: this.user });

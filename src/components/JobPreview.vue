@@ -1,6 +1,6 @@
 <template>
   <section @click="goToDetails" class="job-preview flex column space-between align-center">
-    <div class="icons flex space-between align-center text-center">
+    <div v-if="user" class="icons flex space-between align-center text-center">
       <h2 class="trash bold" @click.stop="removeJob">🗑</h2>
       <h2 @click.stop="saveJob">❤</h2>
     </div>
@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  props: { job: Object },
+  props: { job: Object, user: Object },
   data() {
     return {
       saved: false,

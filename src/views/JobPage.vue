@@ -2,7 +2,7 @@
     <section class="job-page">
         <JobFilter @set-filter="setFilter"></JobFilter>
         <router-link class="edit-link" to="/job/edit">Add a New Job</router-link>
-        <JobList @removed="removeJob" @updated="updateJob" v-if="jobs" :jobs="jobs"></JobList>
+        <JobList @removed="removeJob" @updated="updateJob" v-if="jobs" :jobs="jobs" :user="user"></JobList>
     </section>
 </template>
 
@@ -11,6 +11,11 @@ import JobList from "../components/JobList.vue";
 import JobFilter from '../components/JobFilter.vue';
 
 export default {
+    data() {
+        return {
+            user: null
+        }
+    },
     methods: {
         removeJob(jobId) {
             this.$store.commit('removeJob', { jobId });
@@ -26,7 +31,12 @@ export default {
     computed: {
         jobs() {
             return this.$store.getters.jobsToShow;
-        }
+        },
+    },
+    created() {
+        const user = this.$store.getters.loggedinUser;
+        if (!user) return
+        this.user = JSON.parse(JSON.stringify(user));
     },
     components: {
         JobList,
