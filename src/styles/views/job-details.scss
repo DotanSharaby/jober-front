@@ -40,17 +40,13 @@
         border-radius: 10px;
     }
 
-    .time-show {
-        margin: 20px 0 0 20px;
-    }
-
     .desc {
         margin: 25px 0;
         line-height: 25px;
         white-space: pre-line;
     }
     .skills,
-    .perks {
+    .props {
         h2 {
             margin-bottom: 15px;
             color: $clr3;
@@ -70,7 +66,7 @@
         align-self: flex-start;
         align-items: flex-start;
     }
-    .perks {
+    .props {
         padding-left: 50px;
         align-self: flex-start;
         align-items: flex-start;
