@@ -39,7 +39,7 @@
                         <p @click="toggleSkills">Done</p>
                     </div>
                 </div>
-                <div class="salary" v-if="user.expSalary">
+                <div class="salary">
                     <h2 class="semi">Expected Salary</h2>
                     <div class="flex-center">
                         <input type="number" v-model="user.expSalary" @input="updateUser" />
