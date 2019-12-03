@@ -5,7 +5,7 @@ import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Login from './views/Login.vue'
 import Signup from './views/Signup.vue'
-import UserDetails from './views/UserDetails.vue'
+import UserProfile from './views/UserProfile.vue'
 
 import JobPage from './views/JobPage.vue'
 import JobDetails from './views/JobDetails.vue'
@@ -39,8 +39,8 @@ const routes = [
   },
   {
     path: '/user/:id',
-    name: 'serDetails',
-    component: UserDetails
+    name: 'userDetails',
+    component: UserProfile
   },
   {
     path: '/job',

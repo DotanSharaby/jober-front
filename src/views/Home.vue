@@ -13,7 +13,6 @@
 
 <script>
 import JobList from "../components/JobList.vue";
-
 export default {
     computed: {
         jobs() {

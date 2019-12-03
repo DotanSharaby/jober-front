@@ -4,6 +4,7 @@
     <section v-else class="job-details flex space-between">
       <div class="details flex column">
         <span @click="goBack" class="back-btn profile-link">Back</span>
+
         <div class="title flex space-between align-center">
           <div class="comp flex align-center justify-center">
             <img class="avatar" :src="logoUrl" alt />
@@ -18,6 +19,7 @@
           <button class="apply-btn" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
           <button class="disabled-btn" v-else disabled>Applied</button>
         </div>
+
         <div class="info flex space-between align-center">
           <img class="job-img" :src="imgUrl" />
           <div class="skills flex column align-center">
@@ -25,24 +27,25 @@
             <p v-for="(skill, idx) in job.reqSkills" :key="idx">{{skill}}</p>
           </div>
         </div>
+        <p class="time-show">
+          Published:
+          <span class="semi">{{timeToShow}}</span>
+        </p>
         <p class="desc">{{job.desc}}</p>
+
         <div class="more-info flex align-center space-between">
-          <div class="perks flex column">
+          <div class="props flex column">
             <h2 class="semi" v-if="job.perks.length > 0 ">Properties</h2>
             <JobProp v-for="item in job.perks" :item="item" :key="item" />
           </div>
-          <img
-            class="map"
-            src="https://icdn7.digitaltrends.com/image/digitaltrends/google_maps_share_location_1-500x300-c.jpg"
-          />
+          <button
+            class="apply-btn center"
+            v-if="!applied"
+            :disabled="applied"
+            @click="applyToJob"
+          >Apply</button>
+          <button class="disabled-btn center" v-else disabled>Applied</button>
         </div>
-        <button
-          class="apply-btn center"
-          v-if="!applied"
-          :disabled="applied"
-          @click="applyToJob"
-        >Apply</button>
-        <button class="disabled-btn center" v-else disabled>Applied</button>
       </div>
       <Wall class="wall-container" :job="job"></Wall>
     </section>
@@ -54,6 +57,7 @@ import Wall from "../components/Wall";
 import JobProp from "../components/JobProp";
 import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
 
+import moment from "moment";
 export default {
   data() {
     return {
@@ -66,7 +70,7 @@ export default {
       this.$router.push("/apply");
     },
     goBack() {
-      return this.$router.go(-1);
+      this.$router.go(-1);
     }
   },
   computed: {
@@ -81,6 +85,12 @@ export default {
     },
     job() {
       return this.$store.getters.currJob;
+    },
+    timeToShow() {
+      return this.creationTime.fromNow();
+    },
+    creationTime() {
+      return moment(this.job.createdAt);
     }
   },
   async created() {

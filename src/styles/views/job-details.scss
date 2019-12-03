@@ -39,8 +39,13 @@
         height: 220px;
         border-radius: 10px;
     }
+
+    .time-show {
+        margin: 20px 0 0 20px;
+    }
+
     .desc {
-        margin: 40px 0;
+        margin: 25px 0;
         line-height: 25px;
         white-space: pre-line;
     }
@@ -62,9 +67,13 @@
     .skills {
         flex-grow: 1;
         padding-left: 35px;
+        align-self: flex-start;
+        align-items: flex-start;
     }
     .perks {
         padding-left: 50px;
+        align-self: flex-start;
+        align-items: flex-start;
         h2 {
             text-align: center;
         }
@@ -83,9 +92,13 @@
     .apply-btn {
         width: 100px;
         height: 30px;
+        margin: 10px 0;
         transition: 0.3s;
         &:hover {
             background-color: $clr4;
+        }
+        &.second {
+            margin: 10px auto;
         }
     }
     .disabled-btn {
@@ -117,7 +130,6 @@
         .wall-container {
             max-width: 350px;
             min-width: 350px;
-            padding-left: 15px;
         }
         .perks {
             padding: 0;
@@ -147,7 +159,6 @@
             min-width: 100%;
             margin-top: 25px;
             border-top: 1px solid #d0d0d0;
-            padding: 15px;
             height: fit-content;
         }
         .desc {

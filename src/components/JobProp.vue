@@ -35,7 +35,7 @@ export default {
 
 <style lang="scss" scoped>
 .item-wrapper {
-  padding: 7px;
+  padding: 7px 0;
   .check {
     font-size: 0.8em;
     margin-left: 5px;

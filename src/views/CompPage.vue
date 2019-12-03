@@ -16,6 +16,12 @@ import CompJobList from '../components/CompJobList'
 import CompChart from '../components/CompChart'
 
 export default {
+    data() {
+        return {
+            user: null,
+            jobs: []
+        }
+    },
     computed: {
         comp() {
             return this.$store.getters.userComp;
@@ -25,7 +31,11 @@ export default {
         }
     },
     created() {
+        this.user = this.$store.getters.loggedinUser
+        if (!this.user) this.$router.go(-1);
         this.$store.dispatch("loadJobs");
+        this.jobs = this.$store.getters.userPostedJobs
+        if (!this.jobs.length) this.$router.go(-1);
     },
     components: {
         CompJobList,

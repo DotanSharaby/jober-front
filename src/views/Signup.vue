@@ -67,6 +67,10 @@
                         <label :for="skill">{{skill}}</label>
                     </div>
                 </div>
+                <div>
+                    <div class="instructions text-center">What are your salary expectations? (optional)</div>
+                    
+                </div>
             </tab-content>
         </form-wizard>
         <div v-else class="whats-next flex column justify-center align-center">

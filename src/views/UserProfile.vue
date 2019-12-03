@@ -24,7 +24,6 @@
       <label>CV</label>
     </div>
 
-    <pre>{{user}}</pre>
   </section>
 </template>
 
@@ -39,12 +38,8 @@ export default {
   },
   created() {
     const user = this.$store.getters.loggedinUser;
-    if (!user) {
-      alert("No user to show");
-      return this.$router.push("/");
-    }
+    if (!user) this.$router.go(-1);
     this.user = JSON.parse(JSON.stringify(user));
-    delete this.user.pass;
   },
   methods: {
     async getUrl(ev) {
