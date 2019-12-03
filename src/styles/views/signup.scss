@@ -9,8 +9,10 @@
     }
 
     input {
-        padding: 5px;
-        margin-top: 5px;
+        padding: 8px;
+        margin: 5px 0 7px;
+        border-radius: 5px;
+        border: 1px solid #c3c3c3;
     }
 
     label {
@@ -33,7 +35,7 @@
         .icon-item {
             position: absolute;
             color: $clr5;
-            top: 73px;
+            top: 27px;
         }
 
         .icon-item.user {
@@ -92,7 +94,7 @@
     }
 
     .wizard-nav {
-        padding: 20px 20px 5px;
+        padding: 0 20px 5px;
         background-color: $clr5;
     }
 

@@ -1,7 +1,6 @@
 
 <template>
     <section class="signup flex column justify-center align-center">
-        <h1 v-if="!isCompleted" class="semi">Signup</h1>
         <form-wizard
             v-if="!isCompleted"
             class="my-form"

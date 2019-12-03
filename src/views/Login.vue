@@ -33,7 +33,6 @@ export default {
     methods: {
         async doLogin() {
             const cred = this.loginCred;
-            console.log('login comp got creds:', cred);
             if (!cred.email || !cred.pass) return (this.msg = "Please fill both fields");
             const user = await this.$store.dispatch({ type: "login", userCred: cred });
             if (!user) return this.msg = "Wrong email or password";

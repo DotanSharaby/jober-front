@@ -56,6 +56,13 @@ header {
         background-color: $clr1;
     }
 
+    .user-img {
+        height: 40px;
+        width: 40px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
     @media (max-width: 760px) {
         .menu-btn {
             display: block;

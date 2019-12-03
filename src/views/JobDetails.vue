@@ -1,7 +1,7 @@
 <template>
   <section v-if="job" class="job-details flex space-between">
     <div class="details flex column">
-      <a href @click="goBack" class="back-btn profile-link">Back</a>
+      <span @click="goBack" class="back-btn profile-link">Back</span>
       <div class="title flex space-between align-center">
         <div class="comp flex align-center justify-center">
           <img class="avatar" :src="logoUrl" alt />
@@ -37,7 +37,7 @@
       <button class="apply-btn center" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
       <button class="disabled-btn center" v-else disabled>Applied</button>
     </div>
-    <Wall class="wall-container" :posts="job.posts"></Wall>
+    <Wall class="wall-container" :job="job"></Wall>
   </section>
 </template>
 
@@ -57,7 +57,7 @@ export default {
       this.$router.push("/apply");
     },
     goBack() {
-      return this.$router.push("/job");
+      return this.$router.go(-1);
     }
   },
   computed: {

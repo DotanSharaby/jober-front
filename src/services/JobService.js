@@ -7,7 +7,8 @@ export default {
     getById
 }
 
-function query() {
+function query(filterBy) {
+    if(filterBy) console.log('Filterby')
     return HttpService.get('job');
 }
 

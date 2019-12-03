@@ -6,13 +6,13 @@
             <span>Jober</span>
         </div>
         <button @click="toggleMenu" class="menu-btn">☰</button>
-        <div class="flex">
+        <div class="flex align-center justify-center">
             <nav @click="toggleMenu">
                 <router-link exact to="/job">Jobs</router-link>
                 <router-link exact to="/comp">Company Demo</router-link>
                 <router-link exact to="/about">About</router-link>
             </nav>
-            <img v-if="user" :src="user.img" />
+            <img class="user-img" v-if="user" :src="userImg" />
             <button v-else @click="goToLogin" class="login-btn">Login</button>
         </div>
     </header>
@@ -54,6 +54,10 @@ export default {
     computed: {
         userDetails() {
             return `user/${this.user._id}`;
+        },
+        userImg() {
+            if (this.user.img) return this.user.img;
+            return 'https://www.afrombira.com/img/no-user.png';
         }
     }
 };
