@@ -64,17 +64,8 @@
           src="https://icdn7.digitaltrends.com/image/digitaltrends/google_maps_share_location_1-500x300-c.jpg"
         />
       </div>
-      <button
-        class="apply-btn center"
-        v-if="!applied"
-        :disabled="applied"
-        @click="applyToJob"
-      >Apply</button>
-      <button
-        class="disabled-btn center"
-        v-else
-        disabled
-      >Applied</button>
+      <button class="apply-btn second center" v-if="!applied" :disabled="applied" @click="applyToJob">Apply</button>
+      <button class="disabled-btn center" v-else disabled>Applied</button>
     </div>
     <Wall
       class="wall-container"
@@ -99,7 +90,7 @@ export default {
       this.$router.push("/apply");
     },
     goBack() {
-      return this.$router.go(-1);
+      this.$router.go(-1);
     }
   },
   computed: {
