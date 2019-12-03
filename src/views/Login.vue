@@ -11,7 +11,7 @@
 
             <button class="save-btn">Login</button>
         </form>
-        <h3>{{ msg }}</h3>
+        <h3 class="error">{{ msg }}</h3>
         <h3 class="signup-msg text-center">
             Don't have account yet?
             <router-link to="/signup" class="semi profile-link">Sign up</router-link>

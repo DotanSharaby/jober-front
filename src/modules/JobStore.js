@@ -4,18 +4,6 @@ export default ({
     strict: true,
     state: {
         jobs: [],
-        currUser: {
-            "email": "m@m.com",
-            "img": "https://www.afrombira.com/img/no-user.png",
-            "comp": {
-                "_id": "90328jfsc",
-                "name": "Googloo",
-                "rating": 4.4,
-                "logoUrl": "https://i.pinimg.com/originals/ee/8e/1c/ee8e1ce91c0ffddf0105b4173f597db8.jpg"
-            },
-            "username": "Meital",
-            "_id": "weok9f"
-        },
         currJob: null,
         filter: null
     },
@@ -28,6 +16,9 @@ export default ({
         },
         setCurrJob(state, { job }) {
             state.currJob = job;
+        },
+        resetCurrJob(state) {
+            state.currJob = null;
         },
         updateJob(state, updatedJob) {
             const idx = state.jobs.findIndex(job => job._id === updatedJob._id);
@@ -87,6 +78,14 @@ export default ({
                 })
             })
             return skills;
+        },
+        userPostedJobs(state, commit, rootState) {
+            const userId = rootState.UserStore.loggedinUser;
+            var userJobs = [];
+            state.jobs.forEach(job => {
+                if (job.owner._id === userId) userJobs.push(job)
+            })
+            return userJobs
         }
     },
     actions: {
@@ -97,6 +96,7 @@ export default ({
         },
         async saveJob(context, { job }) {
             const addedJob = await JobService.save(job)
+            debugger
             context.commit({ type: 'updateJob', addedJob })
         },
         async getJob({ commit }, { id }) {
@@ -106,6 +106,9 @@ export default ({
         async removeJob(context, { id }) {
             await JobService.remove(id)
             context.commit({ type: 'removeJob', id })
+        },
+        resetCurrJob(context) {
+            context.commit({ type: 'resetCurrJob' })
         }
     },
 })

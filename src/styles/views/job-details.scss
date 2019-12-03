@@ -2,12 +2,8 @@
     .heart {
         color: gray;
     }
-    .back-btn {
-        position: absolute;
-        left: 30px;
-    }
     .details {
-        margin: 20px auto;
+        margin: 35px auto;
         width: 700px;
         padding: 0 20px;
     }
@@ -43,13 +39,18 @@
         height: 220px;
         border-radius: 10px;
     }
+
+    .time-show {
+        margin: 20px 0 0 20px;
+    }
+
     .desc {
-        margin: 40px 0;
+        margin: 25px 0;
         line-height: 25px;
         white-space: pre-line;
     }
     .skills,
-    .props {
+    .perks {
         h2 {
             margin-bottom: 15px;
             color: $clr3;
@@ -66,9 +67,13 @@
     .skills {
         flex-grow: 1;
         padding-left: 35px;
+        align-self: flex-start;
+        align-items: flex-start;
     }
-    .props {
+    .perks {
         padding-left: 50px;
+        align-self: flex-start;
+        align-items: flex-start;
         h2 {
             text-align: center;
         }
@@ -77,7 +82,6 @@
         margin-bottom: 35px;
     }
     .wall-container {
-        flex-grow: 1;
         max-width: 35vw;
         height: calc(100vh - 75px);
         position: sticky;
@@ -87,9 +91,13 @@
     .apply-btn {
         width: 100px;
         height: 30px;
+        margin: 10px 0;
         transition: 0.3s;
         &:hover {
             background-color: $clr4;
+        }
+        &.second {
+            margin: 10px auto;
         }
     }
     .disabled-btn {
@@ -121,9 +129,8 @@
         .wall-container {
             max-width: 350px;
             min-width: 350px;
-            padding-left: 15px;
         }
-        .props {
+        .perks {
             padding: 0;
         }
     }
@@ -139,7 +146,7 @@
         }
         .more-info {
             flex-direction: column;
-            .props {
+            .perks {
                 margin-bottom: 25px;
             }
         }
@@ -151,7 +158,6 @@
             min-width: 100%;
             margin-top: 25px;
             border-top: 1px solid #d0d0d0;
-            padding: 15px;
             height: fit-content;
         }
         .desc {
