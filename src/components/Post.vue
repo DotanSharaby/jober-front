@@ -34,7 +34,6 @@ export default {
       let postToEdit = JSON.parse(JSON.stringify(this.post));
       postToEdit.likes += diff;
       this.$emit("update-post", postToEdit, this.idx);
-      // todo : make it computed (if likes is true, make active else unactive)
       var target = ev.target;
       if (target.localName === "path") target = target.farthestViewportElement;
       target.classList.toggle("active");
