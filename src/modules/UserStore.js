@@ -29,6 +29,7 @@ export default {
         updateUser(state, {updatedUser}) {
             const idx = state.users.findIndex(user => user._id === updatedUser._id);
             state.users.splice(idx, 1, updatedUser);
+            if (updatedUser.email === state.loggedinUser.email) state.loggedinUser = updatedUser;
         }
     },
     actions: {
