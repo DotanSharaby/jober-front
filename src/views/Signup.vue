@@ -30,53 +30,61 @@
             </tab-content>
 
             <tab-content class="flex column" title="Additional Info" icon="ti-settings">
-              <div>
-                <div class="instructions text-center semi">Upload some files (optional)</div>
-                <div class="img-div">
-                    <label>
-                        <input
-                            type="file"
-                            name="signupImgFile"
-                            id="signupImgFile"
-                            class="inputfile inputImg"
-                            @change="getUrl($event)"
-                        />
-                        <label for="signupImgFile">Profile Image</label>
-                    </label>
-                    <img v-if="user && user.img" :src="user.img" height="100" />
+                <div>
+                    <div class="instructions text-center semi">Upload some files (optional)</div>
+                    <div class="img-div">
+                        <label>
+                            <input
+                                type="file"
+                                name="signupImgFile"
+                                id="signupImgFile"
+                                class="inputfile inputImg"
+                                @change="getUrl($event)"
+                            />
+                            <label for="signupImgFile">Profile Image</label>
+                        </label>
+                        <img v-if="user && user.img" :src="user.img" height="100" />
                     </div>
                     <div>
-                    <label>
-                        <input
-                            type="file"
-                            name="cvFile"
-                            id="cvFile"
-                            class="inputfile inputCv"
-                            @change="getUrl($event,'cv')"
-                        />
-                        <label for="cvFile">CV File (pdf)</label>
-                    </label>
+                        <label>
+                            <input
+                                type="file"
+                                name="cvFile"
+                                id="cvFile"
+                                class="inputfile inputCv"
+                                @change="getUrl($event,'cv')"
+                            />
+                            <label for="cvFile">CV File (pdf)</label>
+                        </label>
                     </div>
                     <!-- <Checkbox /> -->
                 </div>
             </tab-content>
-            <tab-content class="flex column" title="Last step" icon="ti-check" >
-              <div>
-                <div class="instructions text-center semi">What are your skills? (optional)</div>
-                <div class="skill" v-for="(skill, idx) in skills" :key="idx">
-                    <input type="checkbox" :id="skill" :value="skill" v-model="user.skills" />
-                    <label :for="skill">{{skill}}</label>
+            <tab-content class="flex column" title="Last step" icon="ti-check">
+                <div>
+                    <div class="instructions text-center semi">What are your skills? (optional)</div>
+                    <div class="skill" v-for="(skill, idx) in skills" :key="idx">
+                        <input type="checkbox" :id="skill" :value="skill" v-model="user.skills" />
+                        <label :for="skill">{{skill}}</label>
+                    </div>
                 </div>
-              </div>
+                <div>
+                    <div class="instructions text-center">What are your salary expectations? (optional)</div>
+                    
+                </div>
             </tab-content>
         </form-wizard>
         <div v-else class="whats-next flex column justify-center align-center">
-                  <h1 class="semi text-center">What's next?</h1>
-                  <div>
-                  <router-link to="/job"><button>Start searching for your dream job</button></router-link>
-                  <router-link to="/job/edit"><button>Publish your own job offer</button></router-link>
-                  </div>
-                </div>
+            <h1 class="semi text-center">What's next?</h1>
+            <div>
+                <router-link to="/job">
+                    <button>Start searching for your dream job</button>
+                </router-link>
+                <router-link to="/job/edit">
+                    <button>Publish your own job offer</button>
+                </router-link>
+            </div>
+        </div>
         <p>{{ msg }}</p>
         <scale-loader v-if="isLoading" :color="'#8bdade'"></scale-loader>
     </section>
@@ -118,8 +126,8 @@ export default {
             await this.doSignup()
             console.log('this.user', this.user);
             if (!this.user) {
-              this.msg = "Something went wrong"
-              return false;
+                this.msg = "Something went wrong"
+                return false;
             }
             this.msg = ""
             return true
@@ -140,14 +148,14 @@ export default {
             }
         },
         async updateUser() {
-          await this.$store.dispatch({ type: "updateUser", user: this.user})
-          this.isCompleted = true;
+            await this.$store.dispatch({ type: "updateUser", user: this.user })
+            this.isCompleted = true;
         }
     },
     computed: {
-      skills() {
-        return this.$store.getters.skills;
-      }
+        skills() {
+            return this.$store.getters.skills;
+        }
     },
     components: {
         FormWizard,
