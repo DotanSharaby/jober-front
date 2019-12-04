@@ -187,7 +187,6 @@ export default {
         id: jobId
       });
       const job = this.$store.getters.currJob;
-      console.log(job);
       this.editedJob = JSON.parse(JSON.stringify(job));
     } else {
       this.editedJob.owner = user;

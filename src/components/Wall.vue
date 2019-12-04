@@ -96,7 +96,6 @@ export default {
     SocketService.emit("join room", this.job._id);
     SocketService.on("post newPost", post => {
       this.copyJob.posts.unshift(post);
-      console.log(post);
     });
     SocketService.on("post update", postData => {
       this.copyJob.posts.splice(postData.postIdx, 1, postData.sentPost);
