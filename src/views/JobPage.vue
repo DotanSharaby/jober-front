@@ -34,6 +34,7 @@ export default {
         },
     },
     created() {
+        window.scrollTo(0, 0);
         const user = this.$store.getters.loggedinUser;
         if (!user) return
         this.user = JSON.parse(JSON.stringify(user));

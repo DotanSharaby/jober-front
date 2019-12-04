@@ -96,7 +96,6 @@ export default ({
         },
         async saveJob(context, { job }) {
             const addedJob = await JobService.save(job)
-            debugger
             context.commit({ type: 'updateJob', addedJob })
         },
         async getJob({ commit }, { id }) {
