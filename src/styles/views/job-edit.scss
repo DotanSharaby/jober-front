@@ -39,6 +39,19 @@
         }
     }
 
+    .image-section {
+        width: 270px;
+        height: 100px;
+        img{
+            object-fit: cover;
+            width: 100px;
+            height: 100px;
+        }
+        .loader {
+            
+        }
+    }
+
     .inputfile {
         width: 0.1px;
         height: 0.1px;
