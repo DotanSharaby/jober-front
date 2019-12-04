@@ -122,7 +122,6 @@ export default ({
         },
         async updateJob(context, {job}) {
             const updatedJob = await JobService.update(job)
-            console.log('updated job on store actions', updatedJob);
             context.commit({ type: 'updateJob', updatedJob })
         },
         async addJob(context, { job }) {

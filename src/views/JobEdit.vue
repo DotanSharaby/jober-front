@@ -3,10 +3,23 @@
     <h1 v-if="!editedJob._id">Add Job</h1>
     <h1 v-else>Edit Job</h1>
 
-    <form @submit.prevent="saveJob" class="flex">
+    <form
+      @submit.prevent="saveJob"
+      class="flex"
+    >
       <section class="flex column">
+        <label>Job Title:</label>
+        <input
+          type="text"
+          v-model="editedJob.title"
+          placeholder='"Designer"'
+        />
         <label>Address:</label>
-        <input type="text" v-model="editedJob.address" placeholder="Tel Aviv" />
+        <input
+          type="text"
+          v-model="editedJob.address"
+          placeholder='"Tel Aviv"'
+        />
         <label>Description:</label>
         <textarea
           placeholder="Describe the position, working place etc.."
@@ -17,7 +30,42 @@
 
       <section class="flex column">
         <label>Choose up to 3 questions:</label>
-        <drop-down @setVal="setQuests" :quests="editedJob.quests" />
+        <drop-down
+          @setVal="setQuests"
+          :quests="editedJob.quests"
+        />
+        <section class="req-container flex column">
+          Skill requirements:
+          <div
+            class="skill"
+            v-for="(skill, idx) in skills"
+            :key="idx"
+          >
+            <input
+              type="checkbox"
+              :id="skill"
+              :value="skill"
+              v-model="editedJob.reqSkills"
+            />
+            <label :for="skill">{{skill}}</label>
+          </div>
+          <ul class="clean-list">
+            <li
+              v-for="(skill, idx) in addedSkills"
+              :key="idx"
+            >
+              {{skill}}
+            </li>
+          </ul>
+          <label>Other:
+            <input
+              type="text"
+              ref="addSkillInput"
+              v-model="skillToAdd"
+            />
+            <button @click.prevent="addSkillReq">+</button>
+          </label>
+        </section>
       </section>
 
       <section class="flex column">
@@ -60,7 +108,11 @@
           />
         </div>
         <label>Salary:</label>
-        <input type="number" placeholder="Expected Salery" v-model="editedJob.payment" />
+        <input
+          type="number"
+          placeholder="Expected Salery"
+          v-model.number="editedJob.payment"
+        />
         <label>
           Image:
           <input
@@ -74,15 +126,32 @@
           <label for="file">Choose File</label>
         </label>
         <button class="save-btn">Save</button>
+          <br/>
+        <div class="flex justify-center">
+          <p v-if="!isAllowedToPublish">Fill all fields</p>
+          <p v-else>Ready to go</p>
+        </div>
       </section>
 
       <section class="flex column">
-        <div class="image" v-if="editedJob.img">
-          <img :src="editedJob.img" height="100px" />
+        <div
+          class="image"
+          v-if="editedJob.img"
+        >
+          <img
+            :src="editedJob.img"
+            height="100px"
+          />
           <button @click="removeImg">x</button>
         </div>
-        <button v-if="editedJob._id" @click="remove">Remove Job</button>
-        <scale-loader v-if="isLoading" :color="'#8bdade'"></scale-loader>
+        <button
+          v-if="editedJob._id"
+          @click="remove"
+        >Remove Job</button>
+        <scale-loader
+          v-if="isLoading"
+          :color="'#8bdade'"
+        ></scale-loader>
       </section>
     </form>
   </section>
@@ -99,22 +168,19 @@ export default {
   data() {
     return {
       editedJob: {
-        owner: { name: "" },
-        title: "",
-        address: "",
+        reqSkills: [],
         perks: [],
-        desc: "",
-        img: "",
-        payment: null,
         quests: []
       },
+      skillToAdd: "",
+      addedSkills: [],
       isLoading: false
     };
   },
   async created() {
-    if (!this.user) return this.$router.go(-1);
-
-    await this.$store.dispatch({ type: "loadJobs" });
+    const user = this.$store.getters.loggedinUser;
+    if (!user) return this.$router.go(-1);
+    // await this.$store.dispatch({ type: "loadJobs" });
     const jobId = this.$route.params.id;
     if (jobId) {
       await this.$store.dispatch({
@@ -122,13 +188,23 @@ export default {
         id: jobId
       });
       const job = this.$store.getters.currJob;
+      console.log(job);
       this.editedJob = JSON.parse(JSON.stringify(job));
+    } else {
+      this.editedJob.owner = user;
     }
   },
   methods: {
+    addSkillReq() {
+      this.editedJob.reqSkills.push(this.skillToAdd);
+      this.addedSkills.push(JSON.parse(JSON.stringify(this.skillToAdd)));
+      this.skillToAdd = "";
+    },
     async saveJob() {
-      await this.$store.dispatch({ type: "saveJob", job: this.editedJob });
-      this.$router.go(-1);
+      if (this.isAllowedToPublish) {
+        await this.$store.dispatch({ type: "addJob", job: this.editedJob });
+        this.$router.go(-1);
+      }
     },
     async getUrl(ev) {
       this.isLoading = true;
@@ -161,9 +237,18 @@ export default {
     }
   },
   computed: {
-    user() {
-      const user = this.$store.getters.loggedinUser;
-      return user;
+    skills() {
+      return this.$store.getters.skills;
+    },
+    isAllowedToPublish() {
+      let job = this.editedJob;
+      return (
+        job.title &&
+        job.address &&
+        job.reqSkills.length > 0 &&
+        job.payment > 100 &&
+        job.desc
+      );
     }
   },
   components: {
