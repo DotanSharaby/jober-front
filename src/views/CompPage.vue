@@ -1,12 +1,12 @@
 <template>
-    <section class="comp-page" v-if="comp && compJobs">
+    <section class="comp-page">
         <div class="title flex align-center center justify-center">
-            <h1 class="text-center bold">{{comp.name}}</h1>
+            <h1 class="text-center bold">{{user.username}}</h1>
         </div>
         <div class="content flex space-between">
             <div class="flex column"></div>
-            <CompJobList :jobs="compJobs" v-if="compJobs"></CompJobList>
-            <CompChart :jobs="compJobs" class="comp-chart" v-if="compJobs"></CompChart>
+            <CompJobList :jobs="jobs"></CompJobList>
+            <CompChart :jobs="jobs" class="comp-chart"></CompChart>
         </div>
     </section>
 </template>
@@ -16,26 +16,18 @@ import CompJobList from '../components/CompJobList'
 import CompChart from '../components/CompChart'
 
 export default {
-    data() {
-        return {
-            user: null,
-            jobs: []
-        }
-    },
     computed: {
-        comp() {
-            return this.$store.getters.userComp;
+        jobs() {
+            return this.$store.getters.userPostedJobs;
         },
-        compJobs() {
-            return this.$store.getters.userJobs;
+        user() {
+            return this.$store.getters.loggedinUser
         }
     },
     created() {
-        this.user = this.$store.getters.loggedinUser
-        if (!this.user) this.$router.go(-1);
-        this.$store.dispatch("loadJobs");
-        this.jobs = this.$store.getters.userPostedJobs
-        if (!this.jobs.length) this.$router.go(-1);
+        if (!this.user || !this.jobs) {
+            this.$router.go(-1)
+        }
     },
     components: {
         CompJobList,
