@@ -11,10 +11,16 @@ export default {
             return this.jobs.map(job => job.title)
         },
         applicantsDatas() {
-            return this.jobs.map(job => job.applicants.length)
+            return this.jobs.map(job => {
+                if (!job.applicants) return 0
+                return job.applicants.length;
+            })
         },
         savesDatas() {
-            return this.jobs.map(job => job.saves)
+            return this.jobs.map(job => {
+                if (!job.saves) return 0
+                return job.saves;
+            })
         }
     },
     mounted() {

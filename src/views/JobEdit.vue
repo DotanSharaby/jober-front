@@ -130,7 +130,6 @@
             id="file"
             class="inputfile"
             @change="getUrl"
-            multiple
           />
           <scale-loader
             class="loader inline-block flex-center"

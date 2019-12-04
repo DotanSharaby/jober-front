@@ -26,7 +26,7 @@ export default {
         removeUser(state, { userId }) {
             state.users = state.users.filter(user => user._id !== userId);
         },
-        updateUser(state, {updatedUser}) {
+        updateUser(state, { updatedUser }) {
             const idx = state.users.findIndex(user => user._id === updatedUser._id);
             state.users.splice(idx, 1, updatedUser);
             state.loggedinUser = updatedUser;
@@ -35,7 +35,7 @@ export default {
     actions: {
         async login(context, { userCred }) {
             const user = await UserService.login(userCred);
-            context.commit({type: 'setUser', user})
+            context.commit({ type: 'setUser', user })
             return user;
         },
         async signup(context, { userCred }) {
@@ -59,6 +59,11 @@ export default {
         async updateUser(context, { user }) {
             const updatedUser = await UserService.update(user);
             context.commit({ type: 'updateUser', updatedUser });
+        },
+        async checkEmail(context, { email }) {
+            const users = await UserService.getUsers();
+            const res = users.find(user => user.email === email)
+            return res;
         }
     }
 }

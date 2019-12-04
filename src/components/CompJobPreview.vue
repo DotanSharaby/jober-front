@@ -5,8 +5,8 @@
         </router-link>
         <div class="flex space-between align-center">
             <p class="date">{{job.createdAt}}</p>
-            <p class="saved">{{job.saves}} saves</p>
-            <p class="applicants profile-link semi">{{job.applicants.length}} applicants</p>
+            <p class="saved">{{saves}} saves</p>
+            <p class="applicants profile-link semi">{{applicants}} applicants</p>
         </div>
     </section>
 </template>
@@ -17,6 +17,14 @@ export default {
     computed: {
         jobEditUrl() {
             return `/job/edit/${this.job.owner._id}`;
+        },
+        applicants() {
+            if (!this.job.applicants) return 0;
+            return this.job.applicants.length
+        },
+        saves() {
+            if (!this.job.saves) return 0;
+            return this.job.saves
         }
     }
 }

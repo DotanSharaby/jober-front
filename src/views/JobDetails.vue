@@ -71,9 +71,6 @@ export default {
     methods: {
         async applyToJob() {
             if (this.isDisableApply) return
-            const user = JSON.parse(JSON.stringify(this.user))
-            user.appliedJobsIds.push(this.job._id);
-            await this.$store.dispatch({type: "updateUser", user})
             this.$router.push("/apply");
         },
         goBack() {
