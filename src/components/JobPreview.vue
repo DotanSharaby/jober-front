@@ -19,7 +19,10 @@
                     <h4 class="semi">{{job.title}}</h4>
                     <p>{{job.address}}</p>
                 </div>
-                <h4 :class="{ colored: match>70}">{{match}}% match</h4>
+                <div class="flex-center column">
+                    <h4>{{job.payment}}$</h4>
+                    <!-- <h4 :class="{ colored: match>70}">{{match}}% match</h4> -->
+                </div>
             </div>
         </div>
     </section>

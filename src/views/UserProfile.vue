@@ -1,5 +1,5 @@
 <template>
-    <section v-if="user" class="user-profile flex">
+    <section v-if="user" class="user-profile container flex column">
         <div class="info flex column align-center">
             <div class="title flex justify-center align-center">
                 <label class="change-img">
@@ -55,24 +55,27 @@
         <div class="jobs flex-center column">
             <div class="category flex-center column">
                 <h2 class="semi">Applied Jobs</h2>
-                <div v-if="!user.appliedJobsIds" class="no-jobs flex-center column">
+                <div v-if="!user.appliedJobsIds.length" class="no-jobs flex-center column">
                     <p>No applied jobs yet</p>
                     <router-link class="semi profile-link" to="/job">Browse Jobs</router-link>
                 </div>
+                <job-list v-else :jobs="appliedJobs"></job-list>
             </div>
             <div class="category flex-center column">
                 <h2 class="semi">Saved Jobs</h2>
-                <div v-if="!user.savedJobsIds" class="no-jobs flex-center column">
+                <div v-if="!user.savedJobsIds.length" class="no-jobs flex-center column">
                     <p>No saved jobs yet</p>
                     <router-link class="semi profile-link" to="/job">Browse Jobs</router-link>
                 </div>
+                <job-list v-else :jobs="savedJobs"></job-list>
             </div>
             <div class="category flex-center column">
                 <h2 class="semi">Archived Jobs</h2>
-                <div v-if="!user.archivedJobsIds" class="no-jobs flex-center column">
+                <div v-if="!user.archivedJobsIds.length" class="no-jobs flex-center column">
                     <p>No archived jobs yet</p>
                     <router-link class="semi profile-link" to="/job">Browse Jobs</router-link>
                 </div>
+                <job-list v-else :jobs="archivedJobs"></job-list>
             </div>
         </div>
     </section>
@@ -80,6 +83,7 @@
 
 <script>
 import UploadService from "../services/UploadService";
+import JobList from "../components/JobList.vue";
 
 export default {
     data() {
@@ -106,6 +110,15 @@ export default {
     computed: {
         skills() {
             return this.$store.getters.skills;
+        },
+        savedJobs() {
+            return this.$store.getters.userSavedJobs;
+        },
+        appliedJobs() {
+            return this.$store.getters.userAppliedJobs;
+        },
+        archivedJobs() {
+            return this.$store.getters.userArchivedJobs;
         }
     },
     created() {
@@ -115,6 +128,9 @@ export default {
             return
         }
         this.user = JSON.parse(JSON.stringify(user));
+    },
+    components: {
+        JobList
     }
 };
 </script>
