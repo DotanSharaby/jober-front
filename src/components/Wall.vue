@@ -1,6 +1,6 @@
 <template>
   <section class="wall flex column">
-    <div class="post-container">
+    <div class="post-container" v-if="copyJob.posts.length">
       <Post
         v-for="(post, idx) in copyJob.posts"
         @update-post="updatePost"
@@ -9,6 +9,7 @@
         :key="idx"
       ></Post>
     </div>
+    <span v-else class="post-container"><em>Ask something about the job</em></span>
     <div class="add-post flex">
       <div
         v-if="isModalActive"
@@ -75,12 +76,12 @@ export default {
       this.clearPost();
     },
     updatePost(sentPost, postIdx) {
-      SocketService.emit('post update', {sentPost, postIdx})
+      SocketService.emit("post update", { sentPost, postIdx });
       this.copyJob.posts.splice(postIdx, 1, sentPost);
       this.updateJob();
     },
     async updateJob() {
-      await this.$store.dispatch({ type: "saveJob", job: this.copyJob });
+      await this.$store.dispatch({ type: "updateJob", job: this.copyJob });
     },
     clearPost() {
       this.postToAdd = {
@@ -92,16 +93,17 @@ export default {
     }
   },
   created() {
-    SocketService.emit('join room', this.job._id);
-    SocketService.on('post newPost', post => {
+    SocketService.emit("join room", this.job._id);
+    SocketService.on("post newPost", post => {
       this.copyJob.posts.unshift(post);
-      console.log(post)
+      console.log(post);
     });
-    SocketService.on('post update', postData => {
+    SocketService.on("post update", postData => {
       this.copyJob.posts.splice(postData.postIdx, 1, postData.sentPost);
-    })
+    });
     this.clearPost();
     this.copyJob = JSON.parse(JSON.stringify(this.job));
+    if (!this.copyJob.posts) this.copyJob.posts = [];
     const user = this.$store.getters.loggedinUser;
     if (user) {
       this.nameOnPost = user.username;
