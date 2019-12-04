@@ -4,6 +4,7 @@
     <h2 class="bold">Your application to {{currJob.title}} at {{currJob.owner.username}}</h2>
     <h3>Please record a short video of yourself, and refer to the following:</h3>
     <VideoCapture
+      v-if="user"
       class="vid-container center"
       :uploadUrl="serverUrl"
       v-model="application.videoUrl"
@@ -59,10 +60,11 @@ export default {
     }
   },
   created() {
+    this.user = this.$store.getters.loggedinUser;
+    if(!this.user) this.$router.push('/login');
     window.scrollTo(0, 0);
     this.currJob = this.$store.getters.currJob;
     this.questions = this.currJob.quests;
-    this.user = this.$store.getters.loggedinUser;
     this.user = JSON.parse(JSON.stringify(this.user));
   },
   components: {

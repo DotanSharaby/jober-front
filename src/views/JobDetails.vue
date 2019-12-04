@@ -70,7 +70,7 @@ export default {
     },
     methods: {
         async applyToJob() {
-            if (this.isDisableApply) return
+            if (this.isDisableApply) return;
             this.$router.push("/apply");
         },
         goBack() {
@@ -103,8 +103,7 @@ export default {
     async created() {
         const id = this.$route.params.id;
         await this.$store.dispatch({ type: "getJob", id });
-        if (!this.user) this.isDisableApply = true;
-        if (this.user.appliedJobsIds.includes(id)) this.isDisableApply = true;
+        if (this.user && this.user.appliedJobsIds.includes(id)) this.isDisableApply = true;
     },
     destroyed() {
         this.$store.dispatch({ type: "resetCurrJob" });
