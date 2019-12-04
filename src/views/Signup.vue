@@ -14,6 +14,8 @@
             <font-awesome-icon class="icon-item user" :icon="['fas', 'user']" size="2x" />
             <font-awesome-icon class="icon-item details" :icon="['fas', 'asterisk']" size="2x" />
             <font-awesome-icon class="icon-item done" :icon="['fas', 'check']" size="2x" />
+            <p class="err-msg error text-center">{{ msg }}</p>
+
             <tab-content
                 class="flex column"
                 title="User setup"
@@ -66,10 +68,10 @@
                         <input type="checkbox" :id="skill" :value="skill" v-model="user.skills" />
                         <label :for="skill">{{skill}}</label>
                     </div>
-                </div>
-                <div>
-                    <div class="instructions text-center">What are your salary expectations? (optional)</div>
-                    
+                    <div
+                        class="instructions text-center semi"
+                    >What is your salary expectation? (optional)</div>
+                    <input type="number" v-model="user.expSalary" />
                 </div>
             </tab-content>
         </form-wizard>
@@ -84,7 +86,6 @@
                 </router-link>
             </div>
         </div>
-        <p>{{ msg }}</p>
         <scale-loader v-if="isLoading" :color="'#8bdade'"></scale-loader>
     </section>
 </template>
