@@ -13,6 +13,7 @@ export default {
             return state.users;
         },
         loggedinUser(state) {
+            console.log('state.loggedinUser', state.loggedinUser);
             return state.loggedinUser;
         }
     },
@@ -29,6 +30,7 @@ export default {
         updateUser(state, {updatedUser}) {
             const idx = state.users.findIndex(user => user._id === updatedUser._id);
             state.users.splice(idx, 1, updatedUser);
+            state.loggedinUser = updatedUser;
         }
     },
     actions: {

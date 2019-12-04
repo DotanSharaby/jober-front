@@ -58,7 +58,6 @@
                             <label for="cvFile">CV File (pdf)</label>
                         </label>
                     </div>
-                    <!-- <Checkbox /> -->
                 </div>
             </tab-content>
             <tab-content class="flex column" title="Last step" icon="ti-check">
@@ -96,7 +95,6 @@ import UploadService from "../services/UploadService";
 import { FormWizard, TabContent } from "vue-form-wizard";
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
 
-// import Checkbox from "../components/Checkbox";
 
 import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
 
@@ -124,7 +122,10 @@ export default {
                 return false;
             }
             await this.doSignup()
-            console.log('this.user', this.user);
+            if (!this.user) {
+                this.msg = "Something went wrong"
+                return false;
+            }
             if (!this.user) {
                 this.msg = "Something went wrong"
                 return false;
@@ -142,9 +143,8 @@ export default {
                 this.user.cv = file.url;
                 return (this.msg = "CV uploaded");
             } else {
-                setTimeout(() => (this.msg = ''), 2000);
                 this.user.img = file.url;
-                return (this.msg = "Image uploaded");
+                return (this.msg = "");
             }
         },
         async updateUser() {
@@ -157,11 +157,14 @@ export default {
             return this.$store.getters.skills;
         }
     },
+    created() {
+        const user = this.$store.getters.loggedinUser;
+        if (user) this.$router.push('/')
+    },
     components: {
         FormWizard,
         TabContent,
         ScaleLoader,
-        // Checkbox
     }
 }
 </script>
