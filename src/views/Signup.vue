@@ -15,6 +15,7 @@
       <font-awesome-icon class="icon-item details" :icon="['fas', 'asterisk']" size="2x" />
       <font-awesome-icon class="icon-item done" :icon="['fas', 'check']" size="2x" />
       <p class="err-msg error text-center">{{ msg }}</p>
+
       <tab-content class="flex column" title="User setup" icon="ti-user" :before-change="validate">
         <label>Username / Company Name:</label>
         <input type="text" v-model="signupCred.username" placeholder="Josh" />
@@ -110,9 +111,8 @@ export default {
       this.user.archivedJobsIds = [];
       this.user.savedJobsIds = [];
       this.user.appliedJobsIds = [];
-      if (this.user) {
+      if (this.user)
         await this.$store.dispatch({ type: "login", userCred: cred });
-      }
     },
     async validate() {
       const cred = this.signupCred;

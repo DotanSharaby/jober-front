@@ -23,6 +23,14 @@
                 margin: 5px 0;
             }
         }
+        h4 {
+            margin: 5px 0 10px;
+            color: $clr3;
+            font-size: 18px;
+        }
+        span {
+            margin-top: 10px;
+        }
     }
     .avatar {
         width: 70px;
@@ -103,12 +111,10 @@
         &.second {
             margin: 10px auto;
         }
-    }
-    .disabled-btn {
-        width: 100px;
-        height: 30px;
-        opacity: 0.6;
-        cursor: auto;
+        &.disabled-btn {
+            background-color: #ababab;
+            cursor: auto;
+        }
     }
     @media (max-width: 1040px) {
         width: 100%;

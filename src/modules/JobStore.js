@@ -97,6 +97,18 @@ export default ({
                 if (job.owner._id === userId) userJobs.push(job)
             })
             return userJobs
+        },
+        userSavedJobs(state, commit, rootState) {
+            const savedJobsIds = rootState.UserStore.loggedinUser.savedJobsIds;
+            return state.jobs.filter(job => savedJobsIds.includes(job._id))
+        },
+        userAppliedJobs(state, commit, rootState) {
+            const appliedJobsIds = rootState.UserStore.loggedinUser.appliedJobsIds;
+            return state.jobs.filter(job => appliedJobsIds.includes(job._id))
+        },
+        userArchivedJobs(state, commit, rootState) {
+            const archivedJobsIds = rootState.UserStore.loggedinUser.archivedJobsIds;
+            return state.jobs.filter(job => archivedJobsIds.includes(job._id))
         }
     },
     actions: {
@@ -107,7 +119,6 @@ export default ({
         },
         async updateJob(context, { job }) {
             const updatedJob = await JobService.update(job)
-            console.log('updated job on store actions', updatedJob);
             context.commit({ type: 'updateJob', updatedJob })
         },
         async addJob(context, { job }) {

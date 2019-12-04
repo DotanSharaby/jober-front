@@ -29,6 +29,16 @@
         margin: 10px 0;
     }
 
+    .skill:not(:last-child) {
+        margin: 5px 0;
+    }
+
+    .clean-list{
+        li {
+            margin: 7px 20px;
+        }
+    }
+
     .inputfile {
         width: 0.1px;
         height: 0.1px;
