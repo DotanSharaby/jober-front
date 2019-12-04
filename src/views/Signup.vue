@@ -113,6 +113,9 @@ export default {
             const cred = this.signupCred;
             this.user = await this.$store.dispatch({ type: "signup", userCred: cred });
             this.user.skills = [];
+            this.user.archivedJobsIds = [];
+            this.user.savedJobsIds = [];
+            this.user.appliedJobsIds = [];
             if (this.user) await this.$store.dispatch({ type: "login", userCred: cred });
         },
         async validate() {
@@ -148,6 +151,7 @@ export default {
             }
         },
         async updateUser() {
+            if (!this.user.img) this.user.img = 'https://www.afrombira.com/img/no-user.png'
             await this.$store.dispatch({ type: "updateUser", user: this.user })
             this.isCompleted = true;
         }

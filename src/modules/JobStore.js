@@ -20,7 +20,7 @@ export default ({
         resetCurrJob(state) {
             state.currJob = null;
         },
-        updateJob(state, updatedJob) {
+        updateJob(state, {updatedJob}) {
             const idx = state.jobs.findIndex(job => job._id === updatedJob._id);
             state.jobs.splice(idx, 1, updatedJob);
         },
@@ -36,23 +36,25 @@ export default ({
         currJob(state) {
             return state.currJob
         },
-        jobsToShow(state) {
-            var jobs = state.jobs;
-            // var user = rootState.UserStore.loggedinUser;
+        jobsToShow(state, commit, rootState) {
+            var jobsToShow = [];
+            var user = rootState.UserStore.loggedinUser;
 
-            // if (user) {
-            //     jobs = jobs.filter(job => {
-            //         let jobId = job._id;
-            //         return !user.archivedJobsIds.includes(jobId) &&
-            //         !user.savedJobsIds.includes(jobId) &&
-            //         !user.appliedJobsIds.includes(jobId)
-            //     })
-            // }
+            if (!user) jobsToShow = state.jobs;
+
+            else {
+                state.jobs.forEach(job => {
+                    let jobId = job._id;
+                    if (!user.archivedJobsIds.includes(jobId) 
+                    && !user.savedJobsIds.includes(jobId)
+                    &&  !user.appliedJobsIds.includes(jobId)) jobsToShow.push(job)
+                })
+            }
 
             if (state.filter) {
                 let filter = state.filter.toLowerCase();
                 var res = [];
-                jobs.forEach(job => {
+                jobsToShow.forEach(job => {
                     if (job.title.toLowerCase().includes(filter)) {
                         res.unshift(job);
                     } else if (job.owner.username.toLowerCase().includes(filter)) {
@@ -65,7 +67,7 @@ export default ({
                 })
                 return res;
             }
-            return jobs;
+            return jobsToShow;
         },
         userComp(state) {
             var comp = state.currUser;
@@ -106,10 +108,14 @@ export default ({
             context.commit({ type: 'setJobs', jobs })
             return jobs;
         },
-        async saveJob(context, { job }) {
-            const addedJob = await JobService.save(job)
-            debugger
-            context.commit({ type: 'updateJob', addedJob })
+        async updateJob(context, {job}) {
+            const updatedJob = await JobService.update(job)
+            console.log('updated job on store actions', updatedJob);
+            context.commit({ type: 'updateJob', updatedJob })
+        },
+        async addJob(context, { job }) {
+            const addedJob = await JobService.add(job)
+            context.commit({ type: 'addJob', addedJob })
         },
         async getJob({ commit }, { id }) {
             const job = await JobService.getById(id)

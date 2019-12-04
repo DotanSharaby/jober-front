@@ -2,7 +2,7 @@
     <section class="job-page">
         <JobFilter @set-filter="setFilter"></JobFilter>
         <router-link class="edit-link" to="/job/edit">Add a New Job</router-link>
-        <JobList @archived="archiveJob" @updated="updateJob" v-if="jobs" :jobs="jobs" :user="user" class="container"></JobList>
+        <JobList @updatedData="updateData" v-if="jobs" :jobs="jobs" :user="user" class="container"></JobList>
     </section>
 </template>
 
@@ -11,18 +11,10 @@ import JobList from "../components/JobList.vue";
 import JobFilter from '../components/JobFilter.vue';
 
 export default {
-    data() {
-        return {
-            user: null
-        }
-    },
     methods: {
-        archiveJob(jobId) {
-            this.$store.commit('removeJob', { jobId });
-        },
-        updateJob(job) {
-            this.$store.dispatch({type: "saveJob", job})
-            this.$store.commit('removeJob', { jobId: job._id });
+        updateData(data) {
+            if (data.job) this.$store.dispatch({type: "updateJob", job: data.job})
+            this.$store.dispatch({type: "updateUser", user: data.user})
         },
         setFilter(filterBy) {
             this.$store.commit({type:'setFilter', filterBy});
@@ -32,15 +24,16 @@ export default {
         jobs() {
             return this.$store.getters.jobsToShow;
         },
-    },
-    created() {
-        const user = this.$store.getters.loggedinUser;
-        if (!user) return
-        this.user = JSON.parse(JSON.stringify(user));
+        user() {
+            return this.$store.getters.loggedinUser
+        }
     },
     components: {
         JobList,
         JobFilter
+    },
+    created() {
+        this.$store.dispatch("loadJobs");
     }
 };
 </script>

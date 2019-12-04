@@ -1,5 +1,4 @@
 
-// import router from '../router'
 
 const BASE_URL = process.env.NODE_ENV === 'production'
     ? '/api/'
@@ -36,8 +35,5 @@ async function ajax(endpoint, method = 'get', data = null) {
         return res.data;
     } catch (err) {
         console.log('Error from HttpService:', err);
-        // if (err.response.status === 401) {
-        //     router.push('/');
-        // }
     }
 }
