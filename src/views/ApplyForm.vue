@@ -3,7 +3,11 @@
     <span @click="goBack" class="back-btn">⬅</span>
     <h2 class="bold">Your application to {{currJob.title}} at {{currJob.owner.username}}</h2>
     <h3>Please record a short video of yourself, and refer to the following:</h3>
-    <VideoCapture class="vid-container center" :uploadUrl="serverUrl" v-model="application.videoUrl" />
+    <VideoCapture
+      class="vid-container center"
+      :uploadUrl="serverUrl"
+      v-model="application.videoUrl"
+    />
     <section class="flex column med-container center-self">
       <ul>
         <li v-for="quest in questions" :quest="quest" :key="quest">{{ quest }}</li>
@@ -11,7 +15,7 @@
       <textarea v-model="application.pm" placeholder="Add a personal message (optional)"></textarea>
       <div class="flex align-center space-around">
         <span @click="goBack" class="profile-link">Cancel</span>
-        <button @click="submit">Submit</button>
+        <button @click.once="submit">Submit</button>
       </div>
     </section>
   </section>
@@ -27,7 +31,6 @@ export default {
       questions: null,
       user: {},
       application: { pm: "", videoUrl: null },
-
       serverUrl: "https://mister-recorder.herokuapp.com/uploads/"
     };
   },
@@ -41,7 +44,9 @@ export default {
       this.application.expSalary = this.user.expSalary;
       this.application.img = this.user.img;
       this.application.skills = this.user.skills;
-      debugger;
+      this.application.userId = this.user._id;
+      this.application.cv = this.user.cv;
+
       this.user.appliedJobsIds.push(this.currJob._id);
       if (this.currJob.applicants) {
         this.currJob.applicants.push(this.application);
