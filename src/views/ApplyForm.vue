@@ -1,8 +1,8 @@
 <template>
   <section class="apply-form-wrapper container flex column">
     <span @click="goBack" class="back-btn">⬅</span>
-    <h2 class="bold">Your application to Frontend Developer at Googooloo</h2>
-    <h3 class="semi">Please record a short video of yourself, and refer to the following:</h3>
+    <h2 class="bold">Your application to {{currJob.title}} at {{currJob.owner.username}}</h2>
+    <h3>Please record a short video of yourself, and refer to the following:</h3>
 
     <!-- <ApplyQuest v-for="quest in questions" :quest="quest" :key="quest"></ApplyQuest> -->
 
