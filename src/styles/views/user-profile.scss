@@ -1,5 +1,4 @@
 .user-profile {
-    flex-wrap: wrap;
     input {
         color: $clr2;
         background-color: $clr5;
@@ -22,7 +21,7 @@
         margin: 0 auto;
         .title {
             height: 122px;
-            margin-bottom: 50px;
+            margin-bottom: 25px;
             align-self: flex-start;
             .basic {
                 margin-left: 10px;
@@ -91,12 +90,10 @@
         padding: 30px;
         flex-grow: 1;
         .category {
-            flex-grow: 1;
             width: 100%;
-            &:not(:last-child) {
-                margin-bottom: 20px;
-                border-bottom: 1px solid #d5d5d5;
-            }
+            min-height: 150px;
+            padding: 20px 0;
+            border-top: 1px solid #d5d5d5;
             h2 {
                 color: $clr3;
                 margin: 0 0 10px;
@@ -106,6 +103,26 @@
                 a {
                     margin-top: 3px;
                     color: $clr1;
+                }
+            }
+        }
+        .job-list {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            flex-wrap: wrap;
+            .job-preview {
+                width: 230px;
+                margin: 20px;
+                .job-img {
+                    height: 120px;
+                }
+                .desc {
+                    height: 156px;
+                }
+                .owner-logo {
+                    top: 92px;
                 }
             }
         }
