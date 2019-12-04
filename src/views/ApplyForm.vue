@@ -39,7 +39,7 @@ export default {
       return this.$router.go(-1);
     },
     submit() {
-      this.application.applicant = this.user.username;
+      this.application.username = this.user.username;
       this.application.email = this.user.email;
       this.application.expSalary = this.user.expSalary;
       this.application.img = this.user.img;

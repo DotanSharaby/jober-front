@@ -186,7 +186,7 @@ export default {
     const jobId = this.$route.params.id;
     if (jobId) {
       await this.$store.dispatch({
-        type: "getJob",
+        type: "loadCurrJob",
         id: jobId
       });
       const job = this.$store.getters.currJob;
