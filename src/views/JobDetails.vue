@@ -30,7 +30,9 @@
                     <img class="job-img" :src="imgUrl" />
                     <div class="skills flex column align-center">
                         <h2 class="semi">Required Skills</h2>
-                        <p v-for="(skill, idx) in job.reqSkills" :key="idx">{{skill}}</p>
+                        <p v-for="(skill, idx) in job.reqSkills" :key="idx">
+                           <font-awesome-icon class="arrow-icon" :icon="['fa', 'chevron-right']"></font-awesome-icon>&nbsp;{{skill}}
+                           </p>
                     </div>
                 </div>
                 <p class="desc">{{job.desc}}</p>
