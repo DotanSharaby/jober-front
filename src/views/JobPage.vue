@@ -13,11 +13,11 @@ import JobFilter from '../components/JobFilter.vue';
 export default {
     methods: {
         updateData(data) {
-            if (data.job) this.$store.dispatch({type: "updateJob", job: data.job})
-            this.$store.dispatch({type: "updateUser", user: data.user})
+            if (data.job) this.$store.dispatch({ type: "updateJob", job: data.job })
+            this.$store.dispatch({ type: "updateUser", user: data.user })
         },
         setFilter(filterBy) {
-            this.$store.commit({type:'setFilter', filterBy});
+            this.$store.commit({ type: 'setFilter', filterBy });
         }
     },
     computed: {
