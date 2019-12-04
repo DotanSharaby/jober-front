@@ -36,18 +36,18 @@ export default ({
         currJob(state) {
             return state.currJob
         },
-        jobsToShow(state, commit, rootState) {
+        jobsToShow(state) {
             var jobs = state.jobs;
-            var user = rootState.UserStore.loggedinUser;
+            // var user = rootState.UserStore.loggedinUser;
 
-            if (user) {
-                jobs = jobs.filter(job => {
-                    let jobId = job._id;
-                    return !user.archivedJobsIds.includes(jobId) &&
-                    !user.savedJobsIds.includes(jobId) &&
-                    !user.appliedJobsIds.includes(jobId)
-                })
-            }
+            // if (user) {
+            //     jobs = jobs.filter(job => {
+            //         let jobId = job._id;
+            //         return !user.archivedJobsIds.includes(jobId) &&
+            //         !user.savedJobsIds.includes(jobId) &&
+            //         !user.appliedJobsIds.includes(jobId)
+            //     })
+            // }
 
             if (state.filter) {
                 let filter = state.filter.toLowerCase();
