@@ -27,7 +27,6 @@ Vue.use(VueGoogleMaps, {
   installComponents: true
 })
 
-
 Vue.config.productionTip = false
 
 new Vue({

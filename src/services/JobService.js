@@ -2,22 +2,22 @@ import HttpService from './HttpService'
 
 export default {
     query,
-    save,
+    add,
+    update,
     remove,
     getById
 }
 
-function query(filterBy) {
-    if(filterBy) console.log('Filterby')
+function query() {
     return HttpService.get('job');
 }
 
-function save(job) {
-    if (job._id) {
-        return HttpService.put(`job/edit/${job._id}`, job);
-    } else {
-        return HttpService.post('job/edit', job);
-    }
+function add(job) {
+    return HttpService.post('job/edit', job);
+}
+
+function update(job) {
+    return HttpService.put(`job/edit/${job._id}`, job);
 }
 
 function remove(jobId) {

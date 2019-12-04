@@ -3,7 +3,7 @@
         <div class="info flex column align-center">
             <div class="title flex justify-center align-center">
                 <label class="change-img">
-                    <img v-if="user.img" :src="user.img" />
+                    <img :src="user.img" />
                     <input
                         type="file"
                         name="logoFile"
@@ -25,7 +25,7 @@
             <div class="extra flex space-between">
                 <div class="skills text-center">
                     <h2 class="semi">Your Skills</h2>
-                    <div v-if="!isOpenSkills">
+                    <div v-if="user.skills && !isOpenSkills">
                         <ul class="clean-list">
                             <li v-for="(skill,idx) in user.skills" :key="idx">{{skill}}</li>
                         </ul>
@@ -46,8 +46,8 @@
                 <div class="salary">
                     <h2 class="semi">Expected Salary</h2>
                     <div class="flex-center">
-                        <input type="number" v-model="user.expSalary" @input="updateUser" />
-                        <h3 class="text-center">USD</h3>
+                        <input type="number" v-model="user.expSalary" @input="updateUser" placeholder="Add"/>
+                        <h3 class="text-center" v-if="user.expSalary">USD</h3>
                     </div>
                 </div>
             </div>

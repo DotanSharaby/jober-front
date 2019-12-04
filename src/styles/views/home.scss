@@ -28,7 +28,7 @@
     .job-preview {
         border-radius: 5px;
         .job-img {
-            height: 140px;
+            height: 180px;
             border-radius: 5px 5px 0 0;
         }
         .desc {
@@ -42,7 +42,7 @@
                 height: 40px;
                 width: 40px;
                 left: 5px;
-                top: 118px;
+                top: 158px;
             }
             .details {
                 h2 {
@@ -60,7 +60,7 @@
               text-align: center;
             }
             p {
-                display: none;
+                // display: none;
             }
         }
         .icons {

@@ -45,6 +45,8 @@
 
 <script>
 import Post from "./Post";
+import SocketService from "@/services/SocketService";
+
 export default {
   components: {
     Post
@@ -67,11 +69,13 @@ export default {
     addPost() {
       if (this.postToAdd.txt.length <= 2) return;
       this.postToAdd.from = this.nameOnPost;
+      SocketService.emit("post newPost", this.postToAdd);
       this.copyJob.posts.unshift(this.postToAdd);
       this.updateJob();
       this.clearPost();
     },
     updatePost(sentPost, postIdx) {
+      SocketService.emit('post update', {sentPost, postIdx})
       this.copyJob.posts.splice(postIdx, 1, sentPost);
       this.updateJob();
     },
@@ -88,6 +92,14 @@ export default {
     }
   },
   created() {
+    SocketService.emit('join room', this.job._id);
+    SocketService.on('post newPost', post => {
+      this.copyJob.posts.unshift(post);
+      console.log(post)
+    });
+    SocketService.on('post update', postData => {
+      this.copyJob.posts.splice(postData.postIdx, 1, postData.sentPost);
+    })
     this.clearPost();
     this.copyJob = JSON.parse(JSON.stringify(this.job));
     const user = this.$store.getters.loggedinUser;

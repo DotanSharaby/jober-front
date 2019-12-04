@@ -1,48 +1,41 @@
 <template>
-    <section class="job-page">
-        <JobFilter @set-filter="setFilter"></JobFilter>
-        <router-link v-if="user" class="edit-link" to="/job/edit">Add a New Job</router-link>
-        <JobList @removed="removeJob" @updated="updateJob" v-if="jobs" :jobs="jobs" :user="user" class="container"></JobList>
-    </section>
+  <section class="job-page">
+    <JobFilter @set-filter="setFilter"></JobFilter>
+    <router-link v-if="user" class="edit-link" to="/job/edit">Add a New Job</router-link>
+    <JobList @updatedData="updateData" v-if="jobs" :jobs="jobs" :user="user" class="container"></JobList>
+  </section>
 </template>
 
 <script>
 import JobList from "../components/JobList.vue";
-import JobFilter from '../components/JobFilter.vue';
+import JobFilter from "../components/JobFilter.vue";
 
 export default {
-    data() {
-        return {
-            user: null
-        }
+  methods: {
+    updateData(data) {
+      if (data.job) this.$store.dispatch({ type: "updateJob", job: data.job });
+      this.$store.dispatch({ type: "updateUser", user: data.user });
     },
-    methods: {
-        removeJob(jobId) {
-            this.$store.commit('removeJob', { jobId });
-        },
-        updateJob(job) {
-            this.$store.dispatch({type: "saveJob", job})
-            this.$store.commit('removeJob', { jobId: job._id });
-        },
-        setFilter(filterBy) {
-            this.$store.commit({type:'setFilter', filterBy});
-        }
-    },
-    computed: {
-        jobs() {
-            return this.$store.getters.jobsToShow;
-        },
-    },
-    created() {
-        window.scrollTo(0, 0);
-        const user = this.$store.getters.loggedinUser;
-        if (!user) return
-        this.user = JSON.parse(JSON.stringify(user));
-    },
-    components: {
-        JobList,
-        JobFilter
+    setFilter(filterBy) {
+      this.$store.commit({ type: "setFilter", filterBy });
     }
+  },
+  computed: {
+    jobs() {
+      return this.$store.getters.jobsToShow;
+    },
+    user() {
+      return this.$store.getters.loggedinUser;
+    }
+  },
+  components: {
+    JobList,
+    JobFilter
+  },
+  created() {
+    window.scrollTo(0, 0);
+    this.$store.dispatch("loadJobs");
+  }
 };
 </script>
 

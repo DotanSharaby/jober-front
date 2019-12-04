@@ -1,5 +1,5 @@
 <template>
-  <section v-if="post">
+  <section v-if="post" class="post">
     <div class="post-header">
       <p>
         <span class="semi">{{post.from}}</span>

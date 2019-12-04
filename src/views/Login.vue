@@ -37,7 +37,7 @@ export default {
             const user = await this.$store.dispatch({ type: "login", userCred: cred });
             if (!user) return this.msg = "Wrong email or password";
             this.msg = "";
-            this.$router.push("/job");
+            this.$router.push("/");
             this.loginCred = {};
         }
     },
