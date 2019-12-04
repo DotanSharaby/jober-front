@@ -126,6 +126,11 @@
           <label for="file">Choose File</label>
         </label>
         <button class="save-btn">Save</button>
+          <br/>
+        <div class="flex justify-center">
+          <p v-if="!isAllowedToPublish">Fill all fields</p>
+          <p v-else>Ready to go</p>
+        </div>
       </section>
 
       <section class="flex column">
