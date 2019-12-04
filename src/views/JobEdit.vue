@@ -121,7 +121,6 @@
             id="file"
             class="inputfile"
             @change="getUrl"
-            multiple
           />
           <label for="file">Choose File</label>
         </label>

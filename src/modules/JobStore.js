@@ -20,7 +20,7 @@ export default ({
         resetCurrJob(state) {
             state.currJob = null;
         },
-        updateJob(state, {updatedJob}) {
+        updateJob(state, { updatedJob }) {
             const idx = state.jobs.findIndex(job => job._id === updatedJob._id);
             state.jobs.splice(idx, 1, updatedJob);
         },
@@ -39,18 +39,15 @@ export default ({
         jobsToShow(state, commit, rootState) {
             var jobsToShow = [];
             var user = rootState.UserStore.loggedinUser;
-
             if (!user) jobsToShow = state.jobs;
-
             else {
                 state.jobs.forEach(job => {
                     let jobId = job._id;
-                    if (!user.archivedJobsIds.includes(jobId) 
-                    && !user.savedJobsIds.includes(jobId)
-                    &&  !user.appliedJobsIds.includes(jobId)) jobsToShow.push(job)
+                    if (!user.archivedJobsIds.includes(jobId)
+                        && !user.savedJobsIds.includes(jobId)
+                        && !user.appliedJobsIds.includes(jobId)) jobsToShow.push(job)
                 })
             }
-
             if (state.filter) {
                 let filter = state.filter.toLowerCase();
                 var res = [];
@@ -120,7 +117,7 @@ export default ({
             context.commit({ type: 'setJobs', jobs })
             return jobs;
         },
-        async updateJob(context, {job}) {
+        async updateJob(context, { job }) {
             const updatedJob = await JobService.update(job)
             context.commit({ type: 'updateJob', updatedJob })
         },
