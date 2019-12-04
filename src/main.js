@@ -11,9 +11,9 @@ Vue.use(ElementUI)
 
 // Font Awesome
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPaw, faBus, faUtensils, faParking, faMugHot, faThumbsUp, faReply, faCheck, faUser, faAsterisk, faLongArrowAltLeft, faSearch, faUserSecret} from '@fortawesome/free-solid-svg-icons'
+import { faPaw, faBus, faUtensils, faParking, faMugHot, faThumbsUp, faReply, faCheck, faUser, faAsterisk, faLongArrowAltLeft, faSearch, faUserSecret, faChevronRight} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-library.add(faPaw, faBus, faUtensils, faParking, faMugHot, faThumbsUp, faReply, faCheck, faUser, faAsterisk, faLongArrowAltLeft, faSearch, faUserSecret)
+library.add(faPaw, faBus, faUtensils, faParking, faMugHot, faThumbsUp, faReply, faCheck, faUser, faAsterisk, faLongArrowAltLeft, faSearch, faUserSecret, faChevronRight)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 // Google maps 
