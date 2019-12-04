@@ -1,17 +1,18 @@
 <template>
   <section class="apply-form-wrapper container flex column">
     <span @click="goBack" class="back-btn">⬅</span>
+
     <h2 class="bold">Your application to {{currJob.title}} at {{currJob.owner.username}}</h2>
     <h3>Please record a short video of yourself, and refer to the following:</h3>
+    <ul class="center">
+      <li v-for="quest in questions" :quest="quest" :key="quest">{{ quest }}</li>
+    </ul>
     <VideoCapture
       class="vid-container center"
       :uploadUrl="serverUrl"
       v-model="application.videoUrl"
     />
     <section class="flex column med-container center-self">
-      <ul>
-        <li v-for="quest in questions" :quest="quest" :key="quest">{{ quest }}</li>
-      </ul>
       <textarea v-model="application.pm" placeholder="Add a personal message (optional)"></textarea>
       <div class="flex align-center space-around">
         <span @click="goBack" class="profile-link">Cancel</span>
@@ -23,6 +24,8 @@
 
 <script>
 import { VideoCapture } from "vue-media-recorder";
+
+window.x = VideoCapture;
 
 export default {
   data() {
@@ -38,8 +41,10 @@ export default {
     goBack() {
       return this.$router.go(-1);
     },
-    submit() {
-      this.application.applicant = this.user.username;
+    async submit() {
+      // TODO: STOP CAMERA
+
+      this.application.name = this.user.username;
       this.application.email = this.user.email;
       this.application.expSalary = this.user.expSalary;
       this.application.img = this.user.img;
