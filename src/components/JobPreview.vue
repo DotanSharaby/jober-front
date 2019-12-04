@@ -40,7 +40,7 @@ export default {
             const user = JSON.parse(JSON.stringify(this.user))
             job.saves += 1;
             user.savedJobsIds.push(job._id)
-            this.updateData(job, user)
+            this.updateData(user, job)
         },
         archiveJob() {
             const user = JSON.parse(JSON.stringify(this.user))
@@ -49,7 +49,7 @@ export default {
         },
         updateData(user, job) {
             if (!job) this.$emit('updatedData', { user })
-            this.$emit('updatedData', { job, user });
+            this.$emit('updatedData', { user, job });
         }
     },
     computed: {
