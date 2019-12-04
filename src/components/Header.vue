@@ -1,5 +1,5 @@
 <template>
-    <header class="flex space-between align-center" :class="{'opened-menu': this.isMenuOpen, 'opened-user-menu': this.isUserMenuOpen}">
+      <header class="flex space-between align-center" :class="{'opened-menu': this.isMenuOpen, 'opened-user-menu': this.isUserMenuOpen}">
         <div class="screen" @click="toggleMenu"></div>
         <div class="logo-box flex align-center" @click="goHome">
             <img src="../assets/logo.png" class="logo" />
@@ -11,7 +11,7 @@
                 <router-link exact to="/job">Jobs</router-link>
                 <router-link exact to="/about">About</router-link>
             </nav>
-            <div class="user-menu flex column space-between align-center" :class="{shown: isUserMenuOpen}" @click="toggleUserMenu">
+            <div v-if="user" class="user-menu flex column space-between align-center" :class="{shown: isUserMenuOpen}" @click="toggleUserMenu">
                 <h3 class="nav-btn semi flex-center" @click="goToProfile" v-if="isUserMenuOpen">Profile</h3>
                 <h3 class="nav-btn semi flex-center" v-if="isUserMenuOpen && isCompany" @click="goToCompPage">Back-Office</h3>
                 <h3 class="nav-btn semi flex-center" v-if="isUserMenuOpen" @click="logout">Logout</h3>
@@ -25,16 +25,16 @@
 
 <script>
 export default {
-    props: {
-        user: Object
-    },
-    data() {
-        return {
-            msg: '',
-            isMenuOpen: false,
-            isUserMenuOpen: false
-        };
-    },
+  props: {
+    user: Object
+  },
+  data() {
+    return {
+      msg: "",
+      isMenuOpen: false,
+      isUserMenuOpen: false
+    };
+  },
     methods: {
         goHome() {
             this.$router.push('/');
@@ -58,22 +58,22 @@ export default {
             this.$router.push('/login');
         },
         goToProfile() {
-            this.$router.push(`/user/${this.user._id}`);
+            this.$router.push(`/user`);
         },
         goToCompPage() {
             this.$router.push(`/comp`)
         }
+  },
+  computed: {
+    userImg() {
+      if (this.user.img) return this.user.img;
+      return "https://www.afrombira.com/img/no-user.png";
     },
-    computed: {
-        userImg() {
-            if (this.user.img) return this.user.img;
-            return 'https://www.afrombira.com/img/no-user.png';
-        },
-        isCompany() {
-            if(this.$store.getters.userPostedJobs.length) return true
-            return false
-        }
+    isCompany() {
+      if (this.$store.getters.userPostedJobs.length) return true;
+      return false;
     }
+  }
 };
 </script>
 

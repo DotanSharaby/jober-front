@@ -40,6 +40,10 @@ export default {
             this.$router.push("/job");
             this.loginCred = {};
         }
+    },
+    created() {
+        const user = this.$store.getters.loggedinUser;
+        if (user) this.$router.push('/')
     }
 };
 </script>

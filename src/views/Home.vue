@@ -2,12 +2,14 @@
     <section class="home">
         <h1 class="site-header bold">Find Your Dream Job</h1>
         <img class="main-img" src="../assets/imgs/employment.jpg" />
-        <h2 class="preview-header semi">Top Rated Companies</h2>
-        <JobList v-if="jobs" :jobs="jobs"></JobList>
-        <h2 class="preview-header semi">Most Applied Jobs</h2>
-        <JobList v-if="jobs" :jobs="jobs"></JobList>
-        <h2 class="preview-header semi">Recently Added</h2>
-        <JobList v-if="jobs" :jobs="jobs"></JobList>
+        <div class="container">
+            <h2 class="preview-header semi">Top Rated Companies</h2>
+            <JobList v-if="jobs" :jobs="jobs"></JobList>
+            <h2 class="preview-header semi">Most Applied Jobs</h2>
+            <JobList v-if="jobs" :jobs="jobs"></JobList>
+            <h2 class="preview-header semi">Recently Added</h2>
+            <JobList v-if="jobs" :jobs="jobs"></JobList>
+        </div>
     </section>
 </template>
 

@@ -18,8 +18,9 @@ function remove(userId) {
     return HttpService.delete(`user/${userId}`)
 }
 
-function update(user) {
-    return HttpService.put(`user/${user._id}`, user)
+async function update(user) {
+    user = await HttpService.put(`user/${user._id}`, user);
+    return _handleLogin(user)
 }
 
 async function login(userCred) {

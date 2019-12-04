@@ -19,13 +19,10 @@
     .preview-header {
         color: $clr3;
         margin: 50px auto 20px;
-        padding: 0 15px;
+        padding: 0;
         max-width: 1150px;
     }
     .job-list {
-        margin: 0 auto 10px;
-        padding: 0 15px;
-        max-width: 1150px;
         grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
     }
     .job-preview {
@@ -79,27 +76,13 @@
             width: 378px;
             margin-left: -189px;
         }
-        .job-list {
-            padding: 0 45px;
-        }
-        .preview-header {
-            padding: 0 45px;
+    }
+    @media(max-width: 394px) {
+        .site-header {
+            font-size: 35px;
+            width: 294px;
+            margin-left: -157px;
         }
     }
-    @media(max-width: 540px) {
-        .job-list {
-            padding: 0 14px;
-        }
-        .preview-header {
-            padding: 0 14px;
-        }
-    }
-    @media(max-width: 480px) {
-        .job-list {
-            padding: 0 55px;
-        }
-        .preview-header {
-            padding: 0 55px;
-        }
-    }
+    
 }
