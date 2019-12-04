@@ -1,7 +1,7 @@
 <template>
     <section class="job-page">
         <JobFilter @set-filter="setFilter"></JobFilter>
-        <router-link class="edit-link" to="/job/edit">Add a New Job</router-link>
+        <router-link v-if="this.user" class="edit-link" to="/job/edit">Add a New Job</router-link>
         <JobList @updatedData="updateData" v-if="jobs" :jobs="jobs" :user="user" class="container"></JobList>
     </section>
 </template>
