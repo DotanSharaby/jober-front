@@ -36,11 +36,23 @@ export default ({
         currJob(state) {
             return state.currJob
         },
-        jobsToShow(state) {
+        jobsToShow(state, commit, rootState) {
+            var jobs = state.jobs;
+            var user = rootState.UserStore.loggedinUser;
+
+            if (user) {
+                jobs = jobs.filter(job => {
+                    let jobId = job._id;
+                    return !user.archivedJobsIds.includes(jobId) &&
+                    !user.savedJobsIds.includes(jobId) &&
+                    !user.appliedJobsIds.includes(jobId)
+                })
+            }
+
             if (state.filter) {
                 let filter = state.filter.toLowerCase();
                 var res = [];
-                state.jobs.forEach(job => {
+                jobs.forEach(job => {
                     if (job.title.toLowerCase().includes(filter)) {
                         res.unshift(job);
                     } else if (job.owner.username.toLowerCase().includes(filter)) {
@@ -53,7 +65,7 @@ export default ({
                 })
                 return res;
             }
-            return state.jobs
+            return jobs;
         },
         userComp(state) {
             var comp = state.currUser;
@@ -80,7 +92,7 @@ export default ({
             return skills;
         },
         userPostedJobs(state, commit, rootState) {
-            const userId = rootState.UserStore.loggedinUser;
+            const userId = rootState.UserStore.loggedinUser._id;
             var userJobs = [];
             state.jobs.forEach(job => {
                 if (job.owner._id === userId) userJobs.push(job)

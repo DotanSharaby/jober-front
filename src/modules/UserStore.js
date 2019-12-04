@@ -13,7 +13,6 @@ export default {
             return state.users;
         },
         loggedinUser(state) {
-            console.log('state.loggedinUser', state.loggedinUser);
             return state.loggedinUser;
         }
     },

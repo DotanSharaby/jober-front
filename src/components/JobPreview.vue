@@ -1,7 +1,7 @@
 <template>
   <section @click="goToDetails" class="job-preview flex column space-between align-center">
     <div v-if="user" class="icons flex space-between align-center text-center">
-      <h2 class="trash bold" @click.stop="removeJob">🗑</h2>
+      <h2 class="trash bold" @click.stop="archiveJob">🗑</h2>
       <h2 @click.stop="saveJob">❤</h2>
     </div>
     <img class="job-img" :src="currJob.img" />
@@ -47,8 +47,8 @@ export default {
       // if (!this.saved) this.currJob.saves -= 1;
       // this.$emit('updated', this.currJob)
     },
-    removeJob() {
-      this.$emit("removed", this.currJob._id);
+    archiveJob() {
+      this.$emit("archived", this.currJob._id);
     }
   },
   computed: {
