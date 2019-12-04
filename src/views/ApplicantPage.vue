@@ -10,7 +10,7 @@ export default {
     computed: {
         applicants() {
             var currJob = this.$store.getters.currJob
-            if (currJob) return this.$store.getters.currJob.applicants;
+            if (currJob) return currJob.applicants;
             return null
         }
     },
