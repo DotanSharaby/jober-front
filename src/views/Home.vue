@@ -16,14 +16,14 @@
 <script>
 import JobList from "../components/JobList.vue";
 export default {
+  async created() {
+    window.scrollTo(0, 0);
+    await this.$store.dispatch("loadJobs");
+  },
   computed: {
     jobs() {
       return this.$store.getters.jobsToShow.slice(0, 4);
     }
-  },
-  created() {
-    this.$store.dispatch("loadJobs");
-    window.scrollTo(0, 0);
   },
   components: {
     JobList

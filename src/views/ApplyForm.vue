@@ -3,12 +3,12 @@
     <span @click="goBack" class="back-btn">⬅</span>
     <h2 class="bold">Your application to {{currJob.title}} at {{currJob.owner.username}}</h2>
     <h3>Please record a short video of yourself, and refer to the following:</h3>
-    <VideoCapture class="vid-container center" :uploadUrl="serverUrl" v-model="videoUrl" />
+    <VideoCapture class="vid-container center" :uploadUrl="serverUrl" v-model="application.videoUrl" />
     <section class="flex column med-container center-self">
       <ul>
         <li v-for="quest in questions" :quest="quest" :key="quest">{{ quest }}</li>
       </ul>
-      <textarea v-model="pm" placeholder="Add a personal message (optional)"></textarea>
+      <textarea v-model="application.pm" placeholder="Add a personal message (optional)"></textarea>
       <div class="flex align-center space-around">
         <span @click="goBack" class="profile-link">Cancel</span>
         <button @click="submit">Submit</button>
@@ -26,8 +26,8 @@ export default {
       currJob: null,
       questions: null,
       user: {},
-      pm: "",
-      videoUrl: null,
+      application: { pm: "", videoUrl: null },
+
       serverUrl: "https://mister-recorder.herokuapp.com/uploads/"
     };
   },
@@ -36,14 +36,20 @@ export default {
       return this.$router.go(-1);
     },
     submit() {
-      this.user.pm = this.pm;
-      this.user.vid = this.videoUrl;
+      this.application.applicant = this.user.username;
+      this.application.email = this.user.email;
+      this.application.expSalary = this.user.expSalary;
+      this.application.img = this.user.img;
+      this.application.skills = this.user.skills;
+      debugger;
+      this.user.appliedJobsIds.push(this.currJob._id);
       if (this.currJob.applicants) {
-        this.currJob.applicants.push(this.user);
+        this.currJob.applicants.push(this.application);
       } else {
-        this.currJob.applicants = [this.user];
+        this.currJob.applicants = [this.application];
       }
-      this.$store.dispatch({ type: "saveJob", job: this.currJob });
+      this.$store.dispatch({ type: "updateJob", job: this.currJob });
+      this.$store.dispatch({ type: "updateUser", user: this.user });
       return this.$router.push("/");
     }
   },
@@ -52,6 +58,7 @@ export default {
     this.currJob = this.$store.getters.currJob;
     this.questions = this.currJob.quests;
     this.user = this.$store.getters.loggedinUser;
+    this.user = JSON.parse(JSON.stringify(this.user));
   },
   components: {
     VideoCapture
