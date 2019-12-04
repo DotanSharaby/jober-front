@@ -1,5 +1,5 @@
 <template>
-  <section class="job-edit">
+  <section class="job-edit container">
     <h1 v-if="!editedJob._id">Add Job</h1>
     <h1 v-else>Edit Job</h1>
 
@@ -7,18 +7,18 @@
       @submit.prevent="saveJob"
       class="flex"
     >
-      <section class="flex column">
+      <section class="flex column flex-grow">
         <label>Job Title:</label>
         <input
           type="text"
           v-model="editedJob.title"
-          placeholder='"Designer"'
+          placeholder='Designer'
         />
         <label>Address:</label>
         <input
           type="text"
           v-model="editedJob.address"
-          placeholder='"Tel Aviv"'
+          placeholder='Tel Aviv'
         />
         <label>Description:</label>
         <textarea
@@ -28,7 +28,7 @@
         ></textarea>
       </section>
 
-      <section class="flex column">
+      <section class="flex column flex-grow">
         <label>Choose up to 3 questions:</label>
         <drop-down
           @setVal="setQuests"
@@ -68,7 +68,7 @@
         </section>
       </section>
 
-      <section class="flex column">
+      <section class="flex column flex-grow">
         <label>Perks:</label>
         <div class="icons-container flex">
           <font-awesome-icon
@@ -113,8 +113,17 @@
           placeholder="Expected Salery"
           v-model.number="editedJob.payment"
         />
-        <label>
+        <label class="image-section flex align-center space-between">
           Image:
+
+          <div
+            class="image"
+            v-if="editedJob.img"
+          >
+            <img
+              :src="editedJob.img"
+            />
+          </div>
           <input
             type="file"
             name="file"
@@ -123,10 +132,16 @@
             @change="getUrl"
             multiple
           />
+          <scale-loader
+            class="loader inline-block flex-center"
+            v-if="isLoading && !editedJob.img"
+            :color="'#8bdade'"
+          ></scale-loader>
           <label for="file">Choose File</label>
+
         </label>
         <button class="save-btn">Save</button>
-          <br/>
+        <br />
         <div class="flex justify-center">
           <p v-if="!isAllowedToPublish">Fill all fields</p>
           <p v-else>Ready to go</p>
@@ -134,24 +149,12 @@
       </section>
 
       <section class="flex column">
-        <div
-          class="image"
-          v-if="editedJob.img"
-        >
-          <img
-            :src="editedJob.img"
-            height="100px"
-          />
-          <button @click="removeImg">x</button>
-        </div>
+
         <button
           v-if="editedJob._id"
           @click="remove"
         >Remove Job</button>
-        <scale-loader
-          v-if="isLoading"
-          :color="'#8bdade'"
-        ></scale-loader>
+
       </section>
     </form>
   </section>
@@ -229,9 +232,6 @@ export default {
 
       target.classList.toggle("active");
     },
-    removeImg() {
-      this.editedJob.img = "";
-    },
     setQuests(val) {
       this.editedJob.quests = val;
     }
@@ -247,7 +247,8 @@ export default {
         job.address &&
         job.reqSkills.length > 0 &&
         job.payment > 100 &&
-        job.desc
+        job.desc &&
+        job.img
       );
     }
   },

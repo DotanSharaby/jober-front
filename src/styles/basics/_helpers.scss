@@ -58,6 +58,10 @@
     margin: 0 auto;
 }
 
+.flex-grow {
+    flex-grow: 1;
+}
+
 .profile-link {
     cursor: pointer;
 
@@ -86,4 +90,8 @@
     color: $clr3;
     cursor: pointer;
     font-size: 45px;
+}
+
+.inline-block {
+    display: inline-block;
 }
