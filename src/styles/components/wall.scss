@@ -7,6 +7,14 @@
     overflow: scroll;
     overflow-x: hidden;
 
+    .post {
+      border-bottom: 1px solid #d1d1d1;
+      padding: 15px 0;
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+
     &::-webkit-scrollbar {
       width: 0.5em;
     }
@@ -33,7 +41,6 @@
   .post-options {
     height: 100%;
     align-items: center;
-    margin-bottom: 30px;
     .btn-wrap {
       padding: 8px 16px;
     }
@@ -55,16 +62,16 @@
     height: 2.5em;
     padding: 10px;
     select {
-        padding: 5px;
+      padding: 5px;
+      background-color: transparent;
+      option {
         background-color: transparent;
-        option{
-            background-color: transparent;
-        }
+      }
     }
     .cancel-btn {
-        align-self: flex-start;
-        position: absolute;
-        right: 5px;
+      align-self: flex-start;
+      position: absolute;
+      right: 5px;
     }
   }
   .add-post {
@@ -87,12 +94,12 @@
   }
   @media (max-width: 780px) {
     .post-container {
-        position: relative;
-        margin-bottom: 70px;
+      position: relative;
+      margin-bottom: 70px;
     }
     .name-modal {
-        position: absolute;
-        bottom: 70px;
+      position: absolute;
+      bottom: 70px;
     }
     .add-post {
       padding-top: 0;
