@@ -16,7 +16,7 @@ export default {
     props: { job: Object },
     computed: {
         jobEditUrl() {
-            return `/job/edit/${this.job.owner._id}`;
+            return `/job/edit/${this.job._id}`;
         },
         applicants() {
             if (!this.job.applicants) return 0;

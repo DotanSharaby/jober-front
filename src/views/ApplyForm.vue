@@ -45,7 +45,7 @@ export default {
     async submit() {
       // TODO: STOP CAMERA
 
-      this.application.name = this.user.username;
+      this.application.username = this.user.username;
       this.application.email = this.user.email;
       this.application.expSalary = this.user.expSalary;
       this.application.img = this.user.img;

@@ -66,21 +66,6 @@ export default ({
             }
             return jobsToShow;
         },
-        userComp(state) {
-            var comp = state.currUser;
-            if (!comp) comp = {
-                "_id": "90328jfsc",
-                "name": "Googloo",
-                "rating": 4.4,
-                "logoUrl": "https://i.pinimg.com/originals/ee/8e/1c/ee8e1ce91c0ffddf0105b4173f597db8.jpg"
-            }
-            return comp
-        },
-        userJobs(state, getters) {
-            var comp = getters.getUserComp;
-            var jobs = state.jobs.filter(job => job.owner._id === comp._id)
-            return jobs
-        },
         skills(state) {
             var skills = [];
             state.jobs.forEach(job => {
