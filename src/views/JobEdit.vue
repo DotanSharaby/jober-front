@@ -5,9 +5,15 @@
       @submit.prevent="saveJob"
       class="flex"
     >
-      <h1 v-if="!editedJob._id">Add Job</h1>
-      <h1 v-else>Edit Job</h1>
       <section class="flex column flex-grow">
+        <h1
+          class="bold"
+          v-if="!editedJob._id"
+        >Add Job</h1>
+        <h1
+          class="bold"
+          v-else
+        >Edit Job</h1>
         <label>Job Title:</label>
         <input
           type="text"
@@ -70,42 +76,54 @@
 
       <section class="flex column flex-grow">
         <label>Perks:</label>
-        <div class="icons-container flex">
-          <font-awesome-icon
-            @click="addProp"
-            class="icon-item"
-            data-desc="Dog friendly"
-            title="Dog friendly"
-            :icon="['fas', 'paw']"
-          />
-          <font-awesome-icon
-            @click="addProp"
-            class="icon-item"
-            data-desc="Transportation"
-            title="Transportation"
-            :icon="['fas', 'bus']"
-          />
-          <font-awesome-icon
-            @click="addProp"
-            class="icon-item"
-            data-desc="Restaurants"
-            title="Restaurants"
-            :icon="['fas', 'utensils']"
-          />
-          <font-awesome-icon
-            @click="addProp"
-            class="icon-item"
-            data-desc="Parking"
-            title="Parking"
-            :icon="['fas', 'parking']"
-          />
-          <font-awesome-icon
-            @click="addProp"
-            class="icon-item"
-            data-desc="Coffee shops"
-            title="Coffee shops"
-            :icon="['fas', 'mug-hot']"
-          />
+        <div class="icons-container flex column">
+          <div class="flex align-center icon-container">
+            <font-awesome-icon
+              @click="addProp"
+              class="icon-item"
+              data-desc="Dog friendly"
+              title="Dog friendly"
+              :icon="['fas', 'paw']"
+            /> <span class="icon-desc">Dog Friendly</span>
+          </div>
+
+          <div class="flex align-center icon-container">
+            <font-awesome-icon
+              data-desc="Transportation"
+              class="icon-item"
+              @click="addProp"
+              title="Transportation"
+              :icon="['fas', 'bus']"
+            /> <span class="icon-desc">Transportation</span>
+          </div>
+          <div class="flex align-center icon-container">
+            <font-awesome-icon
+              data-desc="Restaurants"
+              class="icon-item"
+              @click="addProp"
+              title="Restaurants"
+              :icon="['fas', 'utensils']"
+            /> <span class="icon-desc">Restaurants</span>
+          </div>
+          <div class="flex align-center icon-container">
+            <font-awesome-icon
+              data-desc="Parking"
+              class="icon-item"
+              @click="addProp"
+              title="Parking"
+              :icon="['fas', 'parking']"
+            /> <span class="icon-desc">Parking</span>
+          </div>
+
+          <div class="flex align-center icon-container">
+            <font-awesome-icon
+              data-desc="Coffee shops"
+              class="icon-item"
+              @click="addProp"
+              title="Coffee shops"
+              :icon="['fas', 'mug-hot']"
+            /> <span class="icon-desc">Coffee shops</span>
+          </div>
         </div>
         <label>Salary:</label>
         <input
@@ -217,7 +235,6 @@ export default {
       this.$router.push("/");
     },
     addProp(ev) {
-      // Adding the fontawesome icon name to the editedJob object for our future use
       var target = ev.target;
       if (target.localName === "path") target = target.farthestViewportElement;
       if (this.editedJob.perks.includes(target.dataset.icon)) {
