@@ -26,6 +26,7 @@ export default {
     mounted() {
         this.renderChart({
             labels: this.jobTitles,
+            maintainAspectRatio:false,
             datasets: [
                 {
                     label: 'Applicants',
@@ -35,7 +36,7 @@ export default {
                 {
                     label: 'Saves',
                     backgroundColor: '#678b9d',
-                    data: this.savesDatas.concat([0, 10])
+                    data: this.savesDatas.concat([0, 5])
                 }
             ]
         })

@@ -66,20 +66,20 @@ export default ({
             }
             return jobsToShow;
         },
-        userComp(state) {
-            var comp = state.currUser;
-            if (!comp) comp = {
-                "_id": "90328jfsc",
-                "name": "Googloo",
-                "rating": 4.4,
-                "logoUrl": "https://i.pinimg.com/originals/ee/8e/1c/ee8e1ce91c0ffddf0105b4173f597db8.jpg"
-            }
-            return comp
+        jobsByApplyCnt(state) {
+            var jobs = JSON.parse(JSON.stringify(state.jobs))
+            jobs = jobs.filter(job => job.applicants)
+            return jobs.sort((a, b) => b.applicants.length - a.applicants.length)
         },
-        userJobs(state, getters) {
-            var comp = getters.getUserComp;
-            var jobs = state.jobs.filter(job => job.owner._id === comp._id)
-            return jobs
+        jobsBySaveCnt(state) {
+            var jobs = JSON.parse(JSON.stringify(state.jobs))
+            jobs = jobs.filter(job => job.saves)
+            return jobs.sort((a, b) => b.saves - a.saves)
+        },
+        jobsByCreatedAt(state) {
+            var jobs = JSON.parse(JSON.stringify(state.jobs))
+            jobs = jobs.filter(job => job.createdAt)
+            return jobs.sort((a, b) => b.createdAt - a.createdAt)
         },
         skills(state) {
             var skills = [];

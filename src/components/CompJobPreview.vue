@@ -4,7 +4,7 @@
             <h3 class="semi profile-link" title="Edit Job">{{job.title}}</h3>
         </router-link>
         <div class="flex space-between align-center">
-            <p class="date">{{job.createdAt}}</p>
+            <p class="date">{{timeToShow}}</p>
             <p class="saved">{{saves}} saves</p>
             <p class="applicants profile-link semi" @click="goToApplicants">{{applicants}} applicants</p>
         </div>
@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
     props: { job: Object },
     computed: {
@@ -25,6 +27,12 @@ export default {
         saves() {
             if (!this.job.saves) return 0;
             return this.job.saves
+        },
+        timeToShow() {
+            return this.creationTime.fromNow();
+        },
+        creationTime() {
+            return moment(this.job.createdAt);
         }
     },
     methods: {

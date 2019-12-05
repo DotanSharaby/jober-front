@@ -3,12 +3,12 @@
     <h1 class="site-header bold">Find Your Dream Job</h1>
     <img class="main-img" src="../assets/imgs/employment.jpg" />
     <div class="container">
-      <h2 class="preview-header semi">Top Rated Companies</h2>
-      <JobList v-if="jobs" :jobs="jobs"></JobList>
-      <h2 class="preview-header semi">Most Applied Jobs</h2>
-      <JobList v-if="jobs" :jobs="jobs"></JobList>
       <h2 class="preview-header semi">Recently Added</h2>
-      <JobList v-if="jobs" :jobs="jobs"></JobList>
+      <JobList v-if="recentlyAdded" :jobs="recentlyAdded"></JobList>
+      <h2 class="preview-header semi">Most Applied Jobs</h2>
+      <JobList v-if="mostApplied" :jobs="mostApplied"></JobList>
+      <h2 class="preview-header semi">Trending Jobs</h2>
+      <JobList v-if="trendingJobs" :jobs="trendingJobs"></JobList>
     </div>
   </section>
 </template>
@@ -21,8 +21,14 @@ export default {
     await this.$store.dispatch("loadJobs");
   },
   computed: {
-    jobs() {
-      return this.$store.getters.jobsToShow.slice(0, 4);
+    recentlyAdded() {
+      return this.$store.getters.jobsByCreatedAt.slice(0, 4);
+    },
+    mostApplied() {
+      return this.$store.getters.jobsByApplyCnt.slice(0, 4);
+    },
+    trendingJobs() {
+      return this.$store.getters.jobsBySaveCnt.slice(0, 4);
     }
   },
   components: {

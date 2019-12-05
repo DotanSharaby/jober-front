@@ -202,6 +202,7 @@ export default {
     },
     async saveJob() {
       if (this.isAllowedToPublish) {
+        this.editedJob.createdAt = Date.now()
         await this.$store.dispatch({ type: "addJob", job: this.editedJob });
         this.$router.go(-1);
       }
