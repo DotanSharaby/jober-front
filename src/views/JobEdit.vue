@@ -1,19 +1,9 @@
 <template>
   <section class="job-edit container flex justify-center">
-
-    <form
-      @submit.prevent="saveJob"
-      class="flex"
-    >
+    <form @submit.prevent="saveJob" class="flex">
       <section class="flex column flex-grow">
-        <h1
-          class="bold"
-          v-if="!editedJob._id"
-        >Add Job</h1>
-        <h1
-          class="bold"
-          v-else
-        >Edit Job</h1>
+        <h1 class="bold" v-if="!editedJob._id">Add Job</h1>
+        <h1 class="bold" v-else>Edit Job</h1>
         <label>Job Title:</label>
         <input type="text" v-model="editedJob.title" placeholder="Designer" />
         <label>Address:</label>
@@ -56,7 +46,8 @@
               data-desc="Dog friendly"
               title="Dog friendly"
               :icon="['fas', 'paw']"
-            /> <span class="icon-desc">Dog Friendly</span>
+            />
+            <span class="icon-desc">Dog Friendly</span>
           </div>
 
           <div class="flex align-center icon-container">
@@ -66,7 +57,8 @@
               @click="addProp"
               title="Transportation"
               :icon="['fas', 'bus']"
-            /> <span class="icon-desc">Transportation</span>
+            />
+            <span class="icon-desc">Transportation</span>
           </div>
           <div class="flex align-center icon-container">
             <font-awesome-icon
@@ -75,7 +67,8 @@
               @click="addProp"
               title="Restaurants"
               :icon="['fas', 'utensils']"
-            /> <span class="icon-desc">Restaurants</span>
+            />
+            <span class="icon-desc">Restaurants</span>
           </div>
           <div class="flex align-center icon-container">
             <font-awesome-icon
@@ -84,7 +77,8 @@
               @click="addProp"
               title="Parking"
               :icon="['fas', 'parking']"
-            /> <span class="icon-desc">Parking</span>
+            />
+            <span class="icon-desc">Parking</span>
           </div>
 
           <div class="flex align-center icon-container">
@@ -94,11 +88,11 @@
               @click="addProp"
               title="Coffee shops"
               :icon="['fas', 'mug-hot']"
-            /> <span class="icon-desc">Coffee shops</span>
+            />
+            <span class="icon-desc">Coffee shops</span>
           </div>
         </div>
-        <label>Salary:</label>
-        <input type="number" placeholder="Expected Salery" v-model.number="editedJob.payment" />
+
         <label class="image-section flex align-center space-between">
           Image:
           <div class="image" v-if="editedJob.img">
@@ -112,6 +106,8 @@
           ></scale-loader>
           <label for="file">Choose File</label>
         </label>
+        <label>Salary:</label>
+        <input type="number" placeholder="Expected Salery" v-model.number="editedJob.payment" />
         <button class="save-btn">Save</button>
         <br />
         <div class="flex justify-center">

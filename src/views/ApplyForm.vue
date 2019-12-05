@@ -9,7 +9,6 @@
     </ul>
     <VideoCapture
       v-if="user"
-      class="vid-container center"
       :uploadUrl="serverUrl"
       v-model="application.videoUrl"
     />

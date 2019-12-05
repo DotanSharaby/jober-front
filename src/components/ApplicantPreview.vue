@@ -5,12 +5,12 @@
       <h2 class="semi">{{applicant.username}}</h2>
       <p>{{applicant.email}}</p>
     </div>
-    <div class="info flex column space-between align-center">
+    <div class="info flex column space-between align-center center">
       <p v-if="applicant.expSalary">
         <span class="semi">Expected salary:</span>
         {{applicant.expSalary}}
       </p>
-      <div class="skills">
+      <div class="skills text-center">
       <p class="semi">Skills</p>
       <ul class="clean-list">
         <li v-for="(skill, idx) in applicant.skills" :key="idx">{{skill}}</li>
