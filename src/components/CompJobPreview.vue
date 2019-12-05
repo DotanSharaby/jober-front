@@ -6,7 +6,7 @@
         <div class="flex space-between align-center">
             <p class="date">{{job.createdAt}}</p>
             <p class="saved">{{saves}} saves</p>
-            <p class="applicants profile-link semi">{{applicants}} applicants</p>
+            <p class="applicants profile-link semi" @click="goToApplicants">{{applicants}} applicants</p>
         </div>
     </section>
 </template>
@@ -25,6 +25,11 @@ export default {
         saves() {
             if (!this.job.saves) return 0;
             return this.job.saves
+        }
+    },
+    methods: {
+        goToApplicants() {
+            if(this.job.applicants.length) this.$router.push(`/applicant/${this.job._id}`)
         }
     }
 }

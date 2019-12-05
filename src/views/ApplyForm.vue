@@ -8,6 +8,7 @@
       <li v-for="quest in questions" :quest="quest" :key="quest">{{ quest }}</li>
     </ul>
     <VideoCapture
+      v-if="user"
       class="vid-container center"
       :uploadUrl="serverUrl"
       v-model="application.videoUrl"
@@ -64,10 +65,11 @@ export default {
     }
   },
   created() {
+    this.user = this.$store.getters.loggedinUser;
+    if(!this.user) this.$router.push('/login');
     window.scrollTo(0, 0);
     this.currJob = this.$store.getters.currJob;
     this.questions = this.currJob.quests;
-    this.user = this.$store.getters.loggedinUser;
     this.user = JSON.parse(JSON.stringify(this.user));
   },
   components: {

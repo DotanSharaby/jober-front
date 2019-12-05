@@ -1,12 +1,12 @@
 <template>
-  <section class="job-edit container">
-    <h1 v-if="!editedJob._id">Add Job</h1>
-    <h1 v-else>Edit Job</h1>
+  <section class="job-edit container flex justify-center">
 
     <form
       @submit.prevent="saveJob"
       class="flex"
     >
+      <h1 v-if="!editedJob._id">Add Job</h1>
+      <h1 v-else>Edit Job</h1>
       <section class="flex column flex-grow">
         <label>Job Title:</label>
         <input
@@ -120,9 +120,7 @@
             class="image"
             v-if="editedJob.img"
           >
-            <img
-              :src="editedJob.img"
-            />
+            <img :src="editedJob.img" />
           </div>
           <input
             type="file"
@@ -186,7 +184,7 @@ export default {
     const jobId = this.$route.params.id;
     if (jobId) {
       await this.$store.dispatch({
-        type: "getJob",
+        type: "loadCurrJob",
         id: jobId
       });
       const job = this.$store.getters.currJob;

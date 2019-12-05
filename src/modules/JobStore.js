@@ -125,7 +125,7 @@ export default ({
             const addedJob = await JobService.add(job)
             context.commit({ type: 'addJob', addedJob })
         },
-        async getJob({ commit }, { id }) {
+        async loadCurrJob({ commit }, { id }) {
             const job = await JobService.getById(id)
             commit({ type: 'setCurrJob', job });
         },
