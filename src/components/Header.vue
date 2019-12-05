@@ -54,6 +54,7 @@ export default {
     },
     logout() {
       this.$store.dispatch({ type: "logout", user: this.user });
+      this.$router.push("/");
     },
     toggleMenu() {
       if (this.isUserMenuOpen) {

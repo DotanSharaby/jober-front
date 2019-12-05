@@ -5,21 +5,19 @@
       @submit.prevent="saveJob"
       class="flex"
     >
-      <h1 v-if="!editedJob._id">Add Job</h1>
-      <h1 v-else>Edit Job</h1>
       <section class="flex column flex-grow">
+        <h1
+          class="bold"
+          v-if="!editedJob._id"
+        >Add Job</h1>
+        <h1
+          class="bold"
+          v-else
+        >Edit Job</h1>
         <label>Job Title:</label>
-        <input
-          type="text"
-          v-model="editedJob.title"
-          placeholder='Designer'
-        />
+        <input type="text" v-model="editedJob.title" placeholder="Designer" />
         <label>Address:</label>
-        <input
-          type="text"
-          v-model="editedJob.address"
-          placeholder='Tel Aviv'
-        />
+        <input type="text" v-model="editedJob.address" placeholder="Tel Aviv" />
         <label>Description:</label>
         <textarea
           placeholder="Describe the position, working place etc.."
@@ -30,39 +28,19 @@
 
       <section class="flex column flex-grow">
         <label>Choose up to 3 questions:</label>
-        <drop-down
-          @setVal="setQuests"
-          :quests="editedJob.quests"
-        />
+        <drop-down @setVal="setQuests" :quests="editedJob.quests" />
         <section class="req-container flex column">
           Skill requirements:
-          <div
-            class="skill"
-            v-for="(skill, idx) in skills"
-            :key="idx"
-          >
-            <input
-              type="checkbox"
-              :id="skill"
-              :value="skill"
-              v-model="editedJob.reqSkills"
-            />
+          <div class="skill" v-for="(skill, idx) in skills" :key="idx">
+            <input type="checkbox" :id="skill" :value="skill" v-model="editedJob.reqSkills" />
             <label :for="skill">{{skill}}</label>
           </div>
           <ul class="clean-list">
-            <li
-              v-for="(skill, idx) in addedSkills"
-              :key="idx"
-            >
-              {{skill}}
-            </li>
+            <li v-for="(skill, idx) in addedSkills" :key="idx">{{skill}}</li>
           </ul>
-          <label>Other:
-            <input
-              type="text"
-              ref="addSkillInput"
-              v-model="skillToAdd"
-            />
+          <label>
+            Other:
+            <input type="text" ref="addSkillInput" v-model="skillToAdd" />
             <button @click.prevent="addSkillReq">+</button>
           </label>
         </section>
@@ -70,72 +48,69 @@
 
       <section class="flex column flex-grow">
         <label>Perks:</label>
-        <div class="icons-container flex">
-          <font-awesome-icon
-            @click="addProp"
-            class="icon-item"
-            data-desc="Dog friendly"
-            title="Dog friendly"
-            :icon="['fas', 'paw']"
-          />
-          <font-awesome-icon
-            @click="addProp"
-            class="icon-item"
-            data-desc="Transportation"
-            title="Transportation"
-            :icon="['fas', 'bus']"
-          />
-          <font-awesome-icon
-            @click="addProp"
-            class="icon-item"
-            data-desc="Restaurants"
-            title="Restaurants"
-            :icon="['fas', 'utensils']"
-          />
-          <font-awesome-icon
-            @click="addProp"
-            class="icon-item"
-            data-desc="Parking"
-            title="Parking"
-            :icon="['fas', 'parking']"
-          />
-          <font-awesome-icon
-            @click="addProp"
-            class="icon-item"
-            data-desc="Coffee shops"
-            title="Coffee shops"
-            :icon="['fas', 'mug-hot']"
-          />
+        <div class="icons-container flex column">
+          <div class="flex align-center icon-container">
+            <font-awesome-icon
+              @click="addProp"
+              class="icon-item"
+              data-desc="Dog friendly"
+              title="Dog friendly"
+              :icon="['fas', 'paw']"
+            /> <span class="icon-desc">Dog Friendly</span>
+          </div>
+
+          <div class="flex align-center icon-container">
+            <font-awesome-icon
+              data-desc="Transportation"
+              class="icon-item"
+              @click="addProp"
+              title="Transportation"
+              :icon="['fas', 'bus']"
+            /> <span class="icon-desc">Transportation</span>
+          </div>
+          <div class="flex align-center icon-container">
+            <font-awesome-icon
+              data-desc="Restaurants"
+              class="icon-item"
+              @click="addProp"
+              title="Restaurants"
+              :icon="['fas', 'utensils']"
+            /> <span class="icon-desc">Restaurants</span>
+          </div>
+          <div class="flex align-center icon-container">
+            <font-awesome-icon
+              data-desc="Parking"
+              class="icon-item"
+              @click="addProp"
+              title="Parking"
+              :icon="['fas', 'parking']"
+            /> <span class="icon-desc">Parking</span>
+          </div>
+
+          <div class="flex align-center icon-container">
+            <font-awesome-icon
+              data-desc="Coffee shops"
+              class="icon-item"
+              @click="addProp"
+              title="Coffee shops"
+              :icon="['fas', 'mug-hot']"
+            /> <span class="icon-desc">Coffee shops</span>
+          </div>
         </div>
         <label>Salary:</label>
-        <input
-          type="number"
-          placeholder="Expected Salery"
-          v-model.number="editedJob.payment"
-        />
+        <input type="number" placeholder="Expected Salery" v-model.number="editedJob.payment" />
         <label class="image-section flex align-center space-between">
           Image:
-
-          <div
-            class="image"
-            v-if="editedJob.img"
-          >
+          <div class="image" v-if="editedJob.img">
             <img :src="editedJob.img" />
           </div>
-          <input
-            type="file"
-            name="file"
-            id="file"
-            class="inputfile"
-            @change="getUrl"
-          />
+          <input type="file" name="file" id="file" class="inputfile" @change="getUrl" />
           <scale-loader
             class="loader inline-block flex-center"
             v-if="isLoading && !editedJob.img"
             :color="'#8bdade'"
           ></scale-loader>
           <label for="file">Choose File</label>
-
         </label>
         <button class="save-btn">Save</button>
         <br />
@@ -144,14 +119,8 @@
           <p v-else>Ready to go</p>
         </div>
       </section>
-
       <section class="flex column">
-
-        <button
-          v-if="editedJob._id"
-          @click="remove"
-        >Remove Job</button>
-
+        <button v-if="editedJob._id" @click="remove">Remove Job</button>
       </section>
     </form>
   </section>
@@ -159,9 +128,7 @@
 
 <script>
 import UploadService from "../services/UploadService";
-
 import dropDown from "../components/Dropdown";
-
 import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
 
 export default {
@@ -170,7 +137,8 @@ export default {
       editedJob: {
         reqSkills: [],
         perks: [],
-        quests: []
+        quests: [],
+        saves: 0
       },
       skillToAdd: "",
       addedSkills: [],
@@ -180,7 +148,6 @@ export default {
   async created() {
     const user = this.$store.getters.loggedinUser;
     if (!user) return this.$router.go(-1);
-    // await this.$store.dispatch({ type: "loadJobs" });
     const jobId = this.$route.params.id;
     if (jobId) {
       await this.$store.dispatch({
@@ -188,7 +155,6 @@ export default {
         id: jobId
       });
       const job = this.$store.getters.currJob;
-      console.log(job);
       this.editedJob = JSON.parse(JSON.stringify(job));
     } else {
       this.editedJob.owner = user;
@@ -218,7 +184,6 @@ export default {
       this.$router.push("/");
     },
     addProp(ev) {
-      // Adding the fontawesome icon name to the editedJob object for our future use
       var target = ev.target;
       if (target.localName === "path") target = target.farthestViewportElement;
       if (this.editedJob.perks.includes(target.dataset.icon)) {
@@ -240,14 +205,17 @@ export default {
     },
     isAllowedToPublish() {
       let job = this.editedJob;
-      return (
+      if (
         job.title &&
         job.address &&
         job.reqSkills.length > 0 &&
         job.payment > 100 &&
         job.desc &&
         job.img
-      );
+      ) {
+        return true;
+      }
+      return false;
     }
   },
   components: {

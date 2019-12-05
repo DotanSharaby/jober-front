@@ -1,160 +1,163 @@
 .job-edit {
-    margin-left: 3em;
+  h1 {
+    margin-bottom: 10px;
+    text-decoration: underline;
+  }
+  section.flex {
     padding: 20px;
+  }
 
-    h1 {
-        padding: 20px;
-        margin-left: 1em;
+  input {
+    padding: 5px;
+  }
+
+  textarea {
+    overflow-x: hidden;
+    resize: none;
+    min-height: 200px;
+    min-width: 200px;
+    line-height: 1.5;
+  }
+
+  label {
+    margin: 10px 0;
+  }
+
+  .skill:not(:last-child) {
+    margin: 5px 0;
+  }
+
+  .clean-list {
+    li {
+      margin: 7px 20px;
     }
+  }
 
-    section.flex {
-        margin-left: 20px;
-        min-width: 3em;
-        padding: 20px;
+  .image-section {
+    width: 270px;
+    height: 100px;
+    img {
+      object-fit: cover;
+      width: 100px;
+      height: 100px;
     }
+  }
 
-    input {
-        padding: 5px;
+  .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+
+  .save-btn {
+    width: 150px;
+    padding: 7px;
+    margin: 5px auto;
+    font-size: 1em;
+    margin-top: 10px;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: $clr4;
     }
+  }
 
-    textarea {
-        overflow-x: hidden;
-        resize: none;
-        min-height: 200px;
-        min-width: 200px;
-        line-height: 1.5;
-    }
+  .inputfile + label {
+    transition: 0.3s;
+    background-color: $clr3;
+    padding: 4px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    color: $clr5;
+    max-width: 140px;
+    margin: 5px 0;
+    display: inline-block;
+  }
 
-    label {
-        margin: 10px 0;
-    }
+  .inputLogo + label {
+    margin-left: 10px;
+  }
 
-    .skill:not(:last-child) {
-        margin: 5px 0;
-    }
+  .inputfile:focus + label,
+  .inputfile + label:hover {
+    background-color: $clr4;
+  }
 
-    .clean-list{
-        li {
-            margin: 7px 20px;
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  .icons-container {
+    .icon-container {
+      margin: 10px;
+      font-size: 18px;
+      width: max-content;
+
+      .icon-desc {
+        margin-left: 6px;
+        &::before{
+            content: " - "
         }
-    }
-
-    .image-section {
-        width: 270px;
-        height: 100px;
-        img{
-            object-fit: cover;
-            width: 100px;
-            height: 100px;
-        }
-        .loader {
-            
-        }
-    }
-
-    .inputfile {
-        width: 0.1px;
-        height: 0.1px;
-        opacity: 0;
-        overflow: hidden;
-        position: absolute;
-        z-index: -1;
-    }
-
-    .save-btn {
-        width: 150px;
-        padding: 7px;
-        margin: 5px auto;
-        font-size: 1em;
-        margin-top: 10px;
-        transition: .3s;
+      }
+      .icon-item {
+        font-size: 22px;
+        transition: 0.2s;
+        cursor: pointer;
 
         &:hover {
-            background-color: $clr4;
-        }
-    }
-
-    .inputfile+label {
-        transition: .3s;
-        background-color: $clr3;
-        padding: 4px;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-        color: $clr5;
-        max-width: 140px;
-        margin: 5px 0;
-        display: inline-block;
-    }
-
-    .inputLogo+label {
-        margin-left: 10px
-    }
-
-    .inputfile:focus+label,
-    .inputfile+label:hover {
-        background-color: $clr4;
-    }
-
-    /* Chrome, Safari, Edge, Opera */
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    /* Firefox */
-    input[type=number] {
-        -moz-appearance: textfield;
-    }
-
-    .icons-container {
-        .icon-item {
-            margin: 10px;
-            font-size: 22px;
-            transition: .2s;
-
-            &:hover {
-                box-shadow: 0 2px 0 0 lightblue;
-            }
-
-            &.active {
-                color: $clr1;
-            }
-        }
-    }
-
-    .image {
-        margin: 5px;
-        position: relative;
-        cursor: pointer;
-
-        img {
-            max-height: 150px;
-            border-radius: 5px;
-            border: 1px solid #ebebeb;
-
-            &:hover {
-                border: 1px solid $clr1;
-            }
+          box-shadow: 0 2px 0 0 lightblue;
         }
 
-        button {
-            position: absolute;
-            left: 0;
-
-            &:hover {
-                color: black;
-            }
+        &.active {
+          color: $clr1;
         }
+      }
     }
+  }
+
+  .image {
+    margin: 5px;
+    position: relative;
+    cursor: pointer;
+
+    img {
+      max-height: 150px;
+      border-radius: 5px;
+      border: 1px solid #ebebeb;
+
+      &:hover {
+        border: 1px solid $clr1;
+      }
+    }
+
+    button {
+      position: absolute;
+      left: 0;
+
+      &:hover {
+        color: black;
+      }
+    }
+  }
 }
 
 @media (max-width: 1040px) {
-    .job-edit{
-        form {
-            flex-direction: column;
-            max-width: 450px;
-        }
+  .job-edit {
+    form {
+      flex-direction: column;
+      max-width: 450px;
     }
+  }
 }
