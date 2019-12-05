@@ -6,21 +6,37 @@ import { Bar } from 'vue-chartjs'
 export default {
     extends: Bar,
     props: { jobs: Array },
-
+    computed: {
+        jobTitles() {
+            return this.jobs.map(job => job.title)
+        },
+        applicantsDatas() {
+            return this.jobs.map(job => {
+                if (!job.applicants) return 0
+                return job.applicants.length;
+            })
+        },
+        savesDatas() {
+            return this.jobs.map(job => {
+                if (!job.saves) return 0
+                return job.saves;
+            })
+        }
+    },
     mounted() {
-        // Overwriting base render method with actual data.
         this.renderChart({
-            labels: [this.jobs[0].title, this.jobs[1].title],
+            labels: this.jobTitles,
+            maintainAspectRatio:false,
             datasets: [
                 {
                     label: 'Applicants',
                     backgroundColor: '#3fc1c9',
-                    data: [5, 7]
+                    data: this.applicantsDatas
                 },
                 {
                     label: 'Saves',
                     backgroundColor: '#678b9d',
-                    data: [10, 12].concat([0, 15])
+                    data: this.savesDatas.concat([0, 5])
                 }
             ]
         })

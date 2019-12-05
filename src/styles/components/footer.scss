@@ -2,7 +2,8 @@ footer {
     height: 75px;
     width: 100%;
     background-color: #ffffff;
-    border-top: 3px solid #cbd0d0;
+    border-top: 1px solid #cbd0d0;
+    position: relative;
 
     .main {
         width: 450px;
@@ -11,12 +12,39 @@ footer {
     .logo {
         position: absolute;
         right: 25px;
+        height: auto;
+        width: 50px;
     }
     .developer {
         transition: 0.3s;
         cursor: pointer;
         &:hover {
             color: $clr1;
+        }
+    }
+    @media (max-width: 680px) {
+        .logo {
+            right: 50%;
+            margin-right: -25px;
+            top: 5px;
+        }
+        .main {
+            align-self: flex-end;
+            margin-bottom: 7px;
+        }
+    }
+    @media (max-width: 520px) {
+        height: 140px;
+        .main {
+            flex-direction: column;
+        }
+        span {
+            display: none;
+        }
+        .developer {
+            &:not(:last-child) {
+                margin-bottom: 10px;
+            }
         }
     }
 }

@@ -1,10 +1,9 @@
 .job-details {
-    .navigate {
-        position: absolute;
-        left: 30px;
+    .heart {
+        color: gray;
     }
     .details {
-        margin: 20px auto;
+        margin: 35px auto;
         width: 700px;
         padding: 0 20px;
     }
@@ -19,10 +18,23 @@
             color: $clr1;
             font-size: 27px;
         }
+        .position {
+            p {
+                margin: 5px 0;
+            }
+        }
+        h4 {
+            margin: 5px 0 10px;
+            color: $clr3;
+            font-size: 18px;
+        }
+        span {
+            margin-top: 10px;
+        }
     }
     .avatar {
-        width: 80px;
-        height: 80px;
+        width: 70px;
+        height: 70px;
         object-fit: cover;
         border-radius: 50%;
         border: 1px solid #cfcaca;
@@ -40,14 +52,14 @@
         height: 220px;
         border-radius: 10px;
     }
+
     .desc {
-        margin: 40px 0;
+        margin: 46px 0;
         line-height: 25px;
         white-space: pre-line;
     }
     .skills,
     .props {
-        flex-grow: 1;
         h2 {
             margin-bottom: 15px;
             color: $clr3;
@@ -56,22 +68,32 @@
             margin: 7px 0;
         }
     }
-    .info, .more-info {
+    .info,
+    .more-info {
         margin: 0 auto;
         width: 100%;
     }
     .skills {
+        flex-grow: 1;
         padding-left: 35px;
+        align-self: flex-start;
+        align-items: flex-start;
+        .arrow-icon{
+            margin-right: 5px;
+            font-size: .9em;
+        }
     }
     .props {
-        padding-left: 50px;
+        align-self: flex-start;
+        align-items: flex-start;
+        h2 {
+            text-align: center;
+        }
     }
     .more-info {
         margin-bottom: 35px;
     }
-    .wall {
-        flex-grow: 1;
-        padding: 15px;
+    .wall-container {
         max-width: 35vw;
         height: calc(100vh - 75px);
         position: sticky;
@@ -81,15 +103,91 @@
     .apply-btn {
         width: 100px;
         height: 30px;
+        margin: 10px 0;
         transition: 0.3s;
         &:hover {
             background-color: $clr4;
         }
+        &.second {
+            margin: 10px auto;
+        }
+        &.disabled-btn {
+            background-color: #ababab;
+            cursor: auto;
+        }
     }
-    .disabled-btn {
-        width: 100px;
-        height: 30px;
-        opacity: 0.6;
-        cursor: auto;
+    @media (max-width: 1040px) {
+        width: 100%;
+        .title {
+            width: 360px;
+            flex-direction: column;
+            margin: 0 auto 40px;
+            position: relative;
+            .comp {
+                margin-right: 20px;
+                margin-bottom: 30px;
+            }
+            .position {
+                margin-bottom: 15px;
+            }
+        }
+        .details {
+            width: auto;
+            flex-grow: 1;
+            padding: 0 30px;
+        }
+        .wall-container {
+            max-width: 350px;
+            min-width: 350px;
+        }
+        .props {
+            padding: 0;
+        }
+    }
+    @media (max-width: 980px) {
+        .info {
+            flex-direction: column;
+            .job-img {
+                margin-bottom: 25px;
+            }
+            .skills {
+                padding: 0;
+            }
+        }
+        .more-info {
+            flex-direction: column;
+            .props {
+                margin-bottom: 25px;
+            }
+        }
+    }
+    @media (max-width: 780px) {
+        flex-direction: column;
+        .wall-container {
+            max-width: 100%;
+            min-width: 100%;
+            margin-top: 25px;
+            border-top: 1px solid #d0d0d0;
+            height: fit-content;
+        }
+        .desc {
+            padding: 0 20px;
+        }
+        .skills,
+        .props {
+            align-self: center;
+            align-items: center;
+        }
+    }
+    @media (max-width: 420px) {
+        .map,
+        .job-img {
+            width: 100%;
+            height: 230px;
+        }
+        .title {
+            width: 100%;
+            margin-top: 40px;
+        }
     }
 }

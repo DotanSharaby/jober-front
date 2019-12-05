@@ -1,0 +1,72 @@
+.apply-form-wrapper {
+    .quest-container {
+        justify-content: space-evenly;
+    }
+
+    .video {
+        margin: 25px auto;
+    }
+
+    h2 {
+        align-self: center;
+        margin: 30px 0;
+        color: $clr1;
+    }
+
+    h3 {
+        align-self: center;
+        margin-bottom: 20px;
+    }
+
+    textarea {
+        width: 400px;
+        height: 100px;
+        resize: none;
+        margin-bottom: 40px;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    button {
+        width: 150px;
+        height: 40px;
+    }
+
+    li {
+        margin-bottom: 15px;
+    }
+
+    video.camera {
+        transform: rotateY(180deg);
+        max-width: 350px !important;
+    }
+
+    .stream-container {
+        display: flex;
+        flex-direction: column;
+
+        button {
+            margin: 10px;
+            align-self: center;
+        }
+
+        .btn>span {
+            font-size: 2em !important;
+            color: red;
+        }
+    }
+
+    .controls {
+        display: flex;
+        justify-content: center;
+        button{
+            margin: 10px;
+        }
+    }
+}
+
+@media (max-width: 720px) {
+    .quest-container {
+        flex-direction: column;
+    }
+}

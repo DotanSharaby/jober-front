@@ -1,6 +1,6 @@
 <template>
-    <section class="job-list flex space-around align-center">
-        <JobPreview @removed="removeJob" v-for="job in jobs" :key="job._id" :job="job"></JobPreview>
+    <section class="job-list">
+        <JobPreview @updatedData="updateData" v-for="job in jobs" :key="job._id" :job="job" :user="user"></JobPreview>
     </section>
 </template>
 
@@ -8,10 +8,10 @@
 import JobPreview from './JobPreview.vue'
 
 export default {
-    props: { jobs: Array },
+    props: { jobs: Array, user: Object },
     methods: {
-        removeJob(jobId) {
-            this.$emit('removed', jobId)
+        updateData(data) {
+            this.$emit('updatedData', data)
         }
     },
     components: {

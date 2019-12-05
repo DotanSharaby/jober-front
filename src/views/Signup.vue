@@ -1,80 +1,84 @@
 
 <template>
-  <section class="signup">
-    <h1>Signup</h1>
+  <section class="signup flex column justify-center align-center">
     <form-wizard
-      @on-complete="doSignup"
+      v-if="!isCompleted"
+      class="my-form"
+      @on-complete="updateUser"
       shape="tab"
       color="#3fc1c9"
-      back-button-text="Go back!"
-      next-button-text="Go next!"
-      finish-button-text="We're there"
+      back-button-text="Back"
+      next-button-text="Next"
+      finish-button-text="Done"
     >
-      <tab-content class="flex column" title="User setup" icon="ti-user">
-        Looking to post some Jobs?
-        <button
-          :class="{selected :signupCred.isCompany}"
-          @click="isCompany(true)"
-        >Yes, I am recruiting</button>
-        <button
-          :class="{selected : !signupCred.isCompany}"
-          @click="isCompany(false)"
-        >No, I am looking for one</button>
+      <font-awesome-icon class="icon-item user" :icon="['fas', 'user']" size="2x" />
+      <font-awesome-icon class="icon-item details" :icon="['fas', 'asterisk']" size="2x" />
+      <font-awesome-icon class="icon-item done" :icon="['fas', 'check']" size="2x" />
+      <p class="err-msg error text-center">{{ msg }}</p>
+
+      <tab-content class="flex column" title="User setup" icon="ti-user" :before-change="validate">
+        <label>Username / Company Name:</label>
+        <input type="text" v-model="signupCred.username" placeholder="Josh" />
+        <label>Email:</label>
+        <input type="email" v-model="signupCred.email" placeholder="josh@mail.com" />
+        <label>Password:</label>
+        <input type="password" v-model="signupCred.pass" />
       </tab-content>
 
       <tab-content class="flex column" title="Additional Info" icon="ti-settings">
-        <label>User Name:</label>
-        <input type="text" v-model="signupCred.username" placeholder="User Name" />
-        <label>Email:</label>
-        <input type="email" v-model="signupCred.email" placeholder="Email" />
-        <label>Password:</label>
-        <input type="text" v-model="signupCred.password" placeholder="Password" />
-      </tab-content>
-
-      <tab-content class="flex column" title="Last step" icon="ti-check">
-        <div v-if="signupCred.isCompany">
-          <label>
-            <input
-              type="file"
-              name="logoFile"
-              id="logoFile"
-              class="inputfile inputLogo"
-              @change="getUrl($event,'logo')"
-            />
-            <label for="logoFile">Choose Logo</label>
-          </label>
-          <img v-if="signupCred.logoUrl" :src="signupCred.logoUrl" height="100" />
+        <div>
+          <div class="instructions text-center semi">Upload some files (optional)</div>
+          <div class="img-div">
+            <label>
+              <input
+                type="file"
+                name="signupImgFile"
+                id="signupImgFile"
+                class="inputfile inputImg"
+                @change="getUrl($event)"
+              />
+              <label for="signupImgFile">Profile Image</label>
+            </label>
+            <img v-if="user && user.img" :src="user.img" height="100" />
+          </div>
+          <div>
+            <label>
+              <input
+                type="file"
+                name="cvFile"
+                id="cvFile"
+                class="inputfile inputCv"
+                @change="getUrl($event,'cv')"
+              />
+              <label for="cvFile">CV File (pdf)</label>
+            </label>
+          </div>
         </div>
-        <div v-else>
-          <label>
-            <input
-              type="file"
-              name="signupImgFile"
-              id="signupImgFile"
-              class="inputfile inputImg"
-              @change="getUrl($event)"
-            />
-            <label for="signupImgFile">Choose Image</label>
-          </label>
-          <img v-if="signupCred.img" :src="signupCred.img" height="100" />
-          <label>
-            <input
-              type="file"
-              name="cvFile"
-              id="cvFile"
-              class="inputfile inputCv"
-              @change="getUrl($event,'cv')"
-            />
-            <label for="cvFile">Upload CV - (pdf)</label>
-          </label>
+      </tab-content>
+      <tab-content class="flex column" title="Last step" icon="ti-check">
+        <div>
+          <div class="instructions text-center semi">What are your skills? (optional)</div>
+          <div class="skill" v-for="(skill, idx) in skills" :key="idx">
+            <input type="checkbox" :id="skill" :value="skill" v-model="user.skills" />
+            <label :for="skill">{{skill}}</label>
+          </div>
+          <div class="instructions text-center semi">What is your salary expectation? (optional)</div>
+          <input type="number" v-model="user.expSalary" />
         </div>
       </tab-content>
     </form-wizard>
-    <pulse-loader v-if="isLoading" :color="'#8bdade'"></pulse-loader>
-    <!-- <beat-loader :loading="loading" :color="color" :size="size"></beat-loader> -->
-    <!-- <fade-loader :loading="loading" :color="color" :height="height" :width="width"></fade-loader> -->
-    <!-- <pacman-loader :loading="loading" :color="color" :size="size"></pacman-loader> -->
-    <!-- <scale-loader :loading="loading" :color="color" :height="height" :width="width"></scale-loader> -->
+    <div v-else class="whats-next flex column justify-center align-center">
+      <h1 class="semi text-center">What's next?</h1>
+      <div>
+        <router-link to="/job">
+          <button>Start searching for your dream job</button>
+        </router-link>
+        <router-link to="/job/edit">
+          <button>Publish your own job offer</button>
+        </router-link>
+      </div>
+    </div>
+    <scale-loader v-if="isLoading" :color="'#8bdade'"></scale-loader>
   </section>
 </template>
 
@@ -84,51 +88,96 @@ import UploadService from "../services/UploadService";
 import { FormWizard, TabContent } from "vue-form-wizard";
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
 
-import PulseLoader from "vue-spinner/src/PulseLoader.vue";
-// import BeatLoader from "vue-spinner/src/BeatLoader.vue";
-// import FadeLoader from "vue-spinner/src/FadeLoader.vue";
-// import PacmanLoader from "vue-spinner/src/PacmanLoader.vue";
-// import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
+import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
 
 export default {
   data() {
     return {
-      signupCred: {
-        isCompany: true
-      },
+      signupCred: {},
+      user: {},
       msg: "",
-      isLoading: false
+      isLoading: false,
+      isCompleted: false
     };
   },
   methods: {
-    doSignup() {
+    async doSignup() {
       const cred = this.signupCred;
-      if (!cred.email || !cred.password || !cred.username) {
-        setTimeout(() => (this.msg = ""), 2000);
-        return (this.msg = "Please fill up the form");
+      this.user = await this.$store.dispatch({
+        type: "signup",
+        userCred: cred
+      });
+      this.user.skills = [];
+      this.user.archivedJobsIds = [];
+      this.user.savedJobsIds = [];
+      this.user.appliedJobsIds = [];
+      if (this.user)
+        await this.$store.dispatch({ type: "login", userCred: cred });
+    },
+    async validate() {
+      const cred = this.signupCred;
+      if (!cred.email || !cred.pass || !cred.username) {
+        this.msg = "Please fill up all the fields";
+        return false;
       }
-      this.$store.dispatch({ type: "signup", userCred: cred });
-      setTimeout(() => {
-        this.msg = "";
-        this.$router.push("/job");
-      }, 2000);
-      this.msg = "Signup successfully!";
+      if (!this.validEmail || (await this.emailExists())) {
+        this.msg = "Invalid email";
+        return false;
+      }
+      await this.doSignup();
+      if (!this.user) {
+        this.msg = "Something went wrong";
+        return false;
+      }
+      this.msg = "";
+      return true;
     },
     async getUrl(ev, type) {
+      this.isLoading = true;
       const file = await UploadService.upload(ev.target.files[0]);
+      this.isLoading = false;
       if (!file) return;
-      if (type === "cv") return (this.signupCred.cvUrl = file.url);
-      return this.signupCred.img = file.url;
+      if (type === "cv") {
+        setTimeout(() => (this.msg = ""), 2000);
+        this.user.cv = file.url;
+        return (this.msg = "CV uploaded");
+      } else {
+        this.user.img = file.url;
+        return (this.msg = "");
+      }
     },
-    isCompany(val) {
-      if (val) this.signupCred.isCompany = true;
-      else this.signupCred.isCompany = false;
+    async updateUser() {
+      if (!this.user.img) {
+        this.user.img = "https://www.afrombira.com/img/no-user.png";
+      }
+      await this.$store.dispatch({ type: "updateUser", user: this.user });
+      this.isCompleted = true;
+    },
+    async emailExists() {
+      const res = await this.$store.dispatch({
+        type: "checkEmail",
+        email: this.signupCred.email
+      });
+      return res;
     }
+  },
+  computed: {
+    skills() {
+      return this.$store.getters.skills;
+    },
+    validEmail() {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(this.signupCred.email).toLowerCase());
+    }
+  },
+  created() {
+    const user = this.$store.getters.loggedinUser;
+    if (user) this.$router.push("/");
   },
   components: {
     FormWizard,
     TabContent,
-    PulseLoader
+    ScaleLoader
   }
 };
 </script>

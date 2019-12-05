@@ -16,13 +16,18 @@
 @import 'views/job-page';
 @import 'views/job-edit';
 @import 'views/job-details';
-@import 'views/user-details';
+@import 'views/user-profile';
 @import 'views/comp-page';
+@import 'views/apply-form';
 
 // COMPONENTS
 @import 'components/header';
 @import 'components/footer';
 @import 'components/job-preview';
 @import 'components/job-list';
-@import 'components/wall.scss';
+@import 'components/wall';
 @import 'components/comp-job-preview';
+@import 'components/checkbox';
+@import 'components/dropdown';
+@import 'components/apply-quest';
+@import 'components/applicant-preview';

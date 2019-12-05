@@ -1,133 +1,222 @@
 <template>
-  <section class="job-edit">
-    <h1 v-if="!editedJob._id">Add Job</h1>
-    <h1 v-else>Edit Job</h1>
+  <section class="job-edit container flex justify-center">
+    <form @submit.prevent="saveJob" class="flex">
+      <section class="flex column flex-grow">
+        <h1 class="bold" v-if="!editedJob._id">Add Job</h1>
+        <h1 class="bold" v-else>Edit Job</h1>
+        <label>Job Title:</label>
+        <input type="text" v-model="editedJob.title" placeholder="Designer" />
+        <label>Address:</label>
+        <input type="text" v-model="editedJob.address" placeholder="Tel Aviv" />
+        <label>Description:</label>
+        <textarea
+          placeholder="Describe the position, working place etc.."
+          v-model="editedJob.desc"
+          rows="5"
+        ></textarea>
+      </section>
 
-    <form @submit.prevent="saveJob" class="flex column">
-      <label v-if="getLoggedinUser">{{ loggedinUser.username }}</label>
+      <section class="flex column flex-grow">
+        <label>Choose up to 3 questions:</label>
+        <drop-down @setVal="setQuests" :quests="editedJob.quests" />
+        <section class="req-container flex column">
+          Skill requirements:
+          <div class="skill" v-for="(skill, idx) in skills" :key="idx">
+            <input type="checkbox" :id="skill" :value="skill" v-model="editedJob.reqSkills" />
+            <label :for="skill">{{skill}}</label>
+          </div>
+          <ul class="clean-list">
+            <li v-for="(skill, idx) in addedSkills" :key="idx">{{skill}}</li>
+          </ul>
+          <label>
+            Other:
+            <input type="text" ref="addSkillInput" v-model="skillToAdd" />
+            <button @click.prevent="addSkillReq">+</button>
+          </label>
+        </section>
+      </section>
 
-      <label>Position:</label>
-      <input type="text" v-model="editedJob.title" placeholder="Front End Developer" />
+      <section class="flex column flex-grow">
+        <label>Perks:</label>
+        <div class="icons-container flex column">
+          <div class="flex align-center icon-container">
+            <font-awesome-icon
+              @click="addProp"
+              class="icon-item"
+              data-desc="Dog friendly"
+              title="Dog friendly"
+              :icon="['fas', 'paw']"
+            />
+            <span class="icon-desc">Dog Friendly</span>
+          </div>
 
-      <label>Address:</label>
-      <input type="text" v-model="editedJob.loc.address" placeholder="Tel Aviv" />
+          <div class="flex align-center icon-container">
+            <font-awesome-icon
+              data-desc="Transportation"
+              class="icon-item"
+              @click="addProp"
+              title="Transportation"
+              :icon="['fas', 'bus']"
+            />
+            <span class="icon-desc">Transportation</span>
+          </div>
+          <div class="flex align-center icon-container">
+            <font-awesome-icon
+              data-desc="Restaurants"
+              class="icon-item"
+              @click="addProp"
+              title="Restaurants"
+              :icon="['fas', 'utensils']"
+            />
+            <span class="icon-desc">Restaurants</span>
+          </div>
+          <div class="flex align-center icon-container">
+            <font-awesome-icon
+              data-desc="Parking"
+              class="icon-item"
+              @click="addProp"
+              title="Parking"
+              :icon="['fas', 'parking']"
+            />
+            <span class="icon-desc">Parking</span>
+          </div>
 
-      <label>Perks:</label>
-      <div class="icons-container flex">
-        <font-awesome-icon @click="addProp" class="icon-item" :icon="['fas', 'paw']" />
-        <font-awesome-icon @click="addProp" class="icon-item" :icon="['fas', 'bus']" />
-        <font-awesome-icon @click="addProp" class="icon-item" :icon="['fas', 'utensils']" />
-        <font-awesome-icon @click="addProp" class="icon-item" :icon="['fas', 'parking']" />
-        <font-awesome-icon @click="addProp" class="icon-item" :icon="['fas', 'mug-hot']" />
-      </div>
-      <label>
-        Images:
-        <input type="file" name="file" id="file" class="inputfile" @change="getUrl" multiple />
-        <label for="file">Choose files</label>
-      </label>
+          <div class="flex align-center icon-container">
+            <font-awesome-icon
+              data-desc="Coffee shops"
+              class="icon-item"
+              @click="addProp"
+              title="Coffee shops"
+              :icon="['fas', 'mug-hot']"
+            />
+            <span class="icon-desc">Coffee shops</span>
+          </div>
+        </div>
 
-      <label>Description:</label>
-      <textarea
-        placeholder="Describe the position, working place etc.."
-        v-model="editedJob.desc"
-        rows="5"
-      ></textarea>
-
-      <label>Salary:</label>
-      <input type="number" placeholder="Expected Salery" v-model="editedJob.payment" />
-
-      <button class="save-btn">Save</button>
+        <label class="image-section flex align-center space-between">
+          Image:
+          <div class="image" v-if="editedJob.img">
+            <img :src="editedJob.img" />
+          </div>
+          <input type="file" name="file" id="file" class="inputfile" @change="getUrl" />
+          <scale-loader
+            class="loader inline-block flex-center"
+            v-if="isLoading && !editedJob.img"
+            :color="'#8bdade'"
+          ></scale-loader>
+          <label for="file">Choose File</label>
+        </label>
+        <label>Salary:</label>
+        <input type="number" placeholder="Expected Salery" v-model.number="editedJob.payment" />
+        <button class="save-btn">Save</button>
+        <br />
+        <div class="flex justify-center">
+          <p v-if="!isAllowedToPublish">Fill all fields</p>
+          <p v-else>Ready to go</p>
+        </div>
+      </section>
+      <section class="flex column">
+        <button v-if="editedJob._id" @click="remove">Remove Job</button>
+      </section>
     </form>
-
-    <button v-if="editedJob._id" @click="remove">Remove</button>
-
-    <img v-if="editedJob.owner.logoUrl" :src="editedJob.owner.logoUrl" height="100" />
-    <label>
-      <input
-        type="file"
-        name="imgsFile"
-        id="imgsFile"
-        class="inputfile imgsFile"
-        @change="getUrl($event)"
-      />
-      <label for="imgsFile">Choose Images</label>
-    </label>
-    <div v-if="editedJob.imgs.length">
-      <img v-for="(img,idx) in editedJob.imgs" :src="img" :key="idx" height="100" />
-    </div>
   </section>
 </template>
 
 <script>
 import UploadService from "../services/UploadService";
+import dropDown from "../components/Dropdown";
+import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
 
 export default {
   data() {
     return {
       editedJob: {
-        owner: { name: "", logoUrl: "" },
-        title: "",
-        loc: { address: "" },
-        props: [],
-        desc: "",
-        imgs: [],
-        payment: null
+        reqSkills: [],
+        perks: [],
+        quests: [],
+        saves: 0
       },
-      loggedinUser: ""
+      skillToAdd: "",
+      addedSkills: [],
+      isLoading: false
     };
   },
   async created() {
-    await this.$store.dispatch({ type: "loadJobs" });
+    const user = this.$store.getters.loggedinUser;
+    if (!user) return this.$router.go(-1);
     const jobId = this.$route.params.id;
     if (jobId) {
-      this.editedJob = await this.$store.dispatch({
-        type: "getJob",
+      await this.$store.dispatch({
+        type: "loadCurrJob",
         id: jobId
       });
+      const job = this.$store.getters.currJob;
+      this.editedJob = JSON.parse(JSON.stringify(job));
+    } else {
+      this.editedJob.owner = user;
     }
-    const user = this.$store.getters.loggedinUser;
-    this.loggedinUser = JSON.parse(JSON.stringify(user));
-    delete this.user.password;
   },
   methods: {
+    addSkillReq() {
+      this.editedJob.reqSkills.push(this.skillToAdd);
+      this.addedSkills.push(JSON.parse(JSON.stringify(this.skillToAdd)));
+      this.skillToAdd = "";
+    },
     async saveJob() {
-      await this.$store.dispatch({ type: "saveJob", job: this.editedJob });
-      this.$router.go(-1);
+      if (this.isAllowedToPublish) {
+        this.editedJob.createdAt = Date.now()
+        await this.$store.dispatch({ type: "addJob", job: this.editedJob });
+        this.$router.go(-1);
+      }
     },
     async getUrl(ev) {
-      var files = ev.target.files;
-      files = Object.values(files).map(file => {
-        return UploadService.upload(file);
-      });
-      return Promise.all(files).then(files => {
-        var urls = [];
-        files.forEach(file => urls.push(file.url));
-        return (this.editedJob.imgs = this.editedJob.imgs.concat(urls));
-      });
+      this.isLoading = true;
+      const file = await UploadService.upload(ev.target.files[0]);
+      this.isLoading = false;
+      this.editedJob.img = file.url;
     },
     async remove() {
       await this.$store.dispatch({ type: "removeJob", id: this.editedJob._id });
       this.$router.push("/");
     },
     addProp(ev) {
-      // Adding the fontawesome icon name to the editedJob object for our future use
       var target = ev.target;
       if (target.localName === "path") target = target.farthestViewportElement;
-
-      if (this.editedJob.props.includes(target.dataset.icon)) {
-        this.editedJob.props.splice(
-          this.editedJob.props.indexOf(target.dataset.icon),
+      if (this.editedJob.perks.includes(target.dataset.icon)) {
+        this.editedJob.perks.splice(
+          this.editedJob.perks.indexOf(target.dataset.icon),
           1
         );
-      } else this.editedJob.props.push(target.dataset.icon);
+      } else this.editedJob.perks.push(target.dataset.icon);
 
       target.classList.toggle("active");
+    },
+    setQuests(val) {
+      this.editedJob.quests = val;
     }
   },
   computed: {
-    getLoggedinUser() {
-      return this.loggedinUser;
+    skills() {
+      return this.$store.getters.skills;
+    },
+    isAllowedToPublish() {
+      let job = this.editedJob;
+      if (
+        job.title &&
+        job.address &&
+        job.reqSkills.length > 0 &&
+        job.payment > 100 &&
+        job.desc &&
+        job.img
+      ) {
+        return true;
+      }
+      return false;
     }
+  },
+  components: {
+    ScaleLoader,
+    dropDown
   }
 };
 </script>

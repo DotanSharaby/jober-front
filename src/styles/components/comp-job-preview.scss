@@ -3,16 +3,18 @@
     margin-bottom: 20px;
 
     h3 {
-        width: 250px;
         color: $clr3;
     }
     .applicants {
         color: $clr1;
     }
-    .info {
-        flex-grow: 1;
-        margin: 15px 0;
-        max-width: 500px;
-        padding-right: 60px;
+    & *:not(:last-child) {
+        margin-right: 30px;
+    }
+    @media(max-width: 618px) {
+        margin-bottom: 25px;
+        h3 {
+            margin-bottom: 10px;
+        }
     }
 }

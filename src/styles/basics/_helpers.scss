@@ -18,12 +18,18 @@
     justify-content: center;
 }
 
+.center-self {
+    align-self: center;
+}
+
+
 .column {
     flex-direction: column;
 }
 
+
 .wrap {
-	flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 .clean-list {
@@ -48,17 +54,44 @@
     font-family: Raleway-Semi;
 }
 
-.container {
-    max-width: 980px;
-}
-
 .center {
     margin: 0 auto;
 }
 
+.flex-grow {
+    flex-grow: 1;
+}
+
 .profile-link {
     cursor: pointer;
+
     &:hover {
         text-decoration: underline;
     }
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error {
+    font-size: 15px;
+    text-align: center;
+    margin-top: 10px;
+    color: #f10000;
+}
+
+.back-btn {
+    position: absolute;
+    left: 30px;
+    top: 75px;
+    color: $clr3;
+    cursor: pointer;
+    font-size: 45px;
+}
+
+.inline-block {
+    display: inline-block;
 }

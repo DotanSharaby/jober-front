@@ -1,102 +1,115 @@
 .job-preview {
-    border: 1px solid white;
-    width: 320px;
-    margin: 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    position: relative;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
 
-    .job-img {
-        height: 200px;
-        width: 100%;
-        object-fit: cover;
-        border-radius: 10px 10px 0 0;
+  .job-img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+  }
+  .icons {
+    position: absolute;
+    width: 100%;
+    padding: 0 18px;
+    top: 20%;
+
+    h2 {
+      font-size: 2em;
+      color: white;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      transition: 0.3s;
+      background-color: #505050ba;
+
+      &:hover {
+        color: #ff5e5e;
+      }
     }
-    .icons {
-        position: absolute;
-        width: 100%;
-        padding: 0 18px;
-        top: 20%;
 
-        h2 {
-            font-size: 2em;
-            color: white;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            transition: 0.3s;
-            background-color: #505050ba;
+    .trash {
+      font-size: 2.2em;
 
-            &:hover {
-                color: #ff5e5e;
-            }
-        }
-
-        .trash {
-            font-size: 2.2em;
-
-            &:hover {
-                color: #fff4bc;
-            }
-        }
+      &:hover {
+        color: #fff4bc;
+      }
     }
-    .top-comp {
-        color: $clr1;
-    }
-    .desc {
-        width: 100%;
-        height: 170px;
-        background-color: white;
+  }
+  .top-comp {
+    color: $clr1;
+  }
+  .desc {
+    border-radius: 0 0 10px 10px;
+    width: 100%;
+    padding: 0 0 10px;
+    height: 170px;
+    background-color: white;
 
-        .rating span {
-            font-size: 1.3em;
-            margin-top: 2px;
-            margin-left: 4px;
-        }
+    .rating span {
+      font-size: 1.3em;
+      margin-top: 2px;
+      margin-left: 4px;
     }
-    .company {
-        width: 100%;
-        padding: 0 15px;
-        margin: 10px 0 0;
+  }
+  .company {
+    width: 100%;
+    padding: 0 15px;
+    margin: 10px 0 0;
 
-        .owner-logo {
-            height: 50px;
-            width: 50px;
-            object-fit: cover;
-            border-radius: 50%;
-            position: absolute;
-            left: 15px;
-            background-color: #fff;
-            border: 1px solid #d9d9d9;
-        }
+    .owner-logo {
+      height: 50px;
+      width: 50px;
+      object-fit: cover;
+      border-radius: 50%;
+      position: absolute;
+      left: 10px;
+      top: 176px;
+      background-color: #fff;
+      border: 1px solid #d9d9d9;
+    }
 
-        .details {
-            flex-grow: 1;
-            height: 70px;
+    .details {
+      flex-grow: 1;
+      height: 70px;
 
-            h2 {
-                margin-bottom: 5px;
-            }
-        }
+      h2 {
+        margin-bottom: 5px;
+      }
     }
-    .extra {
-        width: 100%;
-        padding: 0 15px;
-        margin: 15px 0;
+  }
+  .extra {
+    width: 100%;
+    padding: 0 15px;
+    margin: 15px 0;
+    font-size: 15px;
 
-        p {
-            margin-top: 5px;
-            color: $clr3;
-        }
+    p {
+      margin-top: 5px;
+      color: $clr3;
     }
-    .colored {
-        color: $clr1;
-        font-family: Raleway-Semi;
-    }
-    .favorite-icon {
-        position: absolute;
-        left: 10px;
-        top: 5px;
-        font-size: 1.3em;
-    }
+  }
+  .colored {
+    color: $clr1;
+    font-family: Raleway-Semi;
+  }
+  .favorite-icon {
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    font-size: 1.3em;
+  }
+}
+
+.slide-fade-enter-active {
+  transition: all 0.2s ease-in;
+}
+.slide-fade-leave-active {
+  transition: all 0.5s cubic-bezier(1, 0.7, 0.8, 1);
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(500px);
+  opacity: 0;
 }

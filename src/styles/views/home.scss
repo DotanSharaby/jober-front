@@ -1,13 +1,88 @@
 .home {
-  // background-image: url(~@/assets/img/application-2860023_1920.jpg);
-  background: url(~@/assets/img/dream-job.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  // background-size: 100vw;
-  h1{
-      margin: 0;
-      padding-top: 20px;
-  }
+    margin-bottom: 50px;
+    .site-header {
+        position: absolute;
+        font-size: 65px;
+        font-family: Lobster;
+        width: 544px;
+        left: 50%;
+        top: 90px;
+        margin-left: -272px;
+        color: #37afb6ad;
+    }
+    .main-img {
+        width: 100%;
+        max-height: 350px;
+        min-height: 300px;
+        object-fit: cover;
+    }
+    .preview-header {
+        color: $clr3;
+        margin: 50px auto 20px;
+        padding: 0;
+        max-width: 1150px;
+        &:first-child {
+            margin: 20px auto 20px;
+        }
+    }
+    .job-list {
+        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    }
+    .job-preview {
+        border-radius: 5px;
+        .job-img {
+            height: 180px;
+            border-radius: 5px 5px 0 0;
+        }
+        .desc {
+            height: 150px;
+        }
+        .top-comp {
+            display: none;
+        }
+        .company {
+            .owner-logo {
+                height: 40px;
+                width: 40px;
+                left: 5px;
+                top: 158px;
+            }
+            .details {
+                h2 {
+                    font-size: 20px;
+                    margin: 0;
+                }
+                h4 {
+                    font-size: 15px;
+                }
+            }
+        }
+        .extra {
+            margin: 0 0 10px;
+            h4:last-child {
+              text-align: center;
+            }
+        }
+        .icons {
+            display: none;
+        }
+    }
+    @media(max-width: 710px) {
+        .main-img {
+            min-height: 240px;
+        }
+        .site-header {
+            font-size: 45px;
+            width: 378px;
+            margin-left: -189px;
+        }
+    }
+    @media(max-width: 394px) {
+        .site-header {
+            font-size: 35px;
+            width: 294px;
+            margin-left: -157px;
+        }
+    }
+    
 }

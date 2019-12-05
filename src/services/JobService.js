@@ -1,9 +1,9 @@
 import HttpService from './HttpService'
-import UtilService from './UtilService'
 
 export default {
     query,
-    save,
+    add,
+    update,
     remove,
     getById
 }
@@ -12,13 +12,12 @@ function query() {
     return HttpService.get('job');
 }
 
-function save(job) {
-    if (job._id) {
-        return HttpService.put(`job/${job._id}`, job);
-    } else {
-        job._id = UtilService.makeId();
-        return HttpService.post('job', job);
-    }
+function add(job) {
+    return HttpService.post('job/edit', job);
+}
+
+function update(job) {
+    return HttpService.put(`job/edit/${job._id}`, job);
 }
 
 function remove(jobId) {
@@ -28,11 +27,3 @@ function remove(jobId) {
 function getById(jobId) {
     return HttpService.get(`job/${jobId}`);
 }
-
-// function update(job) {
-//     return HttpService.put(`job/${job._id}`, job);
-// }
-
-// function add(job) {
-//     return HttpService.post('job', job);
-// }

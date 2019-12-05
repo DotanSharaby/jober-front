@@ -1,0 +1,43 @@
+.applicant-preview {
+    border-bottom: 1px solid #dcd9d9;
+    height: 400px;
+
+    .basic {
+        img {
+            height: 100px;
+            width: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            margin-bottom: 5px;
+            color: $clr3;
+        }
+    }
+
+    .info {
+        flex-grow: 1;
+        max-width: 450px;
+        height: 220px;
+        align-self: flex-start;
+        * {
+            margin: 5px 0;
+        }
+        .skills p {
+            margin-bottom: 10px;
+        }
+        .pm {
+            line-height: 20px;
+            white-space: pre-line;
+        }
+    }
+    video {
+        max-width: 350px;
+    }
+
+    @media (max-width: 720px) {
+        flex-direction: column;
+    }
+}
