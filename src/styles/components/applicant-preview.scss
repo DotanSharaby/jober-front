@@ -15,6 +15,16 @@
     }
     .info {
         flex-grow: 1;
+        height: 220px;
         align-self: flex-start;
+        * {
+            margin: 5px 0;
+        }
+        .skills p {
+            margin-bottom: 10px;
+        }
+    }
+    video {
+        max-width: 350px;
     }
 }

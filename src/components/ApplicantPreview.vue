@@ -10,18 +10,18 @@
         <span class="semi">Expected salary:</span>
         {{applicant.expSalary}}
       </p>
+      <div class="skills">
       <p class="semi">Skills</p>
       <ul class="clean-list">
         <li v-for="(skill, idx) in applicant.skills" :key="idx">{{skill}}</li>
       </ul>
-      <p class="semi">Private message</p>
-      <p>{{applicant.pm}}</p>
-      <a target="_blank" :href="applicant.cv">Open CV</a>
+      </div>
+      <p class="semi" v-if="applicant.pm">Private message</p>
+      <p v-if="applicant.pm">{{applicant.pm}}</p>
+      <a target="_blank" :href="applicant.cv" class="semi">Open CV</a>
     </div>
     <div v-if="applicant.videoUrl" class="sent flex column space-between align-center">
-      <video width="320" height="240" controls>
-        <source :src="applicant.vid" type="video/mp4" />
-      </video>
+      <video controls :src="applicant.videoUrl"></video>
     </div>
   </section>
 </template>
