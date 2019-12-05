@@ -5,7 +5,7 @@
       <h2 class="semi">{{applicant.username}}</h2>
       <p>{{applicant.email}}</p>
     </div>
-    <div class="info flex column space-between align-center">
+    <div class="info flex column space-between align-center center">
       <p v-if="applicant.expSalary">
         <span class="semi">Expected salary:</span>
         {{applicant.expSalary}}
@@ -16,7 +16,7 @@
       </ul>
       <p class="semi">Private message</p>
       <p>{{applicant.pm}}</p>
-      <a target="_blank" :href="applicant.cv">Open CV</a>
+      <a target="_blank" :href="applicant.cv" class="profile-link">Open CV</a>
     </div>
     <div v-if="applicant.videoUrl" class="sent flex column space-between align-center">
       <video width="320" height="240" controls>
