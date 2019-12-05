@@ -17,7 +17,7 @@
       </ul>
       </div>
       <p class="semi" v-if="applicant.pm">Private message</p>
-      <p v-if="applicant.pm">{{applicant.pm}}</p>
+      <p class="pm" v-if="applicant.pm">{{applicant.pm}}</p>
       <a target="_blank" :href="applicant.cv" class="semi">Open CV</a>
     </div>
     <div v-if="applicant.videoUrl" class="sent flex column space-between align-center">
