@@ -1,5 +1,6 @@
 .applicant-preview {
     border-bottom: 1px solid #dcd9d9;
+    height: 400px;
 
     .basic {
         img {
@@ -18,6 +19,7 @@
 
     .info {
         flex-grow: 1;
+        max-width: 450px;
         height: 220px;
         align-self: flex-start;
         * {
@@ -25,6 +27,10 @@
         }
         .skills p {
             margin-bottom: 10px;
+        }
+        .pm {
+            line-height: 20px;
+            white-space: pre-line;
         }
     }
     video {
