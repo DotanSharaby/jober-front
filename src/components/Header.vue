@@ -69,12 +69,15 @@ export default {
       this.isUserMenuOpen = !this.isUserMenuOpen;
     },
     goToLogin() {
+      if (this.$route.fullPath === "/login") return;
       this.$router.push("/login");
     },
     goToProfile() {
+      if (this.$route.fullPath === "/user") return;
       this.$router.push(`/user`);
     },
     goToCompPage() {
+      if (this.$route.fullPath === "/comp") return;
       this.$router.push(`/comp`);
     }
   },
