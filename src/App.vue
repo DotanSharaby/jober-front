@@ -1,7 +1,11 @@
 <template>
   <div id="app">
-    <Header :user="user"/>
-    <router-view class="main-view"></router-view>
+    <Header :user="user" />
+
+    <transition name="view">
+      <router-view class="main-view"></router-view>
+    </transition>
+
     <Footer />
   </div>
 </template>
@@ -9,12 +13,12 @@
 <script>
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
-import SocketService from '@/services/SocketService';
+import SocketService from "@/services/SocketService";
 
 export default {
   computed: {
     user() {
-      return this.$store.getters.loggedinUser
+      return this.$store.getters.loggedinUser;
     }
   },
   components: {
