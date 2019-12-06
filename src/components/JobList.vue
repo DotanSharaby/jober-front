@@ -15,7 +15,7 @@ export default {
         }
     },
     components: {
-        JobPreview
+        JobPreview,
     }
 }
 </script>

@@ -1,39 +1,24 @@
 <template>
-  <transition name="slide-fade">
+  <transition :name="transitionName">
     <section
       @click="goToDetails"
       ref="jobCard"
       class="job-preview flex column space-between align-center"
     >
-      <div
-        v-if="user"
-        class="icons flex space-between align-center text-center"
-      >
-        <h2
-          class="trash bold"
-          @click.stop="archiveJob"
-        >🗑</h2>
+      <div v-if="user" class="icons flex space-between align-center text-center">
+        <h2 class="trash bold" @click.stop="archiveJob">🗑</h2>
         <h2 @click.stop="saveJob">❤</h2>
       </div>
-      <img
-        class="job-img"
-        :src="job.img"
-      />
+      <img class="job-img" :src="job.img" />
       <div class="desc flex align-center column space-between">
         <div class="company flex space-around align-center">
-          <img
-            class="owner-logo"
-            :src="job.owner.img"
-          />
+          <img class="owner-logo" :src="job.owner.img" />
           <div class="details flex column align-center justify-center">
             <h2>{{job.owner.username}}</h2>
             <h4 class="rating semi flex align-center">{{jobSaves}} Saves</h4>
           </div>
         </div>
-        <p
-          v-if="job.owner.rating>4.5"
-          class="top-comp bold"
-        >Top Company</p>
+        <p v-if="job.owner.rating>4.5" class="top-comp bold">Top Company</p>
         <div class="extra flex space-between align-center">
           <div class="job flex space-between column align-center">
             <h4 class="semi">{{job.title}}</h4>
@@ -54,7 +39,8 @@ export default {
   props: { job: Object, user: Object },
   data() {
     return {
-      isShown: true
+      isShown: true,
+      swipeDirection: null
     };
   },
   methods: {
@@ -62,6 +48,7 @@ export default {
       this.$router.push(`/job/${this.job._id}`);
     },
     saveJob() {
+      this.swipeDirection = "right";
       const job = JSON.parse(JSON.stringify(this.job));
       const user = JSON.parse(JSON.stringify(this.user));
       job.saves += 1;
@@ -69,6 +56,7 @@ export default {
       this.updateData(user, job);
     },
     archiveJob() {
+      this.swipeDirection = "left";
       const user = JSON.parse(JSON.stringify(this.user));
       user.archivedJobsIds.push(this.job._id);
       this.updateData(user);
@@ -89,6 +77,9 @@ export default {
       var saves = this.job.saves;
       if (!saves) saves = 0;
       return saves;
+    },
+    transitionName() {
+      return this.swipeDirection;
     }
   }
 };

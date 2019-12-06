@@ -9,6 +9,7 @@
     object-fit: cover;
     border-radius: 10px 10px 0 0;
   }
+
   .icons {
     position: absolute;
     width: 100%;
@@ -37,9 +38,11 @@
       }
     }
   }
+
   .top-comp {
     color: $clr1;
   }
+
   .desc {
     border-radius: 0 0 10px 10px;
     width: 100%;
@@ -53,6 +56,7 @@
       margin-left: 4px;
     }
   }
+
   .company {
     width: 100%;
     padding: 0 15px;
@@ -79,6 +83,7 @@
       }
     }
   }
+
   .extra {
     width: 100%;
     padding: 0 15px;
@@ -90,10 +95,12 @@
       color: $clr3;
     }
   }
+
   .colored {
     color: $clr1;
     font-family: Raleway-Semi;
   }
+
   .favorite-icon {
     position: absolute;
     left: 10px;
@@ -102,14 +109,36 @@
   }
 }
 
-.slide-fade-enter-active {
-  transition: all 0.2s ease-in;
+// Animation
+
+.right-enter-active,
+.right-leave-active {
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
-.slide-fade-leave-active {
-  transition: all 0.5s cubic-bezier(1, 0.7, 0.8, 1);
+
+.right-enter-active {
+  transition-delay: 0.5s;
+  opacity: 1;
 }
-.slide-fade-enter,
-.slide-fade-leave-to {
-  transform: translateX(500px);
+
+.right-enter,
+.right-leave-to {
   opacity: 0;
+  transform: translateX(300px);
+}
+
+.left-enter-active,
+.left-leave-active {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.left-enter-active {
+  transition-delay: 0.5s;
+  opacity: 1;
+}
+
+.left-enter,
+.left-leave-to {
+  opacity: 0;
+  transform: translateX(-300px);
 }
