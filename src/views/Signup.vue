@@ -18,7 +18,7 @@
 
       <tab-content class="flex column" title="User setup" icon="ti-user" :before-change="validate">
         <label>Username / Company Name:</label>
-        <input type="text" v-model="signupCred.username" placeholder="Josh" />
+        <input type="text" ref="name" v-model="signupCred.username" placeholder="Josh" />
         <label>Email:</label>
         <input type="email" v-model="signupCred.email" placeholder="josh@mail.com" />
         <label>Password:</label>
@@ -173,6 +173,10 @@ export default {
   created() {
     const user = this.$store.getters.loggedinUser;
     if (user) this.$router.push("/");
+  },
+  mounted() {
+    // CHECK IF THERE IS A CLEANER WAY - element is not yet loaded so cannot focus it
+    setTimeout(() => this.$refs.name.focus(), 500);
   },
   components: {
     FormWizard,

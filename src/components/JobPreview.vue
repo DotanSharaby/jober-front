@@ -40,7 +40,7 @@
             <p>{{job.address}}</p>
           </div>
           <div class="flex-center column">
-            <h4>${{job.payment}}</h4>
+            <h4>${{payment}}</h4>
             <!-- <h4 :class="{ colored: match>70}">{{match}}% match</h4> -->
           </div>
         </div>
@@ -79,6 +79,9 @@ export default {
     }
   },
   computed: {
+    payment() {
+      return this.job.payment.toLocaleString("en-US");
+    },
     match() {
       return Math.floor(Math.random() * (100 - 50 + 1) + 50);
     },

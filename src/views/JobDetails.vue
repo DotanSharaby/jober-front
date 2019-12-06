@@ -15,7 +15,7 @@
           <div class="position flex column align-center space-between">
             <h3 class="bold job-title">{{job.title}}</h3>
             <p class="semi">{{job.address}}</p>
-            <h4 class="semi">Offering: ${{job.payment}}</h4>
+            <h4 class="semi">Offering: ${{payment}}</h4>
             <span>Published {{timeToShow}}</span>
           </div>
           <button
@@ -79,6 +79,9 @@ export default {
     }
   },
   computed: {
+    payment() {
+      return this.job.payment.toLocaleString("en-US");
+    },
     logoUrl() {
       return this.job.owner.img;
     },
