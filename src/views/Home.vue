@@ -1,22 +1,33 @@
 <template>
-  <section class="home">
-    <h1 class="site-header bold">Find Your Dream Job</h1>
-    <img class="main-img" src="../assets/imgs/employment.jpg" />
-    <div class="container">
-      <h2 class="preview-header semi">Recently Added</h2>
-      <JobList v-if="recentlyAdded" :jobs="recentlyAdded"></JobList>
-      <h2 class="preview-header semi">Most Applied Jobs</h2>
-      <JobList v-if="mostApplied" :jobs="mostApplied"></JobList>
-      <h2 class="preview-header semi">Trending Jobs</h2>
-      <JobList v-if="trendingJobs" :jobs="trendingJobs"></JobList>
-    </div>
+  <section>
+    <scale-loader v-if="isLoading" :color="'#8bdade'"></scale-loader>
+    <section v-else class="home">
+      <h1 class="site-header bold">Find Your Dream Job</h1>
+      <img class="main-img" src="../assets/imgs/employment.jpg" />
+      <div class="container">
+        <h2 class="preview-header semi">Recently Added</h2>
+        <JobList v-if="recentlyAdded" :jobs="recentlyAdded"></JobList>
+        <h2 class="preview-header semi">Most Applied Jobs</h2>
+        <JobList v-if="mostApplied" :jobs="mostApplied"></JobList>
+        <h2 class="preview-header semi">Trending Jobs</h2>
+        <JobList v-if="trendingJobs" :jobs="trendingJobs"></JobList>
+      </div>
+    </section>
   </section>
 </template>
 
 <script>
 import JobList from "../components/JobList.vue";
+import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
+
 export default {
+  data() {
+    return {
+      isLoading: true
+    };
+  },
   async created() {
+    setTimeout(() => (this.isLoading = false), 1100);
     window.scrollTo(0, 0);
     await this.$store.dispatch("loadJobs");
   },
@@ -32,7 +43,8 @@ export default {
     }
   },
   components: {
-    JobList
+    JobList,
+    ScaleLoader
   }
 };
 </script>

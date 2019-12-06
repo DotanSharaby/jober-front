@@ -7,7 +7,7 @@
     <ul class="center">
       <li v-for="quest in questions" :quest="quest" :key="quest">{{ quest }}</li>
     </ul>
-    <VideoCapture
+    <VideoCapture class="video"
       v-if="user"
       :uploadUrl="serverUrl"
       v-model="application.videoUrl"
