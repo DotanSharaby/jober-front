@@ -1,24 +1,50 @@
 <template>
-  <section class="apply-form-wrapper container flex column">
-    <span @click="goBack" class="back-btn">⬅</span>
-
-    <h2 class="bold">Your application to {{currJob.title}} at {{currJob.owner.username}}</h2>
-    <h3>Please record a short video of yourself, and refer to the following:</h3>
-    <ul class="center">
-      <li v-for="quest in questions" :quest="quest" :key="quest">{{ quest }}</li>
-    </ul>
-    <VideoCapture class="video"
-      v-if="user"
-      :uploadUrl="serverUrl"
-      v-model="application.videoUrl"
-    />
-    <section class="flex column med-container center-self">
-      <textarea v-model="application.pm" placeholder="Add a personal message (optional)"></textarea>
-      <div class="flex align-center space-around">
-        <span @click="goBack" class="profile-link">Cancel</span>
-        <button @click.once="submit">Submit</button>
+  <section class="apply-form-wrapper">
+    <!-- back btn -->
+    <section class="apply-heading">
+      <span
+        @click="goBack"
+        class="back-btn"
+      >⬅</span>
+      <div>
+        <h2 class="bold">{{currJob.title}} - {{currJob.owner.username}}</h2>
       </div>
     </section>
+    <section class="apply-list">
+      <h3 class="semi">Please record a short video of yourself, and refer to the following:</h3>
+      <ul class="clean-list">
+        <li
+          v-for="quest in questions"
+          :quest="quest"
+          :key="quest"
+        >- {{ quest }}</li>
+      </ul>
+    </section>
+    <section class="apply-video">
+      <div class="video-wrapper">
+        <VideoCapture
+          class="video"
+          v-if="user"
+          :uploadUrl="serverUrl"
+          v-model="application.videoUrl"
+        />
+      </div>
+    </section>
+    <section class="apply-submit">
+      <textarea
+        v-model="application.pm"
+        placeholder="Add a personal message (optional)"
+      ></textarea>
+      <button
+        class="semi"
+        @click.once="submit"
+      >Submit</button>
+      <span
+        @click="goBack"
+        class="profile-link"
+      >Cancel</span>
+    </section>
+
   </section>
 </template>
 
@@ -62,7 +88,7 @@ export default {
   },
   created() {
     this.user = this.$store.getters.loggedinUser;
-    if(!this.user) this.$router.push('/login');
+    if (!this.user) this.$router.push("/login");
     window.scrollTo(0, 0);
     this.currJob = this.$store.getters.currJob;
     this.questions = this.currJob.quests;
