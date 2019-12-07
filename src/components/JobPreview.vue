@@ -24,7 +24,7 @@
             <p>{{job.address}}</p>
           </div>
           <div class="flex-center column">
-            <h4>${{payment}}</h4>
+            <h4>${{salary}}</h4>
           </div>
         </div>
       </div>
@@ -65,8 +65,8 @@ export default {
     }
   },
   computed: {
-    payment() {
-      return this.job.payment.toLocaleString("en-US");
+    salary() {
+      return this.job.salary.toLocaleString("en-US");
     },
     jobSaves() {
       var saves = this.job.saves;
