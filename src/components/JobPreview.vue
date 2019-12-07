@@ -25,7 +25,6 @@
           </div>
           <div class="flex-center column">
             <h4>${{payment}}</h4>
-            <!-- <h4 :class="{ colored: match>70}">{{match}}% match</h4> -->
           </div>
         </div>
       </div>
