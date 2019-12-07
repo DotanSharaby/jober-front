@@ -1,5 +1,5 @@
 <template>
-    <section class="applicant-page container">
+    <section class="applicant-page">
         <ApplicantPreview v-for="(applicant, idx) in applicants" :key="idx" :applicant="applicant"></ApplicantPreview>
     </section>
 </template>
@@ -23,6 +23,3 @@ export default {
     }
 }
 </script>
-
-<style>
-</style>

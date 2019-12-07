@@ -1,8 +1,19 @@
 .applicant-preview {
-    border-bottom: 1px solid #dcd9d9;
-    
+    flex-wrap: wrap;
+    &:not(:last-child) {
+        border-bottom: 1px solid #dcd9d9;
+    }
+
     .no-data {
         color: $clr3;
+        &.no-cv {
+            margin-top: 20px;
+        }
+    }
+
+    .title {
+        color: $clr3;
+        font-size: 1.1em;
     }
 
     .basic {
@@ -11,40 +22,66 @@
             width: 100px;
             object-fit: cover;
             border-radius: 50%;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         h2 {
-            margin-bottom: 5px;
-            color: $clr3;
+            margin-bottom: 10px;
+            color: $clr1;
         }
+    }
+
+    .main {
+        width: 100%;
     }
 
     .info {
         flex-grow: 1;
-        max-width: 450px;
         align-self: flex-start;
+        margin: 0 20px 0 30px;
         height: 100%;
-        * {
-            margin: 5px 0;
+        .salary {
+            margin: 0 0 20px;
+            .title {
+                margin-right: 5px;
+            }
         }
-        .skills p {
+        .skills {
+            margin: 0 0 20px;
+            p {
+                margin-bottom: 10px;
+            }
+            li {
+                margin-bottom: 7px;
+            }
+        }
+    }
+    .pm {
+        margin: 30px 0;
+        line-height: 25px;
+        white-space: pre-line;
+        .title {
             margin-bottom: 10px;
         }
-        .pm {
-            line-height: 20px;
-            white-space: pre-line;
-        }
-        .cv {
+    }
+    .cv {
+        a {
             color: $clr1;
             font-size: 1.1em;
         }
     }
-    video {
-        max-width: 350px;
+    .video {
+        video {
+            width: 320px;
+            height: 200px;
+        }
+        .no-data {
+            width: 320px;
+            height: 200px;
+        }
     }
 
-    @media (max-width: 720px) {
-        flex-direction: column;
-    }
+    // @media (max-width: 720px) {
+    //     flex-direction: column;
+    // }
 }
