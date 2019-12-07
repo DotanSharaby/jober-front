@@ -15,10 +15,9 @@
           <img class="owner-logo" :src="job.owner.img" />
           <div class="details flex column align-center justify-center">
             <h2>{{job.owner.username}}</h2>
-            <h4 class="rating semi flex align-center">{{jobSaves}} Saves</h4>
+            <h4 class="saves bold flex align-center">{{jobSaves}} <span class="bold">♡</span></h4>
           </div>
         </div>
-        <p v-if="job.owner.rating>4.5" class="top-comp bold">Top Company</p>
         <div class="extra flex space-between align-center">
           <div class="job flex space-between column align-center">
             <h4 class="semi">{{job.title}}</h4>
@@ -69,9 +68,6 @@ export default {
   computed: {
     payment() {
       return this.job.payment.toLocaleString("en-US");
-    },
-    match() {
-      return Math.floor(Math.random() * (100 - 50 + 1) + 50);
     },
     jobSaves() {
       var saves = this.job.saves;
