@@ -9,7 +9,8 @@ export default {
     terminate,
     on,
     off,
-    emit    
+    emit,
+    connect
 }
 
 function setup() {
@@ -30,4 +31,9 @@ function off(eventName, cb) {
 
 function emit(eventName, data) {
     socket.emit(eventName, data);
+}
+
+function connect(id){
+    var socket = io.connect();
+    socket.emit('room', id);
 }

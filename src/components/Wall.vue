@@ -57,15 +57,18 @@ export default {
       this.isModalActive = true;
     },
     addPost() {
-      if (this.postToAdd.txt.length <= 2) return;
-      this.postToAdd.from = this.nameOnPost;
-      SocketService.emit("newPost", this.postToAdd);
-      this.copyJob.posts.unshift(this.postToAdd);
+      const post = this.postToAdd;
+      if (post.txt.length <= 2) return;
+      post.from = this.nameOnPost;
+      const id = this.job._id;
+      SocketService.emit("newPost", { post, id });
+      this.copyJob.posts.unshift(post);
       this.updateJob();
       this.clearPost();
     },
     updatePost(sentPost, postIdx) {
-      SocketService.emit("updatePost", { sentPost, postIdx });
+      const id = this.job._id;
+      SocketService.emit("updatePost", { sentPost, postIdx, id });
       this.copyJob.posts.splice(postIdx, 1, sentPost);
       this.updateJob();
     },
@@ -94,6 +97,8 @@ export default {
   },
   mounted() {
     var job = this.copyJob;
+    SocketService.emit('room',job._id)
+
     SocketService.on("newPost", post => {
       job.posts.unshift(post);
     });
