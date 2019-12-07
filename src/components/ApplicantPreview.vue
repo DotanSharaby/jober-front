@@ -1,33 +1,45 @@
 <template>
-  <section class="applicant-preview container flex space-between align-center">
-    <div class="basic flex column space-between align-center">
-      <img :src="applicant.img" />
-      <h2 class="semi">{{applicant.username}}</h2>
-      <p>{{applicant.email}}</p>
-    </div>
-    <div class="info flex column space-between align-center center">
-      <p v-if="applicant.expSalary">
-        <span class="semi">Expected salary:</span>
-        {{applicant.expSalary}}
-      </p>
-      <div class="skills text-center">
-      <p class="semi">Skills</p>
-      <ul class="clean-list">
-        <li v-for="(skill, idx) in applicant.skills" :key="idx">{{skill}}</li>
-      </ul>
-      </div>
-      <p class="semi" v-if="applicant.pm">Private message</p>
-      <p class="pm" v-if="applicant.pm">{{applicant.pm}}</p>
-      <a target="_blank" :href="applicant.cv" class="semi">Open CV</a>
-    </div>
-    <div v-if="applicant.videoUrl" class="sent flex column space-between align-center">
-      <video controls :src="applicant.videoUrl"></video>
-    </div>
-  </section>
+    <section class="applicant-preview container flex space-between align-center">
+        <div class="basic flex column space-between align-center">
+            <img :src="applicant.img" />
+            <h2 class="semi">{{applicant.username}}</h2>
+            <p>{{applicant.email}}</p>
+        </div>
+        <div class="info flex column space-between align-center center">
+            <p v-if="applicant.expSalary">
+                <span class="semi">Expected salary:</span>
+                {{salary}}
+            </p>
+            <div class="skills text-center">
+                <p class="semi">Skills</p>
+                <ul class="clean-list">
+                    <li v-for="(skill, idx) in applicant.skills" :key="idx">{{skill}}</li>
+                </ul>
+            </div>
+            <p class="semi" v-if="applicant.pm">Private message</p>
+            <p class="pm" v-if="applicant.pm">{{applicant.pm}}</p>
+            <p v-else class="no-data">This applicant did not add a private message</p>
+            <a
+                target="_blank"
+                :href="applicant.cv"
+                v-if="applicant.cv"
+                class="cv semi profile-link"
+            >Open CV</a>
+            <p v-else class="no-data">This applicant did not upload a CV file</p>
+        </div>
+        <div v-if="applicant.videoUrl" class="sent flex column space-between align-center">
+            <video controls :src="applicant.videoUrl"></video>
+        </div>
+    </section>
 </template>
 
 <script>
 export default {
-  props: { applicant: Object },
+    props: { applicant: Object },
+    computed: {
+        salary() {
+            return this.applicant.expSalary.toLocaleString("en-US");
+        }
+    }
 };
 </script>

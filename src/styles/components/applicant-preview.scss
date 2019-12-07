@@ -1,6 +1,9 @@
 .applicant-preview {
     border-bottom: 1px solid #dcd9d9;
-    height: 400px;
+    
+    .no-data {
+        color: $clr3;
+    }
 
     .basic {
         img {
@@ -20,8 +23,8 @@
     .info {
         flex-grow: 1;
         max-width: 450px;
-        height: 220px;
         align-self: flex-start;
+        height: 100%;
         * {
             margin: 5px 0;
         }
@@ -31,6 +34,10 @@
         .pm {
             line-height: 20px;
             white-space: pre-line;
+        }
+        .cv {
+            color: $clr1;
+            font-size: 1.1em;
         }
     }
     video {
