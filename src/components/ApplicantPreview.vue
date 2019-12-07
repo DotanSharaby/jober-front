@@ -8,7 +8,7 @@
     <div class="info flex column space-between align-center center">
       <p v-if="applicant.expSalary">
         <span class="semi">Expected salary:</span>
-        {{payment}}
+        {{salary}}
       </p>
       <div class="skills text-center">
         <p class="semi">Skills</p>
@@ -30,7 +30,7 @@
 export default {
   props: { applicant: Object },
   computed: {
-    payment() {
+    salary() {
       const expSalary = +this.applicant.expSalary;
       return expSalary.toLocaleString("en-US");
     }

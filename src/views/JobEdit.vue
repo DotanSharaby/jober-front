@@ -107,7 +107,7 @@
           <label for="file">Choose File</label>
         </label>
         <label>Salary:</label>
-        <input type="number" placeholder="Expected Salery" v-model.number="editedJob.payment" />
+        <input type="number" placeholder="Expected Salery" v-model.number="editedJob.salary" />
         <button class="save-btn">Save</button>
         <br />
         <div class="flex justify-center">
@@ -205,7 +205,7 @@ export default {
         job.title &&
         job.address &&
         job.reqSkills.length > 0 &&
-        job.payment > 100 &&
+        job.salary > 100 &&
         job.desc &&
         job.img
       ) {
