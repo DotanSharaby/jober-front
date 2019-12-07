@@ -38,7 +38,8 @@
 <script>
 export default {
   props: {
-    user: Object
+    user: Object,
+    postedJobsCnt: Number
   },
   data() {
     return {
@@ -53,8 +54,7 @@ export default {
       this.$router.push("/");
     },
     logout() {
-      this.$store.dispatch({ type: "logout", user: this.user });
-      this.$router.push("/");
+      this.$emit('loggedOut');
     },
     toggleMenu() {
       if (this.isUserMenuOpen) {
