@@ -6,8 +6,8 @@
       class="job-preview flex column space-between align-center"
     >
       <div v-if="user" class="icons flex space-between align-center text-center">
-        <h2 class="trash bold" @click.stop="archiveJob">🗑</h2>
-        <h2 @click.stop="saveJob">❤</h2>
+        <h2 class="trash flex-center" @click.stop="archiveJob"><font-awesome-icon class="trash-icon" :icon="['fas', 'trash-alt']"></font-awesome-icon></h2>
+        <h2 class="flex-center" @click.stop="saveJob"><font-awesome-icon class="heart-icon" :icon="['fa', 'heart']"></font-awesome-icon></h2>
       </div>
       <img class="job-img" :src="job.img" />
       <div class="desc flex align-center column space-between">
