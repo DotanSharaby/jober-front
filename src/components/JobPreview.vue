@@ -15,7 +15,13 @@
           <img class="owner-logo" :src="job.owner.img" />
           <div class="details flex column align-center justify-center">
             <h2>{{job.owner.username}}</h2>
-            <h4 class="saves bold flex align-center">{{jobSaves}} <span class="bold">♡</span></h4>
+            <h4 class="saves bold flex align-center">
+              {{jobSaves}}
+              <span class="bold">♡</span>
+            </h4>
+            <div class="flex-center column">
+              <h4 v-if="user && match">{{match}}% match</h4>
+            </div>
           </div>
         </div>
         <div class="extra flex space-between align-center">
@@ -38,7 +44,9 @@ export default {
   data() {
     return {
       isShown: true,
-      swipeDirection: null
+      swipeDirection: null,
+      matchCount: 0,
+      diff: 0
     };
   },
   methods: {
@@ -62,6 +70,15 @@ export default {
     updateData(user, job) {
       if (!job) this.$emit("updatedData", { user });
       this.$emit("updatedData", { user, job });
+    },
+    calcMatch() {
+      this.job.reqSkills.forEach(skill => {
+        if (this.user.skills.includes(skill)) this.matchCount++;
+      });
+      this.diff = this.job.payment - this.user.expSalary;
+      var res = Math.round(this.diff / 100) + this.matchCount * 5;
+      if (res < 20) return null;
+      return res;
     }
   },
   computed: {
@@ -75,6 +92,9 @@ export default {
     },
     transitionName() {
       return this.swipeDirection;
+    },
+    match() {
+      return this.calcMatch();
     }
   }
 };
