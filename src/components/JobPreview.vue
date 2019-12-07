@@ -2,7 +2,6 @@
   <transition :name="transitionName">
     <section
       @click="goToDetails"
-      ref="jobCard"
       class="job-preview flex column space-between align-center"
     >
       <div v-if="user" class="icons flex space-between align-center text-center">

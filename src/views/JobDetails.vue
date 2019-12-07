@@ -80,20 +80,27 @@ export default {
     methods: {
         async applyToJob() {
             if (this.isDisableApply) return;
-            this.$router.push("/apply");
+            if (!this.user) return this.$router.push('/login')
+            this.$router.push('/apply');
         },
         goBack() {
             this.$router.go(-1);
         },
         toggleSavedJob() {
+            if (!this.user) return this.$router.push('/login')
             if (this.user.savedJobsIds.includes(this.job._id)) {
                 const idx = this.user.savedJobsIds.findIndex(id => id === this.job._id);
                 this.user.savedJobsIds.splice(idx, 1);
+                this.user.archivedJobsIds.push(this.job._id);
                 this.job.saves--;
             }
             else {
-              this.user.savedJobsIds.push(this.job._id);
-              this.job.saves++
+                if (this.user.archivedJobsIds.includes(this.job._id)) {
+                    const idx = this.user.archivedJobsIds.findIndex(id => id === this.job._id);
+                    this.user.archivedJobsIds.splice(idx, 1);
+                }
+                this.user.savedJobsIds.push(this.job._id);
+                this.job.saves++
             }
             this.$store.dispatch({ type: "updateJob", job: this.job });
             this.$store.dispatch({ type: "updateUser", user: this.user });
@@ -112,18 +119,12 @@ export default {
         editUrl() {
             return `/job/edit/${this.job._id}`;
         },
-        // job() {
-        //     return this.$store.getters.currJob;
-        // },
         timeToShow() {
             return this.creationTime.fromNow();
         },
         creationTime() {
             return moment(this.job.createdAt);
         },
-        // user() {
-        //     return this.$store.getters.loggedinUser;
-        // },
         saves() {
             return this.job.saves;
         },
@@ -138,7 +139,7 @@ export default {
         await this.$store.dispatch({ type: "loadCurrJob", id });
         this.user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser));
         this.job = JSON.parse(JSON.stringify(this.$store.getters.currJob));
-        if (!this.user) return (this.isDisableApply = true);
+        if (!this.user) return
         if (this.user.appliedJobsIds.includes(id)) this.isDisableApply = true;
     },
     destroyed() {

@@ -1,144 +1,146 @@
 .job-preview {
-  border-radius: 10px;
-  cursor: pointer;
-  position: relative;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
 
-  .job-img {
-    height: 200px;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
-  }
-
-  .icons {
-    position: absolute;
-    width: 100%;
-    padding: 0 16px;
-    top: 20%;
-
-    h2 {
-      font-size: 1.7em;
-      color: white;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      transition: 0.3s;
-      background-color: #505050ba;
-
-      &:hover {
-        color: #ff5e5e;
-      }
+    .job-img {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
     }
 
-    .trash {
-      font-size: 1.6em;
+    .icons {
+        position: absolute;
+        width: 100%;
+        padding: 0 16px;
+        top: 20%;
 
-      &:hover {
-        color: #fff4bc;
-      }
-    }
-  }
+        h2 {
+            font-size: 1.7em;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            transition: 0.3s;
+            background-color: #505050ba;
 
-  .top-comp {
-    color: $clr1;
-  }
+            &:hover {
+                color: #ff5e5e;
+            }
+        }
 
-  .desc {
-    border-radius: 0 0 10px 10px;
-    width: 100%;
-    padding: 0 0 10px;
-    height: 170px;
-    background-color: white;
+        .trash {
+            font-size: 1.6em;
 
-    .saves span {
-      font-size: 1.5em;
-      padding-top: 2px;
-      padding-left: 3px;
-    }
-  }
-
-  .company {
-    width: 100%;
-    padding: 0 15px;
-    margin: 10px 0 0;
-
-    .owner-logo {
-      height: 50px;
-      width: 50px;
-      object-fit: cover;
-      border-radius: 50%;
-      position: absolute;
-      left: 10px;
-      top: 176px;
-      background-color: #fff;
-      border: 1px solid #d9d9d9;
+            &:hover {
+                color: #fff4bc;
+            }
+        }
     }
 
-    .details {
-      flex-grow: 1;
-      height: 70px;
-
-      h2 {
-        margin-bottom: 5px;
-      }
+    .top-comp {
+        color: $clr1;
     }
-  }
 
-  .extra {
-    width: 100%;
-    padding: 0 15px;
-    margin: 0 0 15px;
-    font-size: 15px;
+    .desc {
+        border-radius: 0 0 10px 10px;
+        width: 100%;
+        padding: 0 0 10px;
+        height: 170px;
+        background-color: white;
 
-    p {
-      margin-top: 5px;
-      color: $clr3;
+        .saves {
+            span {
+                font-size: 1.5em;
+                padding-top: 2px;
+                padding-left: 3px;
+            }
+        }
     }
-  }
 
-  .colored {
-    color: $clr1;
-    font-family: Raleway-Semi;
-  }
+    .company {
+        width: 100%;
+        padding: 0 15px;
+        margin: 10px 0 0;
 
-  .favorite-icon {
-    position: absolute;
-    left: 10px;
-    top: 5px;
-    font-size: 1.3em;
-  }
+        .owner-logo {
+            height: 50px;
+            width: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+            position: absolute;
+            left: 10px;
+            top: 176px;
+            background-color: #fff;
+            border: 1px solid #d9d9d9;
+        }
+
+        .details {
+            flex-grow: 1;
+            height: 70px;
+
+            h2 {
+                margin-bottom: 5px;
+            }
+        }
+    }
+
+    .extra {
+        width: 100%;
+        padding: 0 15px;
+        margin: 0 0 15px;
+        font-size: 15px;
+
+        p {
+            margin-top: 5px;
+            color: $clr3;
+        }
+    }
+
+    .colored {
+        color: $clr1;
+        font-family: Raleway-Semi;
+    }
+
+    .favorite-icon {
+        position: absolute;
+        left: 10px;
+        top: 5px;
+        font-size: 1.3em;
+    }
 }
 
 // Animation
 
 .right-enter-active,
 .right-leave-active {
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
 .right-enter-active {
-  transition-delay: 0.5s;
-  opacity: 1;
+    transition-delay: 0.5s;
+    opacity: 1;
 }
 
 .right-enter,
 .right-leave-to {
-  opacity: 0;
-  transform: translateX(300px);
+    opacity: 0;
+    transform: translateX(300px);
 }
 
 .left-enter-active,
 .left-leave-active {
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
 .left-enter-active {
-  transition-delay: 0.5s;
-  opacity: 1;
+    transition-delay: 0.5s;
+    opacity: 1;
 }
 
 .left-enter,
 .left-leave-to {
-  opacity: 0;
-  transform: translateX(-300px);
+    opacity: 0;
+    transform: translateX(-300px);
 }

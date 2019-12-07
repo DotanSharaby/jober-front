@@ -46,7 +46,12 @@
                 <div class="salary">
                     <h2 class="semi">Expected Salary</h2>
                     <div class="flex-center">
-                        <input type="number" v-model="user.expSalary" @input="updateUser" placeholder="Add"/>
+                        <input
+                            type="number"
+                            v-model="user.expSalary"
+                            @input="updateUser"
+                            placeholder="Add"
+                        />
                         <h3 class="text-center" v-if="user.expSalary">USD</h3>
                     </div>
                 </div>
@@ -54,15 +59,18 @@
         </div>
         <div class="jobs flex-center column">
             <div class="category flex-center column">
-                <h2 class="semi">Applied Jobs</h2>
+                <h2 class="semi flex-center"><font-awesome-icon class="icon" :icon="['fas', 'envelope-open-text']"></font-awesome-icon>Applied Jobs</h2>
                 <div v-if="!user.appliedJobsIds.length" class="no-jobs flex-center column">
                     <p>No applied jobs yet</p>
                     <router-link class="semi profile-link" to="/job">Browse Jobs</router-link>
                 </div>
-                <job-list v-else :jobs="appliedJobs"></job-list>
+                <div v-else>
+                    <div></div>
+                    <job-list :jobs="appliedJobs"></job-list>
+                </div>
             </div>
             <div class="category flex-center column">
-                <h2 class="semi">Saved Jobs</h2>
+                <h2 class="semi flex-center"><font-awesome-icon class="icon heart" :icon="['fa', 'heart']"></font-awesome-icon>Saved Jobs</h2>
                 <div v-if="!user.savedJobsIds.length" class="no-jobs flex-center column">
                     <p>No saved jobs yet</p>
                     <router-link class="semi profile-link" to="/job">Browse Jobs</router-link>
@@ -70,7 +78,7 @@
                 <job-list v-else :jobs="savedJobs"></job-list>
             </div>
             <div class="category flex-center column">
-                <h2 class="semi">Archived Jobs</h2>
+                <h2 class="semi flex-center"><font-awesome-icon class="icon trash" :icon="['fas', 'trash-alt']"></font-awesome-icon>Archived Jobs</h2>
                 <div v-if="!user.archivedJobsIds.length" class="no-jobs flex-center column">
                     <p>No archived jobs yet</p>
                     <router-link class="semi profile-link" to="/job">Browse Jobs</router-link>
