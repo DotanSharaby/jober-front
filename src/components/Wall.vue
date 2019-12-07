@@ -3,18 +3,17 @@
     <div class="post-container" v-if="copyJob.posts.length">
       <Post
         v-for="(post, idx) in copyJob.posts"
-        @update-post="updatePost"
+        @updatePost="updatePost"
         :post="post"
         :idx="idx"
         :key="idx"
       ></Post>
     </div>
-    <span v-else class="post-container"><em>Ask something about the job</em></span>
+    <span v-else class="post-container">
+      <em>Ask something about the job</em>
+    </span>
     <div class="add-post flex">
-      <div
-        v-if="isModalActive"
-        class="name-modal flex justify-center align-center"
-      >
+      <div v-if="isModalActive" class="name-modal flex justify-center align-center">
         <div>
           Post as
           <select v-model="nameOnPost">
@@ -22,21 +21,11 @@
             <option>Anonymous</option>
           </select>&nbsp;
           <button @click="addPost">Post</button>
-          <a
-            href="#"
-            class="cancel-btn"
-            @click.prevent="clearPost"
-          >x</a>
-          <div class="msg-container flex justify-center">
-            Message: {{this.postToAdd.txt}}
-          </div>
+          <button class="cancel-btn" @click="clearPost">x</button>
+          <div class="msg-container flex justify-center">Message: {{this.postToAdd.txt}}</div>
         </div>
       </div>
-      <textarea
-        type="text"
-        v-model="postToAdd.txt"
-        v-if="!isModalActive"
-      />
+      <textarea type="text" v-if="!isModalActive" v-model="postToAdd.txt" />
       <div class="flex align-center">
         <button v-if="!isModalActive" @click="onAddPost">Post</button>
       </div>
@@ -70,13 +59,13 @@ export default {
     addPost() {
       if (this.postToAdd.txt.length <= 2) return;
       this.postToAdd.from = this.nameOnPost;
-      SocketService.emit("post newPost", this.postToAdd);
+      SocketService.emit("newPost", this.postToAdd);
       this.copyJob.posts.unshift(this.postToAdd);
       this.updateJob();
       this.clearPost();
     },
     updatePost(sentPost, postIdx) {
-      SocketService.emit("post update", { sentPost, postIdx });
+      SocketService.emit("updatePost", { sentPost, postIdx });
       this.copyJob.posts.splice(postIdx, 1, sentPost);
       this.updateJob();
     },
@@ -93,14 +82,6 @@ export default {
     }
   },
   created() {
-    SocketService.emit("join room", this.job._id);
-    SocketService.on("post newPost", post => {
-      this.copyJob.posts.unshift(post);
-    });
-    SocketService.on("post update", postData => {
-      this.copyJob.posts.splice(postData.postIdx, 1, postData.sentPost);
-    });
-    this.clearPost();
     this.copyJob = JSON.parse(JSON.stringify(this.job));
     if (!this.copyJob.posts) this.copyJob.posts = [];
     const user = this.$store.getters.loggedinUser;
@@ -108,10 +89,18 @@ export default {
       this.nameOnPost = user.username;
       this.userName = user.username;
     } else this.nameOnPost = "Anonymous";
+
+    this.clearPost();
   },
-  props: ["job"]
+  mounted() {
+    var job = this.copyJob;
+    SocketService.on("newPost", post => {
+      job.posts.unshift(post);
+    });
+    SocketService.on("updatePost", post => {
+      job.posts.splice(post.postIdx, 1, post.sentPost);
+    });
+  },
+  props: { job: Object }
 };
 </script>
-
-<style>
-</style>

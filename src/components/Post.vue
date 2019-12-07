@@ -11,11 +11,7 @@
     </div>
     <div class="post-options flex">
       <div class="btn-wrap">
-        <font-awesome-icon
-          class="icon-item"
-          @click="addLike"
-          :icon="['fa', 'thumbs-up']"
-        />
+        <font-awesome-icon class="icon-item" @click="addLike" :icon="['fa', 'thumbs-up']" />
       </div>
       <span v-if="post.likes > 0">&nbsp;{{post.likes}}</span>
     </div>
@@ -27,7 +23,7 @@ import moment from "moment";
 
 export default {
   name: "Post",
-  props: ["post", "idx"],
+  props: { post: Object, idx: Number },
   data() {
     return {
       isLiked: false
@@ -39,7 +35,7 @@ export default {
       var diff = this.isLiked ? 1 : -1;
       let postToEdit = JSON.parse(JSON.stringify(this.post));
       postToEdit.likes += diff;
-      this.$emit("update-post", postToEdit, this.idx);
+      this.$emit("updatePost", postToEdit, this.idx);
       var target = ev.target;
       if (target.localName === "path") target = target.farthestViewportElement;
       target.classList.toggle("active");
@@ -49,12 +45,9 @@ export default {
     timeToShow() {
       return this.postCreationTime.fromNow();
     },
-    postCreationTime(){
+    postCreationTime() {
       return moment(this.post.createdAt);
     }
   }
 };
 </script>
-
-<style>
-</style>

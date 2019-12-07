@@ -8,13 +8,13 @@
     <div class="info flex column space-between align-center center">
       <p v-if="applicant.expSalary">
         <span class="semi">Expected salary:</span>
-        {{applicant.expSalary}}
+        {{payment}}
       </p>
       <div class="skills text-center">
-      <p class="semi">Skills</p>
-      <ul class="clean-list">
-        <li v-for="(skill, idx) in applicant.skills" :key="idx">{{skill}}</li>
-      </ul>
+        <p class="semi">Skills</p>
+        <ul class="clean-list">
+          <li v-for="(skill, idx) in applicant.skills" :key="idx">{{skill}}</li>
+        </ul>
       </div>
       <p class="semi" v-if="applicant.pm">Private message</p>
       <p class="pm" v-if="applicant.pm">{{applicant.pm}}</p>
@@ -29,5 +29,11 @@
 <script>
 export default {
   props: { applicant: Object },
+  computed: {
+    payment() {
+      const expSalary = +this.applicant.expSalary;
+      return expSalary.toLocaleString("en-US");
+    }
+  }
 };
 </script>

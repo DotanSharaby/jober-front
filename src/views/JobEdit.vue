@@ -5,7 +5,7 @@
         <h1 class="bold" v-if="!editedJob._id">Add Job</h1>
         <h1 class="bold" v-else>Edit Job</h1>
         <label>Job Title:</label>
-        <input type="text" v-model="editedJob.title" placeholder="Designer" />
+        <input type="text" ref="input" v-model="editedJob.title" placeholder="Designer" />
         <label>Address:</label>
         <input type="text" v-model="editedJob.address" placeholder="Tel Aviv" />
         <label>Description:</label>
@@ -164,7 +164,7 @@ export default {
     },
     async saveJob() {
       if (this.isAllowedToPublish) {
-        this.editedJob.createdAt = Date.now()
+        this.editedJob.createdAt = Date.now();
         await this.$store.dispatch({ type: "addJob", job: this.editedJob });
         this.$router.go(-1);
       }
@@ -213,6 +213,9 @@ export default {
       }
       return false;
     }
+  },
+  mounted() {
+    this.$refs.input.focus();
   },
   components: {
     ScaleLoader,

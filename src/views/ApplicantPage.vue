@@ -1,5 +1,5 @@
 <template>
-    <section class="applicant-page">
+    <section class="applicant-page container">
         <ApplicantPreview v-for="(applicant, idx) in applicants" :key="idx" :applicant="applicant"></ApplicantPreview>
     </section>
 </template>
