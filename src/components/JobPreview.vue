@@ -30,7 +30,7 @@
             <p>{{job.address}}</p>
           </div>
           <div class="flex-center column">
-            <h4>${{payment}}</h4>
+            <h4>${{salary}}</h4>
           </div>
         </div>
       </div>
@@ -75,15 +75,15 @@ export default {
       this.job.reqSkills.forEach(skill => {
         if (this.user.skills.includes(skill)) this.matchCount++;
       });
-      this.diff = this.job.payment - this.user.expSalary;
+      this.diff = this.job.salary - this.user.expSalary;
       var res = Math.round(this.diff / 100) + this.matchCount * 5;
       if (res < 20) return null;
       return res;
     }
   },
   computed: {
-    payment() {
-      return this.job.payment.toLocaleString("en-US");
+    salary() {
+      return this.job.salary.toLocaleString("en-US");
     },
     jobSaves() {
       var saves = this.job.saves;

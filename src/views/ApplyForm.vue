@@ -25,8 +25,6 @@
 <script>
 import { VideoCapture } from "vue-media-recorder";
 
-window.x = VideoCapture;
-
 export default {
   data() {
     return {
@@ -42,7 +40,6 @@ export default {
       return this.$router.go(-1);
     },
     async submit() {
-      // TODO: STOP CAMERA
 
       this.application.username = this.user.username;
       this.application.email = this.user.email;
