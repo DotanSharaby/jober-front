@@ -41,6 +41,17 @@
         background-color: white;
         margin-right: 5px;
     }
+    .saves {
+        color: #839097;
+        cursor: pointer;
+        transition: all 0.3s;
+        .heart-icon {
+            margin-left: 3px;
+        }
+        &.saved {
+            color: #fc4545;
+        }
+    }
     .job-img {
         width: 360px;
         height: 250px;
@@ -78,9 +89,9 @@
         padding-left: 35px;
         align-self: flex-start;
         align-items: flex-start;
-        .arrow-icon{
+        .arrow-icon {
             margin-right: 5px;
-            font-size: .9em;
+            font-size: 0.9em;
         }
     }
     .props {
