@@ -113,11 +113,12 @@ export default {
     this.clearPost();
   },
   updated() {
-    this.$refs.wallRef.scrollTop = this.$refs.wallRef.scrollHeight;
+    if (this.$refs.wallRef) {
+      this.$refs.wallRef.scrollTop = this.$refs.wallRef.scrollHeight;
+    }
   },
   mounted() {
     // Scrolling to bottom of the Wall
-    this.$refs.wallRef.scrollTop = this.$refs.wallRef.scrollHeight;
 
     var job = this.copyJob;
     SocketService.emit("room", job._id);
