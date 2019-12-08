@@ -26,10 +26,10 @@ export default {
       isLoading: true
     };
   },
-  async created() {
+  created() {
     setTimeout(() => (this.isLoading = false), 1100);
     window.scrollTo(0, 0);
-    await this.$store.dispatch("loadJobs");
+    // await this.$store.dispatch("loadJobs");
   },
   computed: {
     recentlyAdded() {
