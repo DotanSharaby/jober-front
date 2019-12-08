@@ -131,6 +131,15 @@
                 .owner-logo {
                     top: 92px;
                 }
+                .job {
+                    width: 130px;
+                    align-items: flex-start;
+                }
+                .more-info {
+                    h4 {
+                        display: none;
+                    }
+                }
             }
         }
     }

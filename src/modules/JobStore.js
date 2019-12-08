@@ -121,6 +121,14 @@ export default ({
                 _id: user._id,
                 cv: user.cv
             }
+        },
+        match: (state, commit, rootState) => job => {
+            const user = rootState.UserStore.loggedinUser
+            var salaryMatch = job.salary / user.expSalary;
+            if (job.salary > user.expSalary) salaryMatch = 1
+            var sharedSkills = job.reqSkills.filter(skill => user.skills.includes(skill))
+            var skillsMatch = sharedSkills.length / job.reqSkills.length
+            return Math.floor((skillsMatch + salaryMatch) * 50)
         }
     },
     actions: {
