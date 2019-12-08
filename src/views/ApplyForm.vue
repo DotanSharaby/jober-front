@@ -2,10 +2,7 @@
   <section class="apply-form-wrapper">
     <!-- back btn -->
     <section class="apply-heading">
-      <span
-        @click="goBack"
-        class="back-btn"
-      >⬅</span>
+      <span @click="goBack" class="back-btn">⬅</span>
       <div>
         <h2 class="bold">{{currJob.title}} - {{currJob.owner.username}}</h2>
       </div>
@@ -13,38 +10,19 @@
     <section class="apply-list">
       <h3 class="semi">Please record a short video of yourself, and refer to the following:</h3>
       <ul class="clean-list">
-        <li
-          v-for="quest in questions"
-          :quest="quest"
-          :key="quest"
-        >- {{ quest }}</li>
+        <li v-for="quest in questions" :quest="quest" :key="quest">- {{ quest }}</li>
       </ul>
     </section>
     <section class="apply-video">
       <div class="video-wrapper">
-        <VideoCapture
-          class="video"
-          v-if="user"
-          :uploadUrl="serverUrl"
-          v-model="application.videoUrl"
-        />
+        <VideoCapture class="video" :uploadUrl="serverUrl" v-model="application.videoUrl" />
       </div>
     </section>
     <section class="apply-submit">
-      <textarea
-        v-model="application.pm"
-        placeholder="Add a personal message (optional)"
-      ></textarea>
-      <button
-        class="semi"
-        @click.once="submit"
-      >Submit</button>
-      <span
-        @click="goBack"
-        class="profile-link"
-      >Cancel</span>
+      <textarea v-model="application.pm" placeholder="Add a personal message (optional)"></textarea>
+      <button class="semi" @click.once="submit">Submit</button>
+      <span @click="goBack" class="profile-link">Cancel</span>
     </section>
-
   </section>
 </template>
 
@@ -65,24 +43,17 @@ export default {
     goBack() {
       return this.$router.go(-1);
     },
-    async submit() {
-
-      this.application.username = this.user.username;
-      this.application.email = this.user.email;
-      this.application.expSalary = this.user.expSalary;
-      this.application.img = this.user.img;
-      this.application.skills = this.user.skills;
-      this.application.userId = this.user._id;
-      this.application.cv = this.user.cv;
-
+    submit() {
+      var userInfo = this.$store.getters.userInfo;
+      this.application = { ...this.application, ...userInfo };
       this.user.appliedJobsIds.push(this.currJob._id);
       if (this.currJob.applicants) {
         this.currJob.applicants.push(this.application);
       } else {
         this.currJob.applicants = [this.application];
       }
-      this.$store.dispatch({ type: "updateJob", job: this.currJob });
-      this.$store.dispatch({ type: "updateUser", user: this.user });
+      const app = { job: this.currJob, user: this.user };
+      this.$store.dispatch({ type: "applyForm", app });
       return this.$router.push("/");
     }
   },
