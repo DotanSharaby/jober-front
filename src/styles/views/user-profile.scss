@@ -126,19 +126,18 @@
                     height: 120px;
                 }
                 .desc {
-                    height: 156px;
+                    height: 170px;
                 }
                 .owner-logo {
                     top: 92px;
                 }
-                .job {
-                    width: 130px;
-                    align-items: flex-start;
-                }
                 .more-info {
-                    h4 {
+                    .match span {
                         display: none;
                     }
+                }
+                .company {
+                    margin: 20px 0 0;
                 }
             }
         }

@@ -15,20 +15,20 @@
                     <img class="owner-logo" :src="job.owner.img" />
                     <div class="details flex column align-center justify-center">
                         <h2>{{job.owner.username}}</h2>
-                        <h4 class="saves bold flex align-center">
-                            {{jobSaves}}
-                            <span class="bold">♡</span>
-                        </h4>
+                        <h4 class="job-title semi">{{job.title}}</h4>
                     </div>
                 </div>
                 <div class="extra-pre flex space-between align-center">
                     <div class="job flex space-between column align-center">
-                        <h4 class="semi">{{job.title}}</h4>
-                        <p>{{job.address}}</p>
+                        <p class="salary semi">${{salary}}</p>
+                        <p class="address">{{job.address}}</p>
                     </div>
-                    <div class="more-info flex-center column space-between">
-                        <h4 class="bold" :class="{colored: match>=75}">{{match}}% match</h4>
-                        <p>${{salary}}</p>
+                    <div class="more-info flex-center column">
+                        <h4 class="match" :class="{colored: match>=75}">{{match}}% <span>match</span></h4>
+                        <h4 class="saves semi  flex align-center">
+                            {{jobSaves}}
+                            <span class="bold">♡</span>
+                        </h4>
                     </div>
                 </div>
             </div>

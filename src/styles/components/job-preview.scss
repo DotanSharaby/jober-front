@@ -39,10 +39,6 @@
         }
     }
 
-    .top-comp {
-        color: $clr1;
-    }
-
     .desc {
         border-radius: 0 0 10px 10px;
         width: 100%;
@@ -51,6 +47,8 @@
         background-color: white;
 
         .saves {
+          height: 20px;
+          color: $clr3;
             span {
                 font-size: 1.5em;
                 padding-top: 2px;
@@ -83,33 +81,34 @@
             h2 {
                 margin-bottom: 5px;
             }
+            .job-title {
+              color: $clr1;
+              margin-top: 5px;
+              font-size: 1.1em;
+            }
         }
     }
 
     .extra-pre {
         width: 100%;
-        padding: 0 15px;
+        padding: 0 25px;
         margin: 0 0 15px;
         font-size: 15px;
 
-        p {
-            margin-top: 5px;
-            color: $clr3;
+        .salary {
+          margin-bottom: 8px;
         }
     }
 
     .more-info {
         height: 100%;
-        p {
-            margin-top: 5px;
-            color: $clr3;
-        }
-        h4 {
-            color: $clr3;
-            font-size: 1.1em;
+        .match {
+            color: #989b9d;
+            margin-bottom: 5px;
         }
         .colored {
-            color: $clr1;
+            color: #08bd0e;
+            font-family: Raleway-Semi;
         }
     }
 
