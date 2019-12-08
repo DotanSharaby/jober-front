@@ -1,6 +1,5 @@
 <template>
     <section class="apply-form-wrapper">
-        <!-- back btn -->
         <div class="header">
             <span @click="goBack" class="back-btn">⬅</span>
             <div>
@@ -15,7 +14,6 @@
         </section>
         <VideoCapture
             class="video"
-            v-if="user"
             :uploadUrl="serverUrl"
             v-model="application.videoUrl">
         </VideoCapture>
@@ -40,41 +38,21 @@ export default {
             serverUrl: "https://mister-recorder.herokuapp.com/uploads/"
         };
     },
-    methods: {
-        goBack() {
-            return this.$router.go(-1);
-        },
-        async submit() {
-
-            this.application.username = this.user.username;
-            this.application.email = this.user.email;
-            this.application.expSalary = this.user.expSalary;
-            this.application.img = this.user.img;
-            this.application.skills = this.user.skills;
-            this.application.userId = this.user._id;
-            this.application.cv = this.user.cv;
-
-            this.user.appliedJobsIds.push(this.currJob._id);
-            if (this.currJob.applicants) {
-                this.currJob.applicants.push(this.application);
-            } else {
-                this.currJob.applicants = [this.application];
-            }
-            this.$store.dispatch({ type: "updateJob", job: this.currJob });
-            this.$store.dispatch({ type: "updateUser", user: this.user });
-            return this.$router.push("/");
-        }
-    },
-    created() {
-        this.user = this.$store.getters.loggedinUser;
-        if (!this.user) this.$router.push("/login");
-        window.scrollTo(0, 0);
-        this.currJob = this.$store.getters.currJob;
-        this.questions = this.currJob.quests;
-        this.user = JSON.parse(JSON.stringify(this.user));
+    submit() {
+      var userInfo = this.$store.getters.userInfo;
+      this.application = { ...this.application, ...userInfo };
+      this.user.appliedJobsIds.push(this.currJob._id);
+      if (this.currJob.applicants) {
+        this.currJob.applicants.push(this.application);
+      } else {
+        this.currJob.applicants = [this.application];
+      }
+      const app = { job: this.currJob, user: this.user };
+      this.$store.dispatch({ type: "applyForm", app });
+      return this.$router.push("/");
     },
     components: {
-        VideoCapture
+      VideoCapture
     }
 };
 </script>

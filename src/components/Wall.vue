@@ -1,6 +1,10 @@
 <template>
   <section class="wall flex column">
-    <div class="post-container" v-if="copyJob.posts.length">
+    <div
+      class="post-container"
+      ref="wallRef"
+      v-if="copyJob.posts.length"
+    >
       <Post
         v-for="(post, idx) in copyJob.posts"
         @updatePost="updatePost"
@@ -9,11 +13,17 @@
         :key="idx"
       ></Post>
     </div>
-    <span v-else class="post-container">
+    <span
+      v-else
+      class="post-container"
+    >
       <em>Ask something about the job</em>
     </span>
     <div class="add-post flex">
-      <div v-if="isModalActive" class="name-modal flex justify-center align-center">
+      <div
+        v-if="isModalActive"
+        class="name-modal flex justify-center align-center"
+      >
         <div>
           Post as
           <select v-model="nameOnPost">
@@ -21,11 +31,18 @@
             <option>Anonymous</option>
           </select>&nbsp;
           <button @click="addPost">Post</button>
-          <button class="cancel-btn" @click="clearPost">x</button>
+          <button
+            class="cancel-btn"
+            @click="clearPost"
+          >x</button>
           <div class="msg-container flex justify-center">Message: {{this.postToAdd.txt}}</div>
         </div>
       </div>
-      <textarea type="text" v-if="!isModalActive" v-model="postToAdd.txt" />
+      <textarea
+        type="text"
+        v-if="!isModalActive"
+        v-model="postToAdd.txt"
+      />
       <div class="flex align-center">
         <button v-if="!isModalActive" @click="onAddPost">Post</button>
       </div>
@@ -62,7 +79,7 @@ export default {
       post.from = this.nameOnPost;
       const id = this.job._id;
       SocketService.emit("newPost", { post, id });
-      this.copyJob.posts.unshift(post);
+      this.copyJob.posts.push(post);
       this.updateJob();
       this.clearPost();
     },
@@ -95,12 +112,18 @@ export default {
 
     this.clearPost();
   },
+  updated() {
+    this.$refs.wallRef.scrollTop = this.$refs.wallRef.scrollHeight;
+  },
   mounted() {
+    // Scrolling to bottom of the Wall
+    this.$refs.wallRef.scrollTop = this.$refs.wallRef.scrollHeight;
+
     var job = this.copyJob;
-    SocketService.emit('room',job._id)
+    SocketService.emit("room", job._id);
 
     SocketService.on("newPost", post => {
-      job.posts.unshift(post);
+      job.posts.push(post);
     });
     SocketService.on("updatePost", post => {
       job.posts.splice(post.postIdx, 1, post.sentPost);

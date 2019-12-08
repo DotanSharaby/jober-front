@@ -109,9 +109,33 @@ export default ({
         userArchivedJobs(state, commit, rootState) {
             const archivedJobsIds = rootState.UserStore.loggedinUser.archivedJobsIds;
             return state.jobs.filter(job => archivedJobsIds.includes(job._id))
+        },
+        userInfo(state, commit, rootState) {
+            const user = rootState.UserStore.loggedinUser
+            return {
+                username: user.username,
+                email: user.email,
+                expSalary: user.expSalary,
+                img: user.img,
+                skills: user.skills,
+                _id: user._id,
+                cv: user.cv
+            }
+        },
+        match: (state, commit, rootState) => job => {
+            const user = rootState.UserStore.loggedinUser
+            var salaryMatch = job.salary / user.expSalary;
+            if (job.salary > user.expSalary) salaryMatch = 1
+            var sharedSkills = job.reqSkills.filter(skill => user.skills.includes(skill))
+            var skillsMatch = sharedSkills.length / job.reqSkills.length
+            return Math.floor((skillsMatch + salaryMatch) * 50)
         }
     },
     actions: {
+        async applyForm(context, {app}) {
+            await context.dispatch({ type: "updateJob", job:app.job })
+            await context.dispatch({ type: "updateUser", user:app.user })
+        },
         async loadJobs(context) {
             const jobs = await JobService.query()
             context.commit({ type: 'setJobs', jobs })
