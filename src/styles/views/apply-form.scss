@@ -1,9 +1,16 @@
 .apply-form-wrapper {
     //   h2
+    padding: 30px 30px 20px;
+    position: relative;
+    .back-btn {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
     .header {
         h2 {
             color: $clr1;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
         }
     }
     .main {
@@ -28,14 +35,37 @@
         flex-wrap: wrap;
     }
     .video {
-        margin: 0 50px 20px;
+        margin: 0 50px;
         video.camera {
             height: 250px;
             object-fit: contain;
             transform: rotateY(180deg);
             border-radius: 12px;
         }
+        .controls {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 5px;
+            button {
+                margin: 0 20px;
+                width: 60px;
+                background-color: #6a898a;
+                &:first-child {
+                    background-color: $clr5;
+                    color: $clr2;
+                    font-size: 16px;
+                    border-radius: 0;
+                    padding-bottom: 2px;
+                }
+            }
+        }
         .stream-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             button {
                 margin: 0 auto;
                 height: 60px;
@@ -68,13 +98,20 @@
     }
     .submit {
         transition: all 0.2s ease-in-out;
-        padding: 10px;
+        padding: 12px;
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+        font-size: 1.1em;
         &:hover {
             background-color: $clr1;
         }
     }
 
     @media (max-width: 1040px) {
+        .header {
+            margin: 20px 0;
+        }
         .apply-list {
             margin-left: 20px;
         }
@@ -88,7 +125,7 @@
             }
         }
         .submit {
-            margin-top: 20px;
+            position: static;
         }
     }
 
@@ -127,26 +164,26 @@
             width: unset;
         }
         .pm {
-          width: 100%;
-          textarea {
             width: 100%;
-          }
+            textarea {
+                width: 100%;
+            }
         }
         .header {
-          width: 100%;
-          white-space: pre-line;
-          text-align: center;
-          header {
-            margin: 0 auto;
-          }
+            width: 100%;
+            white-space: pre-line;
+            text-align: center;
+            header {
+                margin: 0 auto;
+            }
         }
     }
     @media (max-width: 430px) {
-      .video {
-        video.camera {
-          height: unset;
-          width: 100%;
+        .video {
+            video.camera {
+                height: unset;
+                width: 100%;
+            }
         }
-      }
     }
 }
