@@ -24,7 +24,7 @@
                         <p class="address">{{job.address}}</p>
                     </div>
                     <div class="more-info flex-center column">
-                        <h4 class="match" v-if="user" :class="{colored: match>=75}">{{match}}% <span>match</span></h4>
+                        <h4 class="match" v-if="user && match" :class="{colored: match>=75}">{{match}}% <span>match</span></h4>
                         <h4 class="saves semi  flex align-center">
                             {{jobSaves}}
                             <span class="bold">♡</span>
