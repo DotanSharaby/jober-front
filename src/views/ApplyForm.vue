@@ -1,23 +1,29 @@
 <template>
-    <section class="apply-form-wrapper" v-if="currJob">
+    <section
+        class="apply-form-wrapper flex space-between align-center column container"
+        v-if="currJob"
+    >
+        <span @click="goBack" class="back-btn">⬅</span>
         <div class="header">
-            <span @click="goBack" class="back-btn">⬅</span>
             <div>
                 <h2 class="bold">{{currJob.title}} - {{currJob.owner.username}}</h2>
             </div>
         </div>
-        <section class="apply-list">
-            <h3 class="semi">Please record a short video of yourself, and refer to the following:</h3>
-            <ul class="clean-list">
-                <li v-for="quest in questions" :quest="quest" :key="quest">- {{ quest }}</li>
-            </ul>
-        </section>
-        <VideoCapture class="video" :uploadUrl="serverUrl" v-model="application.videoUrl"></VideoCapture>
-        <section class="apply-submit">
-            <textarea v-model="application.pm" placeholder="Add a personal message (optional)"></textarea>
-            <button class="semi" @click.once="submit">Submit</button>
-            <span @click="goBack" class="profile-link">Cancel</span>
-        </section>
+        <div class="main flex space-between align-center">
+            <section class="apply-list flex justify-center column">
+                <h3
+                    class="semi"
+                >Please record a short video of yourself, and refer to the following:</h3>
+                <ul class="clean-list">
+                    <li v-for="quest in currJob.quests" :quest="quest" :key="quest">- {{ quest }}</li>
+                </ul>
+            </section>
+            <VideoCapture class="video" :uploadUrl="serverUrl" v-model="application.videoUrl"></VideoCapture>
+            <div class="pm flex-center">
+                <textarea v-model="application.pm" placeholder="Add a personal message (optional)"></textarea>
+            </div>
+        </div>
+        <button class="semi submit" @click.once="submit">Submit</button>
     </section>
 </template>
 
@@ -28,7 +34,6 @@ export default {
     data() {
         return {
             currJob: null,
-            questions: null,
             user: {},
             application: { pm: "", videoUrl: null },
             serverUrl: "https://mister-recorder.herokuapp.com/uploads/"
@@ -55,6 +60,8 @@ export default {
     created() {
         this.currJob = this.$store.getters.currJob
         this.currJob = JSON.parse(JSON.stringify(this.currJob))
+        this.user = this.$store.getters.loggedinUser
+        this.user = JSON.parse(JSON.stringify(this.user))
     },
     components: {
         VideoCapture
