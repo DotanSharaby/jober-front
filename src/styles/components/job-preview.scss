@@ -86,7 +86,7 @@
         }
     }
 
-    .extra {
+    .extra-pre {
         width: 100%;
         padding: 0 15px;
         margin: 0 0 15px;
@@ -98,9 +98,19 @@
         }
     }
 
-    .colored {
-        color: $clr1;
-        font-family: Raleway-Semi;
+    .more-info {
+        height: 100%;
+        p {
+            margin-top: 5px;
+            color: $clr3;
+        }
+        h4 {
+            color: $clr3;
+            font-size: 1.1em;
+        }
+        .colored {
+            color: $clr1;
+        }
     }
 
     .favorite-icon {
