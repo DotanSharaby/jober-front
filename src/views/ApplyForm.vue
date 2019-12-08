@@ -1,6 +1,5 @@
 <template>
   <section class="apply-form-wrapper">
-    <!-- back btn -->
     <section class="apply-heading">
       <span @click="goBack" class="back-btn">⬅</span>
       <div>
