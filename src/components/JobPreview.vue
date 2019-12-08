@@ -21,14 +21,14 @@
                         </h4>
                     </div>
                 </div>
-                <div class="extra flex space-between align-center">
+                <div class="extra-pre flex space-between align-center">
                     <div class="job flex space-between column align-center">
                         <h4 class="semi">{{job.title}}</h4>
                         <p>{{job.address}}</p>
                     </div>
-                    <div class="flex-center column space-between">
-                        <h4>${{salary}}</h4>
-                        <h4 v-if="user && match">{{match}}% match</h4>
+                    <div class="more-info flex-center column space-between">
+                        <h4 class="bold" :class="{colored: match>=75}">{{match}}% match</h4>
+                        <p>${{salary}}</p>
                     </div>
                 </div>
             </div>
@@ -42,9 +42,7 @@ export default {
     data() {
         return {
             isShown: true,
-            swipeDirection: null,
-            matchCount: 0,
-            diff: 0
+            swipeDirection: null
         };
     },
     methods: {
@@ -69,15 +67,6 @@ export default {
             if (!job) this.$emit("updatedData", { user });
             this.$emit("updatedData", { user, job });
         },
-        calcMatch() {
-            this.job.reqSkills.forEach(skill => {
-                if (this.user.skills.includes(skill)) this.matchCount++;
-            });
-            this.diff = this.job.salary - this.user.expSalary;
-            var res = Math.round(this.diff / 100) + this.matchCount * 5;
-            if (res < 20) return null;
-            return res;
-        }
     },
     computed: {
         salary() {
@@ -92,7 +81,7 @@ export default {
             return this.swipeDirection;
         },
         match() {
-            return this.calcMatch();
+            return this.$store.getters.match(this.job);
         }
     }
 };
