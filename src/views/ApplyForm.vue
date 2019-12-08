@@ -1,5 +1,5 @@
 <template>
-    <section class="apply-form-wrapper">
+    <section class="apply-form-wrapper" v-if="currJob">
         <div class="header">
             <span @click="goBack" class="back-btn">⬅</span>
             <div>
@@ -12,11 +12,7 @@
                 <li v-for="quest in questions" :quest="quest" :key="quest">- {{ quest }}</li>
             </ul>
         </section>
-        <VideoCapture
-            class="video"
-            :uploadUrl="serverUrl"
-            v-model="application.videoUrl">
-        </VideoCapture>
+        <VideoCapture class="video" :uploadUrl="serverUrl" v-model="application.videoUrl"></VideoCapture>
         <section class="apply-submit">
             <textarea v-model="application.pm" placeholder="Add a personal message (optional)"></textarea>
             <button class="semi" @click.once="submit">Submit</button>
@@ -38,21 +34,30 @@ export default {
             serverUrl: "https://mister-recorder.herokuapp.com/uploads/"
         };
     },
-    submit() {
-      var userInfo = this.$store.getters.userInfo;
-      this.application = { ...this.application, ...userInfo };
-      this.user.appliedJobsIds.push(this.currJob._id);
-      if (this.currJob.applicants) {
-        this.currJob.applicants.push(this.application);
-      } else {
-        this.currJob.applicants = [this.application];
-      }
-      const app = { job: this.currJob, user: this.user };
-      this.$store.dispatch({ type: "applyForm", app });
-      return this.$router.push("/");
+    methods: {
+        goBack() {
+            return this.$router.go(-1);
+        },
+        submit() {
+            var userInfo = this.$store.getters.userInfo;
+            this.application = { ...this.application, ...userInfo };
+            this.user.appliedJobsIds.push(this.currJob._id);
+            if (this.currJob.applicants) {
+                this.currJob.applicants.push(this.application);
+            } else {
+                this.currJob.applicants = [this.application];
+            }
+            const app = { job: this.currJob, user: this.user };
+            this.$store.dispatch({ type: "applyForm", app });
+            return this.$router.push("/");
+        }
+    },
+    created() {
+        this.currJob = this.$store.getters.currJob
+        this.currJob = JSON.parse(JSON.stringify(this.currJob))
     },
     components: {
-      VideoCapture
+        VideoCapture
     }
 };
 </script>
