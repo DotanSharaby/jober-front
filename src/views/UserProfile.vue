@@ -1,7 +1,7 @@
 <template>
     <section v-if="user" class="user-profile container flex column">
-        <div class="info flex column align-center">
-            <div class="title flex justify-center align-center">
+        <div class="info flex space-between align-center">
+            <div class="title flex justify-center column align-center">
                 <label class="change-img">
                     <img :src="user.img" />
                     <input
@@ -12,18 +12,33 @@
                         @change="getUrl($event)"
                     />
                 </label>
-                <div class="basic flex column align-center">
-                    <input
-                        class="username semi"
-                        type="text"
-                        @input="updateUser"
-                        v-model="user.username"
-                    />
+                <input
+                    class="username semi"
+                    type="text"
+                    @input="updateUser"
+                    v-model="user.username"
+                />
+            </div>
+            <div class="basic flex column space-between">
+                <div class="flex-center">
+                    <font-awesome-icon class="at-icon" :icon="['fas', 'at']"></font-awesome-icon>
                     <input class="email" type="email" @input="updateUser" v-model="user.email" />
+                </div>
+                <div class="salary flex-center column">
+                    <h2 class="semi">Expected Salary</h2>
+                    <div class="flex align-center">
+                        <input
+                            type="number"
+                            v-model="user.expSalary"
+                            @input="updateUser"
+                            placeholder="Add"
+                        />
+                        <h3 class="text-center" v-if="user.expSalary">USD</h3>
+                    </div>
                 </div>
             </div>
             <div class="extra flex space-between">
-                <div class="skills text-center">
+                <div class="skills flex space-between column text-center">
                     <h2 class="semi">Your Skills</h2>
                     <div v-if="user.skills && !isOpenSkills">
                         <ul class="clean-list">
@@ -43,23 +58,13 @@
                         <p @click="toggleSkills">Done</p>
                     </div>
                 </div>
-                <div class="salary">
-                    <h2 class="semi">Expected Salary</h2>
-                    <div class="flex-center">
-                        <input
-                            type="number"
-                            v-model="user.expSalary"
-                            @input="updateUser"
-                            placeholder="Add"
-                        />
-                        <h3 class="text-center" v-if="user.expSalary">USD</h3>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="jobs flex-center column">
             <div class="category flex-center column">
-                <h2 class="semi flex-center"><font-awesome-icon class="icon" :icon="['fas', 'envelope-open-text']"></font-awesome-icon>Applied Jobs</h2>
+                <h2 class="semi flex-center">
+                    <font-awesome-icon class="icon" :icon="['fas', 'envelope-open-text']"></font-awesome-icon>Applied Jobs
+                </h2>
                 <div v-if="!user.appliedJobsIds.length" class="no-jobs flex-center column">
                     <p>No applied jobs yet</p>
                     <router-link class="semi profile-link" to="/job">Browse Jobs</router-link>
@@ -70,7 +75,9 @@
                 </div>
             </div>
             <div class="category flex-center column">
-                <h2 class="semi flex-center"><font-awesome-icon class="icon heart" :icon="['fa', 'heart']"></font-awesome-icon>Saved Jobs</h2>
+                <h2 class="semi flex-center">
+                    <font-awesome-icon class="icon heart" :icon="['fa', 'heart']"></font-awesome-icon>Saved Jobs
+                </h2>
                 <div v-if="!user.savedJobsIds.length" class="no-jobs flex-center column">
                     <p>No saved jobs yet</p>
                     <router-link class="semi profile-link" to="/job">Browse Jobs</router-link>
@@ -78,7 +85,9 @@
                 <job-list v-else :jobs="savedJobs"></job-list>
             </div>
             <div class="category flex-center column">
-                <h2 class="semi flex-center"><font-awesome-icon class="icon trash" :icon="['fas', 'trash-alt']"></font-awesome-icon>Archived Jobs</h2>
+                <h2 class="semi flex-center">
+                    <font-awesome-icon class="icon trash" :icon="['fas', 'trash-alt']"></font-awesome-icon>Archived Jobs
+                </h2>
                 <div v-if="!user.archivedJobsIds.length" class="no-jobs flex-center column">
                     <p>No archived jobs yet</p>
                     <router-link class="semi profile-link" to="/job">Browse Jobs</router-link>
@@ -108,6 +117,7 @@ export default {
             return this.updateUser();
         },
         updateUser() {
+            if(!this.user.username || !this.user.email) return
             this.$store.dispatch({ type: "updateUser", user: this.user });
         },
         toggleSkills() {
