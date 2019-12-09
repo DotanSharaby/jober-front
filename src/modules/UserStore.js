@@ -1,4 +1,5 @@
 import UserService from '../services/UserService.js'
+import SocketService from '../services/SocketService.js'
 
 var localLoggedinUser = null;
 if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user);
@@ -13,6 +14,7 @@ export default {
             return state.users;
         },
         loggedinUser(state) {
+            SocketService.emit("room", state.loggedinUser._id);
             return state.loggedinUser;
         }
     },
@@ -35,7 +37,10 @@ export default {
     actions: {
         async login(context, { userCred }) {
             const user = await UserService.login(userCred);
-            context.commit({ type: 'setUser', user })
+            context.commit({ type: 'setUser', user });
+            
+            // check if this is the place this should be done
+            SocketService.emit("room", user._id);
             return user;
         },
         async signup(context, { userCred }) {

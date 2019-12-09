@@ -23,12 +23,16 @@
       </div>
     </div>
     <button class="semi submit" @click.once="submit">Submit</button>
+    <div>
+      <button class="semi submit" @click="test">Test</button>
+    </div>
   </section>
 </template>
 
 <script>
 import { VideoCapture } from "vue-media-recorder";
 import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
+import SocketService from "@/services/SocketService";
 
 export default {
   data() {
@@ -44,6 +48,10 @@ export default {
     goBack() {
       return this.$router.go(-1);
     },
+    test() {
+      const app = { job: this.currJob, user: this.user };
+      SocketService.emit("jobApplied", app);
+    },
     submit() {
       const userInfo = this.$store.getters.userInfo;
       this.application = { ...this.application, ...userInfo };
@@ -51,6 +59,9 @@ export default {
       this.currJob.applicants.push(this.application);
       const app = { job: this.currJob, user: this.user };
       this.$store.dispatch({ type: "applyForm", app });
+
+      // SocketService.emit("jobApplied", app );
+
       return this.$router.push("/");
     }
   },
@@ -67,6 +78,10 @@ export default {
   created() {
     this.currJob = this.setCurrJob;
     this.user = this.setUser;
+
+    SocketService.on("notify", msg => {
+      console.log("got from server ws", msg);
+    });
   },
   mounted() {
     this.$watch("$refs.video.isUploading", isLoading => {

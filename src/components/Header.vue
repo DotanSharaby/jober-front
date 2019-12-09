@@ -26,26 +26,30 @@
           v-if="isUserMenuOpen && isCompany"
           @click="goToCompPage"
         >Back-Office</h3>
+        <span></span>
         <h3 class="nav-btn semi flex-center" v-if="isUserMenuOpen" @click="logout">Logout</h3>
       </div>
       <img class="user-img" v-if="user" :src="userImg" @click="toggleUserMenu" />
       <button v-else @click="goToLogin" class="login-btn">Login</button>
       <button @click="toggleMenu" class="menu-btn">☰</button>
+      <span class="notifiction" :class="{ hidden: !newNotify }">+{{newNotify}}</span>
     </div>
   </header>
 </template>
 
 <script>
+import SocketService from "@/services/SocketService";
+
 export default {
   props: {
-    user: Object,
-    postedJobsCnt: Number
+    user: Object
   },
   data() {
     return {
       msg: "",
       isMenuOpen: false,
-      isUserMenuOpen: false
+      isUserMenuOpen: false,
+      newNotify: 0
     };
   },
   methods: {
@@ -54,7 +58,7 @@ export default {
       this.$router.push("/");
     },
     logout() {
-      this.$emit('loggedOut');
+      this.$emit("loggedOut");
     },
     toggleMenu() {
       if (this.isUserMenuOpen) {
@@ -90,6 +94,12 @@ export default {
       if (this.$store.getters.userPostedJobs.length) return true;
       return false;
     }
+  },
+  created() {
+    SocketService.on("notify", app => {
+      console.log("got new app: ", app);
+      this.newNotify++;
+    });
   }
 };
 </script>
