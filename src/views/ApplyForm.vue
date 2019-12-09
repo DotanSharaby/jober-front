@@ -1,84 +1,81 @@
 <template>
-    <section
-        class="apply-form-wrapper flex space-between align-center column container"
-        v-if="job"
-    >
-        <font-awesome-icon @click="goBack" class="back-btn" :icon="['fas', 'arrow-left']"></font-awesome-icon>
-        <div class="header">
-            <div>
-                <h2 class="bold">{{job.title}} - {{job.owner.username}}</h2>
-            </div>
-        </div>
-        <div class="main flex space-between align-center">
-            <section class="apply-list flex justify-center column">
-                <h3
-                    class="semi"
-                >Please record a short video of yourself, and refer to the following:</h3>
-                <ul class="clean-list">
-                    <li v-for="quest in job.quests" :quest="quest" :key="quest">- {{ quest }}</li>
-                </ul>
-            </section>
-            <div class="loader flex-center">
-                <scale-loader v-if="isLoading" :color="'#8bdade'"></scale-loader>
-            </div>
-            <VideoCapture
-                class="video"
-                ref="video"
-                :uploadUrl="serverUrl"
-                v-model="application.videoUrl"
-                v-if="!application.videoUrl"
-            ></VideoCapture>
-            <div class="pm flex-center">
-                <textarea v-model="application.pm" placeholder="Add a personal message (optional)"></textarea>
-            </div>
-        </div>
-        <button class="semi submit" @click.once="submit">Submit</button>
-    </section>
+  <section class="apply-form-wrapper flex space-between align-center column container" v-if="job">
+    <font-awesome-icon @click="goBack" class="back-btn" :icon="['fas', 'arrow-left']"></font-awesome-icon>
+    <div class="header">
+      <div>
+        <h2 class="bold">{{job.title}} - {{job.owner.username}}</h2>
+      </div>
+    </div>
+    <div class="main flex space-between align-center">
+      <section class="apply-list flex justify-center column">
+        <h3 class="semi">Please record a short video of yourself, and refer to the following:</h3>
+        <ul class="clean-list">
+          <li v-for="quest in job.quests" :quest="quest" :key="quest">- {{ quest }}</li>
+        </ul>
+      </section>
+      <div class="loader flex-center">
+        <scale-loader v-if="isLoading" :color="'#8bdade'"></scale-loader>
+      </div>
+      <VideoCapture
+        class="video"
+        ref="video"
+        :uploadUrl="serverUrl"
+        v-model="application.videoUrl"
+        v-if="!application.videoUrl"
+      ></VideoCapture>
+      <div class="pm flex-center">
+        <textarea v-model="application.pm" placeholder="Add a personal message (optional)"></textarea>
+      </div>
+    </div>
+    <button class="semi submit" @click.once="submit">Submit</button>
+  </section>
 </template>
 
 <script>
 import { VideoCapture } from "vue-media-recorder";
 import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
+import SocketService from "@/services/SocketService";
 
 export default {
-    data() {
-        return {
-            application: { pm: "", videoUrl: null },
-            serverUrl: "https://mister-recorder.herokuapp.com/uploads/",
-            isLoading: false
-        };
+  data() {
+    return {
+      application: { pm: "", videoUrl: null },
+      serverUrl: "https://mister-recorder.herokuapp.com/uploads/",
+      isLoading: false
+    };
+  },
+  methods: {
+    goBack() {
+      this.$router.go(-1);
     },
-    methods: {
-        goBack() {
-            this.$router.go(-1);
-        },
-        submit() {
-            const userInfo = this.$store.getters.userInfo;
-            const user = JSON.parse(JSON.stringify(this.user))
-            const job = JSON.parse(JSON.stringify(this.job))
-            user.appliedJobsIds.push(job._id);
-            job.applies.push({ ...this.application, ...userInfo });
-            const app = { job, user };
-            this.$store.dispatch({ type: "applyForm", app });
-            return this.$router.push("/user");
-        }
-    },
-    computed: {
-        job() {
-            return this.$store.getters.currJob;
-        },
-        user() {
-            return this.$store.getters.loggedinUser;
-        }
-    },
-    mounted() {
-        this.$watch("$refs.video.isUploading", isLoading => {
-            this.isLoading = isLoading;
-        });
-    },
-    components: {
-        VideoCapture,
-        ScaleLoader
+    submit() {
+      const userInfo = this.$store.getters.userInfo;
+      const user = JSON.parse(JSON.stringify(this.user));
+      const job = JSON.parse(JSON.stringify(this.job));
+      user.appliedJobsIds.push(job._id);
+      job.applies.push({ ...this.application, ...userInfo });
+      const app = { job, user };
+      SocketService.emit("jobApplied", app);
+      this.$store.dispatch({ type: "applyForm", app });
+      return this.$router.push("/user");
     }
+  },
+  computed: {
+    job() {
+      return this.$store.getters.currJob;
+    },
+    user() {
+      return this.$store.getters.loggedinUser;
+    }
+  },
+  mounted() {
+    this.$watch("$refs.video.isUploading", isLoading => {
+      this.isLoading = isLoading;
+    });
+  },
+  components: {
+    VideoCapture,
+    ScaleLoader
+  }
 };
 </script>

@@ -1,4 +1,5 @@
 import UserService from '../services/UserService.js'
+import SocketService from '../services/SocketService.js'
 
 var localLoggedinUser = null;
 if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user);
@@ -6,15 +7,20 @@ if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user);
 export default {
     state: {
         loggedinUser: localLoggedinUser,
-        users: []
+        users: [],
+        newNotifys: []
     },
     getters: {
         users(state) {
             return state.users;
         },
         loggedinUser(state) {
+            if (state.loggedinUser) SocketService.emit("room", state.loggedinUser._id);
             return state.loggedinUser;
-        }
+        },
+        newNotifys: state => id => state.newNotifys.filter(notify => {
+            return notify.jobId === id
+        })
     },
     mutations: {
         setUser(state, { user }) {
@@ -30,12 +36,25 @@ export default {
             const idx = state.users.findIndex(user => user._id === updatedUser._id);
             state.users.splice(idx, 1, updatedUser);
             state.loggedinUser = updatedUser;
+        },
+        setNotify(state, { app }) {
+            const newNotify = {
+                userId: app.user._id,
+                jobId: app.job._id
+            }
+            state.newNotifys.push(newNotify);
+        },
+        removeNotify(state, { jobId }) {
+            state.newNotifys = state.newNotifys.filter(notify => notify.jobId !== jobId)
         }
     },
     actions: {
         async login(context, { userCred }) {
             const user = await UserService.login(userCred);
-            context.commit({ type: 'setUser', user })
+            context.commit({ type: 'setUser', user });
+            
+            // check if this is the place this should be done
+            SocketService.emit("room", user._id);
             return user;
         },
         async signup(context, { userCred }) {
@@ -64,6 +83,12 @@ export default {
             const users = await UserService.getUsers();
             const res = users.find(user => user.email === email)
             return res;
+        },
+        setNewNotify(context, { app }) {
+            context.commit({ type: 'setNotify', app })
+        },
+        removeNotify(context, { jobId }) {
+            context.commit({ type: 'removeNotify', jobId })
         }
     }
 }

@@ -1,10 +1,6 @@
 <template>
   <section class="wall flex column">
-    <div
-      class="post-container"
-      ref="wallRef"
-      v-if="copyJob.posts.length"
-    >
+    <div class="post-container" ref="wallRef" v-if="copyJob.posts.length">
       <Post
         v-for="(post, idx) in copyJob.posts"
         @updatePost="updatePost"
@@ -13,17 +9,11 @@
         :key="idx"
       ></Post>
     </div>
-    <span
-      v-else
-      class="post-container"
-    >
+    <span v-else class="post-container">
       <em>Ask something about the job</em>
     </span>
     <div class="add-post flex">
-      <div
-        v-if="isModalActive"
-        class="name-modal flex justify-center align-center"
-      >
+      <div v-if="isModalActive" class="name-modal flex justify-center align-center">
         <div>
           Post as
           <select v-model="nameOnPost">
@@ -31,18 +21,11 @@
             <option>Anonymous</option>
           </select>&nbsp;
           <button @click="addPost">Post</button>
-          <button
-            class="cancel-btn"
-            @click="clearPost"
-          >x</button>
+          <button class="cancel-btn" @click="clearPost">x</button>
           <div class="msg-container flex justify-center">Message: {{this.postToAdd.txt}}</div>
         </div>
       </div>
-      <textarea
-        type="text"
-        v-if="!isModalActive"
-        v-model="postToAdd.txt"
-      />
+      <textarea type="text" v-if="!isModalActive" v-model="postToAdd.txt" />
       <div class="flex align-center">
         <button v-if="!isModalActive" @click="onAddPost">Post</button>
       </div>
@@ -109,7 +92,6 @@ export default {
       this.nameOnPost = user.username;
       this.userName = user.username;
     } else this.nameOnPost = "Anonymous";
-
     this.clearPost();
   },
   updated() {
@@ -118,8 +100,6 @@ export default {
     }
   },
   mounted() {
-    // Scrolling to bottom of the Wall
-
     var job = this.copyJob;
     SocketService.emit("room", job._id);
 
