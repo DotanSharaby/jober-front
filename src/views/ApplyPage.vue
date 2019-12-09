@@ -1,16 +1,16 @@
 <template>
-    <section class="applicant-page">
-        <ApplicantPreview v-for="(applicant, idx) in applicants" :key="idx" :applicant="applicant"></ApplicantPreview>
+    <section class="apply-page">
+        <ApplyPreview v-for="(apply, idx) in applies" :key="idx" :apply="apply"></ApplyPreview>
     </section>
 </template>
 
 <script>
-import ApplicantPreview from '../components/ApplicantPreview'
+import ApplyPreview from '../components/ApplyPreview'
 export default {
     computed: {
-        applicants() {
+        applies() {
             var currJob = this.$store.getters.currJob
-            if (currJob) return currJob.applicants;
+            if (currJob) return currJob.applies;
             return null
         }
     },
@@ -19,7 +19,7 @@ export default {
         await this.$store.dispatch({ type: "loadCurrJob", id });
     },
     components: {
-      ApplicantPreview
+      ApplyPreview
     }
 }
 </script>

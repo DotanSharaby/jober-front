@@ -11,7 +11,7 @@ import JobDetails from './views/JobDetails.vue'
 import JobEdit from './views/JobEdit.vue'
 import CompPage from './views/CompPage.vue'
 import ApplyForm from './views/ApplyForm.vue'
-import ApplicantPage from './views/ApplicantPage.vue'
+import ApplyPage from './views/ApplyPage.vue'
 
 
 Vue.use(VueRouter)
@@ -67,8 +67,8 @@ const routes = [
     component: ApplyForm
   },
   {
-    path: '/applicant/:jobId',
-    component: ApplicantPage
+    path: '/apply/:jobId',
+    component: ApplyPage
   }
 ]
 
