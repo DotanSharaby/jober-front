@@ -3,7 +3,7 @@
     <scale-loader v-if="isLoading" :color="'#8bdade'"></scale-loader>
     <section v-else class="home">
       <h1 class="site-header bold">Find Your Dream Job</h1>
-      <img class="main-img" src="../assets/imgs/employment.jpg" />
+      <img class="main-img" src="../assets/imgs/jobBg.jpg" />
       <div class="container">
         <h2 class="preview-header semi">Recently Added</h2>
         <JobList v-if="recentlyAdded" :jobs="recentlyAdded"></JobList>

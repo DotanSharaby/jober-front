@@ -60,7 +60,7 @@ export default {
             job.applies.push({ ...this.application, ...userInfo });
             const app = { job, user };
             this.$store.dispatch({ type: "applyForm", app });
-            return this.$router.push("/");
+            return this.$router.push("/user");
         }
     },
     computed: {
