@@ -28,9 +28,6 @@
       </div>
     </div>
     <button class="semi submit" @click.once="submit">Submit</button>
-    <div>
-      <button class="semi submit" @click="test">test</button>
-    </div>
   </section>
 </template>
 
@@ -58,12 +55,9 @@ export default {
       user.appliedJobsIds.push(job._id);
       job.applies.push({ ...this.application, ...userInfo });
       const app = { job, user };
+      SocketService.emit("jobApplied", app);
       this.$store.dispatch({ type: "applyForm", app });
       return this.$router.push("/");
-    },
-    test() {
-      const app = { job: this.job, user: this.user };
-      SocketService.emit("jobApplied", app);
     }
   },
   computed: {

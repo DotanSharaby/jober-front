@@ -7,7 +7,7 @@
       <p class="date">{{timeToShow}}</p>
       <p class="saved">{{saves}} saves</p>
       <p class="applies profile-link semi" @click="goToApplies">{{applies}} applies</p>
-      <span v-if="newNotifys.length" class="notification">O</span>
+      <span v-if="newNotify" class="notification">O</span>
     </div>
   </section>
 </template>
@@ -35,13 +35,18 @@ export default {
     creationTime() {
       return moment(this.job.createdAt);
     },
-    newNotifys() {
-      return this.$store.getters.newNotifys;
+    newNotify() {
+      const notifys = this.$store.getters.newNotifys(this.job._id);
+      if (notifys.length > 0) return true;
+      return null;
     }
   },
   methods: {
     goToApplies() {
-      if (this.job.applies.length) this.$router.push(`/apply/${this.job._id}`);
+      if (this.job.applies.length) {
+        this.$store.dispatch({ type: "removeNotify", jobId: this.job._id });
+        this.$router.push(`/apply/${this.job._id}`);
+      }
     }
   }
 };

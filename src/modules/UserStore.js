@@ -18,10 +18,9 @@ export default {
             if (state.loggedinUser) SocketService.emit("room", state.loggedinUser._id);
             return state.loggedinUser;
         },
-        newNotifys(state){
-            return state.newNotifys
-        }
-
+        newNotifys: state => id => state.newNotifys.filter(notify => {
+            return notify.jobId === id
+        })
     },
     mutations: {
         setUser(state, { user }) {
@@ -43,13 +42,17 @@ export default {
                 userId: app.user._id,
                 jobId: app.job._id
             }
-            state.push(newNotify);
+            state.newNotifys.push(newNotify);
+        },
+        removeNotify(state, { jobId }) {
+            state.newNotifys = state.newNotifys.filter(notify => notify.jobId !== jobId)
         }
     },
     actions: {
         async login(context, { userCred }) {
             const user = await UserService.login(userCred);
             context.commit({ type: 'setUser', user });
+            
             // check if this is the place this should be done
             SocketService.emit("room", user._id);
             return user;
@@ -82,8 +85,10 @@ export default {
             return res;
         },
         setNewNotify(context, { app }) {
-            console.log('app:', app);
             context.commit({ type: 'setNotify', app })
+        },
+        removeNotify(context, { jobId }) {
+            context.commit({ type: 'removeNotify', jobId })
         }
     }
 }
