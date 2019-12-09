@@ -1,12 +1,12 @@
 <template>
     <section
         class="apply-form-wrapper flex space-between align-center column container"
-        v-if="currJob"
+        v-if="job"
     >
         <font-awesome-icon @click="goBack" class="back-btn" :icon="['fas', 'arrow-left']"></font-awesome-icon>
         <div class="header">
             <div>
-                <h2 class="bold">{{currJob.title}} - {{currJob.owner.username}}</h2>
+                <h2 class="bold">{{job.title}} - {{job.owner.username}}</h2>
             </div>
         </div>
         <div class="main flex space-between align-center">
@@ -15,7 +15,7 @@
                     class="semi"
                 >Please record a short video of yourself, and refer to the following:</h3>
                 <ul class="clean-list">
-                    <li v-for="quest in currJob.quests" :quest="quest" :key="quest">- {{ quest }}</li>
+                    <li v-for="quest in job.quests" :quest="quest" :key="quest">- {{ quest }}</li>
                 </ul>
             </section>
             <div class="loader flex-center">
@@ -26,6 +26,7 @@
                 ref="video"
                 :uploadUrl="serverUrl"
                 v-model="application.videoUrl"
+                v-if="!application.videoUrl"
             ></VideoCapture>
             <div class="pm flex-center">
                 <textarea v-model="application.pm" placeholder="Add a personal message (optional)"></textarea>
@@ -42,8 +43,6 @@ import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
 export default {
     data() {
         return {
-            currJob: null,
-            user: {},
             application: { pm: "", videoUrl: null },
             serverUrl: "https://mister-recorder.herokuapp.com/uploads/",
             isLoading: false
@@ -51,27 +50,26 @@ export default {
     },
     methods: {
         goBack() {
-            return this.$router.go(-1);
+            this.$router.go(-1);
         },
         submit() {
-            var userInfo = this.$store.getters.userInfo;
-            this.application = { ...this.application, ...userInfo };
-            this.user.appliedJobsIds.push(this.currJob._id);
-            if (this.currJob.applicants) {
-                this.currJob.applicants.push(this.application);
-            } else {
-                this.currJob.applicants = [this.application];
-            }
-            const app = { job: this.currJob, user: this.user };
+            const userInfo = this.$store.getters.userInfo;
+            const user = JSON.parse(JSON.stringify(this.user))
+            const job = JSON.parse(JSON.stringify(this.job))
+            user.appliedJobsIds.push(job._id);
+            job.applicants.push({ ...this.application, ...userInfo });
+            const app = { job, user };
             this.$store.dispatch({ type: "applyForm", app });
             return this.$router.push("/");
         }
     },
-    created() {
-        this.currJob = this.$store.getters.currJob;
-        this.currJob = JSON.parse(JSON.stringify(this.currJob));
-        this.user = this.$store.getters.loggedinUser;
-        this.user = JSON.parse(JSON.stringify(this.user));
+    computed: {
+        job() {
+            return this.$store.getters.currJob;
+        },
+        user() {
+            return this.$store.getters.loggedinUser;
+        }
     },
     mounted() {
         this.$watch("$refs.video.isUploading", isLoading => {

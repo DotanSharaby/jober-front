@@ -142,9 +142,6 @@ export default {
         if (!this.user) return
         if (this.user.appliedJobsIds.includes(id)) this.isDisableApply = true;
     },
-    destroyed() {
-        this.$store.dispatch({ type: "resetCurrJob" });
-    },
     components: {
         Wall,
         JobProp,
