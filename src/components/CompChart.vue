@@ -12,8 +12,8 @@ export default {
         },
         applicantsDatas() {
             return this.jobs.map(job => {
-                if (!job.applicants) return 0
-                return job.applicants.length;
+                if (!job.applies) return 0
+                return job.applies.length;
             })
         },
         savesDatas() {

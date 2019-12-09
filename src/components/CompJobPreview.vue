@@ -6,7 +6,7 @@
         <div class="flex space-between align-center">
             <p class="date">{{timeToShow}}</p>
             <p class="saved">{{saves}} saves</p>
-            <p class="applicants profile-link semi" @click="goToApplicants">{{applicants}} applicants</p>
+            <p class="applies profile-link semi" @click="goToApplies">{{applies}} applies</p>
         </div>
     </section>
 </template>
@@ -20,9 +20,9 @@ export default {
         jobEditUrl() {
             return `/job/edit/${this.job._id}`;
         },
-        applicants() {
-            if (!this.job.applicants) return 0;
-            return this.job.applicants.length
+        applies() {
+            if (!this.job.applies) return 0;
+            return this.job.applies.length
         },
         saves() {
             if (!this.job.saves) return 0;
@@ -36,8 +36,8 @@ export default {
         }
     },
     methods: {
-        goToApplicants() {
-            if(this.job.applicants.length) this.$router.push(`/applicant/${this.job._id}`)
+        goToApplies() {
+            if(this.job.applies.length) this.$router.push(`/apply/${this.job._id}`)
         }
     }
 }

@@ -135,7 +135,7 @@ export default {
         perks: [],
         quests: [],
         saves: 0,
-        applicants:[]
+        applies:[]
       },
       skillToAdd: "",
       addedSkills: [],

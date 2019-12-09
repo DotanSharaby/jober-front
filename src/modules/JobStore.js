@@ -68,8 +68,8 @@ export default ({
         },
         jobsByApplyCnt(state) {
             var jobs = JSON.parse(JSON.stringify(state.jobs))
-            jobs = jobs.filter(job => job.applicants)
-            return jobs.sort((a, b) => b.applicants.length - a.applicants.length)
+            jobs = jobs.filter(job => job.applies)
+            return jobs.sort((a, b) => b.applies.length - a.applies.length)
         },
         jobsBySaveCnt(state) {
             var jobs = JSON.parse(JSON.stringify(state.jobs))

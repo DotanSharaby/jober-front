@@ -57,7 +57,7 @@ export default {
             const user = JSON.parse(JSON.stringify(this.user))
             const job = JSON.parse(JSON.stringify(this.job))
             user.appliedJobsIds.push(job._id);
-            job.applicants.push({ ...this.application, ...userInfo });
+            job.applies.push({ ...this.application, ...userInfo });
             const app = { job, user };
             this.$store.dispatch({ type: "applyForm", app });
             return this.$router.push("/");
