@@ -25,14 +25,16 @@
           class="nav-btn semi flex-center"
           v-if="isUserMenuOpen && isCompany"
           @click="goToCompPage"
-        >Back-Office</h3>
-        <span></span>
+        >
+          Back-Office
+          <span v-if="newNotify > 0" class="notification">O</span>
+        </h3>
         <h3 class="nav-btn semi flex-center" v-if="isUserMenuOpen" @click="logout">Logout</h3>
       </div>
       <img class="user-img" v-if="user" :src="userImg" @click="toggleUserMenu" />
       <button v-else @click="goToLogin" class="login-btn">Login</button>
       <button @click="toggleMenu" class="menu-btn">☰</button>
-      <span class="notifiction" :class="{ hidden: !newNotify }">+{{newNotify}}</span>
+      <span class="notification" :class="{ hidden: !newNotify }">+{{newNotify}}</span>
     </div>
   </header>
 </template>
@@ -81,6 +83,7 @@ export default {
       this.$router.push(`/user`);
     },
     goToCompPage() {
+      this.newNotify = 0;
       if (this.$route.fullPath === "/comp") return;
       this.$router.push(`/comp`);
     }
@@ -97,8 +100,8 @@ export default {
   },
   created() {
     SocketService.on("notify", app => {
-      console.log("got new app: ", app);
       this.newNotify++;
+      this.$store.dispatch({ type: "setNewNotify", app });
     });
   }
 };

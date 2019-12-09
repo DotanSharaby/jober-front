@@ -7,16 +7,21 @@ if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user);
 export default {
     state: {
         loggedinUser: localLoggedinUser,
-        users: []
+        users: [],
+        newNotifys: []
     },
     getters: {
         users(state) {
             return state.users;
         },
         loggedinUser(state) {
-            SocketService.emit("room", state.loggedinUser._id);
+            if (state.loggedinUser) SocketService.emit("room", state.loggedinUser._id);
             return state.loggedinUser;
+        },
+        newNotifys(state){
+            return state.newNotifys
         }
+
     },
     mutations: {
         setUser(state, { user }) {
@@ -32,13 +37,19 @@ export default {
             const idx = state.users.findIndex(user => user._id === updatedUser._id);
             state.users.splice(idx, 1, updatedUser);
             state.loggedinUser = updatedUser;
+        },
+        setNotify(state, { app }) {
+            const newNotify = {
+                userId: app.user._id,
+                jobId: app.job._id
+            }
+            state.push(newNotify);
         }
     },
     actions: {
         async login(context, { userCred }) {
             const user = await UserService.login(userCred);
             context.commit({ type: 'setUser', user });
-            
             // check if this is the place this should be done
             SocketService.emit("room", user._id);
             return user;
@@ -69,6 +80,10 @@ export default {
             const users = await UserService.getUsers();
             const res = users.find(user => user.email === email)
             return res;
+        },
+        setNewNotify(context, { app }) {
+            console.log('app:', app);
+            context.commit({ type: 'setNotify', app })
         }
     }
 }

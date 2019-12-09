@@ -28,6 +28,9 @@
       </div>
     </div>
     <button class="semi submit" @click.once="submit">Submit</button>
+    <div>
+      <button class="semi submit" @click="test">test</button>
+    </div>
   </section>
 </template>
 
@@ -58,8 +61,10 @@ export default {
       this.$store.dispatch({ type: "applyForm", app });
       return this.$router.push("/");
     },
+
+    
     test() {
-      const app = { job: this.currJob, user: this.user };
+      const app = { job: this.job, user: this.user };
       SocketService.emit("jobApplied", app);
     }
   },
