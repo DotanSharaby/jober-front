@@ -45,29 +45,32 @@ export default {
       return this.$router.go(-1);
     },
     submit() {
-      var userInfo = this.$store.getters.userInfo;
+      const userInfo = this.$store.getters.userInfo;
       this.application = { ...this.application, ...userInfo };
       this.user.appliedJobsIds.push(this.currJob._id);
-      if (this.currJob.applicants) {
-        this.currJob.applicants.push(this.application);
-      } else {
-        this.currJob.applicants = [this.application];
-      }
+      this.currJob.applicants.push(this.application);
       const app = { job: this.currJob, user: this.user };
       this.$store.dispatch({ type: "applyForm", app });
       return this.$router.push("/");
     }
   },
+  computed: {
+    setCurrJob() {
+      const currJob = this.$store.getters.currJob;
+      return JSON.parse(JSON.stringify(currJob));
+    },
+    setUser() {
+      const user = this.$store.getters.loggedinUser;
+      return JSON.parse(JSON.stringify(user));
+    }
+  },
   created() {
-    this.currJob = this.$store.getters.currJob;
-    this.currJob = JSON.parse(JSON.stringify(this.currJob));
-    this.user = this.$store.getters.loggedinUser;
-    this.user = JSON.parse(JSON.stringify(this.user));
+    this.currJob = this.setCurrJob;
+    this.user = this.setUser;
   },
   mounted() {
-    this.$watch("$refs.video.isUploading", new_value => {
-      if (new_value) this.isLoading = true;
-      else this.isLoading = false;
+    this.$watch("$refs.video.isUploading", isLoading => {
+      this.isLoading = isLoading;
     });
   },
   components: {
