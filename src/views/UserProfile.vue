@@ -1,7 +1,7 @@
 <template>
     <section v-if="user" class="user-profile container flex column">
-        <div class="info flex space-between align-center">
-            <div class="title flex justify-center column align-center">
+        <div class="info flex-center">
+            <div class="title flex-center column">
                 <label class="change-img">
                     <img :src="user.img" />
                     <input
@@ -20,9 +20,9 @@
                 />
             </div>
             <div class="basic flex column space-between">
-                <div class="flex-center">
+                <div class="email flex-center">
                     <font-awesome-icon class="at-icon" :icon="['fas', 'at']"></font-awesome-icon>
-                    <input class="email" type="email" @input="updateUser" v-model="user.email" />
+                    <input class="email-input" type="email" @input="updateUser" v-model="user.email" />
                 </div>
                 <div class="salary flex-center column">
                     <h2 class="semi">Expected Salary</h2>
@@ -37,7 +37,7 @@
                     </div>
                 </div>
             </div>
-            <div class="extra flex space-between">
+            <div class="extra flex-center">
                 <div class="skills flex space-between column text-center">
                     <h2 class="semi">Your Skills</h2>
                     <div v-if="user.skills && !isOpenSkills">
