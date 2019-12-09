@@ -3,7 +3,7 @@
         <scale-loader v-if="!job || isLoading" :color="'#8bdade'"></scale-loader>
         <section v-else class="job-details flex space-between">
             <div class="details flex column">
-                <span @click="goBack" class="back-btn">⬅</span>
+                <font-awesome-icon @click="goBack" class="back-btn" :icon="['fas', 'arrow-left']"></font-awesome-icon>
 
                 <div class="title flex space-between align-center">
                     <div class="comp flex align-center justify-center">
