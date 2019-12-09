@@ -57,7 +57,7 @@ export default {
       const app = { job, user };
       SocketService.emit("jobApplied", app);
       this.$store.dispatch({ type: "applyForm", app });
-      return this.$router.push("/");
+      return this.$router.push("/user");
     }
   },
   computed: {
