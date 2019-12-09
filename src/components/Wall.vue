@@ -9,11 +9,11 @@
         :key="idx"
       ></Post>
     </div>
-    <span v-else class="post-container">
+    <p v-else class="post-container">
       <em>Ask something about the job</em>
-    </span>
+    </p>
     <div class="add-post flex">
-      <div v-if="isModalActive" class="name-modal flex justify-center align-center">
+      <!-- <div v-if="isModalActive" class="name-modal flex justify-center align-center">
         <div>
           Post as
           <select v-model="nameOnPost">
@@ -24,11 +24,33 @@
           <button class="cancel-btn" @click="clearPost">x</button>
           <div class="msg-container flex justify-center">Message: {{this.postToAdd.txt}}</div>
         </div>
-      </div>
-      <textarea type="text" v-if="!isModalActive" v-model="postToAdd.txt" />
-      <div class="flex align-center">
-        <button v-if="!isModalActive" @click="onAddPost">Post</button>
-      </div>
+      </div>-->
+      <section>
+          <p>{{nameOnPost}}</p>
+        <div class="flex">
+          <label class="radio">
+            <input type="radio" name="r" :value="userName" checked v-model="nameOnPost" />
+            <span>{{userName}}</span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="r" value="Anonymous" v-model="nameOnPost" />
+            <span>Anonymous</span>
+          </label>
+          <!-- <button @click="addPost">Post</button> -->
+          <!-- <button class="cancel-btn" @click="clearPost">x</button> -->
+          <!-- <div class="msg-container flex justify-center">Message: {{this.postToAdd.txt}}</div> -->
+        </div>
+
+        <textarea
+          type="text"
+          v-model="postToAdd.txt"
+          @keydown.enter.exact.prevent
+          @keyup.enter.exact="addPost"
+        />
+        <div class="flex align-center">
+          <button @click="addPost">Post</button>
+        </div>
+      </section>
     </div>
   </section>
 </template>
@@ -46,15 +68,15 @@ export default {
       nameOnPost: null,
       userName: null,
       postToAdd: null,
-      copyJob: null,
-      isModalActive: false
+      copyJob: null
+      //   isModalActive: false
     };
   },
   methods: {
     onAddPost() {
       if (this.postToAdd.txt.length <= 2) return;
       else if (!this.userName) return this.addPost();
-      this.isModalActive = true;
+      //   this.isModalActive = true;
     },
     addPost() {
       const post = this.postToAdd;
@@ -81,7 +103,7 @@ export default {
         createdAt: Date.now(),
         likes: 0
       };
-      this.isModalActive = false;
+      //   this.isModalActive = false;
     }
   },
   created() {

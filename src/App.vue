@@ -31,7 +31,6 @@ export default {
       this.$router.push("/login");
     },
     handleScroll(ev) {
-      console.log(ev);
       if (ev.path[1].scrollY >= 50) {
         this.$refs.header.$el.style.height = "55px";
         ev.path[0].links[0].style.padding = "16px 25px";
