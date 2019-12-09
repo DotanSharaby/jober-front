@@ -8,7 +8,7 @@ header {
     width: 100%;
     height: 75px;
     z-index: 10;
-
+    transition: all .2s ease-in-out;
     .logo-box {
         font-family: Squada;
         font-size: 30px;
@@ -19,8 +19,8 @@ header {
     nav a {
         color: $clr2;
         font-size: 20px;
-        transition: all 0.3s;
-        padding: 27px;
+        transition: all .2s ease-in-out;
+        padding: 25px;
     }
 
     .router-link-active {
