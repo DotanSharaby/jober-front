@@ -1,6 +1,5 @@
 <template>
     <section class="filter-container flex justify-center align-center">
-        <!-- <label class="filter-label">Search:</label> -->
         <div class="input-wrapper">
             <font-awesome-icon class="search-icon" :icon="['fas', 'search']"></font-awesome-icon>
             <input
