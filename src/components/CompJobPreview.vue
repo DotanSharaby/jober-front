@@ -6,8 +6,10 @@
     <div class="flex space-between align-center">
       <p class="date">{{timeToShow}}</p>
       <p class="saved">{{saves}} saves</p>
-      <p class="applies profile-link semi" @click="goToApplies">{{applies}} applies</p>
-      <span v-if="newNotify" class="notification">O</span>
+      <p class="applies profile-link semi" @click="goToApplies">
+        {{applies}} applies
+        <span v-if="newNotify" class="notification">◉</span>
+      </p>
     </div>
   </section>
 </template>

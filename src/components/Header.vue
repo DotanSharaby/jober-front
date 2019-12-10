@@ -27,14 +27,14 @@
           @click="goToCompPage"
         >
           Back-Office
-          <span v-if="newNotify > 0" class="notification">O</span>
+          <span v-if="newNotify > 0" class="notification">◉</span>
         </h3>
         <h3 class="nav-btn semi flex-center" v-if="isUserMenuOpen" @click="logout">Logout</h3>
       </div>
       <img class="user-img" v-if="user" :src="userImg" @click="toggleUserMenu" />
       <button v-else @click="goToLogin" class="login-btn">Login</button>
-      <button @click="toggleMenu" class="menu-btn">☰</button>
       <span class="notification" :class="{ hidden: !newNotify }">+{{newNotify}}</span>
+      <button @click="toggleMenu" class="menu-btn">☰</button>
     </div>
   </header>
 </template>
@@ -56,6 +56,7 @@ export default {
   },
   methods: {
     goHome() {
+      this.isMenuOpen = false;
       if (this.$route.fullPath === "/") return;
       this.$router.push("/");
     },
@@ -75,6 +76,7 @@ export default {
       this.isUserMenuOpen = !this.isUserMenuOpen;
     },
     goToLogin() {
+      this.isMenuOpen = false;
       if (this.$route.fullPath === "/login") return;
       this.$router.push("/login");
     },
