@@ -64,10 +64,6 @@ export default {
     }
   },
   created() {
-    let postToEdit = JSON.parse(JSON.stringify(this.post));
-    if (postToEdit.likes >= 0) delete postToEdit.likes;
-    if (!postToEdit.usersLiked) postToEdit.usersLiked = [];
-    this.$emit("updatePost", postToEdit, this.idx);
     const user = this.$store.getters.loggedinUser;
     this.userId = user._id;
   }
