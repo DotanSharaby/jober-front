@@ -21,7 +21,7 @@
       />
       <div class="flex space-between">
         <button @click="addPost">Post</button>
-        <label class="center center-self">
+        <label class="center center-self" v-if="userName">
           <input
             type="checkbox"
             v-model="nameOnPost"
