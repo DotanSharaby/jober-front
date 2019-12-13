@@ -22,7 +22,12 @@
             <div class="basic flex column space-between">
                 <div class="email flex-center">
                     <font-awesome-icon class="at-icon" :icon="['fas', 'at']"></font-awesome-icon>
-                    <input class="email-input" type="email" @input="updateUser" v-model="user.email" />
+                    <input
+                        class="email-input"
+                        type="email"
+                        @input="updateUser"
+                        v-model="user.email"
+                    />
                 </div>
                 <div class="salary flex-center column">
                     <h2 class="semi">Expected Salary</h2>
@@ -117,7 +122,7 @@ export default {
             return this.updateUser();
         },
         updateUser() {
-            if(!this.user.username || !this.user.email) return
+            if (!this.user.username || !this.user.email) return
             this.$store.dispatch({ type: "updateUser", user: this.user });
         },
         toggleSkills() {
@@ -137,7 +142,7 @@ export default {
         },
         archivedJobs() {
             return this.$store.getters.userArchivedJobs;
-        }
+        },
     },
     created() {
         window.scrollTo(0, 0);
