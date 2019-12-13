@@ -48,7 +48,7 @@ export default {
     goBack() {
       this.$router.go(-1);
     },
-    submit() {
+    async submit() {
       const userInfo = this.$store.getters.userInfo;
       const user = JSON.parse(JSON.stringify(this.user));
       const job = JSON.parse(JSON.stringify(this.job));
@@ -56,7 +56,7 @@ export default {
       job.applies.push({ ...this.application, ...userInfo });
       const app = { job, user };
       SocketService.emit("jobApplied", app);
-      this.$store.dispatch({ type: "applyForm", app });
+      await this.$store.dispatch({ type: "applyForm", app });
       return this.$router.push("/user");
     }
   },

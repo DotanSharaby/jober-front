@@ -1,9 +1,10 @@
 <template>
-  <section>
-    <div class="about">About..............</div>
-    <video width="320" height="240" autoplay>
-      <source src="" type="video/mp4" />
-      <source src="" type="video/ogg" />Your browser does not support the video tag.
-    </video>
+  <section class="about-page">
+    <div class="flex column text-center container">
+      <h3>Contact Us</h3>
+      <a class="profile-link" href="mailto:kgon1312@gmail.com">@ Kosta Goncharov</a>
+      <a class="profile-link" href="mailto:Lazarovich.meital@gmail.com">@ Meital Lazarovich</a>
+      <a class="profile-link" href="mailto:dotan.sharaby@gmail.com">@ Dotan Sharaby</a>
+    </div>
   </section>
 </template>
