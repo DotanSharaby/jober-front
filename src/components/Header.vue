@@ -3,38 +3,83 @@
     class="flex space-between align-center"
     :class="{'opened-menu': this.isMenuOpen, 'opened-user-menu': this.isUserMenuOpen}"
   >
-    <div class="screen" @click="toggleMenu"></div>
-    <div class="logo-box flex align-center" @click="goHome">
-      <img src="../assets/logo.png" class="logo" />
+    <div
+      class="screen"
+      @click="toggleMenu"
+    ></div>
+    <div
+      class="logo-box flex align-center"
+      @click="goHome"
+    >
+      <img
+        src="../assets/logo.png"
+        class="logo"
+      />
       <span>Jober</span>
     </div>
     <div class="flex align-center justify-center">
       <nav @click="toggleMenu">
-        <router-link exact to="/">Home</router-link>
-        <router-link exact to="/job">Jobs</router-link>
-        <router-link exact to="/about">About</router-link>
+        <router-link
+          exact
+          to="/"
+        >Home</router-link>
+        <router-link
+          exact
+          to="/job"
+        >Jobs</router-link>
+        <router-link
+          exact
+          to="/about"
+        >About</router-link>
       </nav>
       <div
         v-if="user"
         class="user-menu flex column space-between align-center"
         :class="{shown: isUserMenuOpen}"
         @click="toggleUserMenu"
+        ref="profileNav"
       >
-        <h3 class="nav-btn semi flex-center" @click="goToProfile" v-if="isUserMenuOpen">Profile</h3>
+        <h3
+          class="nav-btn semi flex-center"
+          @click="goToProfile"
+          v-if="isUserMenuOpen"
+        >Profile</h3>
         <h3
           class="nav-btn semi flex-center"
           v-if="isUserMenuOpen && isCompany"
           @click="goToCompPage"
         >
           Back-Office
-          <span v-if="newNotify > 0" class="notification">◉</span>
+          <span
+            v-if="newNotify > 0"
+            class="notification"
+          >◉</span>
         </h3>
-        <h3 class="nav-btn semi flex-center" v-if="isUserMenuOpen" @click="logout">Logout</h3>
+        <h3
+          class="nav-btn semi flex-center"
+          v-if="isUserMenuOpen"
+          @click="logout"
+        >Logout</h3>
       </div>
-      <img class="user-img" v-if="user" :src="userImg" @click="toggleUserMenu" />
-      <button v-else @click="goToLogin" class="login-btn">Login</button>
-      <span class="notification" :class="{ hidden: !newNotify }">+{{newNotify}}</span>
-      <button @click="toggleMenu" class="menu-btn">☰</button>
+      <img
+        class="user-img"
+        v-if="user"
+        :src="userImg"
+        @click="toggleUserMenu"
+      />
+      <button
+        v-else
+        @click="goToLogin"
+        class="login-btn"
+      >Login</button>
+      <span
+        class="notification"
+        :class="{ hidden: !newNotify }"
+      >+{{newNotify}}</span>
+      <button
+        @click="toggleMenu"
+        class="menu-btn"
+      >☰</button>
     </div>
   </header>
 </template>
@@ -88,6 +133,13 @@ export default {
       this.newNotify = 0;
       if (this.$route.fullPath === "/comp") return;
       this.$router.push(`/comp`);
+    },
+    handleScroll(ev) {
+      if (ev.path[1].scrollY >= 50) {
+        this.$refs.profileNav.style.top = "55px";
+      }else {
+        this.$refs.profileNav.style.top = "75px";
+      }
     }
   },
   computed: {
@@ -101,6 +153,7 @@ export default {
     }
   },
   created() {
+    window.addEventListener("scroll", this.handleScroll);
     SocketService.on("notify", app => {
       this.newNotify++;
       this.$store.dispatch({ type: "setNewNotify", app });
