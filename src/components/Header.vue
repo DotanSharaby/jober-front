@@ -33,26 +33,13 @@
         <h3 class="nav-btn semi flex-center" v-if="isUserMenuOpen" @click="logout">Logout</h3>
       </div>
       <div class="nav-user flex-center">
-        <img
-          class="user-img"
-          v-if="user"
-          :src="userImg"
-          @click="toggleUserMenu"
-        />
-        <button
-          v-else
-          @click="goToLogin"
-          class="login-btn"
-        >Login</button>
-        <div
-          class="notification flex-center"
-          v-if="newNotify"
-        ><span>{{newNotify}}</span></div>
+        <img class="user-img" v-if="user" :src="userImg" @click="toggleUserMenu" />
+        <button v-else @click="goToLogin" class="login-btn">Login</button>
+        <div class="notification flex-center" v-if="newNotify">
+          <span>{{newNotify}}</span>
+        </div>
       </div>
-      <button
-        @click="toggleMenu"
-        class="menu-btn"
-      >☰</button>
+      <button @click="toggleMenu" class="menu-btn">☰</button>
     </div>
   </header>
 </template>
@@ -79,6 +66,7 @@ export default {
       this.$router.push("/");
     },
     logout() {
+      this.newNotify = 0;
       this.$emit("loggedOut");
     },
     toggleMenu() {
@@ -113,6 +101,19 @@ export default {
       } else {
         this.$refs.profileNav.style.top = "75px";
       }
+    },
+    checkNotifys() {
+      const self = this;
+      const newNots = this.$store.getters.newJobNotifys;
+      if (newNots.length) {
+        newNots.forEach(async function(app) {
+          const newNotify = await self.$store.dispatch({
+            type: "setNewNotify",
+            app
+          });
+          if (newNotify) self.newNotify++;
+        });
+      }
     }
   },
   computed: {
@@ -126,25 +127,20 @@ export default {
     }
   },
   created() {
-    if (this.user) {
-      window.addEventListener("scroll", this.handleScroll);
-    }
     SocketService.on("notify", app => {
       this.newNotify++;
       this.$store.dispatch({ type: "setNewNotify", app });
     });
   },
   watch: {
-    user: function() {
-      const self = this;
-      const newNots = this.$store.getters.newJobNotifys;
-      newNots.forEach(async function(app) {
-        const newNotify = await self.$store.dispatch({
-          type: "setNewNotify",
-          app
-        });
-        if (newNotify) self.newNotify++;
-      });
+    user: function(newVal) {
+      if (newVal) this.checkNotifys();
+    }
+  },
+  mounted() {
+    if (this.user) {
+      window.addEventListener("scroll", this.handleScroll);
+      this.checkNotifys();
     }
   }
 };
