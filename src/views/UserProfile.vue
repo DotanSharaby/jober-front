@@ -126,7 +126,7 @@ export default {
             this.$store.dispatch({ type: "updateUser", user: this.user });
         },
         toggleSkills() {
-            if (this.isOpenSkills) this.updateUser;
+            if (this.isOpenSkills) this.updateUser();
             this.isOpenSkills = !this.isOpenSkills;
         }
     },
