@@ -1,5 +1,5 @@
 <template>
-    <font-awesome-icon class="apply-form-wrapper flex align-center column container" v-if="job">
+    <section class="apply-form-wrapper flex align-center column container" v-if="job">
         <font-awesome-icon @click="goBack" class="back-btn" :icon="['fas', 'arrow-left']"></font-awesome-icon>
         <div class="header">
             <h2 class="bold">{{job.title}} - {{job.owner.username}}</h2>
@@ -28,7 +28,7 @@
         <button class="submit semi" @click.once="submit">Submit 
             <font-awesome-icon class="icon" :icon="['fas', 'paper-plane']"></font-awesome-icon>
         </button>
-    </font-awesome-icon>
+    </section>
 </template>
 
 <script>
