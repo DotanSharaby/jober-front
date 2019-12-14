@@ -1,53 +1,42 @@
 .apply-form-wrapper {
-    //   h2
     padding: 30px 30px 20px;
     position: relative;
-
     .back-btn {
         position: absolute;
         left: 15px;
         top: 15px;
     }
-
     .header {
         h2 {
             color: $clr1;
-            margin-bottom: 30px;
+            margin: 30px 0 50px;
         }
     }
-
     .main {
         width: 100%;
         flex-wrap: wrap;
     }
-
-    // h3 + ul li's
     .apply-list {
         h3 {
             color: $clr3;
         }
-
         width: 300px;
         align-self: flex-start;
         line-height: 30px;
         height: 250px;
-
         li {
             margin: 15px 0;
         }
     }
-
     .videoContainer {
         margin: 0 50px;
-
         .v-spinner {
             height: 320px;
             width: 444px;
         }
     }
-
-    // video section
     .video {
+        position: relative;
         video.camera {
             height: 250px;
             object-fit: contain;
@@ -56,58 +45,61 @@
             margin-bottom: 10px;
             flex-wrap: wrap;
         }
-
         .controls {
             height: 60px;
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-top: 5px;
-
             button {
                 margin: 0 20px;
-                width: 60px;
                 background-color: #6a898a;
-
+                padding: 6px;
+                height: 30px;
+                width: 60px;
                 &:first-child {
                     background-color: $clr5;
                     color: $clr2;
-                    font-size: 16px;
-                    border-radius: 0;
-                    padding-bottom: 2px;
+                    font-size: 14px;
                 }
             }
         }
-
         .stream-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-
             button {
+                position: absolute;
+                bottom: 20px;
                 margin: 0 auto;
-                height: 60px;
-                width: 60px;
+                height: 45px;
+                width: 45px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 11px;
                 background-color: #e72d2d;
                 border: 2px solid #ffffff;
                 box-sizing: border-box;
                 border-radius: 50%;
                 transition: all 0.4s ease-in-out;
-
                 &:hover {
                     box-shadow: 0px 0px 0px 2px rgba(85, 85, 85, 0.66);
+                }
+                span {
+                    margin-top: -5px;
                 }
             }
         }
     }
-
-    // text area
     .pm {
         height: 250px;
         flex-grow: 1;
         align-self: flex-start;
-
         textarea {
             width: 100%;
             max-width: 500px;
@@ -118,7 +110,6 @@
             border-radius: 5px;
         }
     }
-
     .submit {
         transition: all 0.2s ease-in-out;
         padding: 12px;
@@ -126,18 +117,15 @@
         bottom: 30px;
         right: 30px;
         font-size: 1.1em;
-
         &:hover {
             background-color: $clr1;
         }
     }
 
-
     @media (max-width: 1040px) {
         .header {
             margin: 20px 0;
         }
-
         .apply-list {
             margin-left: 20px;
         }
@@ -145,15 +133,12 @@
         .video {
             margin: 0 0 20px;
         }
-
         .pm {
             height: 180px;
-
             textarea {
                 width: 400px;
             }
         }
-
         .submit {
             position: static;
         }
@@ -165,20 +150,17 @@
             align-items: center;
             justify-content: center;
         }
-
         .header {
             h2 {
                 margin: 20px 0;
             }
         }
-
         .apply-list {
             align-self: center;
             margin-left: 0;
             text-align: center;
             width: 400px;
         }
-
         .pm {
             align-self: center;
         }
@@ -188,30 +170,24 @@
         .main {
             justify-content: center;
         }
-
         .video {
             video.camera {
                 height: 200px;
             }
         }
-
         .apply-list {
             width: unset;
         }
-
         .pm {
             width: 100%;
-
             textarea {
                 width: 100%;
             }
         }
-
         .header {
             width: 100%;
             white-space: pre-line;
             text-align: center;
-
             header {
                 margin: 0 auto;
             }

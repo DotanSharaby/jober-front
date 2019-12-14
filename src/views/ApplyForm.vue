@@ -1,38 +1,23 @@
 <template>
-  <section class="apply-form-wrapper flex space-between align-center column container" v-if="job">
+  <section class="apply-form-wrapper flex align-center column container" v-if="job">
     <font-awesome-icon @click="goBack" class="back-btn" :icon="['fas', 'arrow-left']"></font-awesome-icon>
     <div class="header">
-      <div>
-        <h2 class="bold">{{job.title}} - {{job.owner.username}}</h2>
-      </div>
+      <h2 class="bold">{{job.title}} - {{job.owner.username}}</h2>
     </div>
     <div class="main flex space-between align-center">
-      <section class="apply-list flex justify-center column">
+      <div class="apply-list flex justify-center column">
         <h3 class="semi">Please record a short video of yourself, and refer to the following:</h3>
         <ul class="clean-list">
           <li v-for="quest in job.quests" :quest="quest" :key="quest">- {{ quest }}</li>
         </ul>
-      </section>
-
-
-
-
+      </div>
       <div class="videoContainer">
         <div v-if="isLoading" class="loader flex-center">
           <scale-loader :color="'#8bdade'"></scale-loader>
         </div>
-        <VideoCapture
-          class="video"
-          ref="video"
-          :uploadUrl="serverUrl"
-          v-model="application.videoUrl"
-          
-        ></VideoCapture>
+        <VideoCapture class="video" ref="video" :uploadUrl="serverUrl" v-model="application.videoUrl">
+        </VideoCapture>
       </div>
-
-
-
-
       <div class="pm flex-center">
         <textarea v-model="application.pm" placeholder="Add a personal message (optional)"></textarea>
       </div>
@@ -77,9 +62,6 @@ export default {
     user() {
       return this.$store.getters.loggedinUser;
     }
-  },
-  created() {
-      
   },
   mounted() {
     this.$watch("$refs.video.isUploading", isLoading => {

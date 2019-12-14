@@ -10,7 +10,7 @@
         <div class="salary">
           <p v-if="apply.expSalary">
             <span class="bold title">Expected Salary:</span>
-            ${{salary}}
+            {{salary}}₪
           </p>
           <div v-else class="no-data">This applicant did not add an expected salary</div>
         </div>
