@@ -1,164 +1,126 @@
 <template>
-  <header
-    class="flex space-between align-center"
-    :class="{'opened-menu': this.isMenuOpen, 'opened-user-menu': this.isUserMenuOpen}"
-  >
-    <div
-      class="screen"
-      @click="toggleMenu"
-    ></div>
-    <div
-      class="logo-box flex align-center"
-      @click="goHome"
+    <header
+        class="flex space-between align-center"
+        :class="{'opened-menu': this.isMenuOpen, 'opened-user-menu': this.isUserMenuOpen}"
     >
-      <img
-        src="../assets/logo.png"
-        class="logo"
-      />
-      <span>Jober</span>
-    </div>
-    <div class="flex align-center justify-center">
-      <nav @click="toggleMenu">
-        <router-link
-          exact
-          to="/"
-        >Home</router-link>
-        <router-link
-          exact
-          to="/job"
-        >Jobs</router-link>
-        <router-link
-          exact
-          to="/about"
-        >About</router-link>
-      </nav>
-      <div
-        v-if="user"
-        class="user-menu flex column space-between align-center"
-        :class="{shown: isUserMenuOpen}"
-        @click="toggleUserMenu"
-        ref="profileNav"
-      >
-        <h3
-          class="nav-btn semi flex-center"
-          @click="goToProfile"
-          v-if="isUserMenuOpen"
-        >Profile</h3>
-        <h3
-          class="nav-btn semi flex-center"
-          v-if="isUserMenuOpen && isCompany"
-          @click="goToCompPage"
-        >
-          Back-Office
-          <span
-            v-if="newNotify > 0"
-            class="notification"
-          >◉</span>
-        </h3>
-        <h3
-          class="nav-btn semi flex-center"
-          v-if="isUserMenuOpen"
-          @click="logout"
-        >Logout</h3>
-      </div>
-      <img
-        class="user-img"
-        v-if="user"
-        :src="userImg"
-        @click="toggleUserMenu"
-      />
-      <button
-        v-else
-        @click="goToLogin"
-        class="login-btn"
-      >Login</button>
-      <span
-        class="notification"
-        :class="{ hidden: !newNotify }"
-      >+{{newNotify}}</span>
-      <button
-        @click="toggleMenu"
-        class="menu-btn"
-      >☰</button>
-    </div>
-  </header>
+        <div class="screen" @click="toggleMenu"></div>
+        <div class="logo-box flex align-center" @click="goHome">
+            <img src="../assets/logo.png" class="logo" />
+            <span>Jober</span>
+        </div>
+        <div class="flex align-center justify-center">
+            <nav @click="toggleMenu">
+                <router-link exact to="/">Home</router-link>
+                <router-link exact to="/job">Jobs</router-link>
+                <router-link exact to="/about">About</router-link>
+            </nav>
+            <div
+                v-if="user"
+                class="user-menu flex column space-between align-center"
+                :class="{shown: isUserMenuOpen}"
+                @click="toggleUserMenu"
+                ref="profileNav"
+            >
+                <h3
+                    class="nav-btn semi flex-center"
+                    @click="goToProfile"
+                    v-if="isUserMenuOpen"
+                >Profile</h3>
+                <h3
+                    class="nav-btn semi flex-center"
+                    v-if="isUserMenuOpen && isCompany"
+                    @click="goToCompPage"
+                >
+                    Back-Office
+                    <span v-if="newNotify > 0" class="notification">◉</span>
+                </h3>
+                <h3 class="nav-btn semi flex-center" v-if="isUserMenuOpen" @click="logout">Logout</h3>
+            </div>
+            <div class="nav-user flex-center">
+                <img class="user-img" v-if="user" :src="userImg" @click="toggleUserMenu" />
+                <button v-else @click="goToLogin" class="login-btn">Login</button>
+                <div class="notification flex-center" v-if="newNotify"><span>{{newNotify}}</span></div>
+            </div>
+            <button @click="toggleMenu" class="menu-btn">☰</button>
+        </div>
+    </header>
 </template>
 
 <script>
 import SocketService from "@/services/SocketService";
 
 export default {
-  props: {
-    user: Object
-  },
-  data() {
-    return {
-      msg: "",
-      isMenuOpen: false,
-      isUserMenuOpen: false,
-      newNotify: 0
-    };
-  },
-  methods: {
-    goHome() {
-      this.isMenuOpen = false;
-      if (this.$route.fullPath === "/") return;
-      this.$router.push("/");
+    props: {
+        user: Object
     },
-    logout() {
-      this.$emit("loggedOut");
+    data() {
+        return {
+            msg: "",
+            isMenuOpen: false,
+            isUserMenuOpen: false,
+            newNotify: 0
+        };
     },
-    toggleMenu() {
-      if (this.isUserMenuOpen) {
-        this.isMenuOpen = false;
-        this.isUserMenuOpen = false;
-        return;
-      }
-      this.isMenuOpen = !this.isMenuOpen;
+    methods: {
+        goHome() {
+            this.isMenuOpen = false;
+            if (this.$route.fullPath === "/") return;
+            this.$router.push("/");
+        },
+        logout() {
+            this.$emit("loggedOut");
+        },
+        toggleMenu() {
+            if (this.isUserMenuOpen) {
+                this.isMenuOpen = false;
+                this.isUserMenuOpen = false;
+                return;
+            }
+            this.isMenuOpen = !this.isMenuOpen;
+        },
+        toggleUserMenu() {
+            this.isMenuOpen = false;
+            this.isUserMenuOpen = !this.isUserMenuOpen;
+        },
+        goToLogin() {
+            this.isMenuOpen = false;
+            if (this.$route.fullPath === "/login") return;
+            this.$router.push("/login");
+        },
+        goToProfile() {
+            if (this.$route.fullPath === "/user") return;
+            this.$router.push(`/user`);
+        },
+        goToCompPage() {
+            this.newNotify = 0;
+            if (this.$route.fullPath === "/comp") return;
+            this.$router.push(`/comp`);
+        },
+        handleScroll(ev) {
+            if (ev.path[1].scrollY >= 50) {
+                this.$refs.profileNav.style.top = "55px";
+            } else {
+                this.$refs.profileNav.style.top = "75px";
+            }
+        }
     },
-    toggleUserMenu() {
-      this.isMenuOpen = false;
-      this.isUserMenuOpen = !this.isUserMenuOpen;
+    computed: {
+        userImg() {
+            if (this.user.img) return this.user.img;
+            return "https://www.afrombira.com/img/no-user.png";
+        },
+        isCompany() {
+            if (this.$store.getters.userPostedJobs.length) return true;
+            return false;
+        }
     },
-    goToLogin() {
-      this.isMenuOpen = false;
-      if (this.$route.fullPath === "/login") return;
-      this.$router.push("/login");
-    },
-    goToProfile() {
-      if (this.$route.fullPath === "/user") return;
-      this.$router.push(`/user`);
-    },
-    goToCompPage() {
-      this.newNotify = 0;
-      if (this.$route.fullPath === "/comp") return;
-      this.$router.push(`/comp`);
-    },
-    handleScroll(ev) {
-      if (ev.path[1].scrollY >= 50) {
-        this.$refs.profileNav.style.top = "55px";
-      }else {
-        this.$refs.profileNav.style.top = "75px";
-      }
+    created() {
+        window.addEventListener("scroll", this.handleScroll);
+        SocketService.on("notify", app => {
+            this.newNotify++;
+            this.$store.dispatch({ type: "setNewNotify", app });
+        });
     }
-  },
-  computed: {
-    userImg() {
-      if (this.user.img) return this.user.img;
-      return "https://www.afrombira.com/img/no-user.png";
-    },
-    isCompany() {
-      if (this.$store.getters.userPostedJobs.length) return true;
-      return false;
-    }
-  },
-  created() {
-    window.addEventListener("scroll", this.handleScroll);
-    SocketService.on("notify", app => {
-      this.newNotify++;
-      this.$store.dispatch({ type: "setNewNotify", app });
-    });
-  }
 };
 </script>
 
