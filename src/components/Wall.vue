@@ -28,7 +28,7 @@
             true-value="Anonymous"
             :false-value="userName"
           />
-          Post as Anonymous
+          Post Anonymously
         </label>
       </div>
     </div>
