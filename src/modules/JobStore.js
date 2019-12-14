@@ -34,7 +34,27 @@ export default ({
     },
     getters: {
         currJob(state) {
-            return state.currJob
+            return state.currJob;
+        },
+        newJobNotifys(state, getters) {
+            const jobs = getters.userPostedJobs;
+            var newNots = []
+            jobs.forEach(job => {
+                const jobId = job._id
+                job.applies.filter((app) => {
+                    if (app.isNew) {
+                        let user = { _id: app.userId };
+                        let job = { _id: jobId };
+                        var newApp = {
+                            user,
+                            job
+                        }
+                        newNots.push(newApp);
+                    }
+                    return newNots;
+                })
+            })
+            return newNots
         },
         jobsToShow(state, commit, rootState) {
             var jobsToShow = [];
@@ -132,9 +152,9 @@ export default ({
         }
     },
     actions: {
-        async applyForm(context, {app}) {
-            await context.dispatch({ type: "updateJob", job:app.job })
-            await context.dispatch({ type: "updateUser", user:app.user })
+        async applyForm(context, { app }) {
+            await context.dispatch({ type: "updateJob", job: app.job })
+            await context.dispatch({ type: "updateUser", user: app.user })
         },
         async loadJobs(context) {
             const jobs = await JobService.query()
@@ -160,5 +180,5 @@ export default ({
         resetCurrJob(context) {
             context.commit({ type: 'resetCurrJob' })
         }
-    },
+    }
 })

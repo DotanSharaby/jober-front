@@ -47,6 +47,14 @@ export default {
     goToApplies() {
       if (this.job.applies.length) {
         this.$store.dispatch({ type: "removeNotify", jobId: this.job._id });
+        let job = this.job;
+        job.applies.forEach(app => {
+          if (app.isNew) {
+            delete app.isNew;
+            return app;
+          }
+        });
+        this.$store.dispatch({ type: "updateJob", job });
         this.$router.push(`/apply/${this.job._id}`);
       }
     }

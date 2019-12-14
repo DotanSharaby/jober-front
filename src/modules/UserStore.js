@@ -52,8 +52,6 @@ export default {
         async login(context, { userCred }) {
             const user = await UserService.login(userCred);
             context.commit({ type: 'setUser', user });
-            
-            // check if this is the place this should be done
             SocketService.emit("room", user._id);
             return user;
         },
@@ -86,6 +84,7 @@ export default {
         },
         setNewNotify(context, { app }) {
             context.commit({ type: 'setNotify', app })
+            return app;
         },
         removeNotify(context, { jobId }) {
             context.commit({ type: 'removeNotify', jobId })
