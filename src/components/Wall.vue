@@ -93,11 +93,6 @@ export default {
     } else this.nameOnPost = "Anonymous";
     this.clearPost();
   },
-  updated() {
-    if (this.$refs.wallRef) {
-      this.$refs.wallRef.scrollTop = this.$refs.wallRef.scrollHeight;
-    }
-  },
   mounted() {
     var job = this.copyJob;
     SocketService.emit("room", job._id);

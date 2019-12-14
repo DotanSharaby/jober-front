@@ -13,16 +13,26 @@
           <li v-for="quest in job.quests" :quest="quest" :key="quest">- {{ quest }}</li>
         </ul>
       </section>
-      <div class="loader flex-center">
-        <scale-loader v-if="isLoading" :color="'#8bdade'"></scale-loader>
+
+
+
+
+      <div class="videoContainer">
+        <div v-if="isLoading" class="loader flex-center">
+          <scale-loader :color="'#8bdade'"></scale-loader>
+        </div>
+        <VideoCapture
+          class="video"
+          ref="video"
+          :uploadUrl="serverUrl"
+          v-model="application.videoUrl"
+          
+        ></VideoCapture>
       </div>
-      <VideoCapture
-        class="video"
-        ref="video"
-        :uploadUrl="serverUrl"
-        v-model="application.videoUrl"
-        v-if="!application.videoUrl"
-      ></VideoCapture>
+
+
+
+
       <div class="pm flex-center">
         <textarea v-model="application.pm" placeholder="Add a personal message (optional)"></textarea>
       </div>
