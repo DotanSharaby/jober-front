@@ -68,6 +68,9 @@ export default {
       return this.$store.getters.loggedinUser;
     }
   },
+  created() {
+      
+  },
   mounted() {
     this.$watch("$refs.video.isUploading", isLoading => {
       this.isLoading = isLoading;
