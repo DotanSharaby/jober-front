@@ -11,9 +11,9 @@ Vue.use(ElementUI)
 
 // Font Awesome
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPaw, faBus, faUtensils, faParking, faMugHot, faThumbsUp, faReply, faCheck, faUser, faAsterisk, faLongArrowAltLeft, faSearch, faUserSecret, faChevronRight, faHeart, faTrashAlt, faEnvelopeOpenText, faAt, faArrowLeft} from '@fortawesome/free-solid-svg-icons'
+import { faPaw, faBus, faUtensils, faParking, faMugHot, faThumbsUp, faReply, faCheck, faUser, faAsterisk, faLongArrowAltLeft, faSearch, faUserSecret, faChevronRight, faHeart, faTrashAlt, faEnvelopeOpenText, faAt, faArrowLeft, faPaperPlane} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-library.add(faPaw, faBus, faUtensils, faParking, faMugHot, faThumbsUp, faReply, faCheck, faUser, faAsterisk, faLongArrowAltLeft, faSearch, faUserSecret, faChevronRight, faHeart, faTrashAlt, faEnvelopeOpenText, faAt, faArrowLeft)
+library.add(faPaw, faBus, faUtensils, faParking, faMugHot, faThumbsUp, faReply, faCheck, faUser, faAsterisk, faLongArrowAltLeft, faSearch, faUserSecret, faChevronRight, faHeart, faTrashAlt, faEnvelopeOpenText, faAt, faArrowLeft, faPaperPlane)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 // Google maps 

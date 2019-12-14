@@ -29,10 +29,15 @@
         }
     }
     .videoContainer {
-        margin: 0 50px;
+        height: 250px;
+        width: 444px;
+        margin: 0 50px 50px;
         .v-spinner {
-            height: 320px;
-            width: 444px;
+            height: 250px;
+        }
+        .uploaded {
+            font-size: 20px;
+            color: $clr1;
         }
     }
     .video {
@@ -113,10 +118,10 @@
     .submit {
         transition: all 0.2s ease-in-out;
         padding: 12px;
-        position: absolute;
-        bottom: 30px;
-        right: 30px;
         font-size: 1.1em;
+        .icon {
+            margin-left: 5px;
+        }
         &:hover {
             background-color: $clr1;
         }
