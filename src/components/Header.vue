@@ -32,10 +32,27 @@
         </h3>
         <h3 class="nav-btn semi flex-center" v-if="isUserMenuOpen" @click="logout">Logout</h3>
       </div>
-      <img class="user-img" v-if="user" :src="userImg" @click="toggleUserMenu" />
-      <button v-else @click="goToLogin" class="login-btn">Login</button>
-      <span class="notification" :class="{ hidden: !newNotify }">+{{newNotify}}</span>
-      <button @click="toggleMenu" class="menu-btn">☰</button>
+      <div class="nav-user flex-center">
+        <img
+          class="user-img"
+          v-if="user"
+          :src="userImg"
+          @click="toggleUserMenu"
+        />
+        <button
+          v-else
+          @click="goToLogin"
+          class="login-btn"
+        >Login</button>
+        <div
+          class="notification flex-center"
+          v-if="newNotify"
+        ><span>{{newNotify}}</span></div>
+      </div>
+      <button
+        @click="toggleMenu"
+        class="menu-btn"
+      >☰</button>
     </div>
   </header>
 </template>
@@ -109,13 +126,13 @@ export default {
     }
   },
   created() {
+    if (this.user) {
+      window.addEventListener("scroll", this.handleScroll);
+    }
     SocketService.on("notify", app => {
       this.newNotify++;
       this.$store.dispatch({ type: "setNewNotify", app });
     });
-  },
-  mounted() {
-    window.addEventListener("scroll", this.handleScroll);
   },
   watch: {
     user: function() {
