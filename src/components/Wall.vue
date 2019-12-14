@@ -14,6 +14,7 @@
     </p>
     <div class="add-post flex column">
       <textarea
+      placeholder="Ask a question.."
         type="text"
         v-model="postToAdd.txt"
         @keydown.enter.exact.prevent
