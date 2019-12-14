@@ -20,7 +20,7 @@
                 </div>
                 <div class="extra-pre flex space-between align-center">
                     <div class="job flex space-between column align-center">
-                        <p class="salary semi">${{salary}}</p>
+                        <p class="salary semi">{{salary}} ₪</p>
                         <p class="address">{{job.address}}</p>
                     </div>
                     <div class="more-info flex-center column">

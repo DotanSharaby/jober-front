@@ -38,7 +38,7 @@
                             @input="updateUser"
                             placeholder="Add"
                         />
-                        <h3 class="text-center" v-if="user.expSalary">USD</h3>
+                        <h3 class="text-center" v-if="user.expSalary">NIS</h3>
                     </div>
                 </div>
             </div>
