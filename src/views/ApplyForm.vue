@@ -1,14 +1,12 @@
 <template>
-    <section class="apply-form-wrapper flex align-center column container" v-if="job">
+    <font-awesome-icon class="apply-form-wrapper flex align-center column container" v-if="job">
         <font-awesome-icon @click="goBack" class="back-btn" :icon="['fas', 'arrow-left']"></font-awesome-icon>
         <div class="header">
             <h2 class="bold">{{job.title}} - {{job.owner.username}}</h2>
         </div>
         <div class="main flex space-between align-center">
             <div class="apply-list flex justify-center column">
-                <h3
-                    class="semi"
-                >Please record a short video of yourself, and refer to the following:</h3>
+                <h3 class="semi">Please record a short video of yourself, and refer to the following:</h3>
                 <ul class="clean-list">
                     <li v-for="quest in job.quests" :quest="quest" :key="quest">- {{ quest }}</li>
                 </ul>
@@ -17,12 +15,9 @@
                 <div v-if="isLoading" class="loader flex-center">
                     <scale-loader :color="'#8bdade'"></scale-loader>
                 </div>
-                <VideoCapture
-                    v-if="!application.videoUrl"
-                    class="video"
-                    ref="video"
-                    :uploadUrl="serverUrl"
-                    v-model="application.videoUrl"
+                <VideoCapture v-if="!application.videoUrl"
+                    class="video" ref="video"
+                    :uploadUrl="serverUrl" v-model="application.videoUrl"
                 ></VideoCapture>
                 <div v-else class="uploaded semi">Video has been uploaded</div>
             </div>
@@ -30,11 +25,10 @@
                 <textarea v-model="application.pm" placeholder="Add a personal message (optional)"></textarea>
             </div>
         </div>
-        <button class="submit semi" @click.once="submit">
-            Submit 
+        <button class="submit semi" @click.once="submit">Submit 
             <font-awesome-icon class="icon" :icon="['fas', 'paper-plane']"></font-awesome-icon>
         </button>
-    </section>
+    </font-awesome-icon>
 </template>
 
 <script>

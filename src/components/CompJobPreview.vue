@@ -8,7 +8,7 @@
       <p class="saved">{{saves}} saves</p>
       <p class="applies profile-link semi" @click="goToApplies">
         {{applies}} applies
-        <span v-if="!newNotify" class="notification">◉</span>
+        <span v-if="newNotify" class="notification">◉</span>
       </p>
     </div>
   </section>
