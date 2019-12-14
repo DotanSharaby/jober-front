@@ -1,6 +1,7 @@
 .comp-job-preview {
     flex-wrap: wrap;
     margin-bottom: 20px;
+    position: relative;
 
     h3 {
         color: $clr3;
@@ -11,13 +12,15 @@
     & *:not(:last-child) {
         margin-right: 30px;
     }
-    @media(max-width: 618px) {
+    .notification {
+        color: #ff3636;
+        position: absolute;
+        left: -20px;
+    }
+    @media (max-width: 618px) {
         margin-bottom: 25px;
         h3 {
             margin-bottom: 10px;
         }
-    }
-    .notification {
-        color: red;
     }
 }

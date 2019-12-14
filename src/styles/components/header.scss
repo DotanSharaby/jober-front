@@ -8,7 +8,7 @@ header {
     width: 100%;
     height: 75px;
     z-index: 10;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     .logo-box {
         font-family: Squada;
         font-size: 30px;
@@ -19,7 +19,7 @@ header {
     nav a {
         color: $clr2;
         font-size: 20px;
-        transition: all .2s ease-in-out;
+        transition: all 0.2s ease-in-out;
         padding: 25px;
     }
 
@@ -29,7 +29,7 @@ header {
         font-family: Raleway-Semi;
     }
 
-    nav>*:hover {
+    nav > *:hover {
         color: $clr1;
     }
 
@@ -38,6 +38,7 @@ header {
         background-color: transparent;
         font-size: 32px;
         color: $clr1;
+        margin-top: -4px;
     }
 
     .screen {
@@ -88,24 +89,42 @@ header {
         padding: 0 9px;
         top: 75px;
         border-radius: 10px;
-        transition: all .2s ease-in-out;
+        transition: all 0.2s ease-in-out;
         .nav-btn {
             opacity: 1;
             color: $clr5;
             flex-grow: 1;
             width: 100%;
             height: 70px;
+            position: relative;
             cursor: pointer;
 
             &:not(:last-child) {
                 border-bottom: 1px solid #d2d4d5;
             }
+            .notification {
+                position: absolute;
+                top: 2px;
+                right: 5px;
+                color: #ff3636;
+            }
         }
     }
 
-    .notification {
-        color: red;
-        margin-left: 4px;
+    .nav-user {
+        position: relative;
+        .notification {
+            position: absolute;
+            height: 18px;
+            width: 18px;
+            background-color: #ff3636;
+            color: white;
+            border-radius: 50%;
+            right: -7px;
+            bottom: -3px;
+            font-size: 14px;
+            padding-bottom: 2px;
+        }
     }
 
     @media (max-width: 760px) {
