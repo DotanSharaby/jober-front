@@ -9,7 +9,7 @@
       <span>Jober</span>
     </div>
     <div class="flex align-center justify-center">
-      <nav @click="toggleMenu">
+      <nav @click="toggleMenu,resetPadding($event)">
         <router-link exact to="/">Home</router-link>
         <router-link exact to="/job">Jobs</router-link>
         <router-link exact to="/about">About</router-link>
@@ -19,7 +19,6 @@
         class="user-menu flex column space-between align-center"
         :class="{shown: isUserMenuOpen}"
         @click="toggleUserMenu"
-        ref="profileNav"
       >
         <h3 class="nav-btn semi flex-center" @click="goToProfile" v-if="isUserMenuOpen">Profile</h3>
         <h3
@@ -95,13 +94,6 @@ export default {
       if (this.$route.fullPath === "/comp") return;
       this.$router.push(`/comp`);
     },
-    handleScroll(ev) {
-      if (ev.path[1].scrollY >= 50) {
-        this.$refs.profileNav.style.top = "55px";
-      } else {
-        this.$refs.profileNav.style.top = "75px";
-      }
-    },
     checkNotifys() {
       const self = this;
       const newNots = this.$store.getters.newJobNotifys;
@@ -114,6 +106,12 @@ export default {
           if (newNotify) self.newNotify++;
         });
       }
+    },
+    resetPadding(ev) {
+      window.scrollTo(0, 0);
+      const elNavbar = ev.path[1];
+      elNavbar.children.forEach(elLink => (elLink.style.padding = ""));
+      this.$emit("setVal");
     }
   },
   computed: {
@@ -130,6 +128,7 @@ export default {
     SocketService.on("notify", app => {
       this.newNotify++;
       this.$store.dispatch({ type: "setNewNotify", app });
+      this.$store.dispatch({ type: "loadJobs" });
     });
   },
   watch: {
@@ -139,7 +138,6 @@ export default {
   },
   mounted() {
     if (this.user) {
-      window.addEventListener("scroll", this.handleScroll);
       this.checkNotifys();
     }
   }

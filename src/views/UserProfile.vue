@@ -147,10 +147,6 @@ export default {
     created() {
         window.scrollTo(0, 0);
         const user = this.$store.getters.loggedinUser;
-        if (!user) {
-            this.$router.go(-1)
-            return
-        }
         this.user = JSON.parse(JSON.stringify(user));
     },
     components: {

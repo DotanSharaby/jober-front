@@ -65,7 +65,7 @@ export default {
   },
   created() {
     const user = this.$store.getters.loggedinUser;
-    this.userId = user._id;
+    if (user) this.userId = user._id;
   }
 };
 </script>
