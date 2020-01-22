@@ -27,12 +27,12 @@ export default {
     handleScroll(ev) {
       if (!this.$refs.header) return;
       if (window.scrollY < 55) {
-        this.$refs.header.$el.classList.remove("scrolled");
         ev.path[0].links.forEach(link => (link.style.padding = ""));
-      } else {
+        this.$refs.header.$el.classList.remove("scrolled");
+      } else if(window.scrollY > 75) {
         this.$refs.header.$el.classList.add("scrolled");
         ev.path[0].links.forEach(link => {
-          if (link.classList[0] === "router-link-exact-active") {
+          if (link.classList.contains("router-link-exact-active")) {
             link.style.padding = "16px 25px";
           }
         });
